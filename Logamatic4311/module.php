@@ -34,7 +34,9 @@ class Logamatic4311 extends IPSModule
         //sleep (0.5);
         $Data = chr(162).chr(0).$this->ReadPropertyString('Bus').chr(0).chr(0).chr(0);
         $this->SendDataToParent($Data);
+        return true;
     }
+    
     protected function SendDataToParent($Data)
     {
         // API-Daten verpacken und dann versenden.
