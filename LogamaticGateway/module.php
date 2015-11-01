@@ -228,6 +228,12 @@ class LogamaticGateway extends IPSModule
         return true;
     }
 ################## DUMMYS / WOARKAROUNDS - protected
+      
+    protected function GetParent()
+    {
+        $instance = IPS_GetInstance($this->InstanceID);
+        return ($instance['ConnectionID'] > 0) ? $instance['ConnectionID'] : false;
+    }
     protected function HasActiveParent()
     {
 //        IPS_LogMessage(__CLASS__, __FUNCTION__); //          
