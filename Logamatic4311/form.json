@@ -8,7 +8,7 @@
                 {
                     "type": "Button",
                     "label": "Monitordaten auslesen",
-                    "onClick": "Logamatic_RequestMonitordaten();"
+                    "onClick": "Logamatic_RequestMonitordaten($id);"
                 }                
             ],
         "status":
