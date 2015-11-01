@@ -154,7 +154,7 @@ class LogamaticGateway extends IPSModule
         //Anfang suchen
         if ($start === false)
         {
-//            IPS_LogMessage('Logamatic Gateway', 'Frame without 0x7e');
+            IPS_LogMessage('Logamatic Gateway', 'Frame without 0x7e');
             $stream = '';
         }
         elseif ($start > 0)
