@@ -1,0 +1,37 @@
+{	
+	"elements":
+	[
+            { "name": "Bus", "type": "ValidationTextBox", "caption": "ECO-CAN Adresse:" }
+        ],
+        "actions":
+            [
+                {
+                    "type": "Button",
+                    "label": "Monitordaten auslesen",
+                    "onClick": "Logamatic_RequestState($id);"
+                }                
+            ],
+    "status":
+            [
+                {
+                    "code": 102,
+                    "icon": "active",
+                    "caption": "Konfiguration gültig."
+                },
+                {
+                    "code": 104,
+                    "icon": "inactive",
+                    "caption": "Logamatic Gateway is inactive."
+                },
+                {
+                    "code": 202,
+                    "icon": "error",
+                    "caption": "ECO-CAN Adresse ungültig"
+                },
+                {
+                    "code": 203,
+                    "icon": "error",
+                    "caption": "Verbindung zu Logamatic Gateway verloren."
+                }
+            ]
+}

@@ -1,0 +1,15 @@
+{	
+	"elements":
+	[
+            { "name": "Open", "type": "CheckBox", "caption": "Open" },
+            { "name": "Host", "type": "ValidationTextBox", "caption": "Host" },
+            { "name": "Port", "type": "NumberSpinner", "caption": "Port" }
+        ],
+        "status":
+        [
+            { "code": 102, "icon": "active", "caption": "Gateway erreichbar" },
+            { "code": 104, "icon": "inactive", "caption": "Gateway geschlossen" },
+            { "code": 202, "icon": "error", "caption": "Gateway Adresse darf nicht leer sein" },
+            { "code": 203, "icon": "error", "caption": "Verbindung zu Gateway verloren" }
+        ]
+}
