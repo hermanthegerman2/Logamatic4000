@@ -100,15 +100,31 @@ class LogamaticGateway extends IPSModule
    
     
 ################## DATAPOINT RECEIVE FROM CHILD
-    public function ForwardData($JSONString)
+    /*public function ForwardData($JSONString)
     {
-        // Prüfen und aufteilen nach ForwardDataFromSplitter und ForwardDataFromDevcie
-        $Data = json_decode($JSONString);
-        IPS_LogMessage('ForwardDataFromChild:'.$this->InstanceID,  print_r(json_decode($JSONString),1));
+        // ForwardDataFromDevice
+        $data = json_decode($JSONString);
+        IPS_LogMessage('ForwardDataFromChild:'.$this->InstanceID,  print_r($data,1));
         $this->SendDataToParent($Data);
         
+    }*/
+    public function ForwardData($JSONString) 
+    {
+ 
+    // Empfangene Daten von der Device Instanz
+    $data = json_decode($JSONString);
+    IPS_LogMessage("ForwardData", utf8_decode($data->Buffer));
+ 
+    // Hier würde man den Buffer im Normalfall verarbeiten
+    // z.B. CRC prüfen, in Einzelteile zerlegen
+ 
+    // Weiterleiten zur I/O Instanz
+    $resultat = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data->Buffer)));
+ 
+    // Weiterverarbeiten und durchreichen
+    return $resultat;
+ 
     }
-
 ################## DATAPOINTS PARENT
     public function ReceiveData($JSONString)
     {
