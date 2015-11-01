@@ -151,11 +151,21 @@ class LogamaticGateway extends IPSModule
         // Stream in einzelne Pakete schneiden
         $stream = $head . utf8_decode($data->Buffer);
         IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
-        $start = strpos($stream, chr(0x7e));
+        $type = ord(substr($stream, 0, 1));
+        echo $type."\n";
+
+		switch ($type) {
+					case 167:   // A7 Monitordaten einzelmeldung
+
+                                        echo "Daten:  ".str2hex($stream)."\n";
+                                        break;
+                                }
+
+        /*$start = strpos($stream, chr(0xA7));
         //Anfang suchen
         if ($start === false)
         {
-            IPS_LogMessage('Logamatic Gateway', 'Frame without 0x7e');
+            IPS_LogMessage('Logamatic Gateway', 'Monitordaten Einzelmeldung');
             $stream = '';
         }
         elseif ($start > 0)
@@ -173,15 +183,15 @@ class LogamaticGateway extends IPSModule
         }
         $len = ord($stream[1]) * 256 + ord($stream[2]);
         if (strlen($stream) < $len + 4)
-        {
-//            IPS_LogMessage('Logamatic Gateway', 'Frame must have ' . $len . ' Bytes. ' . strlen($stream) . ' Bytes given.');
+        {*/
+            IPS_LogMessage('Logamatic Gateway', 'Frame: ' . strlen($stream) . ' Bytes given.');
             SetValueString($bufferID, $stream);
             $this->unlock("ReceiveLock");
             return;
-        }
+        //}
         $packet = substr($stream, 3, $len + 1);
         // Ende wieder in den Buffer werfen
-        $tail = substr($stream, $len + 4);
+        $tail = substr($stream, $len + 10);
         if ($tail===false) $tail='';
         SetValueString($bufferID, $tail);
         $this->unlock("ReceiveLock");
