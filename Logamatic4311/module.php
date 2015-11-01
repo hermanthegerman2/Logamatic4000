@@ -41,7 +41,7 @@ class Logamatic4311 extends IPSModule
     {
         // API-Daten verpacken und dann versenden.
         //$Data->Bus=$this->ReadPropertyString('Bus');
-        $JSONString = $Data->ToJSONString('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
+        $JSONString = $Data->ToJSONString('{0D923A14-D3B4-4F44-A4AB-D2B534693C35}');
         IPS_LogMessage('SendDataToGateway:'.$this->InstanceID,$JSONString);
         // Daten senden
         IPS_SendDataToParent($this->InstanceID, $JSONString);
