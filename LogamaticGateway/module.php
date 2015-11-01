@@ -200,7 +200,7 @@ class LogamaticGateway extends IPSModule
         //Laenge bilden
         $len = strlen($Data);
         //Startzeichen
-        //$frame = 
+        $frame = '';
         
         //Laenge
         
