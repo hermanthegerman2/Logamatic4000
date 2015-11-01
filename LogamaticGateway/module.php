@@ -64,12 +64,12 @@ class LogamaticGateway extends IPSModule
         if (($this->ReadPropertyBoolean('Open'))
                 and ( $this->HasActiveParent($ParentID)))
         {
-            $Data = chr(221).chr(0).chr(1).chr(0).chr(0);
+            /*$Data = chr(221).chr(0).chr(1).chr(0).chr(0);
             $this->SendDataToParent($Data);
             //sleep (0.5);
             $Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
             $this->SendDataToParent($Data);
-                     
+            */        
         }
     }
 
@@ -88,10 +88,10 @@ class LogamaticGateway extends IPSModule
         {
             $instance = IPS_GetInstance($this->InstanceID);
             $parentGUID = IPS_GetInstance($instance['ConnectionID'])['ModuleInfo']['ModuleID'];
-            if ($parentGUID == '{61051B08-5B92-472B-AFB2-6D971D9B99EE}')
+            if ($parentGUID == '{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}')
             {
                 IPS_DisconnectInstance($this->InstanceID);
-                IPS_LogMessage('XBee-ZigBee Gateway', 'XB-ZB Gateway has invalid Parent.');
+                IPS_LogMessage('Logamatic Gateway', 'Logamatic Gateway has invalid Parent.');
                 $result = false;
             }
         }
@@ -157,7 +157,8 @@ class LogamaticGateway extends IPSModule
 		switch ($type) {
 					case 167:   // A7 Monitordaten einzelmeldung
 
-                                        echo "Daten:  ".str2hex($stream)."\n";
+                                        echo "Daten: A7 ".str2hex($stream)."\n";
+                                        $stream = '';
                                         break;
                                 }
 
