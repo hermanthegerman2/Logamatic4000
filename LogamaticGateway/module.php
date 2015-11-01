@@ -160,6 +160,21 @@ class LogamaticGateway extends IPSModule
                                         echo "Daten: A7 ".str2hex($stream)."\n";
                                         $stream = '';
                                         break;
+                                    
+                                        case 165:   // A5 Monitordaten einzelmeldung
+
+                                        echo "Daten: A5 ".str2hex($stream)."\n";
+                                        $stream = '';
+                                        break;
+                                    
+                                        case 171:   // AB Monitordaten komplett
+
+                                        echo "Daten: AB ".str2hex($stream)."\n";
+                                        $stream = '';
+                                        break;
+                                    
+                                    
+                                    
                                 }
 
         /*$start = strpos($stream, chr(0xA7));
