@@ -104,20 +104,16 @@ class LogamaticGateway extends IPSModule
     {
         // Prüfen und aufteilen nach ForwardDataFromSplitter und ForwardDataFromDevcie
         $Data = json_decode($JSONString);
-//        IPS_LogMessage('ForwardDataFrom???:'.$this->InstanceID,  print_r($Data,1));
+        IPS_LogMessage('ForwardDataFrom???:'.$this->InstanceID,  print_r($Data,1));
         
         switch ($Data->DataID)
         {
-            case "{5971FB22-3F96-45AE-916F-AE3AC8CA8782}": //API
+            case "{FDAAB689-6162-47D3-A05D-F342430AF8C2}": //API
                 $APIData = new TXB_API_Data();
                 $APIData->GetDataFromJSONObject($Data);
                 $this->ForwardDataFromSplitter($APIData);
                 break;
-            case "{C2813FBB-CBA1-4A92-8896-C8BC32A82BA4}": //CMD
-                $ATData = new TXB_Command_Data();
-                $ATData->GetDataFromJSONObject($Data);
-                $this->ForwardDataFromDevice($ATData);
-                break;
+            
         }
     }
 
@@ -131,9 +127,9 @@ class LogamaticGateway extends IPSModule
     }
     private function SendDataToDevice(TXB_Command_Data $ATData)
     {
-//        IPS_LogMessage('SendDataToDevice:'.$this->InstanceID,  print_r($ATData,1));
-        $Data = $ATData->ToJSONString('{CB5950B3-593C-4126-9F0F-8655A3944419}');
-        IPS_SendDataToChildren($this->InstanceID, $Data);
+        IPS_LogMessage('SendDataToDevice:'.$this->InstanceID,  print_r($ATData,1));
+        $JSONString = json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => utf8_encode($Data)));
+        IPS_SendDataToChildren($this->InstanceID, $JSONString);
     }
 ################## DATAPOINTS PARENT
     public function ReceiveData($JSONString)
