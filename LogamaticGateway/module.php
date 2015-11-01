@@ -103,11 +103,11 @@ class LogamaticGateway extends IPSModule
     public function ForwardData($JSONString)
     {
         // Prüfen und aufteilen nach ForwardDataFromSplitter und ForwardDataFromDevcie
-        $Data = json_decode($JSONString);
-        IPS_LogMessage('ForwardDataFromChild:'.$this->InstanceID,  print_r($Data,1));
+        //$Data = json_decode($JSONString);
+        IPS_LogMessage('ForwardDataFromChild:'.$this->InstanceID,  print_r(json_decode($JSONString),1));
         $JSONString = json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $Data));
         IPS_SendDataToParent($this->InstanceID,$JSONString);
-           
+        IPS_LogMessage('ForwardDataToSerialPort:'.$this->InstanceID,  print_r($Data,1));  
     }
 
 ################## DATAPOINTS PARENT
