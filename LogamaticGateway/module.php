@@ -138,7 +138,7 @@ class LogamaticGateway extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('ReceiveDataFromSerialPort:'.$this->InstanceID,  print_r($data,1));
+        IPS_LogMessage('ReceiveDataFromSerialPort:'.$this->InstanceID,  print_r(str2hex($data),1));
         
         $bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
@@ -341,5 +341,15 @@ class LogamaticGateway extends IPSModule
     {
         IPS_SemaphoreLeave("XBZB_" . (string) $this->InstanceID . (string) $ident);
     }
+    private function str2hex($string) // Funktion String in Hex umwandeln
+	{
+		$hex='';
+		for ($i=0; $i < strlen($string); $i++)
+			{
+			$hex .=dechex(ord($string[$i]))." ";
+			}
+		return $hex;
+	}
+
 }
 ?>
