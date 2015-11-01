@@ -19,7 +19,11 @@ class Logamatic4311 extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
-
+        if ($this->ReadPropertyString('Bus') == '')
+            $this->SetSummary(202);
+        else
+            $this->SetStatus(102);
+        $this->SetSummary($this->ReadPropertyString('Bus'));
         
     }
 }
