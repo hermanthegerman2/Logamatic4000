@@ -8,10 +8,10 @@
                 {
                     "type": "Button",
                     "label": "Monitordaten auslesen",
-                    "onClick": "Logamatic_RequestMonitordaten($id);"
+                    "onClick": "Logamatic_RequestMonitordaten();"
                 }                
             ],
-    "status":
+        "status":
             [
                 {
                     "code": 102,
