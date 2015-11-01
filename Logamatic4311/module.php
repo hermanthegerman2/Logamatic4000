@@ -21,5 +21,7 @@ class Logamatic4311 extends IPSModule
         parent::ApplyChanges();
 
         
-    }    
- ?>
+    }
+}
+
+?>
