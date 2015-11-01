@@ -149,7 +149,7 @@ class LogamaticGateway extends IPSModule
         SetValueString($bufferID, '');
         // Stream in einzelne Pakete schneiden
         $stream = $head . utf8_decode($data->Buffer);
-        IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data)));
+        IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($stream)));
         $start = strpos($stream, chr(0x7e));
         //Anfang suchen
         if ($start === false)
