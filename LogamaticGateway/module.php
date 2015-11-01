@@ -66,7 +66,7 @@ class LogamaticGateway extends IPSModule
         {
             $Data = chr(221).chr(0).chr(1).chr(0).chr(0);
             $this->SendDataToParent($Data);
-            sleep (0.5);
+            //sleep (0.5);
             $Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
             $this->SendDataToParent($Data);
                      

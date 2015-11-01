@@ -30,10 +30,10 @@ class Logamatic4311 extends IPSModule
     private function RequestMonitordaten($Data)
     {
         $Data = chr(221).chr(0).$this->ReadPropertyString('Bus').chr(0).chr(0);
-            $this->SendDataToParent($Data);
-            //sleep (0.5);
-            $Data = chr(162).chr(0).$this->ReadPropertyString('Bus').chr(0).chr(0).chr(0);
-            $this->SendDataToParent($Data);
+        $this->SendDataToParent($Data);
+        //sleep (0.5);
+        $Data = chr(162).chr(0).$this->ReadPropertyString('Bus').chr(0).chr(0).chr(0);
+        $this->SendDataToParent($Data);
     }
      protected function SendDataToParent($Data)
     {
