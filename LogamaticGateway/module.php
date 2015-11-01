@@ -138,7 +138,7 @@ class LogamaticGateway extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('ReceiveDataFromSerialPort:'.$this->InstanceID,  print_r(str2hex($data),1));
+        IPS_LogMessage('ReceiveDataFromSerialPort:'.$this->InstanceID,  print_r($data,1));
         
         $bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
@@ -149,6 +149,7 @@ class LogamaticGateway extends IPSModule
         SetValueString($bufferID, '');
         // Stream in einzelne Pakete schneiden
         $stream = $head . utf8_decode($data->Buffer);
+        IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data)));
         $start = strpos($stream, chr(0x7e));
         //Anfang suchen
         if ($start === false)
