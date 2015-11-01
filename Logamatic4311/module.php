@@ -26,11 +26,10 @@ class Logamatic4311 extends IPSModule
         $this->SetSummary($this->ReadPropertyString('Bus'));
         
     }
-}
 
-protected function SetSummary($data)
+    protected function SetSummary($data)
     {
         IPS_LogMessage(__CLASS__, __FUNCTION__ . "Data:" . $data); //                   
     }
-
+}
 ?>
