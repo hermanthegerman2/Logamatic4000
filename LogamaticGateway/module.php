@@ -105,32 +105,9 @@ class LogamaticGateway extends IPSModule
         // Prüfen und aufteilen nach ForwardDataFromSplitter und ForwardDataFromDevcie
         $Data = json_decode($JSONString);
         IPS_LogMessage('ForwardDataFrom???:'.$this->InstanceID,  print_r($Data,1));
-        
-        switch ($Data->DataID)
-        {
-            case "{FDAAB689-6162-47D3-A05D-F342430AF8C2}": //API
-                $APIData = new TXB_API_Data();
-                $APIData->GetDataFromJSONObject($Data);
-                $this->ForwardDataFromSplitter($APIData);
-                break;
-            
-        }
+           
     }
 
-################## DATAPOINTS DEVICE
-    private function ForwardDataFromDevice(TXB_Command_Data $ATData)
-    {
-//        IPS_LogMessage('ForwardDataFromDevice:'.$this->InstanceID,  print_r($ATData,1));
-        
-        $Frame = chr(TXB_API_Command::XB_API_AT_Command) . chr($ATData->FrameID) . $ATData->ATCommand . $ATData->Data;
-        $this->SendDataToParent($Frame);
-    }
-    private function SendDataToDevice(TXB_Command_Data $ATData)
-    {
-        IPS_LogMessage('SendDataToDevice:'.$this->InstanceID,  print_r($ATData,1));
-        $JSONString = json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => utf8_encode($Data)));
-        IPS_SendDataToChildren($this->InstanceID, $JSONString);
-    }
 ################## DATAPOINTS PARENT
     public function ReceiveData($JSONString)
     {
