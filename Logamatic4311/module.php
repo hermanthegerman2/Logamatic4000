@@ -26,7 +26,11 @@ class Logamatic4311 extends IPSModule
             $this->SetSummary($this->ReadPropertyString('Bus'));
         if (!$this->HasActiveParent())
             IPS_LogMessage('Logamatic', 'Instance has no active Parent.');
-        
+        else 
+            $this->RegisterVariableString("BufferIN", "BufferIN", "", -3);      
+            IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
+            
+     
     }
 
     public function RequestMonitordaten()
