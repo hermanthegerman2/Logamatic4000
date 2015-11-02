@@ -119,7 +119,7 @@ class LogamaticGateway extends IPSModule
     // z.B. CRC prüfen, in Einzelteile zerlegen
  
     // Weiterleiten zur I/O Instanz
-    $resultat = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data->Buffer)));
+    $resultat = $this->SendDataToParent($data);
  
     // Weiterverarbeiten und durchreichen
     return $resultat;
@@ -209,7 +209,7 @@ class LogamaticGateway extends IPSModule
     }
     protected function SendDataToParent($Data)
     {
-        IPS_LogMessage('SendDataToSerialPort:'.$this->InstanceID,$Data);
+        IPS_LogMessage('Gateway -> SerialPort::'.$this->InstanceID,$Data);
         
         //Parent ok ?
         if (!$this->HasActiveParent())
