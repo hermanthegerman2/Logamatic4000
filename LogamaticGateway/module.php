@@ -140,9 +140,11 @@ class LogamaticGateway extends IPSModule
         SetValueString($bufferID, '');
         // Stream in einzelne Pakete schneiden
         $stream = $head . utf8_decode($data->Buffer);
-        IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
+        //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
         $type = ord(substr($stream, 0, 1));
-        echo $type."\n";
+        $bus = ord(substr($stream, 2, 1));
+        
+        echo $type." / ".$bus."\n";
 
 		switch ($type) {
 					case 167:   // A7 Monitordaten einzelmeldung
