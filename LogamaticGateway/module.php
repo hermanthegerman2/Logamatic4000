@@ -119,7 +119,7 @@ class LogamaticGateway extends IPSModule
     // z.B. CRC prüfen, in Einzelteile zerlegen
  
     // Weiterleiten zur I/O Instanz
-    $resultat = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data->Buffer)));
+    $resultat = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => utf8_decode($data->Buffer))));
  
     // Weiterverarbeiten und durchreichen
     return $resultat;
@@ -150,9 +150,9 @@ class LogamaticGateway extends IPSModule
 					case 167:   // A7 Monitordaten einzelmeldung
 
                                         echo "Daten: A7 ".str2hex($stream)."\n";
+                                        $stream = substr($stream, 0, 9);
                                         $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => $data->Buffer)));
-		                        
-                                        $stream = '';
+		                        $stream = '';
                                         break;
                                     
                                         case 165:   // A5 Monitordaten einzelmeldung
