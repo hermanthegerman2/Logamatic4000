@@ -50,6 +50,14 @@ class Logamatic4311 extends IPSModule
         IPS_SendDataToParent($this->InstanceID, $JSONString);
         return true;
     }
+    
+    protected function ReceiveData($JSONString)
+		{
+			$data = json_decode($JSONString);
+			IPS_LogMessage('Logamatic <- Gateway:', utf8_decode($data->Buffer));
+						
+		}
+		
 ################## DUMMYS / WOARKAROUNDS - protected
  
     protected function HasActiveParent()
