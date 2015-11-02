@@ -34,12 +34,12 @@ class Logamatic4311 extends IPSModule
 
     public function RequestMonitordaten()
     {
-        //$Data = chr(0xDD).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
-        $Data = chr(221).chr(0).chr(1).chr(0).chr(0).chr(0);
+        $Data = chr(0xDD).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
+        //$Data = chr(221).chr(0).chr(1).chr(0).chr(0).chr(0);
         $this->SendDataToParent($Data);
         //sleep (0.5);
-        //$Data = chr(0xA2).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
-        $Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
+        $Data = chr(0xA2).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
+        //$Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
         $this->SendDataToParent($Data);
         return true;
     }
@@ -51,7 +51,7 @@ class Logamatic4311 extends IPSModule
         
         $JSONString = json_encode(Array("DataID" => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => utf8_encode($Data)));
        
-        IPS_LogMessage('Logamatic -> Gateway:'.$Data,$JSONString);
+        IPS_LogMessage('Logamatic -> Gateway:'.$this->InstanceID,$JSONString);
         // Daten senden
         IPS_SendDataToParent($this->InstanceID, $JSONString);
         

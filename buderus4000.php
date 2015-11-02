@@ -352,27 +352,4 @@ function CheckVariableTYP($name, $vartyp, $profile)
                 //echo "ID: ".$InstanzID." ".$name."\n";
             return $InstanzID;
    }
-
-
-// Klasse mit Daten zum SENDEN an den L4S
-class L4SData extends stdClass
-{
-
-//    const SendCommand = 0;
-//    const GetData = 1;
-
-    public $Data;
-    //public $Typ;
-    public $needResponse;
-
-    public function __construct($Command, $Data = '', /* $Typ = L4SData::SendCommand, */ $needResponse = true)
-    {
-        $this->Command = $Command;
-        $this->Data = $Data;
-//        $this->Typ = $Typ;
-        $this->needResponse = $needResponse;
-    }
-
-}
-
 ?>
