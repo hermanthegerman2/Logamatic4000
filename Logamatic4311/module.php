@@ -25,7 +25,7 @@ class Logamatic4311 extends IPSModule
             $this->SetStatus(102);
             $this->SetSummary($this->ReadPropertyString('Bus'));
         if (!$this->HasActiveParent())
-            IPS_LogMessage("Instance has no active Parent.");
+            IPS_LogMessage('Logamatic', 'Instance has no active Parent.');
         
     }
 
