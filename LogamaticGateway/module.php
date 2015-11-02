@@ -113,7 +113,7 @@ class LogamaticGateway extends IPSModule
  
     // Empfangene Daten von der Device Instanz
     $data = json_decode($JSONString);
-    IPS_LogMessage("ForwardData", utf8_decode($data->Buffer));
+    IPS_LogMessage("Gateway -> SerialPort:", utf8_decode($data->Buffer));
  
     // Hier würde man den Buffer im Normalfall verarbeiten
     // z.B. CRC prüfen, in Einzelteile zerlegen
@@ -148,6 +148,8 @@ class LogamaticGateway extends IPSModule
 					case 167:   // A7 Monitordaten einzelmeldung
 
                                         echo "Daten: A7 ".str2hex($stream)."\n";
+                                        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => $data->Buffer)));
+		                        
                                         $stream = '';
                                         break;
                                     
