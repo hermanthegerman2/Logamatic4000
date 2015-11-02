@@ -36,15 +36,7 @@ class LogamaticGateway extends IPSModule
             }
             $ParentOpen = $this->ReadPropertyBoolean('Open');
             // Keine Verbindung erzwingen wenn Host leer ist, sonst folgt später Exception.
-            if (!$ParentOpen)
-                $this->SetStatus(104);
-
-            if ($this->ReadPropertyString('Host') == '')
-            {
-                if ($ParentOpen)
-                    $this->SetStatus(202);
-                $ParentOpen = false;
-            }
+         
             if (IPS_GetProperty($ParentID, 'Open') <> $ParentOpen)
             {
                 IPS_SetProperty($ParentID, 'Open', $ParentOpen);
