@@ -129,7 +129,7 @@ class LogamaticGateway extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Gateway <- SerialPort:'.$this->InstanceID,  print_r($data,1));
+        //IPS_LogMessage('Gateway <- SerialPort:'.$this->InstanceID,  print_r($data,1));
         
         $bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
