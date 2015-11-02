@@ -70,7 +70,7 @@ class Logamatic4311 extends IPSModule
         SetValueString($bufferID, '');
         // Stream in einzelne Pakete schneiden
         $stream = $head . utf8_decode($data->BufferIN);
-        IPS_LogMessage('ReceiveDataHex:',  print_r($stream));
+        IPS_LogMessage('ReceiveDataHex:',  print_r($data));
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
