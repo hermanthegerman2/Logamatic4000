@@ -23,7 +23,9 @@ class Logamatic4311 extends IPSModule
             $this->SetSummary(202);
         else
             $this->SetStatus(102);
-        $this->SetSummary($this->ReadPropertyString('Bus'));
+            $this->SetSummary($this->ReadPropertyString('Bus'));
+        if (!$this->HasActiveParent())
+            throw new Exception("Instance has no active Parent.");
         
     }
 
@@ -41,7 +43,7 @@ class Logamatic4311 extends IPSModule
     {
         // API-Daten verpacken und dann versenden.
         //$Data->Bus=$this->ReadPropertyString('Bus');
-        $JSONString = json_encode(Array("DataID" => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => utf8_decode($Data)));
+        $JSONString = json_encode(Array("DataID" => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => utf8_encode($Data)));
        
         IPS_LogMessage('Logamatic -> Gateway:'.$this->InstanceID,$JSONString);
         // Daten senden
