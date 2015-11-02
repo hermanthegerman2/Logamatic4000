@@ -48,6 +48,7 @@ class Logamatic4311 extends IPSModule
         IPS_LogMessage('Logamatic -> Gateway:'.$this->InstanceID,$JSONString);
         // Daten senden
         IPS_SendDataToParent($this->InstanceID, $JSONString);
+        
         return true;
     }
     
@@ -55,6 +56,7 @@ class Logamatic4311 extends IPSModule
 		{
 			$data = json_decode($JSONString);
 			IPS_LogMessage('Logamatic <- Gateway:', utf8_decode($data->Buffer));
+                        IPS_LogMessage('Logamatic <- Gateway:'.$this->InstanceID,$JSONString);
 						
 		}
 		
