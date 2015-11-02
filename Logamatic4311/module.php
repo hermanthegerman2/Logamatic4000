@@ -26,8 +26,8 @@ class Logamatic4311 extends IPSModule
             $this->SetSummary($this->ReadPropertyString('Bus'));
         if (!$this->HasActiveParent())
             IPS_LogMessage('Logamatic', 'Instance has no active Parent.');
-        $this->RegisterVariableString("BufferIN", "BufferIN", "", -3);      
-        IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
+        $this->RegisterVariableString("Buffer", "Buffer", "", -3);      
+        IPS_SetHidden($this->GetIDForIdent('Buffer'), true);
     }
 
     public function RequestMonitordaten()
@@ -76,7 +76,7 @@ class Logamatic4311 extends IPSModule
                     switch ($type) {
 					case 167:   // A7 Monitordaten einzelmeldung
 
-                                        echo "Daten: A7 ".str2hex($stream)."\n";
+                                        echo "Daten: ".str2hex($stream)."\n";
                                         $stream = substr($stream, 0, 9);
                                         $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => $data->Buffer)));
 		                        $stream = '';
