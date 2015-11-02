@@ -4,7 +4,7 @@
     "type": 3,
     "vendor": "Buderus",
     "aliases": ["Logamatic 4311"],
-    "parentRequirements": ["{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}"],
+    "parentRequirements": ["{0D923A14-D3B4-4F44-A4AB-D2B534693C35}"],
     "childRequirements": [],
     "implemented": ["{FDAAB689-6162-47D3-A05D-F342430AF8C2}"],
     "prefix": "Logamatic"
