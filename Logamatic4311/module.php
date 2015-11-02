@@ -65,12 +65,12 @@ class Logamatic4311 extends IPSModule
         //    return false;
         $BufferID = $this->GetIDForIdent("BufferIN");
 // Empfangs Lock setzen
-        if (!$this->lock("ReplyLock"))
+        /*if (!$this->lock("ReplyLock"))
         {
             
             trigger_error("ReceiveBuffer is locked",E_USER_NOTICE);
         }
-        /*
+        
           // Datenstream zusammenfügen
           $Head = GetValueString($BufferID); */
 // Stream zusammenfügen
@@ -81,10 +81,10 @@ class Logamatic4311 extends IPSModule
           // Empfangs Lock aufheben
           $this->unlock("ReplyLock");
           throw new Exception("Can not send to ParentLMS");
-          } */
+          } 
         $this->SetReplyEvent(TRUE);
 // Empfangs Lock aufheben
-        $this->unlock("ReplyLock");
+        $this->unlock("ReplyLock");*/
         return true;
                       				
     }
