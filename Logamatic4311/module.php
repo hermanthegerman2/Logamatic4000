@@ -61,64 +61,7 @@ class Logamatic4311 extends IPSModule
         //if ($data->DataID <> '{018EF6B5-AB94-40C6-AA53-46943E824ACF}')
         //    return false;
         IPS_LogMessage('Logamatic <- Gateway:'.$this->InstanceID,$JSONString);
-        $bufferID = $this->GetIDForIdent("BufferIN");
-        // Empfangs Lock setzen
-        if (!$this->lock("ReceiveLock"))
-            throw new Exception("ReceiveBuffer is locked");
-        // Datenstream zusammenfügen
-        $head = GetValueString($bufferID);
-        SetValueString($bufferID, '');
-        // Stream in einzelne Pakete schneiden
-        $stream = $head . utf8_decode($data->BufferIN);
-        IPS_LogMessage('ReceiveDataHex:',  print_r($data));
-        $type = ord(substr($stream, 0, 1));
-        $bus = ord(substr($stream, 2, 1));
         
-        echo $type." / ".$bus."\n";
-
-		switch ($type) {
-					case 167:   // A7 Monitordaten einzelmeldung
-
-                                        echo "Daten: ".str2hex($stream)."\n";
-                                        $stream = substr($stream, 0, 9);
-                                        
-		                        $stream = '';
-                                        break;
-                                    
-                                        case 165:   // A5 Monitordaten einzelmeldung
-
-                                        echo "Daten: A5 ".str2hex($stream)."\n";
-                                        $stream = '';
-                                        break;
-                                    
-                                        case 171:   // AB Monitordaten komplett
-
-                                        echo "Daten: AB ".str2hex($stream)."\n";
-                                        $stream = '';
-                                        break;
-                                    
-                                    
-                                    
-                                }
-
-        
-        
-        //IPS_LogMessage('Logamatic Gateway', 'Frame: ' . strlen($stream) . ' Bytes given.');
-        SetValueString($bufferID, $stream);
-        $this->unlock("ReceiveLock");
-        return;
-        //}
-        $packet = substr($stream, 3, $len + 1);
-        // Ende wieder in den Buffer werfen
-        $tail = substr($stream, $len + 10);
-        if ($tail===false) $tail='';
-        SetValueString($bufferID, $tail);
-        $this->unlock("ReceiveLock");
-        $this->DecodeData($packet);
-        // Ende war länger als 4 ? Dann nochmal Packet suchen.
-        if (strlen($tail) > 4)
-            $this->ReceiveData(json_encode(array('Buffer' => '')));
-        return true;
     }
         
 ################## DUMMYS / WOARKAROUNDS - protected
