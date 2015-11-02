@@ -24,14 +24,13 @@ class Logamatic4311 extends IPSModule
         else
             $this->SetStatus(102);
             $this->SetSummary($this->ReadPropertyString('Bus'));
+            $this->RegisterVariableString("BufferIN", "BufferIN", "", -3);      
+            IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
         if (!$this->HasActiveParent())
             IPS_LogMessage('Logamatic', 'Instance has no active Parent.');
         
-        $this->RegisterVariableString("BufferIN", "BufferIN", "", -3);      
-        IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
-            
+    }        
      
-    }
 
     public function RequestMonitordaten()
     {
@@ -57,17 +56,45 @@ class Logamatic4311 extends IPSModule
     }
     
     public function ReceiveData($JSONString)
-	{
-		$data = json_decode($JSONString);
-                IPS_LogMessage('Logamatic <- Gateway:'.$this->InstanceID,  print_r($data,1));                    				
-	}
+    {
+//        IPS_LogMessage('RecData', utf8_decode($JSONString));
+//        IPS_LogMessage(__CLASS__, __FUNCTION__); // 
+//FIXME Bei Status inaktiv abbrechen
+        $data = json_decode($JSONString);
+        //if ($data->DataID <> '{018EF6B5-AB94-40C6-AA53-46943E824ACF}')
+        //    return false;
+        $BufferID = $this->GetIDForIdent("BufferIN");
+// Empfangs Lock setzen
+        if (!$this->lock("ReplyLock"))
+        {
+            
+            trigger_error("ReceiveBuffer is locked",E_USER_NOTICE);
+        }
+        /*
+          // Datenstream zusammenfügen
+          $Head = GetValueString($BufferID); */
+// Stream zusammenfügen
+        SetValueString($BufferID, utf8_decode($data->Buffer));
+// Empfangs Event setzen
+        /*        if (!$this->SetReplyEvent(TRUE))
+          {
+          // Empfangs Lock aufheben
+          $this->unlock("ReplyLock");
+          throw new Exception("Can not send to ParentLMS");
+          } */
+        $this->SetReplyEvent(TRUE);
+// Empfangs Lock aufheben
+        $this->unlock("ReplyLock");
+        return true;
+                      				
+    }
         
 ################## DUMMYS / WOARKAROUNDS - protected
  
+    
     protected function HasActiveParent()
     {
-        IPS_LogMessage(__CLASS__, __FUNCTION__); //          
-        $instance = IPS_GetInstance($this->InstanceID);
+        $instance = @IPS_GetInstance($this->InstanceID);
         if ($instance['ConnectionID'] > 0)
         {
             $parent = IPS_GetInstance($instance['ConnectionID']);
@@ -75,6 +102,11 @@ class Logamatic4311 extends IPSModule
                 return true;
         }
         return false;
+    }
+    protected function GetParent()
+    {
+        $instance = @IPS_GetInstance($this->InstanceID);
+        return ($instance['ConnectionID'] > 0) ? $instance['ConnectionID'] : false;
     }
     protected function SetStatus($InstanceStatus)
     {
@@ -85,5 +117,6 @@ class Logamatic4311 extends IPSModule
     {
         IPS_LogMessage(__CLASS__, __FUNCTION__ . "Data:" . $data); // 
     }
+    
 }
 ?>
