@@ -61,7 +61,7 @@ class Logamatic4311 extends IPSModule
         //if ($data->DataID <> '{018EF6B5-AB94-40C6-AA53-46943E824ACF}')
         //    return false;
         IPS_LogMessage('Logamatic <- Gateway:'.$this->InstanceID,$JSONString);
-        
+        IPS_LogMessage('ReceivedData:'.$this->InstanceID,  print_r($data,1));
     }
         
 ################## DUMMYS / WOARKAROUNDS - protected
