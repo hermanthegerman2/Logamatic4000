@@ -105,7 +105,7 @@ class Logamatic4311 extends IPSModule
         
         //IPS_LogMessage('Logamatic Gateway', 'Frame: ' . strlen($stream) . ' Bytes given.');
         SetValueString($bufferID, $stream);
-        this->unlock("ReceiveLock");
+        $this->unlock("ReceiveLock");
         return;
         //}
         $packet = substr($stream, 3, $len + 1);
