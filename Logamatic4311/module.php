@@ -29,10 +29,10 @@ class Logamatic4311 extends IPSModule
 
     public function RequestMonitordaten()
     {
-        $Data = chr(221).chr(0).chr(1).chr(0).chr(0);
+        $Data = chr(0xDD).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
         $this->SendDataToParent($Data);
         //sleep (0.5);
-        $Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
+        $Data = chr(0xA2).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
         $this->SendDataToParent($Data);
         return true;
     }
