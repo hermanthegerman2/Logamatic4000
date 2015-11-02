@@ -75,7 +75,7 @@ class Logamatic4311 extends IPSModule
           // Datenstream zusammenfügen
           $Head = GetValueString($BufferID); */
 // Stream zusammenfügen
-        SetValueString($BufferID, utf8_decode($data->Buffer));
+        SetValueString($BufferID, utf8_decode($data->BufferIN));
 // Empfangs Event setzen
         /*        if (!$this->SetReplyEvent(TRUE))
           {
