@@ -122,8 +122,8 @@ class LogamaticGateway extends IPSModule
     {
         $data = json_decode($JSONString);
         //IPS_LogMessage('Gateway <- SerialPort:'.$this->InstanceID,  print_r($data,1));
-        
-        $bufferID = $this->GetIDForIdent("BufferIN");
+        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $data->Buffer)));
+        /*$bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
         if (!$this->lock("ReceiveLock"))
             throw new Exception("ReceiveBuffer is locked");
@@ -179,7 +179,7 @@ class LogamaticGateway extends IPSModule
         $this->DecodeData($packet);
         // Ende war länger als 4 ? Dann nochmal Packet suchen.
         if (strlen($tail) > 4)
-            $this->ReceiveData(json_encode(array('Buffer' => '')));
+            $this->ReceiveData(json_encode(array('Buffer' => '')));*/
         return true;
     }
     
