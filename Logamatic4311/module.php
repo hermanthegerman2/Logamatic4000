@@ -58,7 +58,7 @@ class Logamatic4311 extends IPSModule
 		$data = json_decode($JSONString);
                 print utf8_decode($data->Buffer)."\n";
                 IPS_LogMessage('Logamatic <- Gateway:', utf8_decode($data->Buffer));                        				
-		$bufferID = $this->GetIDForIdent("BufferIN");
+		$bufferID = $this->GetIDForIdent("Buffer");
                 // Empfangs Lock setzen
                 if (!$this->lock("ReceiveLock"))
                     throw new Exception("ReceiveBuffer is locked");
