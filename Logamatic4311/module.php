@@ -26,7 +26,8 @@ class Logamatic4311 extends IPSModule
             $this->SetSummary($this->ReadPropertyString('Bus'));
         if (!$this->HasActiveParent())
             IPS_LogMessage('Logamatic', 'Instance has no active Parent.');
-        
+        $this->RegisterVariableString("BufferIN", "BufferIN", "", -3);      
+        IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
     }
 
     public function RequestMonitordaten()
@@ -53,13 +54,37 @@ class Logamatic4311 extends IPSModule
     }
     
     public function ReceiveData($JSONString)
-		{
-			$data = json_decode($JSONString);
-                        print utf8_decode($data->Buffer)."\n";
-			IPS_LogMessage('Logamatic <- Gateway:', utf8_decode($data->Buffer));
-                        						
-		}
-		
+	{
+		$data = json_decode($JSONString);
+                print utf8_decode($data->Buffer)."\n";
+                IPS_LogMessage('Logamatic <- Gateway:', utf8_decode($data->Buffer));                        				
+		$bufferID = $this->GetIDForIdent("BufferIN");
+                // Empfangs Lock setzen
+                if (!$this->lock("ReceiveLock"))
+                    throw new Exception("ReceiveBuffer is locked");
+                // Datenstream zusammenfügen
+                $head = GetValueString($bufferID);
+                SetValueString($bufferID, '');
+                // Stream in einzelne Pakete schneiden
+                $stream = $head . utf8_decode($data->Buffer);
+                //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
+                $type = ord(substr($stream, 0, 1));
+                $bus = ord(substr($stream, 2, 1));
+        
+                echo $type." / ".$bus."\n";
+
+                    switch ($type) {
+					case 167:   // A7 Monitordaten einzelmeldung
+
+                                        echo "Daten: A7 ".str2hex($stream)."\n";
+                                        $stream = substr($stream, 0, 9);
+                                        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => $data->Buffer)));
+		                        $stream = '';
+                                        break;
+                                    }
+                $this->unlock("ReceiveLock");
+	}
+        
 ################## DUMMYS / WOARKAROUNDS - protected
  
     protected function HasActiveParent()
