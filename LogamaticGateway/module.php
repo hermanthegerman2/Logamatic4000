@@ -167,33 +167,12 @@ class LogamaticGateway extends IPSModule
                                     
                                 }
 
-        /*$start = strpos($stream, chr(0xA7));
-        //Anfang suchen
-        if ($start === false)
-        {
-            IPS_LogMessage('Logamatic Gateway', 'Monitordaten Einzelmeldung');
-            $stream = '';
-        }
-        elseif ($start > 0)
-        {
-//            IPS_LogMessage('Logamatic Gateway', 'Frame do not start with 0x7e');
-            $stream = substr($stream, $start);
-        }
-        //Paket suchen
-        if (strlen($stream) < 5)
-        {
-//            IPS_LogMessage('Logamatic', 'Frame to short');
-            SetValueString($bufferID, $stream);
-            $this->unlock("ReceiveLock");
-            return;
-        }
-        $len = ord($stream[1]) * 256 + ord($stream[2]);
-        if (strlen($stream) < $len + 4)
-        {*/
-            IPS_LogMessage('Logamatic Gateway', 'Frame: ' . strlen($stream) . ' Bytes given.');
-            SetValueString($bufferID, $stream);
-            $this->unlock("ReceiveLock");
-            return;
+        
+        
+        //IPS_LogMessage('Logamatic Gateway', 'Frame: ' . strlen($stream) . ' Bytes given.');
+        SetValueString($bufferID, $stream);
+        $this->unlock("ReceiveLock");
+        return;
         //}
         $packet = substr($stream, 3, $len + 1);
         // Ende wieder in den Buffer werfen
