@@ -62,7 +62,7 @@ class Logamatic4311 extends IPSModule
         //    return false;
         IPS_LogMessage('Logamatic <- Gateway:'.$this->InstanceID,$JSONString);
         //IPS_LogMessage('ReceivedData:'.$this->InstanceID, utf8_decode(print_r($data,1)));
-        $Data = $data->BufferIN;
+        $Data = str2hex($data->BufferIN);
         IPS_LogMessage('ReceivedData:'.$this->InstanceID, $Data);
     }
         
