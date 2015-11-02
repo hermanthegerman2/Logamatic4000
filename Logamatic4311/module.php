@@ -55,8 +55,8 @@ class Logamatic4311 extends IPSModule
     public function ReceiveData($JSONString)
 	{
 		$data = json_decode($JSONString);
-                print utf8_decode($data->Buffer)."\n";
-                IPS_LogMessage('Logamatic <- Gateway:', utf8_decode($data->Buffer));                        				
+                print $data." : ".utf8_decode($data)."\n";
+                IPS_LogMessage('Logamatic <- Gateway:', utf8_decode($data));                        				
 		
 	}
         
