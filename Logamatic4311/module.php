@@ -63,8 +63,8 @@ class Logamatic4311 extends IPSModule
         IPS_LogMessage('Logamatic <- Gateway:'.$this->InstanceID,$JSONString);
         $bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
-        if (!$this->lock("ReceiveLock"))
-            throw new Exception("ReceiveBuffer is locked");
+        //if (!$this->lock("ReceiveLock"))
+            //throw new Exception("ReceiveBuffer is locked");
         // Datenstream zusammenfügen
         $head = GetValueString($bufferID);
         SetValueString($bufferID, '');
@@ -105,7 +105,7 @@ class Logamatic4311 extends IPSModule
         
         //IPS_LogMessage('Logamatic Gateway', 'Frame: ' . strlen($stream) . ' Bytes given.');
         SetValueString($bufferID, $stream);
-        $this->unlock("ReceiveLock");
+        //$this->unlock("ReceiveLock");
         return;
         //}
         $packet = substr($stream, 3, $len + 1);
@@ -113,7 +113,7 @@ class Logamatic4311 extends IPSModule
         $tail = substr($stream, $len + 10);
         if ($tail===false) $tail='';
         SetValueString($bufferID, $tail);
-        $this->unlock("ReceiveLock");
+        //$this->unlock("ReceiveLock");
         $this->DecodeData($packet);
         // Ende war länger als 4 ? Dann nochmal Packet suchen.
         if (strlen($tail) > 4)
