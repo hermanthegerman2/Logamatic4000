@@ -5,7 +5,7 @@
     "vendor": "Buderus",
     "aliases": ["Logamatic Gateway"],
     "parentRequirements": ["{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}"],
-    "childRequirements": ["{9888202F-A490-4785-BDA7-DBB817B163B2}"],
+    "childRequirements": ["{9888202F-A490-4785-BDA7-DBB817B163B2}", "{FDAAB689-6162-47D3-A05D-F342430AF8C2}"],
     "implemented": ["{0D923A14-D3B4-4F44-A4AB-D2B534693C35}"],
     "prefix": "Gateway"
 }
