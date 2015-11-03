@@ -1,7 +1,21 @@
 <?php
 require_once(__DIR__ . "/../buderus4000.php");  // diverse Klassen
 
-$Buderus[128][-1] = array ("Heizkreis 1", "17");
+
+
+class Logamatic4311 extends IPSModule
+{
+
+    public function Create()
+    {
+        //Never delete this line!
+        parent::Create();
+
+        // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
+        $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
+        $this->RegisterPropertyString('Bus', '');
+        
+        $Buderus[128][-1] = array ("Heizkreis 1", "17");
 $Buderus[128][0] = array ("Betriebswerte", "Bit", "Ausschaltoptimierung", "Einschaltoptimierung", "Automatik", "Warmwasservorrang", "Estrichtrocknung", "Ferien", "Frostschutz", "Manuell");
 $Buderus[128][1] = array ("Betriebswerte 2", "Bit", "Sommer", "Tag", "keine Kommunikation mit FB", "FB fehlerhaft", "Fehler Vorlauffühler", "maximaler Vorlauf", "externer Störeingang", "Party / Pause");
 $Buderus[128][2] = array ("Vorlaufsolltemperatur", "Temp", "1", "°C");
@@ -317,18 +331,6 @@ $Buderus[159][38] = array ("","");
 $Buderus[159][39] = array ("","");
 $Buderus[159][40] = array ("","");
 $Buderus[159][41] = array ("","");
-
-class Logamatic4311 extends IPSModule
-{
-
-    public function Create()
-    {
-        //Never delete this line!
-        parent::Create();
-
-        // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
-        $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
-        $this->RegisterPropertyString('Bus', '');
         
     }
 
