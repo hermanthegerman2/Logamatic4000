@@ -33,7 +33,7 @@ class Logamatic4311 extends IPSModule
 
     public function RequestMonitordaten()
     {
-        $data = Command::Direktmodus.Command::NUL;
+        $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
         //sleep (2);
         //$data = chr(0xA2).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
