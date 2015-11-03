@@ -3,9 +3,10 @@
 class Command extends stdClass
 {
     
-    const NUL = '0x00';
-    const Direktmodus = '0xDD'; //Umschalten von Normalmodus -> Direktmodus
-    const Normalmodus = '0xDC'; //Umschalten von Direktmodus -> Normalmodus
+    const NUL = 0x00;
+    const Direktmodus = 0xDD; //Umschalten von Normalmodus -> Direktmodus
+    const Normalmodus = 0xDC; //Umschalten von Direktmodus -> Normalmodus
+    const Monitordaten = 0xA2; //Monitordaten anfordern
         
 }
 
