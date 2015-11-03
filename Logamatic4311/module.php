@@ -67,20 +67,20 @@ class Logamatic4311 extends IPSModule
 		switch ($type) {
 					case 167:   // A7 Monitordaten einzelmeldung
 
-                                        echo "Daten: ".str2hex($stream)."\n";
                                         $stream = substr($stream, 0, 12);
-                                        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $data->Buffer)));
+                                        echo "Daten: ".str2hex($stream)."\n";
+
 		                        $stream = '';
                                         break;
                                     
                                         case 165:   // A5 Monitordaten einzelmeldung
-
+                                        $stream = substr($stream, 0, 12);
                                         echo "Daten: A5 ".str2hex($stream)."\n";
                                         $stream = '';
                                         break;
                                     
                                         case 171:   // AB Monitordaten komplett
-
+                                        $stream = substr($stream, 0, 12);
                                         echo "Daten: AB ".str2hex($stream)."\n";
                                         $stream = '';
                                         break;
