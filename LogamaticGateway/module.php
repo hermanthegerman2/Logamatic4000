@@ -185,7 +185,7 @@ class LogamaticGateway extends IPSModule
     
     protected function SendDataToParent($Data)
     {
-        IPS_LogMessage('Gateway -> SerialPort::'.$this->InstanceID,$Data);
+        IPS_LogMessage('Gateway -> SerialPort::'.$this->InstanceID,  str2hex($Data));
         
         //Parent ok ?
         if (!$this->HasActiveParent())
