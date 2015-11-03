@@ -36,7 +36,7 @@ class Logamatic4311 extends IPSModule
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
         sleep (1);
-        $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
+        $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         return true;
     }
