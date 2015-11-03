@@ -46,7 +46,7 @@ class Logamatic4311 extends IPSModule
       
         $JSONString = json_encode(Array("DataID" => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => utf8_encode($data)));
        
-        IPS_LogMessage('Logamatic -> Gateway:'.$this->InstanceID,str2hex(utf8_decode($data)));
+        IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
         // Daten senden
         IPS_SendDataToParent($this->InstanceID, $JSONString);
         
@@ -56,8 +56,41 @@ class Logamatic4311 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Logamatic <- Gateway:'.$this->InstanceID, str2hex(utf8_decode($data->BufferIN)));
-        //IPS_LogMessage('ReceivedData:'.$this->InstanceID, utf8_decode(print_r($data,1)));
+        IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->BufferIN)));
+        $stream = $head . utf8_decode($data->Buffer);
+        //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
+        $type = ord(substr($stream, 0, 1));
+        $bus = ord(substr($stream, 2, 1));
+        
+        //echo $type." / ".$bus."\n";
+
+		switch ($type) {
+					case 167:   // A7 Monitordaten einzelmeldung
+
+                                        echo "Daten: ".str2hex($stream)."\n";
+                                        $stream = substr($stream, 0, 12);
+                                        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $data->Buffer)));
+		                        $stream = '';
+                                        break;
+                                    
+                                        case 165:   // A5 Monitordaten einzelmeldung
+
+                                        echo "Daten: A5 ".str2hex($stream)."\n";
+                                        $stream = '';
+                                        break;
+                                    
+                                        case 171:   // AB Monitordaten komplett
+
+                                        echo "Daten: AB ".str2hex($stream)."\n";
+                                        $stream = '';
+                                        break;
+                                    
+                                    
+                                    
+                                }
+
+        
+        
     }
         
 ################## DUMMYS / WOARKAROUNDS - protected
