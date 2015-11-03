@@ -60,8 +60,6 @@ class Logamatic4311 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        //if ($data->DataID <> '{018EF6B5-AB94-40C6-AA53-46943E824ACF}')
-        //    return false;
         IPS_LogMessage('Logamatic <- Gateway:'.$this->InstanceID, str2hex(utf8_decode($data->Buffer)));
         //IPS_LogMessage('ReceivedData:'.$this->InstanceID, utf8_decode(print_r($data,1)));
     }
