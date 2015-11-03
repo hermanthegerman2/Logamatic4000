@@ -57,7 +57,7 @@ class Logamatic4311 extends IPSModule
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->BufferIN)));
-        $stream = $head . utf8_decode($data->Buffer);
+        $stream = $head . utf8_decode($data->BufferIN);
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
