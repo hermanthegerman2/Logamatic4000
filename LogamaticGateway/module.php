@@ -107,15 +107,14 @@ class LogamaticGateway extends IPSModule
     // Empfangene Daten von der Device Instanz
     $data = json_decode($JSONString);
     IPS_LogMessage("Gateway -> SerialPort:", str2hex(utf8_decode($data->Buffer)));
-    $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
     // Hier würde man den Buffer im Normalfall verarbeiten
-    /* z.B. CRC prüfen, in Einzelteile zerlegen
+    // z.B. CRC prüfen, in Einzelteile zerlegen
     $data = utf8_decode($data->Buffer);
     // Weiterleiten zur I/O Instanz
     $resultat = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
      // Weiterverarbeiten und durchreichen
     return $resultat;
-    */
+    
     }
 ################## DATAPOINTS PARENT
     public function ReceiveData($JSONString)
@@ -183,43 +182,10 @@ class LogamaticGateway extends IPSModule
         return true;
     }
     
-    protected function SendDataToParent($Data)
+    protected function SendDataToParent($data)
     {
-        IPS_LogMessage('Gateway -> SerialPort::'.$this->InstanceID,  str2hex($Data));
-        
-        //Parent ok ?
-        if (!$this->HasActiveParent())
-            throw new Exception("Instance has no active Parent.");
-        // Frame bauen
-        //Laenge bilden
-        $len = strlen($Data);
-        //Startzeichen
-        $frame = '';
-        
-        //Laenge
-        
-        //Daten
-        $frame.=$Data;
-        //Checksum
-        
-        //Semaphore setzen
-        if (!$this->lock("ToParent"))
-        {
-            throw new Exception("Can not send to Parent");
-        }
-        // Daten senden
-        try
-        {
-            IPS_SendDataToParent($this->InstanceID, json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => utf8_encode($frame))));
-        }
-        catch (Exception $exc)
-        {
-        // Senden fehlgeschlagen
-            $this->unlock("ToParent");
-            throw new Exception($exc);
-        }
-        $this->unlock("ToParent");
-        return true;
+        IPS_LogMessage('Gateway -> SerialPort::'.$this->InstanceID, str2hex($data));
+        IPS_SendDataToParent($this->InstanceID, json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => utf8_encode($data))));
     }
 ################## DUMMYS / WOARKAROUNDS - protected
       
