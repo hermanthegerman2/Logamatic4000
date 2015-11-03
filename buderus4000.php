@@ -340,21 +340,21 @@ function str2hex($string) // Funktion String in Hex umwandeln
 
 function CheckVariable($name)
    {
-  		$InstanzID = @IPS_GetVariableIDByName($name, $_IPS['INSTANCE']);
-            if ($InstanzID === false)
+  		$InstanzID = @IPS_GetVariableIDByName($name, $this->InstanceID);
+                if ($InstanzID === false)
                 {
                 $InstanzID = IPS_CreateVariable(3);
                 IPS_SetName($InstanzID, $name); // Instanz benennen
-                IPS_SetParent($InstanzID, $_IPS['INSTANCE']);
+                IPS_SetParent($InstanzID, $this->InstanceID);
                 }
                 //echo "ID: ".$InstanzID." ".$name."\n";
-            return $InstanzID;
+                return $InstanzID;
    }
    
 function CheckVariableTYP($name, $vartyp, $profile)
    {
   		$InstanzID = @IPS_GetVariableIDByName($name, IPS_GetParent($_IPS['SELF']));
-            if ($InstanzID === false)
+                if ($InstanzID === false)
                 {
                 $InstanzID = IPS_CreateVariable($vartyp);
                 IPS_SetName($InstanzID, $name); // Instanz benennen
@@ -362,6 +362,6 @@ function CheckVariableTYP($name, $vartyp, $profile)
                 IPS_SetVariableCustomProfile($InstanzID, $profile);
 					 }
                 //echo "ID: ".$InstanzID." ".$name."\n";
-            return $InstanzID;
+                return $InstanzID;
    }
 ?>
