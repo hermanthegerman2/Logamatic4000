@@ -65,7 +65,7 @@ class Logamatic4311 extends IPSModule
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
-        echo $type." / ".$bus."\n";
+        //echo $type." / ".$bus."\n";
 
 		switch ($type) {
 					case 167:   // A7 Monitordaten Normalmodus
@@ -85,6 +85,19 @@ class Logamatic4311 extends IPSModule
                                         case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
                                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
+                                        $array = explode("\xAB\x00\x01\x00", $data);
+			   			for ( $x = 0; $x < count ( $array ); $x++ )
+			     					{
+				    				$typ = ord(substr($array[$x], 0, 1));
+				    				$offset = ord(substr($array[$x], 2, 1));
+				    				$text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
+		  		    				if ($typ > 0)
+									{
+                                                                        $value=GetValueString(CheckVariable($Buderus[$typ][-1][0]));
+									$value=substr_replace($value, $text, $offset, 1);
+									setvaluestring(CheckVariable($Buderus[$typ][-1][0]), $value);
+									}
+                                                                }
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         break;
                                         
