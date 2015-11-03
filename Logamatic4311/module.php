@@ -59,13 +59,13 @@ class Logamatic4311 extends IPSModule
         IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->BufferIN)));
         $stream = utf8_decode($data->BufferIN);
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
-        if (strlen($stream) == 0)
+        if (strlen($stream) > 6)
         {
             
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
-        //echo $type." / ".$bus."\n";
+        echo $type." / ".$bus."\n";
 
 		switch ($type) {
 					case 167:   // A7 Monitordaten Normalmodus
@@ -100,6 +100,7 @@ class Logamatic4311 extends IPSModule
                                 }
         }
         else
+        $stream="";
         return true;
         
         
