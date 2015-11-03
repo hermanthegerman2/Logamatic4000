@@ -121,7 +121,7 @@ class LogamaticGateway extends IPSModule
 ################## DATAPOINTS PARENT
     public function ReceiveData($JSONString)
     {
-        $data = utf8_decode(json_decode($JSONString));
+        $data = json_decode($JSONString);
         IPS_LogMessage('Gateway <- SerialPort:'.$this->InstanceID,$data);
         $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $data->Buffer)));
         /*$bufferID = $this->GetIDForIdent("BufferIN");
