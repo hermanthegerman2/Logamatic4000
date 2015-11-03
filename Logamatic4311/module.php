@@ -33,24 +33,22 @@ class Logamatic4311 extends IPSModule
 
     public function RequestMonitordaten()
     {
-        $Data = chr(0xDD).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
-        //$Data = chr(221).chr(0).chr(1).chr(0).chr(0).chr(0);
-        $this->SendDataToParent($Data);
+        $data = chr(0xDD).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
+        //$data = chr(221).chr(0).chr(1).chr(0).chr(0).chr(0);
+        $this->SendDataToParent($data);
         //sleep (0.5);
-        $Data = chr(0xA2).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
-        //$Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
-        $this->SendDataToParent($Data);
+        $data = chr(0xA2).chr(0x00).chr(0x01).chr(0x00).chr(0x00);
+        //$data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
+        $this->SendDataToParent($data);
         return true;
     }
     
-    protected function SendDataToParent($Data)
+    protected function SendDataToParent($data)
     {
-        // API-Daten verpacken und dann versenden.
-        //$Data->Bus=$this->ReadPropertyString('Bus');
-        
-        $JSONString = json_encode(Array("DataID" => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => utf8_encode($Data)));
+      
+        $JSONString = json_encode(Array("DataID" => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => utf8_encode($data)));
        
-        IPS_LogMessage('Logamatic -> Gateway:'.$this->InstanceID,$JSONString);
+        IPS_LogMessage('Logamatic -> Gateway:'.$this->InstanceID,str2hex(utf8_decode($data)));
         // Daten senden
         IPS_SendDataToParent($this->InstanceID, $JSONString);
         

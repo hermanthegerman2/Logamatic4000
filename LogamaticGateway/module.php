@@ -106,17 +106,16 @@ class LogamaticGateway extends IPSModule
  
     // Empfangene Daten von der Device Instanz
     $data = json_decode($JSONString);
-    IPS_LogMessage("Gateway -> SerialPort:", utf8_decode($data->Buffer));
- 
+    IPS_LogMessage("Gateway -> SerialPort:", str2hex(utf8_decode($data->Buffer)));
+    $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
     // Hier würde man den Buffer im Normalfall verarbeiten
-    // z.B. CRC prüfen, in Einzelteile zerlegen
+    /* z.B. CRC prüfen, in Einzelteile zerlegen
     $data = utf8_decode($data->Buffer);
     // Weiterleiten zur I/O Instanz
     $resultat = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
- 
-    // Weiterverarbeiten und durchreichen
+     // Weiterverarbeiten und durchreichen
     return $resultat;
- 
+    */
     }
 ################## DATAPOINTS PARENT
     public function ReceiveData($JSONString)
