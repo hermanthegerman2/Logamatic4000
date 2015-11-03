@@ -1,4 +1,15 @@
 <?php
+
+class Command extends stdClass
+{
+    
+    const NUL = 0x00;
+    const Direktmodus = 0xDD; //Umschalten von Normalmodus -> Direktmodus
+    const Normalmodus = 0xDC; //Umschalten von Direktmodus -> Normalmodus
+        
+}
+
+
 $Buderus[128][-1] = array ("Heizkreis 1", "17");
 $Buderus[128][0] = array ("Betriebswerte", "Bit", "Ausschaltoptimierung", "Einschaltoptimierung", "Automatik", "Warmwasservorrang", "Estrichtrocknung", "Ferien", "Frostschutz", "Manuell");
 $Buderus[128][1] = array ("Betriebswerte 2", "Bit", "Sommer", "Tag", "keine Kommunikation mit FB", "FB fehlerhaft", "Fehler Vorlauffühler", "maximaler Vorlauf", "externer Störeingang", "Party / Pause");
