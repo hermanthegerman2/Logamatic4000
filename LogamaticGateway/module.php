@@ -111,9 +111,7 @@ class LogamaticGateway extends IPSModule
     // z.B. CRC prüfen, in Einzelteile zerlegen
     $data = utf8_decode($data->Buffer);
     // Weiterleiten zur I/O Instanz
-    $resultat = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
-     // Weiterverarbeiten und durchreichen
-    return $resultat;
+    $this->SendDataToParent($data);
     
     }
 ################## DATAPOINTS PARENT
@@ -122,8 +120,7 @@ class LogamaticGateway extends IPSModule
         $data = json_decode($JSONString);
         $stream = utf8_decode($data->Buffer);
         IPS_LogMessage('Gateway <- SerialPort:', str2hex(utf8_decode($data->Buffer)));
-        IPS_SendDataToParent($this->InstanceID, json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => utf8_encode($stream))));
-        //$this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $data->Buffer)));
+        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $data->Buffer)));
         /*$bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
         if (!$this->lock("ReceiveLock"))
@@ -184,10 +181,16 @@ class LogamaticGateway extends IPSModule
         return true;
     }
     
-    protected function SendDataToParent($data)
+      protected function SendDataToParent($data)
     {
-        IPS_LogMessage('Gateway -> SerialPort::'.$this->InstanceID, str2hex($data));
-        IPS_SendDataToParent($this->InstanceID, json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => utf8_encode($data))));
+      
+        $JSONString = json_encode(Array("DataID" => '{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}', "Buffer" => utf8_encode($data)));
+       
+        IPS_LogMessage('Logamatic -> Gateway:'.$this->InstanceID,str2hex(utf8_decode($data)));
+        // Daten senden
+        IPS_SendDataToParent($this->InstanceID, $JSONString);
+        
+        return true;
     }
 ################## DUMMYS / WOARKAROUNDS - protected
       
