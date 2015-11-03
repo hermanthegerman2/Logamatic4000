@@ -20,10 +20,9 @@ class Logamatic4311 extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         if ($this->ReadPropertyString('Bus') == '')
-            $this->SetSummary(202);
+            $this->SetStatus(202);
         else
             $this->SetStatus(102);
-            $this->SetSummary($this->ReadPropertyString('Bus'));
             $this->RegisterVariableString("BufferIN", "BufferIN", "", -3);      
             IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
         if (!$this->HasActiveParent())
