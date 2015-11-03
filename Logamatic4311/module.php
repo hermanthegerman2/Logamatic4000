@@ -71,7 +71,7 @@ class Logamatic4311 extends IPSModule
 					case 167:   // A7 Monitordaten Normalmodus
 
                                         $data = substr($stream, 0, 12);
-                                        echo "Daten: ".str2hex($data)."\n";
+                                        echo "Monitordaten Normalmodus :".str2hex($data)."\n";
 
 		                        $stream = substr($stream, -(strlen($stream)-12));
                                         break;
@@ -84,7 +84,7 @@ class Logamatic4311 extends IPSModule
                                     
                                         case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
-                                        echo "Daten: AB ".str2hex($data)."\n";
+                                        echo "Monitordaten Direktmodus :".str2hex($data)."\n";
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         break;
                                         
@@ -98,6 +98,7 @@ class Logamatic4311 extends IPSModule
                                     
                                     
                                 }
+                echo "Rest : ".str2hex($stream)."\n";            
         }
         else
         $stream="";
