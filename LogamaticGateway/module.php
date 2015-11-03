@@ -56,6 +56,7 @@ class LogamaticGateway extends IPSModule
         if (($this->ReadPropertyBoolean('Open'))
                 and ( $this->HasActiveParent($ParentID)))
         {
+             $this->SetStatus(102);
             /*$Data = chr(221).chr(0).chr(1).chr(0).chr(0);
             $this->SendDataToParent($Data);
             //sleep (0.5);
@@ -120,9 +121,9 @@ class LogamaticGateway extends IPSModule
 ################## DATAPOINTS PARENT
     public function ReceiveData($JSONString)
     {
-        $data = json_decode($JSONString);
-        IPS_LogMessage('Gateway <- SerialPort:'.$this->InstanceID,$JSONString);
-        $this->SendDataToChildren(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $JSONString));
+        $data = utf8_decode(json_decode($JSONString));
+        IPS_LogMessage('Gateway <- SerialPort:'.$this->InstanceID,$data);
+        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $data->Buffer)));
         /*$bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
         if (!$this->lock("ReceiveLock"))
