@@ -24,7 +24,10 @@ class Logamatic4311 extends IPSModule
         else
             $this->SetStatus(102);            
             $this->RegisterVariableString("BufferIN", "BufferIN", "", -4);
-            IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);        
+            IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
+            $this->RegisterVariableString("Monitordaten", "Monitordaten", "", -4);
+            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);        
+    
     }        
      
 
@@ -57,6 +60,8 @@ class Logamatic4311 extends IPSModule
         global $monitordaten;
         IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
         $bufferID = $this->GetIDForIdent("BufferIN");
+        $monitorID = $this->GetIDForIdent("Monitordaten");
+        
         // Empfangs Lock setzen
         if (!$this->lock("ReceiveLock"))
             throw new Exception("ReceiveBuffer is locked");
@@ -93,15 +98,18 @@ class Logamatic4311 extends IPSModule
                                     case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
                                         echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
+                                        $monitordaten = GetValueString($monitorID);
                                         $monitordaten = $monitordaten . $data;
+                                        SetValueString($monitorID, '');
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         break;
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
                                         //$data = substr($stream, 0, 6);
                                         echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
+                                        $monitordaten = GetValueString($monitorID);
                                         EncodeMonitorData($monitordaten, $this->InstanceID);
-                                        $monitordaten = '';
+                                        SetValueString($monitorID, '');
                                         $stream = substr($stream, -(strlen($stream)-6));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data);
