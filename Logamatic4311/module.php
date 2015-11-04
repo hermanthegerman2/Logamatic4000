@@ -84,8 +84,8 @@ class Logamatic4311 extends IPSModule
                                     case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
                                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
-                                     
-			     					
+                                        //if (strlen($data) > 22)
+			     		//{			
 				    	$typ = ord(substr($data, 4, 1));
                                         echo "Typ: ".$typ."\n";
 					$offset = ord(substr($data, 6, 1));
@@ -95,9 +95,9 @@ class Logamatic4311 extends IPSModule
                                         echo "Name: ".CheckVariable($typ, -1, 0, $this->InstanceID);
                                         $value=GetValueString(CheckVariable($typ, -1, 0, $this->InstanceID));
                                         $value=substr_replace($value, $text, $offset, 1);
-                                        setvaluestring(CheckVariable($typ, -1, 0, $this->InstanceID), $value);
-					                                                                
+                                        setvaluestring(CheckVariable($typ, -1, 0, $this->InstanceID), $value);                                                             
                                         $stream = substr($stream, -(strlen($stream)-22));
+                                        //}
                                         break;
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
