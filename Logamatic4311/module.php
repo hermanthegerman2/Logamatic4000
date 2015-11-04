@@ -86,10 +86,10 @@ class Logamatic4311 extends IPSModule
                                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
                                      
 			     					
-				    	$typ = ord(substr($data, 6, 1));
+				    	$typ = ord(substr($data, 4, 1));
                                         echo $typ;
-					$offset = ord(substr($data, 8, 1));
-                                        $text = substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1).substr($data, 16, 1).substr($data, 18, 1).substr($data, 20, 1);
+					$offset = ord(substr($data, 6, 1));
+                                        $text = substr($data, 8, 1).substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1).substr($data, 16, 1).substr($data, 18, 1);
                                             if ($typ > 0)
 						{
                                                     echo CheckVariable($typ,-1,0);
