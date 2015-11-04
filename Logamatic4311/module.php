@@ -37,8 +37,8 @@ class Logamatic4311 extends IPSModule
         $this->SendDataToParent($data);
         $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
-        global $monitordaten;
-        $monitordaten = '';
+        $monitorID = $this->GetIDForIdent("Monitordaten");
+        SetValueString($monitorID, '');
         return true;
     }
     
@@ -109,7 +109,6 @@ class Logamatic4311 extends IPSModule
                                         echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
                                         $monitordaten = GetValueString($monitorID);
                                         EncodeMonitorData($monitordaten, $this->InstanceID);
-                                        SetValueString($monitorID, '');
                                         $stream = substr($stream, -(strlen($stream)-6));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data);
@@ -120,7 +119,7 @@ class Logamatic4311 extends IPSModule
                 echo "Rest : ".str2hex($tail)."\n";
                 if ($tail===false) $tail='';
                 SetValueString($bufferID, $tail);
-                $this->unlock("ReceiveLock");
+                //$this->unlock("ReceiveLock");
         }
         else
         $this->unlock("ReceiveLock");

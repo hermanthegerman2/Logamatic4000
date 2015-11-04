@@ -388,7 +388,7 @@ function EncodeMonitorData($stream, $ID)
                         echo "Offset: ".$offset."\n";
                         $text = substr($data, 8, 1).substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1).substr($data, 16, 1).substr($data, 18, 1);
                         echo "Daten: ".str2hex($text)."\n";
-                        echo "Name: ".CheckVariable($typ, -1, 0, $this->InstanceID);
+                        echo "Name: ".CheckVariable($typ, -1, 0, $ID);
                         $value=GetValueString(CheckVariable($typ, -1, 0, $ID));
                         $value=substr_replace($value, $text, $offset, 0);
                         setvaluestring(CheckVariable($typ, -1, 0, $ID), $value);
