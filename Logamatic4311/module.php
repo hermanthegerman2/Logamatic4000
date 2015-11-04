@@ -78,7 +78,7 @@ class Logamatic4311 extends IPSModule
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
-        echo $type." / ".$bus."\n";
+        //echo $type." / ".$bus."\n";
 
 		switch ($type) {
                                     case 167:   // A7 Monitordaten Normalmodus
@@ -97,7 +97,7 @@ class Logamatic4311 extends IPSModule
                                     
                                     case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
-                                        echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
+                                        //echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
                                         $monitordaten = GetValueString($monitorID);
                                         $monitordaten = $monitordaten . $data;
                                         SetValueString($monitorID, $monitordaten);
@@ -105,9 +105,8 @@ class Logamatic4311 extends IPSModule
                                         break;
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
-                                        //$data = substr($stream, 0, 6);
-                                        echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
                                         $monitordaten = GetValueString($monitorID);
+                                        echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
                                         EncodeMonitorData($monitordaten, $this->InstanceID);
                                         $stream = substr($stream, -(strlen($stream)-6));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);

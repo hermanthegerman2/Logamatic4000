@@ -376,12 +376,11 @@ function CheckVariableTYP($name, $vartyp, $profile)
  
 function EncodeMonitorData($stream, $ID)
     {
-                if (strlen($stream) > 6)
+                while (strlen($stream) > 6)
                     {
                         $data = substr($stream, 0, 22);
                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
-                
-                        //{			
+                                        //{			
                         $typ = ord(substr($data, 4, 1));
                         echo "Typ: ".$typ."\n";
                         $offset = ord(substr($data, 6, 1));
@@ -394,7 +393,7 @@ function EncodeMonitorData($stream, $ID)
                         setvaluestring(CheckVariable($typ, -1, 0, $ID), $value);
                         $stream = substr($stream, -(strlen($stream)-22));
                     }
-                else    
+                   
                 return true;
     }
 
