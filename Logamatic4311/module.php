@@ -58,10 +58,10 @@ class Logamatic4311 extends IPSModule
     {
         $data = json_decode($JSONString);
         global $monitordaten;
-        IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->BufferIN)));
+        IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
         $bufferID = $this->GetIDForIdent("BufferIN");
         $monitorID = $this->GetIDForIdent("Monitordaten");
-        /*
+        
         // Empfangs Lock setzen
         if (!$this->lock("ReceiveLock"))
             throw new Exception("ReceiveBuffer is locked");
@@ -74,7 +74,6 @@ class Logamatic4311 extends IPSModule
         //$tail = '';
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
         
-       
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
@@ -117,10 +116,10 @@ class Logamatic4311 extends IPSModule
                 //if ($stream===false) $stream='';
                 SetValueString($bufferID, $stream);
                 
-        }
+        
         $this->unlock("ReceiveLock");
         return true;
-        */      
+             
     }
         
 ################## DUMMYS / WOARKAROUNDS - protected
