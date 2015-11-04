@@ -66,6 +66,9 @@ class Logamatic4311 extends IPSModule
         if (!$this->lock("ReceiveLock"))
             throw new Exception("ReceiveBuffer is locked");
         // Datenstream zusammenfügen
+        $test = GetValueString($bufferID);
+        if (strlen($test) > 5)
+        {                         
         $head = GetValueString($bufferID);
         SetValueString($bufferID, '');
         // Stream in einzelne Pakete schneiden
@@ -73,8 +76,7 @@ class Logamatic4311 extends IPSModule
         //$tail = '';
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
         
-        if (strlen($stream) == 0)
-        {
+       
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
