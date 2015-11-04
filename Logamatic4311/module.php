@@ -34,6 +34,7 @@ class Logamatic4311 extends IPSModule
         $this->SendDataToParent($data);
         $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
+        global $monitordaten;
         $monitordaten = '';
         return true;
     }
@@ -53,6 +54,7 @@ class Logamatic4311 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
+        global $monitordaten;
         IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
         $bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
