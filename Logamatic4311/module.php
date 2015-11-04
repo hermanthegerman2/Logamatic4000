@@ -72,8 +72,7 @@ class Logamatic4311 extends IPSModule
         $stream = $head . utf8_decode($data->Buffer);
         //$tail = '';
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
-        while (strlen($stream) > 5)
-        {
+        
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
@@ -118,7 +117,7 @@ class Logamatic4311 extends IPSModule
                 if ($stream===false) $stream='';
                 SetValueString($bufferID, $stream);
                 $this->unlock("ReceiveLock");
-        }
+        
         return true;
               
     }
