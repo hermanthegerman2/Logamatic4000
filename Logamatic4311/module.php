@@ -84,7 +84,7 @@ class Logamatic4311 extends IPSModule
                                         case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
                                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
-                                        $array = explode("\xAB\x00\x01\x00", $data);
+                                        $array = explode("\xab\x00\x01\x00", $data);
 			   			for ( $x = 0; $x < count ( $array ); $x++ )
 			     					{
 				    				$typ = ord(substr($array[$x], 0, 1));
