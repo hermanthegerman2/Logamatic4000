@@ -22,7 +22,8 @@ class Logamatic4311 extends IPSModule
             $this->SetStatus(202);
         else
             $this->SetStatus(102);            
-                
+            $this->RegisterVariableString("BufferIN", "BufferIN", "", -4);
+            IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);        
     }        
      
 
@@ -50,8 +51,16 @@ class Logamatic4311 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->BufferIN)));
-        $stream = utf8_decode($data->BufferIN);
+        IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
+        $bufferID = $this->GetIDForIdent("BufferIN");
+        // Empfangs Lock setzen
+        if (!$this->lock("ReceiveLock"))
+            throw new Exception("ReceiveBuffer is locked");
+        // Datenstream zusammenfügen
+        $head = GetValueString($bufferID);
+        SetValueString($bufferID, '');
+        // Stream in einzelne Pakete schneiden
+        $stream = $head . utf8_decode($data->Buffer);
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
         if (strlen($stream) > 1)
         {
@@ -109,6 +118,7 @@ class Logamatic4311 extends IPSModule
         }
         else
         $stream="";
+        $this->unlock("ReceiveLock");
         return true;
         
         

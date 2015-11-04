@@ -118,7 +118,7 @@ class LogamaticGateway extends IPSModule
         $data = json_decode($JSONString);
         $stream = utf8_decode($data->Buffer);
         IPS_LogMessage('Gateway <- SerialPort:', str2hex(utf8_decode($data->Buffer)));
-        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "BufferIN" => $data->Buffer)));
+        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => $data->Buffer)));
         
         return true;
     }
