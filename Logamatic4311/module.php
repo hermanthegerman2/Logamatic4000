@@ -3,8 +3,7 @@ require_once(__DIR__ . "/../buderus4000.php");  // diverse Klassen
 
 class Logamatic4311 extends IPSModule
 {
-    var $monitordaten = '';
-    
+        
     public function Create()
     {
         //Never delete this line!
@@ -35,6 +34,7 @@ class Logamatic4311 extends IPSModule
         $this->SendDataToParent($data);
         $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
+        $monitordaten = '';
         return true;
     }
     
