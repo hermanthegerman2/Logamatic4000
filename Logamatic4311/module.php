@@ -73,7 +73,7 @@ class Logamatic4311 extends IPSModule
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
-        //echo $type." / ".$bus."\n";
+        echo $type." / ".$bus."\n";
 
 		switch ($type) {
                                     case 167:   // A7 Monitordaten Normalmodus
@@ -93,7 +93,7 @@ class Logamatic4311 extends IPSModule
                                     case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
                                         echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
-                                        $monitordaten = $monitordaten.$data;
+                                        $monitordaten = $monitordaten . $data;
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         break;
                                         
