@@ -100,7 +100,7 @@ class Logamatic4311 extends IPSModule
                                         $value=GetValueString(CheckVariable($typ, -1, 0, $this->InstanceID));
                                         $value=substr_replace($value, $text, $offset, 0);
                                         setvaluestring(CheckVariable($typ, -1, 0, $this->InstanceID), $value);                                                             
-                                        $stream = substr($stream, -(strlen($stream)-22));
+                                        $tail = substr($stream, -(strlen($stream)-22));
                                         //}
                                         break;
                                         
@@ -114,8 +114,7 @@ class Logamatic4311 extends IPSModule
                                     
                                     
                                 }
-                echo "Rest : ".str2hex($stream)."\n";
-                $tail = substr($stream, $len + 4);
+                echo "Rest : ".str2hex($tail)."\n";
                 if ($tail===false) $tail='';
                 SetValueString($bufferID, $tail);
                 $this->unlock("ReceiveLock");
