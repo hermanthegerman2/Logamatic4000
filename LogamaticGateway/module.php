@@ -49,9 +49,7 @@ class LogamaticGateway extends IPSModule
         
         */
         //Workaround für persistente Daten der Instanz
-        $this->RegisterVariableString("BufferIN", "BufferIN", "", -3);      
-        IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
-        
+                
         // Wenn wir verbunden sind, am Gateway mit listen anmelden für Events
         if (($this->ReadPropertyBoolean('Open'))
                 and ( $this->HasActiveParent($ParentID)))
