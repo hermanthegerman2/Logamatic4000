@@ -87,9 +87,11 @@ class Logamatic4311 extends IPSModule
                                      
 			     					
 				    	$typ = ord(substr($data, 4, 1));
-                                        echo "Typ: ".$typ;
+                                        echo "Typ: ".$typ."\n";
 					$offset = ord(substr($data, 6, 1));
+                                        echo "Offset: ".$offset."\n";
                                         $text = substr($data, 8, 1).substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1).substr($data, 16, 1).substr($data, 18, 1);
+                                        echo "Daten: ".$text."\n";
                                         echo "Name: ".CheckVariable($typ, -1, 0);
                                         $value=GetValueString(CheckVariable($typ, -1, 0));
                                         $value=substr_replace($value, $text, $offset, 1);
