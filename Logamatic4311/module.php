@@ -70,7 +70,7 @@ class Logamatic4311 extends IPSModule
         SetValueString($bufferID, '');
         // Stream in einzelne Pakete schneiden
         $stream = $head . utf8_decode($data->Buffer);
-        //$tail = '';
+        $tail = '';
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
         if (strlen($stream) > 5)
         {
@@ -117,7 +117,7 @@ class Logamatic4311 extends IPSModule
                                 }
                 echo "Rest : ".str2hex($stream)."\n";
                 if ($stream===false) $stream='';
-                //SetValueString($bufferID, $stream);
+                SetValueString($bufferID, $stream);
                 $this->unlock("ReceiveLock");
         }
         return true;
