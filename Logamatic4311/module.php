@@ -99,7 +99,7 @@ class Logamatic4311 extends IPSModule
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
                                         //$data = substr($stream, 0, 6);
-                                        echo "Monitordaten komplett ".str2hex($stream)."\n";
+                                        echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
                                         EncodeMonitorData($monitordaten, $this->InstanceID);
                                         $monitordaten = '';
                                         $stream = substr($stream, -(strlen($stream)-6));
