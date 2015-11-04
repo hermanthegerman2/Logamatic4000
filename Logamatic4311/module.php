@@ -85,6 +85,7 @@ class Logamatic4311 extends IPSModule
                                         $data = substr($stream, 0, 22);
                                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
                                         $array = explode("\xab\x00\x01\x00", $data);
+                                        echo print_r($array);
 			   			for ( $x = 0; $x < count ( $array ); $x++ )
 			     					{
 				    				$typ = ord(substr($array[$x], 0, 1));
