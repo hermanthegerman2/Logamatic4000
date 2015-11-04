@@ -70,9 +70,9 @@ class Logamatic4311 extends IPSModule
         SetValueString($bufferID, '');
         // Stream in einzelne Pakete schneiden
         $stream = $head . utf8_decode($data->Buffer);
-        $tail = '';
+        //$tail = '';
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
-        if (strlen($stream) > 5)
+        while (strlen($stream) > 5)
         {
             
         $type = ord(substr($stream, 0, 1));
@@ -106,7 +106,7 @@ class Logamatic4311 extends IPSModule
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
                                         $monitordaten = GetValueString($monitorID);
-                                        echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
+                                        //echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
                                         EncodeMonitorData($monitordaten, $this->InstanceID);
                                         $stream = substr($stream, -(strlen($stream)-6));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
