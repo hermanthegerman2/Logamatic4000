@@ -379,8 +379,6 @@ function EncodeMonitorData($stream, $ID)
                 while (strlen($stream) > 22)
                     {
                         $data = substr($stream, 0, 22);
-                        echo "Monitordaten Direktmodus :".str2hex($data)."\n";
-                                        //{			
                         $typ = ord(substr($data, 4, 1));
                         echo "Typ: ".$typ."\n";
                         $offset = ord(substr($data, 6, 1));
