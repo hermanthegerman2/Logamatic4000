@@ -84,13 +84,11 @@ class Logamatic4311 extends IPSModule
                                         case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
                                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
-                                        $array = explode("\xab\x00\x01\x00", $data);
-                                        echo print_r($array);
-			   			for ( $x = 0; $x < count ( $array ); $x++ )
-			     					{
-				    				$typ = ord(substr($array[$x], 0, 1));
-				    				$offset = ord(substr($array[$x], 2, 1));
-				    				$text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
+                                     
+			     					
+				    				$typ = ord(substr($data, 0, 1));
+				    				$offset = ord(substr($data, 2, 1));
+				    				$text = substr($data, 4, 1).substr($data, 6, 1).substr($data, 8, 1).substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1);
 		  		    				if ($typ > 0)
 									{
                                                                         echo CheckVariable($typ,-1,0);
@@ -98,7 +96,7 @@ class Logamatic4311 extends IPSModule
 									$value=substr_replace($value, $text, $offset, 1);
 									setvaluestring(CheckVariable($typ,-1,0), $value);
 									}
-                                                                }
+                                                                
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         break;
                                         
