@@ -117,7 +117,7 @@ class Logamatic4311 extends IPSModule
                                 }
                 echo "Rest : ".str2hex($stream)."\n";
                 if ($stream===false) $stream='';
-                SetValueString($bufferID, $stream);
+                //SetValueString($bufferID, $stream);
                 $this->unlock("ReceiveLock");
         }
         return true;
