@@ -55,7 +55,7 @@ class Logamatic4311 extends IPSModule
         $bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
         //if (!$this->lock("ReceiveLock"))
-            throw new Exception("ReceiveBuffer is locked");
+        //    throw new Exception("ReceiveBuffer is locked");
         // Datenstream zusammenfügen
         $head = GetValueString($bufferID);
         SetValueString($bufferID, '');
