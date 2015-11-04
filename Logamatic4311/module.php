@@ -22,9 +22,7 @@ class Logamatic4311 extends IPSModule
             $this->SetStatus(202);
         else
             $this->SetStatus(102);            
-        if (!$this->HasActiveParent())
-            IPS_LogMessage('Logamatic', 'Instance has no active Parent.');
-        
+                
     }        
      
 
@@ -32,7 +30,6 @@ class Logamatic4311 extends IPSModule
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        sleep (1);
         $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         return true;
@@ -92,7 +89,7 @@ class Logamatic4311 extends IPSModule
                                         echo "Daten: ".str2hex($text)."\n";
                                         echo "Name: ".CheckVariable($typ, -1, 0, $this->InstanceID);
                                         $value=GetValueString(CheckVariable($typ, -1, 0, $this->InstanceID));
-                                        $value=substr_replace($value, $text, $offset, 1);
+                                        $value=substr_replace($value, $text, $offset, 0);
                                         setvaluestring(CheckVariable($typ, -1, 0, $this->InstanceID), $value);                                                             
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         //}
