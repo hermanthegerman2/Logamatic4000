@@ -327,9 +327,9 @@ $Buderus[159][38] = array ("","");
 $Buderus[159][39] = array ("","");
 $Buderus[159][40] = array ("","");
 $Buderus[159][41] = array ("","");
-    echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
+    //echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
     $name = $Buderus[$typ][$offset][$value];
-    echo "Ergebnis: ".$name."\n";    
+    //echo "Ergebnis: ".$name."\n";    
     return $name;
     }
 
@@ -346,9 +346,9 @@ function str2hex($string) // Funktion String in Hex umwandeln
 
 function CheckVariable($typ, $offset, $value, $ID)
    {
-  		echo "Check: ".$typ." ".$offset." ".$value." ".$ID;
+  		//echo "Check: ".$typ." ".$offset." ".$value." ".$ID;
                 $name = Buderus($typ, $offset, $value);
-                echo "Ergebnis return: ".$name."\n";
+                //echo "Ergebnis return: ".$name."\n";
                 $InstanzID = @IPS_GetVariableIDByName($name, $ID);
                 if ($InstanzID === false)
                 {
@@ -356,7 +356,7 @@ function CheckVariable($typ, $offset, $value, $ID)
                 IPS_SetName($InstanzID, $name); // Instanz benennen
                 IPS_SetParent($InstanzID, $ID);
                 }
-                echo "ID: ".$InstanzID." ".$name."\n";
+                //echo "ID: ".$InstanzID." ".$name."\n";
                 return $InstanzID;
    }
    
