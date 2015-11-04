@@ -327,11 +327,9 @@ $Buderus[159][38] = array ("","");
 $Buderus[159][39] = array ("","");
 $Buderus[159][40] = array ("","");
 $Buderus[159][41] = array ("","");
-      
     
-
-
-
+    $value = $Buderus[$typ][$offset][$value];
+    return $value;
     }
 
 
