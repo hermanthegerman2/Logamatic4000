@@ -345,7 +345,8 @@ function str2hex($string) // Funktion String in Hex umwandeln
 
 function CheckVariable($typ, $offset, $value)
    {
-  		$name = Buderus($typ, $offset, $value);
+  		echo "Check: ".$typ." ".$offset." ".$value;
+                $name = Buderus($typ, $offset, $value);
                 $InstanzID = @IPS_GetVariableIDByName($name, $this->InstanceID);
                 if ($InstanzID === false)
                 {
