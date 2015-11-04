@@ -119,13 +119,11 @@ class Logamatic4311 extends IPSModule
                 echo "Rest : ".str2hex($tail)."\n";
                 if ($tail===false) $tail='';
                 SetValueString($bufferID, $tail);
-                //$this->unlock("ReceiveLock");
+                $this->unlock("ReceiveLock");
         }
         else
-        $this->unlock("ReceiveLock");
         return true;
-        
-        
+              
     }
         
 ################## DUMMYS / WOARKAROUNDS - protected
