@@ -67,7 +67,7 @@ class Logamatic4311 extends IPSModule
         //echo $type." / ".$bus."\n";
 
 		switch ($type) {
-					case 167:   // A7 Monitordaten Normalmodus
+                                    case 167:   // A7 Monitordaten Normalmodus
 
                                         $data = substr($stream, 0, 12);
                                         echo "Monitordaten Normalmodus :".str2hex($data)."\n";
@@ -75,32 +75,32 @@ class Logamatic4311 extends IPSModule
 		                        $stream = substr($stream, -(strlen($stream)-12));
                                         break;
                                     
-                                        case 165:   // A5 Monitordaten einzelmeldung
+                                    case 165:   // A5 Monitordaten einzelmeldung
                                         $data = substr($stream, 0, 12);
                                         echo "Daten: A5 ".str2hex($data)."\n";
                                         $stream = substr($stream, -(strlen($stream)-12));
                                         break;
                                     
-                                        case 171:   // AB Monitordaten Direktmodus
+                                    case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
                                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
                                      
 			     					
-				    				$typ = bin2hex(substr($data, 0, 1));
-				    				$offset = ord(substr($data, 2, 1));
-				    				$text = substr($data, 4, 1).substr($data, 6, 1).substr($data, 8, 1).substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1);
-		  		    				if ($typ > 0)
-									{
-                                                                        echo CheckVariable($typ,-1,0);
-                                                                        $value=GetValueString(CheckVariable($typ,-1,0));
-									$value=substr_replace($value, $text, $offset, 1);
-									setvaluestring(CheckVariable($typ,-1,0), $value);
-									}
+				    	$typ = bin2hex(substr($data, 0, 1));
+					$offset = ord(substr($data, 2, 1));
+                                        $text = substr($data, 4, 1).substr($data, 6, 1).substr($data, 8, 1).substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1);
+                                            if ($typ > 0)
+						{
+                                                    echo CheckVariable($typ,-1,0);
+                                                    $value=GetValueString(CheckVariable($typ,-1,0));
+                                                    $value=substr_replace($value, $text, $offset, 1);
+                                                    setvaluestring(CheckVariable($typ,-1,0), $value);
+						}
                                                                 
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         break;
                                         
-                                        case 172:   // AC Monitordaten komplett übertragen
+                                    case 172:   // AC Monitordaten komplett übertragen
                                         $data = substr($stream, 0, 6);
                                         echo "Monitordaten komplett ".str2hex($data)."\n";
                                         $stream = substr($stream, -(strlen($stream)-6));

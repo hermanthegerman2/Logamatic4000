@@ -328,8 +328,8 @@ $Buderus[159][39] = array ("","");
 $Buderus[159][40] = array ("","");
 $Buderus[159][41] = array ("","");
     
-    $value = $Buderus[$typ][$offset][$value];
-    return $value;
+    $name = $Buderus[$typ][$offset][$value];
+    return $name;
     }
 
 
@@ -353,7 +353,7 @@ function CheckVariable($typ, $offset, $value)
                 IPS_SetName($InstanzID, $name); // Instanz benennen
                 IPS_SetParent($InstanzID, $this->InstanceID);
                 }
-                //echo "ID: ".$InstanzID." ".$name."\n";
+                echo "ID: ".$InstanzID." ".$name."\n";
                 return $InstanzID;
    }
    
