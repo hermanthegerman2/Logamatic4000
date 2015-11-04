@@ -54,8 +54,8 @@ class Logamatic4311 extends IPSModule
         IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
         $bufferID = $this->GetIDForIdent("BufferIN");
         // Empfangs Lock setzen
-        //if (!$this->lock("ReceiveLock"))
-        //    throw new Exception("ReceiveBuffer is locked");
+        if (!$this->lock("ReceiveLock"))
+            throw new Exception("ReceiveBuffer is locked");
         // Datenstream zusammenfügen
         $head = GetValueString($bufferID);
         SetValueString($bufferID, '');
@@ -63,7 +63,7 @@ class Logamatic4311 extends IPSModule
         $stream = $head . utf8_decode($data->Buffer);
         $tail = '';
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
-        if (strlen($stream) > 11)
+        if (strlen($stream) > 5)
         {
             
         $type = ord(substr($stream, 0, 1));
@@ -87,16 +87,18 @@ class Logamatic4311 extends IPSModule
                                         break;
                                     
                                     case 171:   // AB Monitordaten Direktmodus
-                                                                                                   
-                                        
-                                        
+                                        $data = substr($stream, 0, 22);
+                                        echo "Monitordaten Direktmodus: AB ".str2hex($data)."\n";
+                                        $monitordaten = $monitordaten.$data;
+                                        $stream = substr($stream, -(strlen($stream)-22));
                                         break;
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
                                         //$data = substr($stream, 0, 6);
                                         echo "Monitordaten komplett ".str2hex($stream)."\n";
-                                        EncodeMonitorData($stream, $this->InstanceID);
-                                        //$stream = substr($stream, -(strlen($stream)-6));
+                                        EncodeMonitorData($monitordaten, $this->InstanceID);
+                                        $monitordaten = '';
+                                        $stream = substr($stream, -(strlen($stream)-6));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data);
                                         break;
@@ -106,10 +108,10 @@ class Logamatic4311 extends IPSModule
                 echo "Rest : ".str2hex($tail)."\n";
                 if ($tail===false) $tail='';
                 SetValueString($bufferID, $tail);
-                //$this->unlock("ReceiveLock");
+                $this->unlock("ReceiveLock");
         }
         else
-        //$this->unlock("ReceiveLock");
+        $this->unlock("ReceiveLock");
         return true;
         
         
