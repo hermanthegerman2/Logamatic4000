@@ -92,7 +92,7 @@ class Logamatic4311 extends IPSModule
                                     
                                     case 171:   // AB Monitordaten Direktmodus
                                         $data = substr($stream, 0, 22);
-                                        echo "Monitordaten Direktmodus: AB ".str2hex($data)."\n";
+                                        echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
                                         $monitordaten = $monitordaten.$data;
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         break;
