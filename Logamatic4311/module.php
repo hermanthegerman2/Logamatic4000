@@ -63,7 +63,7 @@ class Logamatic4311 extends IPSModule
         $stream = $head . utf8_decode($data->Buffer);
         $tail = '';
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
-        if (strlen($stream) > 5)
+        if (strlen($stream) > 11)
         {
             
         $type = ord(substr($stream, 0, 1));
