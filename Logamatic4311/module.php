@@ -3,6 +3,8 @@ require_once(__DIR__ . "/../buderus4000.php");  // diverse Klassen
 
 class Logamatic4311 extends IPSModule
 {
+    var $monitordaten = '';
+    
     public function Create()
     {
         //Never delete this line!
