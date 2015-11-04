@@ -73,6 +73,8 @@ class Logamatic4311 extends IPSModule
         //$tail = '';
         //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
         
+        if (strlen($stream) == 0)
+        {
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
@@ -110,14 +112,13 @@ class Logamatic4311 extends IPSModule
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data);
                                         break;
-                                    
-                                    
                                 }
                 echo "Rest : ".str2hex($stream)."\n";
-                if ($stream===false) $stream='';
+                //if ($stream===false) $stream='';
                 SetValueString($bufferID, $stream);
-                $this->unlock("ReceiveLock");
-        
+                
+        }
+        $this->unlock("ReceiveLock");
         return true;
               
     }
