@@ -109,8 +109,8 @@ class Logamatic4311 extends IPSModule
                                         $data = substr($stream, 0, 6);
                                         echo "Monitordaten komplett ".str2hex($data)."\n";
                                         $stream = substr($stream, -(strlen($stream)-6));
-                                        $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
-                                        $this->SendDataToParent($data);
+                                        //$data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
+                                        //$this->SendDataToParent($data);
                                         break;
                                     
                                     
