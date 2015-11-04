@@ -344,17 +344,17 @@ function str2hex($string) // Funktion String in Hex umwandeln
 		return $hex;
 	}
 
-function CheckVariable($typ, $offset, $value)
+function CheckVariable($typ, $offset, $value, $ID)
    {
-  		echo "Check: ".$typ." ".$offset." ".$value;
+  		echo "Check: ".$typ." ".$offset." ".$value." ".$ID;
                 $name = Buderus($typ, $offset, $value);
                 echo "Ergebnis return: ".$name."\n";
-                $InstanzID = @IPS_GetVariableIDByName($name, $this->InstanceID);
+                $InstanzID = @IPS_GetVariableIDByName($name, $ID);
                 if ($InstanzID === false)
                 {
                 $InstanzID = IPS_CreateVariable(3);
                 IPS_SetName($InstanzID, $name); // Instanz benennen
-                IPS_SetParent($InstanzID, $this->InstanceID);
+                IPS_SetParent($InstanzID, $ID);
                 }
                 echo "ID: ".$InstanzID." ".$name."\n";
                 return $InstanzID;
