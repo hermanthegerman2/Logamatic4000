@@ -327,8 +327,9 @@ $Buderus[159][38] = array ("","");
 $Buderus[159][39] = array ("","");
 $Buderus[159][40] = array ("","");
 $Buderus[159][41] = array ("","");
-    
+    echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
     $name = $Buderus[$typ][$offset][$value];
+    echo "Ergebnis: ".$name."\n";    
     return $name;
     }
 
@@ -347,6 +348,7 @@ function CheckVariable($typ, $offset, $value)
    {
   		echo "Check: ".$typ." ".$offset." ".$value;
                 $name = Buderus($typ, $offset, $value);
+                echo "Ergebnis return: ".$name."\n";
                 $InstanzID = @IPS_GetVariableIDByName($name, $this->InstanceID);
                 if ($InstanzID === false)
                 {
