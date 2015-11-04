@@ -92,10 +92,10 @@ class Logamatic4311 extends IPSModule
                                         echo "Offset: ".$offset."\n";
                                         $text = substr($data, 8, 1).substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1).substr($data, 16, 1).substr($data, 18, 1);
                                         echo "Daten: ".str2hex($text)."\n";
-                                        echo "Name: ".CheckVariable($typ, -1, 0);
-                                        $value=GetValueString(CheckVariable($typ, -1, 0));
+                                        echo "Name: ".CheckVariable($typ, -1, 0, $this->InstanceID);
+                                        $value=GetValueString(CheckVariable($typ, -1, 0, $this->InstanceID));
                                         $value=substr_replace($value, $text, $offset, 1);
-                                        setvaluestring(CheckVariable($typ, -1, 0), $value);
+                                        setvaluestring(CheckVariable($typ, -1, 0, $this->InstanceID), $value);
 					                                                                
                                         $stream = substr($stream, -(strlen($stream)-22));
                                         break;
