@@ -376,7 +376,7 @@ function CheckVariableTYP($name, $vartyp, $profile)
  
 function EncodeMonitorData($stream, $ID)
     {
-                while (strlen($stream) > 22)
+                while (strlen($stream) > 0)
                     {
                         $data = substr($stream, 0, 22);
                         $typ = ord(substr($data, 4, 1));
