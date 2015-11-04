@@ -376,7 +376,7 @@ function CheckVariableTYP($name, $vartyp, $profile)
  
 function EncodeMonitorData($stream, $ID)
     {
-                while (strlen($stream) > 6)
+                while (strlen($stream) > 22)
                     {
                         $data = substr($stream, 0, 22);
                         echo "Monitordaten Direktmodus :".str2hex($data)."\n";
