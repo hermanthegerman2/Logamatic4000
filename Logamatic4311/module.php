@@ -92,6 +92,7 @@ class Logamatic4311 extends IPSModule
 				    				$text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
 		  		    				if ($typ > 0)
 									{
+                                                                        echo CheckVariable($typ,-1,0);
                                                                         $value=GetValueString(CheckVariable($typ,-1,0));
 									$value=substr_replace($value, $text, $offset, 1);
 									setvaluestring(CheckVariable($typ,-1,0), $value);
