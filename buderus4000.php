@@ -429,9 +429,9 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                                 }
                             echo "Name: ".$var." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
                             //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
-                            $old=GetValueString($var);
-                            $new=substr_replace($value, $text, $offset, 6);
-                            setvaluestring($var, $new);
+                            $value = GetValueString($var);
+                            $value = substr_replace($value, $text, $offset, 6);
+                            SetValueString($var, $value);
                             }
                         else
                             echo "Encode: dieses Buderus Modul existiert nicht !";
