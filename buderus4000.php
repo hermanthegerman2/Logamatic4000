@@ -442,7 +442,7 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
     
 function EncodeVariableData($parentID, $typ)
     {
-    $ID = IPS_GetVariableIDByName(Buderus($typ, -1, 0), $$parentID);
+    $ID = IPS_GetVariableIDByName(Buderus($typ, -1, 0), $parentID);
     $value = GetValueString($ID);
     
     for ($x=0; $x < Buderus($typ, -1, 1) ; $x++)
