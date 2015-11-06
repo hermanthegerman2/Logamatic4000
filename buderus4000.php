@@ -373,7 +373,7 @@ $Buderus[159][41] = array ("","");
     return $name;
     }
 
-function CheckVariable($typ, $offset, $value, $ID)
+function CheckVariable($typ, $offset, $value, $parentID)
    {
   		//echo "Check: ".$typ." ".$offset." ".$value." ".$ID;
                 $name = Buderus($typ, $offset, $value);
@@ -383,25 +383,25 @@ function CheckVariable($typ, $offset, $value, $ID)
                     return false;
                     }
                 //echo "Ergebnis return: ".$name."\n";
-                $InstanzID = @IPS_GetVariableIDByName($name, $ID);
+                $InstanzID = @IPS_GetVariableIDByName($name, $parentID);
                 if ($InstanzID === false)
                 {
                 $InstanzID = IPS_CreateVariable(3);
                 IPS_SetName($InstanzID, $name); // Instanz benennen
-                IPS_SetParent($InstanzID, $ID);
+                IPS_SetParent($InstanzID, $parentID);
                 }
                 //echo "ID: ".$InstanzID." ".$name."\n";
                 return $InstanzID;
    }
    
-function CheckVariableTYP($name, $vartyp, $profile, $ID)
+function CheckVariableTYP($name, $vartyp, $profile, $parentID)
    {
-  		$InstanzID = @IPS_GetVariableIDByName($name, $ID);
+  		$InstanzID = @IPS_GetVariableIDByName($name, $parentID);
                 if ($InstanzID === false)
                     {
                     $InstanzID = IPS_CreateVariable($vartyp);
                     IPS_SetName($InstanzID, $name); // Instanz benennen
-                    IPS_SetParent($InstanzID, IPS_GetParent($ID));
+                    IPS_SetParent($InstanzID, $parentID);
                     IPS_SetVariableCustomProfile($InstanzID, $profile);
                     }
                 //echo "ID: ".$InstanzID." ".$name."\n";
@@ -440,13 +440,14 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                 return true;
     }
     
-function EncodeVariableData($ParentID, $typ)
+function EncodeVariableData($parentID, $typ)
     {
-    $ID = IPS_GetVariableIDByName(Buderus($typ, -1, 0),$ParentID);
+    $ID = IPS_GetVariableIDByName(Buderus($typ, -1, 0), $$parentID);
     $value = GetValueString($ID);
+    
     for ($x=0; $x < Buderus($typ, -1, 1) ; $x++)
 	{
-        if (Buderus($typ, $x) !== "")
+        if (Buderus($typ, $x, 0) !== "")
 		{
 		switch (Buderus($typ, $x, 1))
                     {
