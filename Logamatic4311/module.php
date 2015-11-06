@@ -12,7 +12,6 @@ class Logamatic4311 extends IPSModule
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
         $this->RegisterPropertyString('Bus', '');
-       
     }
 
     public function ApplyChanges()

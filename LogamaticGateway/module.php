@@ -60,7 +60,13 @@ class LogamaticGateway extends IPSModule
             //sleep (0.5);
             $Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
             $this->SendDataToParent($Data);
-            */        
+            */
+            RegisterProfileInteger('Minutes', '2', '', '', ' m', 0, '', '');
+            RegisterProfileInteger('Hours', '2', '', '', ' h', 0, '', '');
+            RegisterProfileInteger('Watt', '2', '', '', ' kWh', 0, '', '');
+            RegisterProfileInteger('Waerme', '2', '', '', ' Wh', 0, '', '');
+            RegisterProfileInteger('Version', '3', '', 'V ', '', 0, '', '');
+           
         }
     }
 
@@ -228,6 +234,22 @@ class LogamaticGateway extends IPSModule
     {
 //        IPS_LogMessage(__CLASS__, __FUNCTION__ . "Data:" . $data); //                   
     }
+    protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+    {
+        if (!IPS_VariableProfileExists($Name))
+        {
+            IPS_CreateVariableProfile($Name, $VariablenTyp);
+        }
+        else
+        {
+            $profile = IPS_GetVariableProfile($Name);
+            if ($profile['ProfileType'] != $VariablenTyp)
+                throw new Exception("Variable profile type does not match for profile " . $Name);
+        }
+        IPS_SetVariableProfileIcon($Name, $Icon);
+        IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
+        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
+    }
 ################## SEMAPHOREN Helper  - private  
     private function lock($ident)
     {
@@ -248,15 +270,6 @@ class LogamaticGateway extends IPSModule
     {
         IPS_SemaphoreLeave("Logamatic_" . (string) $this->InstanceID . (string) $ident);
     }
-    private function str2hex($string) // Funktion String in Hex umwandeln
-	{
-		$hex='';
-		for ($i=0; $i < strlen($string); $i++)
-			{
-			$hex .=dechex(ord($string[$i]))." ";
-			}
-		return $hex;
-	}
-
+    
 }
 ?>
