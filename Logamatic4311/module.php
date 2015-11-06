@@ -122,7 +122,7 @@ class Logamatic4311 extends IPSModule
                                         break;
                                 }
                 echo "Rest : ".str2hex($stream)."\n";
-                //if ($stream===false) $stream='';
+                if ($stream===false) $stream='';
                 SetValueString($bufferID, $stream);
                 
         
