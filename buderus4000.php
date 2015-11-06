@@ -106,7 +106,7 @@ $Buderus[132][9] = array ("", "");
 $Buderus[132][10] = array ("", "");
 $Buderus[132][11] = array ("", "");
 
-$Buderus[135][-1] = array ("Fehlerprotokoll", "41");
+$Buderus[135][-1] = array ("Fehlerprotokoll", "0");
 $Buderus[135][0] = array ("","");
 $Buderus[135][1] = array ("","");
 $Buderus[135][2] = array ("","");
@@ -220,8 +220,8 @@ $Buderus[137][21] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "
 $Buderus[137][22] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "%");
 $Buderus[137][23] = array ("Regelgerätevorlaufisttemperatur", "Temp", "1", "°C");
 
-$Buderus[154][-1] = array ("Imaginäres Modul", "59");
-$Buderus[154][0] = array ("Offset 0","Modul");
+$Buderus[154][-1] = array ("Imaginäres Modul", "0");
+$Buderus[154][0] = array ("","");
 $Buderus[154][1] = array ("Offset 1","Modul");
 $Buderus[154][2] = array ("Offset 2","Modul");
 $Buderus[154][3] = array ("Offset 3","Modul");
