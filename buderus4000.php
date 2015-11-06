@@ -466,32 +466,32 @@ function EncodeVariableData($parentID, $typ)
                             SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),ord(substr($value, $x, 1))*Buderus($typ, $x, 2));
                             break;
 			case "Zeit":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "Minutes", $ID),ord(substr($value, $x, 1)));
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "~Temperature", $ID),ord(substr($value, $x, 1)));//Minutes
                             break;
 			case "Prozent":
                             SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "~Valve", $ID),ord(substr($value, $x, 1)));
                             break;
 			case "Betr":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Hours", $ID),(ord(substr($value, $x, 1))*Buderus($typ, $x, 2)+ord(substr($value, $x+1, 1))*Buderus($typ, $x+1, 2)+ord(substr($value, $x+2, 1))*Buderus($typ, $x+2, 2))/60);
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),(ord(substr($value, $x, 1))*Buderus($typ, $x, 2)+ord(substr($value, $x+1, 1))*Buderus($typ, $x+1, 2)+ord(substr($value, $x+2, 1))*Buderus($typ, $x+2, 2))/60); // Hours
                             $x++;
                             $x++;
                             break;
 			case "Betr2":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Minutes", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2)+ord(substr($value,$x+2,1))*Buderus($typ, $x+2, 2))/60);
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2)+ord(substr($value,$x+2,1))*Buderus($typ, $x+2, 2))/60); // Minutes
                             $x++;
                             $x++;
                             break;
                         case "Waerme":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Waerme", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2)+ord(substr($value,$x+2,1))*Buderus($typ, $x+2, 2))/100);
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2)+ord(substr($value,$x+2,1))*Buderus($typ, $x+2, 2))/100); // Waerme
                             $x++;
                             $x++;
                             break;
 			case "Watt":
-			    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Watt", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2)));
+			    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2))); // Watt
                             $x++;
                             break;
 			case "Version":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "Version", $ID),ord(substr($value,$x,1)).".".ord(substr($value,$x+1,1)));
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID),ord(substr($value,$x,1)).".".ord(substr($value,$x+1,1))); // Version
                             $x++;
                             break;
                             case "Modul":
