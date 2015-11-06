@@ -61,11 +61,11 @@ class LogamaticGateway extends IPSModule
             $Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
             $this->SendDataToParent($Data);
             */
-            RegisterProfileInteger('Minutes', '2', '', '', ' m', 0, '', '');
-            RegisterProfileInteger('Hours', '2', '', '', ' h', 0, '', '');
-            RegisterProfileInteger('Watt', '2', '', '', ' kWh', 0, '', '');
-            RegisterProfileInteger('Waerme', '2', '', '', ' Wh', 0, '', '');
-            RegisterProfileInteger('Version', '3', '', 'V ', '', 0, '', '');
+            RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
+            RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
+            RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
+            RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
+            RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
            
         }
     }
