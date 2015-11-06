@@ -220,7 +220,7 @@ $Buderus[137][21] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "
 $Buderus[137][22] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "%");
 $Buderus[137][23] = array ("Regelgerätevorlaufisttemperatur", "Temp", "1", "°C");
 
-$Buderus[154][-1] = array ("Imaginäres Modul", "23");
+$Buderus[154][-1] = array ("Imaginäres Modul", "59");
 $Buderus[154][0] = array ("Offset 0","Modul");
 $Buderus[154][1] = array ("Offset 1","Modul");
 $Buderus[154][2] = array ("Offset 2","Modul");
@@ -245,6 +245,42 @@ $Buderus[154][20] = array ("Offset 20","Modul");
 $Buderus[154][21] = array ("Offset 21","Modul");
 $Buderus[154][22] = array ("Offset 22","Modul");
 $Buderus[154][23] = array ("Offset 23","Modul");
+$Buderus[154][24] = array ("Offset 24","Modul");
+$Buderus[154][25] = array ("Offset 25","Modul");
+$Buderus[154][26] = array ("Offset 26","Modul");
+$Buderus[154][27] = array ("Offset 27","Modul");
+$Buderus[154][28] = array ("Offset 28","Modul");
+$Buderus[154][29] = array ("Offset 29","Modul");
+$Buderus[154][30] = array ("Offset 30","Modul");
+$Buderus[154][31] = array ("Offset 31","Modul");
+$Buderus[154][32] = array ("Offset 32","Modul");
+$Buderus[154][33] = array ("Offset 33","Modul");
+$Buderus[154][34] = array ("Offset 34","Modul");
+$Buderus[154][35] = array ("Offset 35","Modul");
+$Buderus[154][36] = array ("Offset 36","Modul");
+$Buderus[154][37] = array ("Offset 37","Modul");
+$Buderus[154][38] = array ("Offset 38","Modul");
+$Buderus[154][39] = array ("Offset 39","Modul");
+$Buderus[154][40] = array ("Offset 40","Modul");
+$Buderus[154][41] = array ("Offset 41","Modul");
+$Buderus[154][42] = array ("Offset 42","Modul");
+$Buderus[154][43] = array ("Offset 43","Modul");
+$Buderus[154][44] = array ("Offset 44","Modul");
+$Buderus[154][45] = array ("Offset 45","Modul");
+$Buderus[154][46] = array ("Offset 46","Modul");
+$Buderus[154][47] = array ("Offset 47","Modul");
+$Buderus[154][48] = array ("Offset 48","Modul");
+$Buderus[154][49] = array ("Offset 49","Modul");
+$Buderus[154][50] = array ("Offset 50","Modul");
+$Buderus[154][51] = array ("Offset 51","Modul");
+$Buderus[154][52] = array ("Offset 52","Modul");
+$Buderus[154][53] = array ("Offset 53","Modul");
+$Buderus[154][54] = array ("Offset 54","Modul");
+$Buderus[154][55] = array ("Offset 55","Modul");
+$Buderus[154][56] = array ("Offset 56","Modul");
+$Buderus[154][57] = array ("Offset 57","Modul");
+$Buderus[154][58] = array ("Offset 58","Modul");
+$Buderus[154][59] = array ("Offset 59","Modul");
 
 $Buderus[158][-1] = array ("Solarfunktion", "35");
 $Buderus[158][0] = array ("Betriebswerte 1", "Bit", "Fehler Einstellung Hysterese", "Speicher 2 auf max. Temperatur", "Speicher 1 auf max. Temperatur", "Kollektor auf max. Temperatur", "", "", "", "");
@@ -329,25 +365,23 @@ $Buderus[159][40] = array ("","");
 $Buderus[159][41] = array ("","");
     //echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
     $name = $Buderus[$typ][$offset][$value];
-    //echo "Ergebnis: ".$name."\n";    
+    if ($name === false) 
+        {
+        echo "dieses Buderus Modul existiert nicht !";
+        return false;
+        }
     return $name;
     }
-
-
-function str2hex($string) // Funktion String in Hex umwandeln
-	{
-		$hex='';
-		for ($i=0; $i < strlen($string); $i++)
-			{
-			$hex .=dechex(ord($string[$i]))." ";
-			}
-		return $hex;
-	}
 
 function CheckVariable($typ, $offset, $value, $ID)
    {
   		//echo "Check: ".$typ." ".$offset." ".$value." ".$ID;
                 $name = Buderus($typ, $offset, $value);
+                if ($name === false) 
+                    {
+                    echo "Check: dieses Buderus Modul existiert nicht !";
+                    return false;
+                    }
                 //echo "Ergebnis return: ".$name."\n";
                 $InstanzID = @IPS_GetVariableIDByName($name, $ID);
                 if ($InstanzID === false)
@@ -364,12 +398,12 @@ function CheckVariableTYP($name, $vartyp, $profile)
    {
   		$InstanzID = @IPS_GetVariableIDByName($name, IPS_GetParent($_IPS['SELF']));
                 if ($InstanzID === false)
-                {
-                $InstanzID = IPS_CreateVariable($vartyp);
-                IPS_SetName($InstanzID, $name); // Instanz benennen
-                IPS_SetParent($InstanzID, IPS_GetParent($_IPS['SELF']));
-                IPS_SetVariableCustomProfile($InstanzID, $profile);
-					 }
+                    {
+                    $InstanzID = IPS_CreateVariable($vartyp);
+                    IPS_SetName($InstanzID, $name); // Instanz benennen
+                    IPS_SetParent($InstanzID, IPS_GetParent($_IPS['SELF']));
+                    IPS_SetVariableCustomProfile($InstanzID, $profile);
+                    }
                 //echo "ID: ".$InstanzID." ".$name."\n";
                 return $InstanzID;
    }
@@ -384,13 +418,28 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                         $offset = ord(substr($array[$x], 2, 1));
                         //echo "Offset: ".$offset."\n";
                         $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
-                        echo "Name: ".CheckVariable($typ, -1, 0, $ID)." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
+                        $var = CheckVariable($typ, -1, 0, $ID);
+                        if ($var === false) 
+                            {
+                            echo "Encode: dieses Buderus Modul existiert nicht !";
+                            return false;
+                            }
+                        echo "Name: ".$var." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
                         //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
-                        $value=GetValueString(CheckVariable($typ, -1, 0, $ID));
+                        $value=GetValueString($var);
                         $value=substr_replace($value, $text, $offset, 0);
-                        setvaluestring(CheckVariable($typ, -1, 0, $ID), $value);
+                        setvaluestring($var, $value);
                         }                   
                 return true;
     }
+function str2hex($string) // Funktion String in Hex umwandeln
+	{
+		$hex='';
+		for ($i=0; $i < strlen($string); $i++)
+			{
+			$hex .=dechex(ord($string[$i]))." ";
+			}
+		return $hex;
+	}
 
 ?>
