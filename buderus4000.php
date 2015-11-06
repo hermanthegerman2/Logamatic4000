@@ -384,7 +384,7 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                         $offset = ord(substr($array[$x], 2, 1));
                         //echo "Offset: ".$offset."\n";
                         $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
-                        echo "Name: ".CheckVariable($typ, -1, 0, $ID)." : "$typ." : ".$offset." : ".str2hex($text)."\n";
+                        echo "Name: ".CheckVariable($typ, -1, 0, $ID)." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
                         //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
                         $value=GetValueString(CheckVariable($typ, -1, 0, $ID));
                         $value=substr_replace($value, $text, $offset, 0);
