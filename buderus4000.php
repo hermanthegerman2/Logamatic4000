@@ -374,16 +374,16 @@ function CheckVariableTYP($name, $vartyp, $profile)
                 return $InstanzID;
    }
  
-function EncodeMonitorData($monitordaten, $ID)
+function EncodeMonitorData($Monitordaten, $ID, $Bus)
     {
-                $array = explode("\xAB\x00\x01\x00", $monitordaten);
+                $array = explode("\xAB\x00\x01\x00", $Monitordaten);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
-                        $typ = ord(substr($array[$x], 4, 1));
+                        $typ = ord(substr($array[$x], 0, 1));
                         echo "Typ: ".$typ."\n";
-                        $offset = ord(substr($array[$x], 6, 1));
+                        $offset = ord(substr($array[$x], 2, 1));
                         echo "Offset: ".$offset."\n";
-                        $text = substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1).substr($array[$x], 16, 1).substr($array[$x], 18, 1);
+                        $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
                         echo "Daten: ".str2hex($text)."\n";
                         echo "Name: ".CheckVariable($typ, -1, 0, $ID);
                         $value=GetValueString(CheckVariable($typ, -1, 0, $ID));
