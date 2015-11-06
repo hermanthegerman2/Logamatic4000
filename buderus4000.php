@@ -374,24 +374,22 @@ function CheckVariableTYP($name, $vartyp, $profile)
                 return $InstanzID;
    }
  
-function EncodeMonitorData($stream, $ID)
+function EncodeMonitorData($monitordaten, $ID)
     {
-                if (strlen($stream) > 20)
-                    {
-                        $data = substr($stream, 0, 22);
-                        $typ = ord(substr($data, 4, 1));
+                $array = explode("\xAB\x00\x01\x00", $monitordaten);
+                    for ( $x = 0; $x < count ( $array ); $x++ )
+                        {
+                        $typ = ord(substr($array[$x], 4, 1));
                         echo "Typ: ".$typ."\n";
-                        $offset = ord(substr($data, 6, 1));
+                        $offset = ord(substr($array[$x], 6, 1));
                         echo "Offset: ".$offset."\n";
-                        $text = substr($data, 8, 1).substr($data, 10, 1).substr($data, 12, 1).substr($data, 14, 1).substr($data, 16, 1).substr($data, 18, 1);
+                        $text = substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1).substr($array[$x], 16, 1).substr($array[$x], 18, 1);
                         echo "Daten: ".str2hex($text)."\n";
                         echo "Name: ".CheckVariable($typ, -1, 0, $ID);
                         $value=GetValueString(CheckVariable($typ, -1, 0, $ID));
                         $value=substr_replace($value, $text, $offset, 0);
                         setvaluestring(CheckVariable($typ, -1, 0, $ID), $value);
-                        $stream = substr($stream, -(strlen($stream)-22));
-                    }
-                   
+                        }                   
                 return true;
     }
 

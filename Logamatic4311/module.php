@@ -108,7 +108,7 @@ class Logamatic4311 extends IPSModule
                                     case 172:   // AC Monitordaten komplett übertragen
                                         //$monitordaten = GetValueString($monitorID);
                                         echo "Monitordaten komplett :".strlen(GetValueString($monitorID))." Bytes\n";
-                                        EncodeMonitorData($monitordaten, $this->InstanceID);
+                                        EncodeMonitorData(GetValueString($monitorID), $this->InstanceID);
                                         $data = $stream;
                                         $stream = '';
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
