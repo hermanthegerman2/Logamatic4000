@@ -87,7 +87,7 @@ class Logamatic4311 extends IPSModule
                                         $data = substr($stream, 0, 12);
                                         echo "Monitordaten Normalmodus :".str2hex($data)."\n";
                                         $data = $stream;
-		                        $stream = substr($data, -(strlen($data)+12), -12);
+                                        $stream = '';
                                         break;
                                     
                                     case 165:   // A5 Monitordaten einzelmeldung
@@ -98,9 +98,7 @@ class Logamatic4311 extends IPSModule
                                         break;
                                     
                                     case 171:   // AB Monitordaten Direktmodus
-                                        //$data = substr($stream, 0, $abzug);
                                         //echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
-                                        //EncodeMonitorData($data, $this->InstanceID);
                                         $head = GetValueString($monitorID);
                                         $Monitordaten = $head.$stream;
                                         SetValueString($monitorID, $Monitordaten);
@@ -109,12 +107,12 @@ class Logamatic4311 extends IPSModule
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
                                         //$monitordaten = GetValueString($monitorID);
-                                        //echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
-                                        //EncodeMonitorData($monitordaten, $this->InstanceID);
+                                        echo "Monitordaten komplett :".strlen(GetValueString($monitorID))." Bytes\n";
+                                        EncodeMonitorData($monitordaten, $this->InstanceID);
                                         $data = $stream;
-                                        $stream = substr($data, -(strlen($data)+6), -6);
-                                        //$data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
-                                        //$this->SendDataToParent($data);
+                                        $stream = '';
+                                        $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
+                                        $this->SendDataToParent($data);
                                         break;
                                 }
                 echo "Rest : ".str2hex($stream)."\n";
