@@ -414,22 +414,28 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(substr($array[$x], 0, 1));
-                        //echo "Typ: ".$typ."\n";
-                        $offset = ord(substr($array[$x], 2, 1));
-                        //echo "Offset: ".$offset."\n";
-                        $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
-                        $var = CheckVariable($typ, -1, 0, $ID);
-                        if ($var === false) 
+                        if ($typ > 79) 
                             {
-                            echo "Encode: dieses Buderus Modul existiert nicht !";
-                            return false;
+                            
+                            //echo "Typ: ".$typ."\n";
+                            $offset = ord(substr($array[$x], 2, 1));
+                            //echo "Offset: ".$offset."\n";
+                            $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
+                            $var = CheckVariable($typ, -1, 0, $ID);
+                            if ($var === false) 
+                                {
+                                echo "Encode: dieses Buderus Modul existiert nicht !";
+                                return false;
+                                }
+                            echo "Name: ".$var." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
+                            //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
+                            $value=GetValueString($var);
+                            $value=substr_replace($value, $text, $offset, 0);
+                            setvaluestring($var, $value);
                             }
-                        echo "Name: ".$var." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
-                        //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
-                        $value=GetValueString($var);
-                        $value=substr_replace($value, $text, $offset, 0);
-                        setvaluestring($var, $value);
-                        }                   
+                        else
+                            echo "Encode: dieses Buderus Modul existiert nicht !";
+                        }
                 return true;
     }
 function str2hex($string) // Funktion String in Hex umwandeln

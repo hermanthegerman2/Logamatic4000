@@ -26,10 +26,7 @@ class Logamatic4311 extends IPSModule
             $this->RegisterVariableString("BufferIN", "BufferIN", "", -4);
             IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
             $this->RegisterVariableString("Monitordaten", "Monitordaten", "", -4);
-            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
-            $this->RegisterVariableString("Merker", "Merker", "", -4);
-            IPS_SetHidden($this->GetIDForIdent('Merker'), true);
-    
+            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);  
     }        
      
 
@@ -109,7 +106,6 @@ class Logamatic4311 extends IPSModule
                                         //$monitordaten = GetValueString($monitorID);
                                         echo "Monitordaten komplett :".strlen(GetValueString($monitorID))." Bytes\n";
                                         EncodeMonitorData(GetValueString($monitorID), $this->InstanceID, $this->ReadPropertyString('Bus'));
-                                        $data = $stream;
                                         $stream = '';
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data);
