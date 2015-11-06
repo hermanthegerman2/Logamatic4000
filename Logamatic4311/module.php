@@ -98,12 +98,13 @@ class Logamatic4311 extends IPSModule
                                         break;
                                     
                                     case 171:   // AB Monitordaten Direktmodus
-                                        $data = substr($stream, 0, $abzug);
+                                        //$data = substr($stream, 0, $abzug);
                                         //echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
                                         //EncodeMonitorData($data, $this->InstanceID);
                                         $head = GetValueString($monitorID);
                                         $Monitordaten = $head.$stream;
                                         SetValueString($monitorID, $Monitordaten);
+                                        $stream = '';
                                         break;
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
