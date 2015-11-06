@@ -75,7 +75,7 @@ class Logamatic4311 extends IPSModule
         $type = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
-        echo " / Länge : ".strlen($stream)."\n";
+        //echo " / Länge : ".strlen($stream)."\n";
 
 		switch ($type) {
                                     case 167:   // A7 Monitordaten Normalmodus
@@ -110,7 +110,7 @@ class Logamatic4311 extends IPSModule
                                         //$this->SendDataToParent($data);
                                         break;
                                 }
-                echo "Rest : ".str2hex($stream)."\n";
+                //echo "Rest : ".str2hex($stream)."\n";
                 if ($stream===false) $stream='';
                 SetValueString($bufferID, $stream);
                 
