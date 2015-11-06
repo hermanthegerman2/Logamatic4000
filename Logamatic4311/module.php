@@ -86,14 +86,15 @@ class Logamatic4311 extends IPSModule
 
                                         $data = substr($stream, 0, 12);
                                         echo "Monitordaten Normalmodus :".str2hex($data)."\n";
-
-		                        $stream = substr($stream, -(strlen($stream)-12));
+                                        $data = $stream;
+		                        $stream = substr($data, -(strlen($data)-12));
                                         break;
                                     
                                     case 165:   // A5 Monitordaten einzelmeldung
                                         $data = substr($stream, 0, 12);
                                         echo "Daten: A5 ".str2hex($data)."\n";
-                                        $stream = substr($stream, -(strlen($stream)-12));
+                                        $data = $stream;
+                                        $stream = substr($data, -(strlen($data)-12));
                                         break;
                                     
                                     case 171:   // AB Monitordaten Direktmodus
@@ -102,17 +103,19 @@ class Logamatic4311 extends IPSModule
                                         $data = substr($stream, 0, $abzug);
                                         //echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
                                         //EncodeMonitorData($data, $this->InstanceID);
-                                        $monitordaten = GetValueString($monitorID);
-                                        $monitordaten = $monitordaten . $data;
+                                        $head = GetValueString($monitorID);
+                                        $monitordaten = $head . $data;
                                         SetValueString($monitorID, $monitordaten);
-                                        $stream = substr($stream, -(strlen($stream)-$abzug));
+                                        $data = $stream;
+                                        $stream = substr($data, -(strlen($data)-$abzug));
                                         break;
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
                                         //$monitordaten = GetValueString($monitorID);
                                         //echo "Monitordaten komplett ".str2hex($monitordaten)."\n";
                                         //EncodeMonitorData($monitordaten, $this->InstanceID);
-                                        $stream = substr($stream, -(strlen($stream)-6));
+                                        $data = $stream;
+                                        $stream = substr($data, -(strlen($data)-6));
                                         //$data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         //$this->SendDataToParent($data);
                                         break;
