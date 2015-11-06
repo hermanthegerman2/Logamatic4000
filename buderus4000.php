@@ -494,8 +494,8 @@ function EncodeVariableData($parentID, $typ)
                             SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID),ord(substr($value,$x,1)).".".ord(substr($value,$x+1,1))); // Version
                             $x++;
                             break;
-                            case "Modul":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID),$Buderus($typ, $x, ord(substr($value,$x,1))+2));
+                        case "Modul":
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(substr($value,$x,1))+2));
                             break;
 
                     }
