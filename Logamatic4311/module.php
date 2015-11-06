@@ -26,7 +26,9 @@ class Logamatic4311 extends IPSModule
             $this->RegisterVariableString("BufferIN", "BufferIN", "", -4);
             IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
             $this->RegisterVariableString("Monitordaten", "Monitordaten", "", -4);
-            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);        
+            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
+            $this->RegisterVariableString("Merker", "Merker", "", -4);
+            IPS_SetHidden($this->GetIDForIdent('Merker'), true);
     
     }        
      
@@ -98,10 +100,10 @@ class Logamatic4311 extends IPSModule
                                         $array = explode("\xAB\x00\x01\x00", $stream);
                                         $abzug = ((count($array)+1)*22);
                                         $data = substr($stream, 0, $abzug);
-                                        echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
-                                        EncodeMonitorData($data, $this->InstanceID);
-                                        //$monitordaten = GetValueString($monitorID);
-                                        //$monitordaten = $monitordaten . $data;
+                                        //echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
+                                        //EncodeMonitorData($data, $this->InstanceID);
+                                        $monitordaten = GetValueString($monitorID);
+                                        $monitordaten = $monitordaten . $data;
                                         //SetValueString($monitorID, $monitordaten);
                                         $stream = substr($stream, -(strlen($stream)-$abzug));
                                         break;
