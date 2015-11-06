@@ -220,7 +220,7 @@ $Buderus[137][21] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "
 $Buderus[137][22] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "%");
 $Buderus[137][23] = array ("Regelgerätevorlaufisttemperatur", "Temp", "1", "°C");
 
-$Buderus[154][-1] = array ("???", "23");
+$Buderus[154][-1] = array ("Imaginäres Modul", "23");
 $Buderus[154][0] = array ("Offset 0","Modul");
 $Buderus[154][1] = array ("Offset 1","Modul");
 $Buderus[154][2] = array ("Offset 2","Modul");
@@ -380,12 +380,12 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(substr($array[$x], 0, 1));
-                        echo "Typ: ".$typ."\n";
+                        //echo "Typ: ".$typ."\n";
                         $offset = ord(substr($array[$x], 2, 1));
                         //echo "Offset: ".$offset."\n";
                         $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
-                        //echo "Daten: ".str2hex($text)."\n";
-                        echo "Name: ".CheckVariable($typ, -1, 0, $ID);
+                        echo "Name: ".CheckVariable($typ, -1, 0, $ID)." : "$typ." : ".$offset." : ".str2hex($text)."\n";
+                        //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
                         $value=GetValueString(CheckVariable($typ, -1, 0, $ID));
                         $value=substr_replace($value, $text, $offset, 0);
                         setvaluestring(CheckVariable($typ, -1, 0, $ID), $value);
