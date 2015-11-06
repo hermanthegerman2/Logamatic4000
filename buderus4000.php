@@ -436,6 +436,7 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                             EncodeVariableData($ID, $typ);
                             }
                         else
+                            return true;
                             echo "Encode: dieses Buderus Modul existiert nicht !";
                         }
                 return true;
