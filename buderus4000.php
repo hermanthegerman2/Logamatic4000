@@ -446,8 +446,8 @@ function EncodeVariableData($ParentID, $typ)
     $value = GetValueString($ID);
     for ($x=0; $x < Buderus($typ, -1, 1) ; $x++)
 	{
-        //if (Buderus($typ, $x) !== "")
-		//{
+        if (Buderus($typ, $x) !== "")
+		{
 		switch (Buderus($typ, $x, 1))
                     {
 			case "Bit":
@@ -497,7 +497,7 @@ function EncodeVariableData($ParentID, $typ)
                             break;
 
                     }
-		//}
+		}
         }
 
     }
