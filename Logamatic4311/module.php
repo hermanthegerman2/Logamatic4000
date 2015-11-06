@@ -65,8 +65,8 @@ class Logamatic4311 extends IPSModule
         $monitorID = $this->GetIDForIdent("Monitordaten");
         
         // Empfangs Lock setzen
-        if (!$this->lock("ReceiveLock"))
-            throw new Exception("ReceiveBuffer is locked");
+        //if (!$this->lock("ReceiveLock"))
+        //    throw new Exception("ReceiveBuffer is locked");
         // Datenstream zusammenfügen
         $head = GetValueString($bufferID);
         SetValueString($bufferID, '');
@@ -126,7 +126,7 @@ class Logamatic4311 extends IPSModule
                 SetValueString($bufferID, $stream);
                 
         
-        $this->unlock("ReceiveLock");
+        //$this->unlock("ReceiveLock");
         return true;
              
     }
