@@ -456,8 +456,8 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
                 //echo "ID: ".$InstanzID." ".$name."\n";
                 return $InstanzID;
    }
- 
-function EncodeMonitorData($Monitordaten, $ID, $Bus)
+
+function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
     {           
                     $array = explode("\xAB\x00".$Bus."\x00", $Monitordaten); // ".chr($Bus)."
                     for ( $x = 0; $x < count ( $array ); $x++ )
@@ -483,9 +483,40 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                             EncodeVariableData($ID, $typ);
                             }
                         else
-                            echo "Encode: dieses Buderus Modul existiert nicht !";
+                            echo "EncodeMonitorDirektData ".$Monitordaten." / ".$ID." / ".$Bus;
                         }
                 return true;
+    }
+   
+function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
+    {           
+                    $array = explode("\xA7\x00".$Bus."\x00", $Monitordaten); // ".chr($Bus)."
+                    for ( $x = 0; $x < count ( $array ); $x++ )
+                        {
+                        $typ = ord(substr($array[$x], 0, 1));
+                        if ($typ > 79) 
+                            {
+                            echo "Array: ".str2hex($array[$x])."\n";
+                            $offset = ord(substr($array[$x], 2, 1));
+                            //echo "Offset: ".$offset."\n";
+                            $text = substr($array[$x], 4, 1);
+                            $var = CheckVariable($typ, -1, 0, $ID);
+                            /*if ($var === false) 
+                                {
+                                echo "Encode: dieses Buderus Modul existiert nicht !";
+                                return false;
+                                }*/
+                            //echo "Name: ".$var." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
+                            //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
+                            $value = GetValueString($var);
+                            $value = substr_replace($value, $text, $offset, 1);
+                            SetValueString($var, $value);
+                            EncodeVariableData($ID, $typ);
+                            }
+                        else
+                            echo "EncodeMonitorNormalData ".$Monitordaten." / ".$ID." / ".$Bus;
+                        }
+                    return true;
     }
 
 function EncodeEinstellParData ($EinstellPar, $ID, $Bus)

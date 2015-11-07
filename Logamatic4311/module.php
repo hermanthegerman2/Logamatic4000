@@ -72,51 +72,47 @@ class Logamatic4311 extends IPSModule
         $bus = ord(substr($stream, 2, 1));
         
         	switch ($typ)   {
-                                    case 167:   // A7 Monitordaten Normalmodus
-
-                                        $data = substr($stream, 0, 12);
-                                        echo "Monitordaten Normalmodus :".str2hex($data)."\n";
+                                      
+                                    case 165:   // A5 Monitordaten einzelmeldung
+                                        
+                                        echo "Logamatic Gateway is alive";
                                         $data = $stream;
-                                        $stream = '';
                                         break;
                                     
-                                    case 165:   // A5 Monitordaten einzelmeldung
-                                        $data = substr($stream, 0, 12);
-                                        echo "Daten: A5 ".str2hex($data)."\n";
-                                        $data = $stream;
-                                        $stream = substr($data, -(strlen($data)+12), -12);
-                                        break;
+                                    case 167:   // A7 Monitordaten Normalmodus
+
+                                        echo "Monitordaten Normalmodus :".str2hex($data)."\n";
+                                        EncodeMonitorNormalData(GetValueString($EinstellParID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                                        break;                                  
                                     
                                     case 169:   // A9 Kennung für einstellbare Parameter
                                         $head = GetValueString($EinstellParID);
                                         $EinstellPar = $head.$stream;
                                         SetValueString($EinstellParID, $EinstellPar);
-                                        $stream = '';
                                         break;
+                                    
                                     case 170:   // AA Einstellbare Parameter komplett übertragen
                                         IPS_LogMessage('Gateway <- SerialPort:', "Einstellbare Parameter komplett :".strlen(GetValueString($EinstellParID))." Bytes\n");
                                         EncodeEinstellParData(GetValueString($EinstellParID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
-                                        $stream = '';
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
+                                    
                                     case 171:   // AB Monitordaten Direktmodus
-                                        //echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
                                         $head = GetValueString($monitorID);
                                         $Monitordaten = $head.$stream;
                                         SetValueString($monitorID, $Monitordaten);
-                                        $stream = '';
                                         break;
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
                                         //$monitordaten = GetValueString($monitorID);
                                         IPS_LogMessage('Gateway <- SerialPort:', "Monitordaten komplett :".strlen(GetValueString($monitorID))." Bytes\n");
-                                        EncodeMonitorData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
-                                        $stream = '';
+                                        EncodeMonitorDirektData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
                                 }
+        $stream = '';
         return true;             
     }
         
