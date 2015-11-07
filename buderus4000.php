@@ -416,7 +416,7 @@ $Buderus[159][41] = array ("","");
     $name = $Buderus[$typ][$offset][$value];
     if ($name === false) 
         {
-        echo "dieses Buderus Modul existiert nicht !";
+        IPS_LogMessage('Logamatic Gateway', 'Buderus Modul 2:'.$typ.' : '.$offset.' : '.$value.'existiert nicht !');
         return false;
         }
     return $name;
@@ -465,7 +465,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                         $typ = ord(substr($array[$x], 0, 1));
                         if ($typ > 79) 
                             {
-                            echo "Array: ".str2hex($array[$x])."\n";
+                            IPS_LogMessage('Logamatic Gateway', 'Array: '.str2hex($array[$x]));
                             $offset = ord(substr($array[$x], 2, 1));
                             //echo "Offset: ".$offset."\n";
                             $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
@@ -476,7 +476,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                             EncodeVariableData($ID, $typ);
                             }
                         else
-                            echo "EncodeMonitorDirektData ".$Monitordaten." / ".$ID." / ".$Bus;
+                            IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorDirektData '.$Monitordaten.' / '.$ID.' / '.$Bus);
                         }
                 return true;
     }
@@ -500,7 +500,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
                             EncodeVariableData($ID, $typ);
                             }
                         else
-                            echo "EncodeMonitorNormalData ".$Monitordaten." / ".$ID." / ".$Bus;
+                            IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorNormalData '.$Monitordaten.' / '.$ID.' / '.$Bus);
                         }
                     return true;
     }
