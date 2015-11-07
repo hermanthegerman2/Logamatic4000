@@ -416,7 +416,7 @@ $Buderus[159][41] = array ("","");
     $name = $Buderus[$typ][$offset][$value];
     if ($name === false) 
         {
-        IPS_LogMessage('Logamatic Gateway', 'Buderus Modul 2:'.$typ.' : '.$offset.' : '.$value.'existiert nicht !');
+        IPS_LogMessage('Logamatic Gateway', 'Buderus Modul :'.$typ.' : '.$offset.' : '.$value.'existiert nicht !');
         return false;
         }
     return $name;
