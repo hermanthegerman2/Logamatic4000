@@ -4,10 +4,37 @@ class Command extends stdClass
 {
     
     const NUL = 0x00;
-    const Direktmodus = 0xDD; //Umschalten von Normalmodus -> Direktmodus
-    const Normalmodus = 0xDC; //Umschalten von Direktmodus -> Normalmodus
-    const Monitordaten = 0xA2; //Monitordaten anfordern
-        
+    const Direktmodus = 0xDD;   //Umschalten von Normalmodus -> Direktmodus
+    const Normalmodus = 0xDC;   //Umschalten von Direktmodus -> Normalmodus
+    const Monitordaten = 0xA2;  //Monitordaten anfordern
+    const Parameter = 0xB0;     // einstellbare ParameterD
+    const Heizkreis1 = 0x07;    // Datentyp für Heizkreis1 der einstellbaren Parameter
+    const Heizkreis2 = 0x08;    // Datentyp für Heizkreis1 der einstellbaren Parameter
+    const Heizkreis3 = 0x09;    // Datentyp für Heizkreis1 der einstellbaren Parameter
+    const Heizkreis4 = 0x0A;    // Datentyp für Heizkreis4 der einstellbaren Parameter
+    const Außenparameter = 0x0B;// Datentyp für Außenparameter der einstellbaren Parameter
+    const Warmwasser = 0x0C;    // Datentyp für WW der einstellbaren Parameter
+    const Konfiguration = 0x0D; // Datentyp für Konfiguration (Modulauswahl) der einstellbaren Parameter
+    const UBA = 0x0E;           // Datentyp für UBA der einstellbaren Parameter / wandhängende Strategie (UBA)
+    const Kessel = 0x10;        // Datentyp für Kessel der einstellbaren Parameter / bodenstehender Kessel
+    const Kanal1 = 0x11;        // Datentyp für Schaltuhr pro Woche Kanal 1 der einstellbaren Parameter
+    const Kanal2 = 0x12;        // Datentyp für Schaltuhr pro Woche Kanal 2 der einstellbaren Parameter
+    const Kanal3 = 0x13;        // Datentyp für Schaltuhr pro Woche Kanal 3 der einstellbaren Parameter
+    const Kanal4 = 0x14;        // Datentyp für Schaltuhr pro Woche Kanal 4 der einstellbaren Parameter
+    const Kanal5 = 0x15;        // Datentyp für Schaltuhr pro Woche Kanal 5 der einstellbaren Parameter
+    const Heizkreis5 = 0x16;    // Datentyp für Heizkreis 5 der einstellbaren Parameter
+    const Kanal6 = 0x17;        // Datentyp für Kanal 6 der einstellbaren Parameter / Schaltuhr pro Woche Kanal 6
+    const Heizkreis6 = 0x18;    // Datentyp für Heizkreis 6 der einstellbaren Parameter
+    const Kanal7 = 0x19;        // Datentyp für Kanal 7 der einstellbaren Parameter / Schaltuhr pro Woche Kanal 7
+    const Heizkreis7 = 0x1A;    // Datentyp für Heizkreis 7 der einstellbaren Parameter
+    const Kanal8 = 0x1B;        // Datentyp für Kanal 8 der einstellbaren Parameter / Schaltuhr pro Woche Kanal 8
+    const Heizkreis8 = 0x1C;    // Datentyp für Heizkreis 8 der einstellbaren Parameter
+    const Kanal9 = 0x1D;        // Datentyp für Kanal 9 der einstellbaren Parameter / Schaltuhr pro Woche Kanal 9
+    const Kanal10 = 0x1F;       // Datentyp für Kanal 10 der einstellbaren Parameter / Schaltuhr pro Woche Kanal 10
+    const Strategie = 0x20;     // Datentyp für Strategie der einstellbaren Parameter / bodenstehende Strategie
+    const Solar = 0x24;         // Datentyp für Solar der einstellbaren Parameter 
+    const FM458 = 0x26;         // Datentyp für FM458 der einstellbaren Parameter / Strategie (FM458)
+     
 }
 function Buderus ($typ, $offset, $value)
     {
