@@ -418,7 +418,7 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                         $typ = ord(substr($array[$x], 0, 1));
                         if ($typ > 79) 
                             {
-                            echo "Array: ".$array[$x]."\n";
+                            echo "Array: ".str2hex($array[$x])."\n";
                             $offset = ord(substr($array[$x], 2, 1));
                             //echo "Offset: ".$offset."\n";
                             $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
