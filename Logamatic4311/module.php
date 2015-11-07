@@ -75,12 +75,12 @@ class Logamatic4311 extends IPSModule
                                       
                                     case 165:   // A5 Monitordaten einzelmeldung
                                         
-                                        echo "Logamatic Gateway is alive";
+                                        IPS_LogMessage('Logamatic Gateway', 'Logamatic Gateway is alive');
                                         return true;
                                     
                                     case 167:   // A7 Monitordaten Normalmodus
 
-                                        echo "Monitordaten Normalmodus :".str2hex($stream)."\n";
+                                        IPS_LogMessage('Logamatic Gateway', "Monitordaten Normalmodus :".str2hex($stream));
                                         EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         break;                                  
                                     
@@ -91,7 +91,7 @@ class Logamatic4311 extends IPSModule
                                         break;
                                     
                                     case 170:   // AA Einstellbare Parameter komplett übertragen
-                                        IPS_LogMessage('Gateway <- SerialPort:', "Einstellbare Parameter komplett :".strlen(GetValueString($EinstellParID))." Bytes\n");
+                                        IPS_LogMessage('Logamatic Gateway', "Einstellbare Parameter komplett :".strlen(GetValueString($EinstellParID))." Bytes");
                                         EncodeEinstellParData(GetValueString($EinstellParID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
@@ -105,7 +105,7 @@ class Logamatic4311 extends IPSModule
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
                                         //$monitordaten = GetValueString($monitorID);
-                                        IPS_LogMessage('Gateway <- SerialPort:', "Monitordaten komplett :".strlen(GetValueString($monitorID))." Bytes\n");
+                                        IPS_LogMessage('Logamatic Gateway:', "Monitordaten komplett :".strlen(GetValueString($monitorID))." Bytes\n");
                                         EncodeMonitorDirektData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
