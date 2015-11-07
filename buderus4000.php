@@ -410,14 +410,15 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
    }
  
 function EncodeMonitorData($Monitordaten, $ID, $Bus)
-    {
-                $array = explode("\xAB\x00\x01\x00", $Monitordaten); // ".chr($Bus)."
+    {           
+                $hexstring = "\xAB\x00".$Bus."\x00";
+                $array = explode($hexstring, $Monitordaten); // ".chr($Bus)."
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(substr($array[$x], 0, 1));
                         if ($typ > 79) 
                             {
-                            //echo "Typ: ".$typ."\n";
+                            echo "Array: ".$array[$x]."\n";
                             $offset = ord(substr($array[$x], 2, 1));
                             //echo "Offset: ".$offset."\n";
                             $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
