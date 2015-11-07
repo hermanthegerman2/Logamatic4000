@@ -2,12 +2,13 @@
 
 class Command extends stdClass
 {
-    
     const NUL = 0x00;
-    const Direktmodus = 0xDD;   //Umschalten von Normalmodus -> Direktmodus
-    const Normalmodus = 0xDC;   //Umschalten von Direktmodus -> Normalmodus
-    const Monitordaten = 0xA2;  //Monitordaten anfordern
-    const Parameter = 0xB0;     // einstellbare ParameterD
+    const leer = 0x65;          // auufüllen der einstellbaren Parameter
+    const EinstellPar = 0xA1;   // Kommando einstellbare Parameter empfangen
+    const Monitordaten = 0xA2;  // Kommando Monitordaten anfordern
+    const Parameter = 0xB0;     // Kommando einstellbare Parameter senden
+    const Normalmodus = 0xDC;   // Kommando Umschalten von Direktmodus -> Normalmodus
+    const Direktmodus = 0xDD;   // Kommando Umschalten von Normalmodus -> Direktmodus
     const Heizkreis1 = 0x07;    // Datentyp für Heizkreis1 der einstellbaren Parameter
     const Heizkreis2 = 0x08;    // Datentyp für Heizkreis1 der einstellbaren Parameter
     const Heizkreis3 = 0x09;    // Datentyp für Heizkreis1 der einstellbaren Parameter
@@ -34,7 +35,6 @@ class Command extends stdClass
     const Strategie = 0x20;     // Datentyp für Strategie der einstellbaren Parameter / bodenstehende Strategie
     const Solar = 0x24;         // Datentyp für Solar der einstellbaren Parameter 
     const FM458 = 0x26;         // Datentyp für FM458 der einstellbaren Parameter / Strategie (FM458)
-     
 }
 function Buderus ($typ, $offset, $value)
     {
@@ -486,6 +486,11 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                             echo "Encode: dieses Buderus Modul existiert nicht !";
                         }
                 return true;
+    }
+
+function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
+    {
+    return true
     }
     
 function EncodeVariableData($parentID, $typ)

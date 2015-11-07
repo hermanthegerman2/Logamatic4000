@@ -9,7 +9,12 @@
                     "type": "Button",
                     "label": "Monitordaten auslesen",
                     "onClick": "Logamatic_RequestMonitordaten($id);"
-                }                
+                },
+{
+                    "type": "Button",
+                    "label": "einstellbare Parameter auslesen",
+                    "onClick": "Logamatic_RequestEinstellPar($id);"
+                }                 
             ],
         "status":
             [

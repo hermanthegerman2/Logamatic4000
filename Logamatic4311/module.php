@@ -22,8 +22,10 @@ class Logamatic4311 extends IPSModule
             $this->SetStatus(202);
         else
             $this->SetStatus(102);            
-            $this->RegisterVariableString("Monitordaten", "Monitordaten", "", -4);
-            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);  
+            $this->RegisterVariableString('Monitordaten', 'Monitordaten', '', -4);
+            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
+            $this->RegisterVariableString('EinstellPar', 'Einstelbare Parameter', '', -4);
+            IPS_SetHidden($this->GetIDForIdent('EinstellPar'), true);
     }        
      
 
@@ -33,15 +35,24 @@ class Logamatic4311 extends IPSModule
         $this->SendDataToParent($data);
         $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $monitorID = $this->GetIDForIdent("Monitordaten");
+        $monitorID = $this->GetIDForIdent('Monitordaten');
         SetValueString($monitorID, '');
         return true;
     }
-    
+    public function RequestEinstellPar()
+    {
+        $data = chr(Command::Direktmodus).chr(Command::NUL);
+        $this->SendDataToParent($data);
+        $data = chr(Command::EinstellPar).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
+        $this->SendDataToParent($data);
+        $monitorID = $this->GetIDForIdent('EinstellPar');
+        SetValueString($monitorID, '');
+        return true;
+    }       
     protected function SendDataToParent($data)
     {
       
-        $JSONString = json_encode(Array("DataID" => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => utf8_encode($data)));
+        $JSONString = json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', 'Buffer' => utf8_encode($data)));
        
         IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
         // Daten senden
@@ -54,7 +65,8 @@ class Logamatic4311 extends IPSModule
     {
         $data = json_decode($JSONString);
         //IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
-        $monitorID = $this->GetIDForIdent("Monitordaten");
+        $monitorID = $this->GetIDForIdent('Monitordaten');
+        $EinstellParID = $this->GetIDForIdent('EinstellPar');
         $stream = utf8_decode($data->Buffer);
         $typ = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
@@ -75,6 +87,19 @@ class Logamatic4311 extends IPSModule
                                         $stream = substr($data, -(strlen($data)+12), -12);
                                         break;
                                     
+                                    case 169:   // A9 Kennung für einstellbare Parameter
+                                        $head = GetValueString($EinstellParID);
+                                        $EinstellPar = $head.$stream;
+                                        SetValueString($EinstellParID, $EinstellPar);
+                                        $stream = '';
+                                        break;
+                                    case 170:   // AA Einstellbare Parameter komplett übertragen
+                                        IPS_LogMessage('Gateway <- SerialPort:', "Einstellbare paraemter komplett :".strlen(GetValueString($EinstellParID))." Bytes\n");
+                                        EncodeEinstellParData(GetValueString($EinstellParID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                                        $stream = '';
+                                        $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
+                                        $this->SendDataToParent($data); // Umschalten in Normalmodus senden
+                                        break;
                                     case 171:   // AB Monitordaten Direktmodus
                                         //echo "Monitordaten Direktmodus: AB ".str2hex($monitordaten)."\n";
                                         $head = GetValueString($monitorID);
