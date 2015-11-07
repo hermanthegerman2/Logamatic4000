@@ -55,9 +55,7 @@ class Logamatic4311 extends IPSModule
         $data = json_decode($JSONString);
         //IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
         $monitorID = $this->GetIDForIdent("Monitordaten");
-        $head = GetValueString($bufferID);
-        SetValueString($bufferID, '');
-        $stream = $head . utf8_decode($data->Buffer);
+        $stream = utf8_decode($data->Buffer);
         $typ = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
@@ -94,11 +92,7 @@ class Logamatic4311 extends IPSModule
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
                                 }
-                
-        if ($stream===false) $stream='';
-        SetValueString($bufferID, $stream);
-        return true;
-             
+        return true;             
     }
         
 ################## DUMMYS / WOARKAROUNDS - protected
