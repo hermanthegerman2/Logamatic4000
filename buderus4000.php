@@ -490,7 +490,7 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
 
 function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
     {
-    return true
+    return true;
     }
     
 function EncodeVariableData($parentID, $typ)
