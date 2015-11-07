@@ -22,8 +22,6 @@ class Logamatic4311 extends IPSModule
             $this->SetStatus(202);
         else
             $this->SetStatus(102);            
-            $this->RegisterVariableString("BufferIN", "BufferIN", "", -4);
-            IPS_SetHidden($this->GetIDForIdent('BufferIN'), true);
             $this->RegisterVariableString("Monitordaten", "Monitordaten", "", -4);
             IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);  
     }        
@@ -55,29 +53,15 @@ class Logamatic4311 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        global $monitordaten;
-        IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
-        $bufferID = $this->GetIDForIdent("BufferIN");
+        //IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
         $monitorID = $this->GetIDForIdent("Monitordaten");
-        
-        // Empfangs Lock setzen
-        //if (!$this->lock("ReceiveLock"))
-        //    throw new Exception("ReceiveBuffer is locked");
-        // Datenstream zusammenfügen
         $head = GetValueString($bufferID);
         SetValueString($bufferID, '');
-        // Stream in einzelne Pakete schneiden
         $stream = $head . utf8_decode($data->Buffer);
-        
-        //$tail = '';
-        //IPS_LogMessage('ReceiveDataHex:'.$this->InstanceID,  print(str2hex($data->Buffer)));
-        
-        $type = ord(substr($stream, 0, 1));
+        $typ = ord(substr($stream, 0, 1));
         $bus = ord(substr($stream, 2, 1));
         
-        //echo " / Länge : ".strlen($stream)."\n";
-
-		switch ($type) {
+        	switch ($typ)   {
                                     case 167:   // A7 Monitordaten Normalmodus
 
                                         $data = substr($stream, 0, 12);
@@ -107,15 +91,12 @@ class Logamatic4311 extends IPSModule
                                         EncodeMonitorData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         $stream = '';
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
-                                        $this->SendDataToParent($data);
+                                        $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
                                 }
-                //echo "Rest : ".str2hex($stream)."\n";
-                if ($stream===false) $stream='';
-                SetValueString($bufferID, $stream);
                 
-        
-        //$this->unlock("ReceiveLock");
+        if ($stream===false) $stream='';
+        SetValueString($bufferID, $stream);
         return true;
              
     }
@@ -144,10 +125,7 @@ class Logamatic4311 extends IPSModule
         if ($InstanceStatus <> IPS_GetInstance($this->InstanceID)['InstanceStatus'])
             parent::SetStatus($InstanceStatus);
     }
-    protected function SetSummary($data)
-    {
-        IPS_LogMessage(__CLASS__, __FUNCTION__ . "Data:" . $data); // 
-    }
+    
     ################## SEMAPHOREN Helper  - private  
     private function lock($ident)
     {
