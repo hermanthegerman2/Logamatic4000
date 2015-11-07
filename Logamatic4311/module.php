@@ -64,7 +64,7 @@ class Logamatic4311 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        //IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
+        IPS_LogMessage('Logamatic <- Gateway:', str2hex(utf8_decode($data->Buffer)));
         $monitorID = $this->GetIDForIdent('Monitordaten');
         $EinstellParID = $this->GetIDForIdent('EinstellPar');
         $stream = utf8_decode($data->Buffer);
