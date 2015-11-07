@@ -24,7 +24,7 @@ class Logamatic4311 extends IPSModule
             $this->SetStatus(102);            
             $this->RegisterVariableString('Monitordaten', 'Monitordaten', '', -4);
             IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
-            $this->RegisterVariableString('EinstellPar', 'Einstelbare Parameter', '', -4);
+            $this->RegisterVariableString('EinstellPar', 'EinstellPar', '', -4);
             IPS_SetHidden($this->GetIDForIdent('EinstellPar'), true);
     }        
      
@@ -45,8 +45,8 @@ class Logamatic4311 extends IPSModule
         $this->SendDataToParent($data);
         $data = chr(Command::EinstellPar).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $monitorID = $this->GetIDForIdent('EinstellPar');
-        SetValueString($monitorID, '');
+        $EinstellParID = $this->GetIDForIdent('EinstellPar');
+        SetValueString($EinstellParID, '');
         return true;
     }       
     protected function SendDataToParent($data)
@@ -94,7 +94,7 @@ class Logamatic4311 extends IPSModule
                                         $stream = '';
                                         break;
                                     case 170:   // AA Einstellbare Parameter komplett übertragen
-                                        IPS_LogMessage('Gateway <- SerialPort:', "Einstellbare paraemter komplett :".strlen(GetValueString($EinstellParID))." Bytes\n");
+                                        IPS_LogMessage('Gateway <- SerialPort:', "Einstellbare Parameter komplett :".strlen(GetValueString($EinstellParID))." Bytes\n");
                                         EncodeEinstellParData(GetValueString($EinstellParID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         $stream = '';
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
