@@ -495,8 +495,8 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
                             $text = substr($array[$x], 4, 1);
                             $var = CheckVariable($typ, -1, 0, $ID);
                             $value = GetValueString($var);
-                            $value = substr_replace($value, $text, $offset, 1);
-                            SetValueString($var, $value);
+                            $newvalue = substr_replace($value, $text, $offset, -1);
+                            SetValueString($var, $newvalue);
                             EncodeVariableData($ID, $typ);
                             }
                         else
