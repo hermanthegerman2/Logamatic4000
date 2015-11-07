@@ -559,6 +559,10 @@ function EncodeVariableData($parentID, $typ)
 			    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2))); // Watt
                             $x++;
                             break;
+                        case "Flow":
+			    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2))); // l/h
+                            $x++;
+                            break;
 			case "Version":
                             SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID),ord(substr($value,$x,1)).".".ord(substr($value,$x+1,1))); // Version
                             $x++;
