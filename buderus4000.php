@@ -411,7 +411,7 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
  
 function EncodeMonitorData($Monitordaten, $ID, $Bus)
     {
-                $array = explode("\xAB\x00".chr($Bus)."x00", $Monitordaten);
+                $array = explode("\xAB\x00\x01\x00", $Monitordaten); // ".chr($Bus)."
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(substr($array[$x], 0, 1));
