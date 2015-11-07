@@ -459,7 +459,7 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
 
 function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
     {           
-                    $array = explode("\xAB\x00".$Bus."\x00", $Monitordaten); // ".chr($Bus)."
+                    $array = explode("\xAB\x00".$Bus."\x00", $Monitordaten);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(substr($array[$x], 0, 1));
@@ -470,13 +470,6 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                             //echo "Offset: ".$offset."\n";
                             $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
                             $var = CheckVariable($typ, -1, 0, $ID);
-                            /*if ($var === false) 
-                                {
-                                echo "Encode: dieses Buderus Modul existiert nicht !";
-                                return false;
-                                }*/
-                            //echo "Name: ".$var." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
-                            //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
                             $value = GetValueString($var);
                             $value = substr_replace($value, $text, $offset, 6);
                             SetValueString($var, $value);
@@ -490,7 +483,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
    
 function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
     {           
-                    $array = explode("\xA7\x00".$Bus."\x00", $Monitordaten); // ".chr($Bus)."
+                    $array = explode("\xA7\x00".$Bus."\x00", $Monitordaten);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(substr($array[$x], 0, 1));
@@ -501,13 +494,6 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
                             //echo "Offset: ".$offset."\n";
                             $text = substr($array[$x], 4, 1);
                             $var = CheckVariable($typ, -1, 0, $ID);
-                            /*if ($var === false) 
-                                {
-                                echo "Encode: dieses Buderus Modul existiert nicht !";
-                                return false;
-                                }*/
-                            //echo "Name: ".$var." : ".$typ." : ".$offset." : ".str2hex($text)."\n";
-                            //echo "Name: ".CheckVariable($typ, -1, 0, $ID);
                             $value = GetValueString($var);
                             $value = substr_replace($value, $text, $offset, 1);
                             SetValueString($var, $value);

@@ -76,13 +76,12 @@ class Logamatic4311 extends IPSModule
                                     case 165:   // A5 Monitordaten einzelmeldung
                                         
                                         echo "Logamatic Gateway is alive";
-                                        $data = $stream;
-                                        break;
+                                        return true;
                                     
                                     case 167:   // A7 Monitordaten Normalmodus
 
-                                        echo "Monitordaten Normalmodus :".str2hex($data)."\n";
-                                        EncodeMonitorNormalData(GetValueString($EinstellParID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                                        echo "Monitordaten Normalmodus :".str2hex($stream)."\n";
+                                        EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         break;                                  
                                     
                                     case 169:   // A9 Kennung für einstellbare Parameter
