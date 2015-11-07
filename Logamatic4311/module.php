@@ -106,8 +106,8 @@ class Logamatic4311 extends IPSModule
                                         IPS_LogMessage('Gateway <- SerialPort:', "Monitordaten komplett :".strlen(GetValueString($monitorID))." Bytes\n");
                                         EncodeMonitorData(GetValueString($monitorID), $this->InstanceID, $this->ReadPropertyString('Bus'));
                                         $stream = '';
-                                        //$data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
-                                        //$this->SendDataToParent($data);
+                                        $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
+                                        $this->SendDataToParent($data);
                                         break;
                                 }
                 //echo "Rest : ".str2hex($stream)."\n";

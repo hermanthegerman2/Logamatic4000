@@ -411,13 +411,12 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
  
 function EncodeMonitorData($Monitordaten, $ID, $Bus)
     {
-                $array = explode("\xAB\x00\x01\x00", $Monitordaten); //x".str2hex($Bus)."
+                $array = explode("\xAB\x00".chr($Bus)."x00", $Monitordaten);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(substr($array[$x], 0, 1));
                         if ($typ > 79) 
                             {
-                            
                             //echo "Typ: ".$typ."\n";
                             $offset = ord(substr($array[$x], 2, 1));
                             //echo "Offset: ".$offset."\n";
@@ -436,7 +435,6 @@ function EncodeMonitorData($Monitordaten, $ID, $Bus)
                             EncodeVariableData($ID, $typ);
                             }
                         else
-                            return true;
                             echo "Encode: dieses Buderus Modul existiert nicht !";
                         }
                 return true;
