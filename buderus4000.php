@@ -220,6 +220,27 @@ $Buderus[137][21] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "
 $Buderus[137][22] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "%");
 $Buderus[137][23] = array ("Regelgerätevorlaufisttemperatur", "Temp", "1", "°C");
 
+$Buderus[144][-1] = array ("LAP", "17");
+$Buderus[144][0] = array ("Betriebswerte 1", "Bit", "Automatik", "Desinfektion", "Einmal-Ladung", "Ferien", "Fehler Desinfektion", "Fehler Fühler", "Fehler WW bleibt kalt", "Fehler Anode");
+$Buderus[144][1] = array ("Betriebswerte 2", "Bit", "Laden durch Kesselanforderung", "Manuell", "Laden durch Restwärmenutzung", "Ausschaltoptimierung", "Einschaltoptimierung", "Tag", "Warm", "Vorrang");
+$Buderus[144][2] = array ("Warmwassersolltemperatur", "Temp", "1", "°C");
+$Buderus[144][3] = array ("Warmwasseristtemperatur", "Temp", "1", "°C");
+$Buderus[144][4] = array ("Einschaltoptimierungszeit", "Zeit", "1", "min");
+$Buderus[144][5] = array ("Bit-Pumpe", "Bit", "Ladepumpe", "Zirkulationspumpe", "Absenkung Solar", "", "", "", "", "");
+$Buderus[144][6] = array ("WW-Eingang", "Bit", "", "", "", "", "", "Schalter 0", "Schalter Hand", "Schalter AUT");
+$Buderus[144][7] = array ("Betriebswerte 3", "Bit", "externe Störmeldung Pumpe WF1-2", "Fehler Fühler unten", "Fehler Fühler Wärmetauscher", "Verkalkungsschutz aktiv", "Fehler Umschaltventil WW UBA", "", "", "");
+$Buderus[144][8] = array ("Bit-Zirkulationspumpe", "Bit", "Tag", "Automatik", "Ferien", "Einmal-Lauf 3 min", "", "", "", "");
+$Buderus[144][9] = array ("WF-Eingänge/Handschalter", "Bit", "Eingang 2", "Eingang 3", "", "", "", "Schalter 0", "Schalter Hand", "Schalter AUT");
+$Buderus[144][10] = array ("Start Ladung", "Temp", "1", "°C");
+$Buderus[144][11] = array ("Ende Ladung", "Temp", "1", "°C");
+$Buderus[144][12] = array ("Isttemperatur Speicher unten", "Zeit", "1", "min");
+$Buderus[144][13] = array ("Isttemperatur Wärmetauscher", "Temp", "1", "°C");
+$Buderus[144][14] = array ("Sollstellung Mischer",  "Prozent", "1", "%");
+$Buderus[144][15] = array ("Iststellung Mischer",  "Prozent", "1", "%");
+$Buderus[144][16] = array ("Ansteuerung Primärpumpe",  "Prozent", "1", "%");
+$Buderus[144][17] = array ("Ansteuerung Sekundärpumpe",  "Prozent", "1", "%");
+
+
 $Buderus[154][-1] = array ("Imaginäres Modul", "0");
 $Buderus[154][0] = array ("","");
 $Buderus[154][1] = array ("Offset 1","Modul");
