@@ -33,7 +33,6 @@ class Logamatic4311 extends IPSModule
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        sleep(0.5);
         $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         $monitorID = $this->GetIDForIdent('Monitordaten');
@@ -44,7 +43,6 @@ class Logamatic4311 extends IPSModule
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        sleep(0.5);
         $data = chr(Command::EinstellPar).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         $EinstellParID = $this->GetIDForIdent('EinstellPar');
@@ -77,27 +75,23 @@ class Logamatic4311 extends IPSModule
                                       
                                     case 165:   // A5 Monitordaten einzelmeldung
                                         
-                                        IPS_LogMessage('Logamatic Gateway', 'Logamatic Gateway is alive');
-                                        $stream = '';
+                                        IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$bus.' is alive');
                                         return true;
                                     
                                     case 167:   // A7 Monitordaten Normalmodus
 
-                                        IPS_LogMessage('Logamatic Gateway', 'Monitordaten Normalmodus :'.str2hex($stream));
+                                        IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.str2hex($stream));
                                         EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
-                                        $stream = '';
                                         break;                                  
                                     
                                     case 169:   // A9 Kennung für einstellbare Parameter
                                         $head = GetValueString($EinstellParID);
                                         $EinstellPar = $head.$stream;
-                                        $stream = '';
                                         SetValueString($EinstellParID, $EinstellPar);
                                         break;
                                     
                                     case 170:   // AA Einstellbare Parameter komplett übertragen
-                                        $stream = '';
-                                        IPS_LogMessage('Logamatic Gateway', 'Einstellbare Parameter komplett :'.strlen(GetValueString($EinstellParID)).' Bytes');
+                                        IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($EinstellParID)).' Bytes');
                                         EncodeEinstellParData(GetValueString($EinstellParID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
@@ -110,14 +104,14 @@ class Logamatic4311 extends IPSModule
                                         break;
                                         
                                     case 172:   // AC Monitordaten komplett übertragen
-                                        $stream = '';
-                                        IPS_LogMessage('Logamatic Gateway:', 'Monitordaten komplett :'.strlen(GetValueString($monitorID)).' Bytes\n');
+                                        //$monitordaten = GetValueString($monitorID);
+                                        IPS_LogMessage('Buderus Logamatic:', 'Monitordaten ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($monitorID)).' Bytes\n');
                                         EncodeMonitorDirektData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
                                 }
-        
+        $stream = '';
         return true;             
     }
         
