@@ -12,12 +12,6 @@ class LogamaticGateway extends IPSModule
         $this->RegisterPropertyString("Host", "192.168.178.133");
         $this->RegisterPropertyBoolean("Open", false);
         $this->RegisterPropertyInteger("Port", 10010);
-        $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
-        $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
-        $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
-        $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
-        $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
-        $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
     }
 
     public function ApplyChanges()
@@ -25,9 +19,6 @@ class LogamaticGateway extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         $change = false;
-        
-        
-           
         // Zwangskonfiguration des ClientSocket
         $ParentID = $this->GetParent();
         if (!($ParentID === false))
@@ -100,26 +91,14 @@ class LogamaticGateway extends IPSModule
    
     
 ################## DATAPOINT RECEIVE FROM CHILD
-    /*public function ForwardData($JSONString)
-    {
-        // ForwardDataFromDevice
-        $data = json_decode($JSONString);
-        IPS_LogMessage('ForwardDataFromChild:'.$this->InstanceID,  print_r($data,1));
-        $this->SendDataToParent($Data);
-        
-    }*/
     public function ForwardData($JSONString) 
-    {
- 
-    // Empfangene Daten von der Device Instanz
-    $data = json_decode($JSONString);
-    //IPS_LogMessage("Gateway -> SerialPort:", str2hex(utf8_decode($data->Buffer)));
-    // Hier würde man den Buffer im Normalfall verarbeiten
-    // z.B. CRC prüfen, in Einzelteile zerlegen
-    $data = utf8_decode($data->Buffer);
-    // Weiterleiten zur I/O Instanz
-    $this->SendDataToParent($data);
-    
+    { 
+        // Empfangene Daten von der Device Instanz
+        $data = json_decode($JSONString);
+        //IPS_LogMessage("Gateway -> SerialPort:", str2hex(utf8_decode($data->Buffer)));
+        $data = utf8_decode($data->Buffer);
+        // Weiterleiten zur I/O Instanz
+        $this->SendDataToParent($data);
     }
 ################## DATAPOINTS PARENT
     public function ReceiveData($JSONString)
@@ -133,14 +112,11 @@ class LogamaticGateway extends IPSModule
     }
     
       protected function SendDataToParent($data)
-    {
-      
-        $JSONString = json_encode(Array("DataID" => '{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}', "Buffer" => utf8_encode($data)));
-       
+    {      
+        $JSONString = json_encode(Array("DataID" => '{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}', "Buffer" => utf8_encode($data)));       
         IPS_LogMessage('Logamatic -> Gateway:'.$this->InstanceID,str2hex(utf8_decode($data)));
         // Daten senden
-        IPS_SendDataToParent($this->InstanceID, $JSONString);
-        
+        IPS_SendDataToParent($this->InstanceID, $JSONString);        
         return true;
     }
 ################## DUMMYS / WOARKAROUNDS - protected
@@ -233,27 +209,7 @@ class LogamaticGateway extends IPSModule
         if ($InstanceStatus <> IPS_GetInstance($this->InstanceID)['InstanceStatus'])
             parent::SetStatus($InstanceStatus);
     }
-    protected function SetSummary($data)
-    {
-//        IPS_LogMessage(__CLASS__, __FUNCTION__ . "Data:" . $data); //                   
-    }
-    protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
-    {
-        if (!IPS_VariableProfileExists($Name))
-        {
-            IPS_CreateVariableProfile($Name, $VariablenTyp);
-        }
-        else
-        {
-            $profile = IPS_GetVariableProfile($Name);
-            if ($profile['ProfileType'] != $VariablenTyp)
-                throw new Exception("Variable profile type does not match for profile " . $Name);
-        }
-        IPS_SetVariableProfileIcon($Name, $Icon);
-        IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
-        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
-    }
-################## SEMAPHOREN Helper  - private  
+    ################## SEMAPHOREN Helper  - private  
     private function lock($ident)
     {
         for ($i = 0; $i < 100; $i++)

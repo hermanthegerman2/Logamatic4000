@@ -26,6 +26,12 @@ class Logamatic4311 extends IPSModule
             IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
             $this->RegisterVariableString('EinstellPar', 'EinstellPar', '', -4);
             IPS_SetHidden($this->GetIDForIdent('EinstellPar'), true);
+            $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
+            $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
+            $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
+            $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
+            $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
+            $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
     }        
      
 
@@ -117,7 +123,22 @@ class Logamatic4311 extends IPSModule
         
 ################## DUMMYS / WOARKAROUNDS - protected
  
-    
+    protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+    {
+        if (!IPS_VariableProfileExists($Name))
+        {
+            IPS_CreateVariableProfile($Name, $VariablenTyp);
+        }
+        else
+        {
+            $profile = IPS_GetVariableProfile($Name);
+            if ($profile['ProfileType'] != $VariablenTyp)
+                throw new Exception("Variable profile type does not match for profile " . $Name);
+        }
+        IPS_SetVariableProfileIcon($Name, $Icon);
+        IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
+        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
+    }
     protected function HasActiveParent()
     {
         $instance = @IPS_GetInstance($this->InstanceID);
