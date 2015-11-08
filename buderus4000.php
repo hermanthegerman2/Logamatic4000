@@ -467,7 +467,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                             {
                             IPS_LogMessage('Logamatic Gateway', 'Array: '.str2hex($array[$x]));
                             $offset = ord(substr($array[$x], 2, 1));
-                            //echo "Offset: ".$offset."\n";
+                            IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.str2hex($array[$x]));
                             $text = substr($array[$x], 4, 1).substr($array[$x], 6, 1).substr($array[$x], 8, 1).substr($array[$x], 10, 1).substr($array[$x], 12, 1).substr($array[$x], 14, 1);
                             $var = CheckVariable($typ, -1, 0, $ID);
                             $value = GetValueString($var);
@@ -489,7 +489,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
                         $typ = ord(substr($array[$x], 0, 1));
                         if ($typ > 79) 
                             {
-                            echo "Array: ".str2hex($array[$x])."\n";
+                            IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.str2hex($array[$x]));
                             $offset = ord(substr($array[$x], 2, 1));
                             //echo "Offset: ".$offset."\n";
                             $text = substr($array[$x], 4, 1);
