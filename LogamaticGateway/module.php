@@ -12,6 +12,12 @@ class LogamaticGateway extends IPSModule
         $this->RegisterPropertyString("Host", "192.168.178.133");
         $this->RegisterPropertyBoolean("Open", false);
         $this->RegisterPropertyInteger("Port", 10010);
+        $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
+        $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
+        $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
+        $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
+        $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
+        $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
     }
 
     public function ApplyChanges()
@@ -19,7 +25,9 @@ class LogamaticGateway extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         $change = false;
-
+        
+        
+           
         // Zwangskonfiguration des ClientSocket
         $ParentID = $this->GetParent();
         if (!($ParentID === false))
@@ -61,13 +69,7 @@ class LogamaticGateway extends IPSModule
             $Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
             $this->SendDataToParent($Data);
             */
-            $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
-            $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
-            $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
-            $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
-            $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
-            $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
-           
+            
         }
     }
 
