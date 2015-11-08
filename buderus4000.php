@@ -467,9 +467,8 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                             {
                             IPS_LogMessage('Logamatic Gateway', 'Array: '.str2hex($array[$x]));
                             $offset = ord(substr($array[$x], 2, 1));
-                            IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.str2hex($array[$x]));
                             $text = array(substr($array[$x], 4, 1),substr($array[$x], 6, 1),substr($array[$x], 8, 1),substr($array[$x], 10, 1),substr($array[$x], 12, 1),substr($array[$x], 14, 1));
-                            $var = CheckVariable($typ, -1, 0, $ID);
+                            IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.print_r(str2hex($text));
                             $value = GetValueString($var);
                             $value = array_merge($value, $text);//substr_replace($value, $text, $offset, 6);
                             SetValueString($var, $value);
