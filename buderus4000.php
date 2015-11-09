@@ -472,7 +472,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                                     IPS_LogMessage('Logamatic Gateway', 'Array: '.$array[$x]);
                                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                                     $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
-                                    IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.$text);
+                                    IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Data: '.$typ.' : '.$offset.' : '.$substring);
                                     $var = CheckVariable($typ, -1, 0, $ID);
                                     $value = GetValueString($var);
                                     $newvalue = substr_replace($value, $substring, $offset*2, 12);
@@ -501,6 +501,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
                                     IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.$array[$x]);
                                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                                     $substring = substr($array[$x], 16, 2);
+                                    IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Data: '.$typ.' : '.$offset.' : '.$substring);
                                     $var = CheckVariable($typ, -1, 0, $ID);
                                     $value = GetValueString($var);
                                     $newvalue = substr_replace($value, $substring, $offset*2, 2);
