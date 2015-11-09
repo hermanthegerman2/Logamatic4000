@@ -475,7 +475,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                                     IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.$text);
                                     $var = CheckVariable($typ, -1, 0, $ID);
                                     $value = GetValueString($var);
-                                    $newvalue = substr_replace($value, $substring, ($offset*2), 12);
+                                    $newvalue = substr_replace($value, $substring, $offset*2, 12);
                                     SetValueString($var, $newvalue);
                                     EncodeVariableData($ID, $typ);
                                     break;
@@ -491,24 +491,24 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
    
 function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
     {           
-                    $array = explode("\xA7\x00".$Bus."\x00", $Monitordaten);
+                    $Bus = 2;
+                    $array = str_split($Monitordaten, 24);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
-                        $typ = ord(substr($array[$x], 0, 1));
-                        if ($typ > 79) 
+                        $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+                        if ($Bus === ord(hex2bin(substr($array[$x], 4, 2)))) 
                             {
-                            IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.str2hex($array[$x]));
-                            $offset = ord(substr($array[$x], 2, 1));
-                            //echo "Offset: ".$offset."\n";
-                            $text = substr($array[$x], 4, 1);
-                            $var = CheckVariable($typ, -1, 0, $ID);
-                            $value = GetValueString($var);
-                            $newvalue = substr_replace($value, $text, $offset, -1);
-                            SetValueString($var, $newvalue);
-                            EncodeVariableData($ID, $typ);
+                                    IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.$array[$x]);
+                                    $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                                    $substring = substr($array[$x], 16, 2);
+                                    $var = CheckVariable($typ, -1, 0, $ID);
+                                    $value = GetValueString($var);
+                                    $newvalue = substr_replace($value, $substring, $offset*2, 2);
+                                    SetValueString($var, $newvalue);
+                                    EncodeVariableData($ID, $typ);
                             }
                         else
-                            IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorNormalData '.$Monitordaten.' / '.$ID.' / '.$Bus);
+                            IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorNormalData für falsche Bus-Adresse');
                         }
                     return true;
     }
@@ -530,55 +530,54 @@ function EncodeVariableData($parentID, $typ)
 		switch (Buderus($typ, $x, 1))
                     {
 			case "Bit":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID),str_pad(base_convert(ord(substr($value, $x, 1)),16,2),8,"0",STR_PAD_LEFT));
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID),str_pad(base_convert(ord(hex2bin(substr($value, $x*2, 2))),16,2),8,"0",STR_PAD_LEFT));
                             break;
                         case "Temp":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),ord(substr($value, $x, 1))*Buderus($typ, $x, 2));
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2));
                             break;
 			case "Temp2":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),(ord(substr($value, $x, 1))*Buderus($typ, $x, 2)+ord(substr($value, $x+1 ,1))*Buderus($typ, $x+1, 2)));
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,($x*2)+1,2)))*Buderus($typ, $x+1, 2)));
                             $x++;
                             break;
                         case "Temp3":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),ord(substr($value, $x, 1))*Buderus($typ, $x, 2));
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2));
                             break;
 			case "Zeit":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "~Temperature", $ID),ord(substr($value, $x, 1)));//Minutes
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "~Temperature", $ID),ord(hex2bin(substr($value, $x*2, 2))));//Minutes
                             break;
 			case "Prozent":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "~Valve", $ID),ord(substr($value, $x, 1)));
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "~Valve", $ID),ord(hex2bin(substr($value, $x*2, 2))));
                             break;
 			case "Betr":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Hours", $ID),(ord(substr($value, $x, 1))*Buderus($typ, $x, 2)+ord(substr($value, $x+1, 1))*Buderus($typ, $x+1, 2)+ord(substr($value, $x+2, 1))*Buderus($typ, $x+2, 2))/60); // 
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Hours", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,($x*2)+1,2, 1)))*Buderus($typ, $x+1, 2)+ord(hex2bin(substr($value,($x*2)+2,2)))*Buderus($typ, $x+2, 2))/60); //
                             $x++;
                             $x++;
                             break;
 			case "Betr2":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Minutes", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2)+ord(substr($value,$x+2,1))*Buderus($typ, $x+2, 2))/60); // 
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Minutes", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,($x*2)+1,2)))*Buderus($typ, $x+1, 2)+ord(hex2bin(substr($value,($x*2)+2,2)))*Buderus($typ, $x+2, 2))/60); //
                             $x++;
                             $x++;
                             break;
                         case "Waerme":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Waerme", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2)+ord(substr($value,$x+2,1))*Buderus($typ, $x+2, 2))/100); // 
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Waerme", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,($x*2)+1,2)))*Buderus($typ, $x+1, 2)+ord(hex2bin(substr($value,($x*2)+2,2)))*Buderus($typ, $x+2, 2))/100); //
                             $x++;
                             $x++;
                             break;
 			case "Watt":
-			    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Watt", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2))); // 
+			    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Watt", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,$x+1,1)))*Buderus($typ, $x+1, 2))); //
                             $x++;
                             break;
                         case "Flow":
-			    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Flow", $ID),(ord(substr($value,$x,1))*Buderus($typ, $x, 2)+ord(substr($value,$x+1,1))*Buderus($typ, $x+1, 2))); // l/h
+			    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Flow", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,($x*2)+1,2)))*Buderus($typ, $x+1, 2))); // l/h
                             $x++;
                             break;
 			case "Version":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "Version", $ID),ord(substr($value,$x,1)).".".ord(substr($value,$x+1,1))); // 
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "Version", $ID),ord(hex2bin(substr($value, $x*2, 2))).".".ord(hex2bin(substr($value,($x*2)+1,2)))); //
                             $x++;
                             break;
                         case "Modul":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(substr($value,$x,1))+2));
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(hex2bin(substr($value, $x*2, 2)))+2));
                             break;
-
                     }
 		}
         }
