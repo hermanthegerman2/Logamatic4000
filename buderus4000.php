@@ -6,7 +6,7 @@ class Command extends stdClass
     const leer = 0x65;          // auufüllen der einstellbaren Parameter
     const EinstellPar = 0xA1;   // Kommando einstellbare Parameter empfangen
     const Monitordaten = 0xA2;  // Kommando Monitordaten anfordern
-    const ErrorLog = 0xA3;      // Kommando Fehlerspeicher anfordern
+    const Datenblock = 0xA3;      // Kommando Datenblock anfordern
     const Parameter = 0xB0;     // Kommando einstellbare Parameter senden
     const Normalmodus = 0xDC;   // Kommando Umschalten von Direktmodus -> Normalmodus
     const Direktmodus = 0xDD;   // Kommando Umschalten von Normalmodus -> Direktmodus
@@ -36,6 +36,8 @@ class Command extends stdClass
     const Strategie = 0x20;     // Datentyp für Strategie der einstellbaren Parameter / bodenstehende Strategie
     const Solar = 0x24;         // Datentyp für Solar der einstellbaren Parameter 
     const FM458 = 0x26;         // Datentyp für FM458 der einstellbaren Parameter / Strategie (FM458)
+    
+    const Fehlerprotokoll = 0x87; 
 }
 function Buderus ($typ, $offset, $value)
     {
