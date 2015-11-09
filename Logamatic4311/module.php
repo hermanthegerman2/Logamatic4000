@@ -74,10 +74,10 @@ class Logamatic4311 extends IPSModule
         $monitorID = $this->GetIDForIdent('Monitordaten');
         $EinstellParID = $this->GetIDForIdent('EinstellPar');
         $stream = bin2hex(utf8_decode($data->Buffer));
-        $typ = substr($stream, 0, 2);
+        $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         
-        	switch ($typ)   {
+        	switch ($datentyp)   {
                                       
                                     case 'a5':   // A5 Monitordaten einzelmeldung
                                         
@@ -86,7 +86,7 @@ class Logamatic4311 extends IPSModule
                                     
                                     case 'a7':   // A7 Monitordaten Normalmodus
 
-                                        IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.str2hex($stream));
+                                        IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                                         EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         break;                                  
                                     
