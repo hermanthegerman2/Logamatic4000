@@ -462,7 +462,7 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
 
 function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
     {           
-                    $Bus = 2;
+                    $Bus = 1;
                     $array = str_split($Monitordaten, 44);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
@@ -492,7 +492,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
    
 function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
     {           
-                    $Bus = 2;
+                    $Bus = 1;
                     $array = str_split($Monitordaten, 24);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
