@@ -76,7 +76,7 @@ class LogamaticGateway extends IPSModule
     }
     public function SendRawData()
     {
-        $this->SendDataToParent($this->ReadPropertyString('Data'));
+        $this->SendDataToParent(chr($this->ReadPropertyString('Data')));
         return true;
     }
 ################## PUBLIC
