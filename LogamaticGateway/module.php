@@ -70,7 +70,7 @@ class LogamaticGateway extends IPSModule
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $data = chr(Command::Datenblock).chr(0x00).chr(Command::Fehlerprotokoll).chr(Command::NUL).chr(Command::NUL);
+        $data = chr(Command::Datenblock).chr(0x00).chr(Command::Fehlerprotokoll).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         return true;
     }
