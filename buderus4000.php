@@ -463,11 +463,11 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-                        if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
+                        if ($Bus == ord(hex2bin(substr($array[$x], 4, 2))))
                             {
-                            switch (ord(hex2bin(substr($array[$x], 0, 2))))
+                            switch (substr($array[$x], 0, 2))
          			{
-         			case 171:
+         			case 'ab':
                                     IPS_LogMessage('Logamatic Gateway', 'Array: '.$array[$x]);
                                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                                     $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
@@ -478,8 +478,8 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                                     SetValueString($var, $newvalue);
                                     EncodeVariableData($ID, $typ);
                                     break;
-                                case 172:
-                                    return 'AC';
+                                case 'ac':
+                                    return 'ac';
                                 }
                             }
                         else
