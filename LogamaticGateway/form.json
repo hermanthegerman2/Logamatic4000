@@ -5,6 +5,14 @@
             { "name": "Host", "type": "ValidationTextBox", "caption": "Host" },
             { "name": "Port", "type": "NumberSpinner", "caption": "Port" }
         ],
+        "actions":
+        [
+            {
+                "type": "Button",
+                "label": "Monitordaten auslesen",
+                "onClick": "Gateway_RequestErrorLog($id);"
+            }
+        ],
         "status":
         [
             { "code": 102, "icon": "active", "caption": "Gateway erreichbar" },           

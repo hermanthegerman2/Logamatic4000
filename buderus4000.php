@@ -6,6 +6,7 @@ class Command extends stdClass
     const leer = 0x65;          // auufüllen der einstellbaren Parameter
     const EinstellPar = 0xA1;   // Kommando einstellbare Parameter empfangen
     const Monitordaten = 0xA2;  // Kommando Monitordaten anfordern
+    const ErrorLog = 0xA3;      // Kommando Fehlerspeicher anfordern
     const Parameter = 0xB0;     // Kommando einstellbare Parameter senden
     const Normalmodus = 0xDC;   // Kommando Umschalten von Direktmodus -> Normalmodus
     const Direktmodus = 0xDD;   // Kommando Umschalten von Normalmodus -> Direktmodus
