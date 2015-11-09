@@ -457,13 +457,13 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
                 return $InstanzID;
    }
 
-function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
+function EncodeMonitorDirektData($Monitordaten, $ID, $Bus=2)
     {           
                     $array = str_split($Monitordaten, 44);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-                        if ($Bus == ord(hex2bin(substr($array[$x], 4, 2))))
+                        if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
                             {
                             switch (substr($array[$x], 0, 2))
          			{
