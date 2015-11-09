@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . "/../buderus4000.php");  // diverse Klassen
 
-class Logamatic4311 extends IPSModule
+class Logamatic43xx extends IPSModule
 {
         
     public function Create()

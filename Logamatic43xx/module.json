@@ -1,9 +1,9 @@
 {
     "id": "{9888202F-A490-4785-BDA7-DBB817B163B2}",
-    "name": "Logamatic4311",
+    "name": "Logamatic43xx",
     "type": 3,
     "vendor": "Buderus",
-    "aliases": ["Logamatic 4311"],
+    "aliases": ["Logamatic 43xx"],
     "parentRequirements": ["{0D923A14-D3B4-4F44-A4AB-D2B534693C35}"],
     "childRequirements": [],
     "implemented": ["{FDAAB689-6162-47D3-A05D-F342430AF8C2}"],
