@@ -479,8 +479,6 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                                     SetValueString($var, $newvalue);
                                     EncodeVariableData($ID, $typ);
                                     break;
-                                case 'ac':
-                                    return 'ac';
                                 }
                             }
                         else
