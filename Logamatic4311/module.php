@@ -116,6 +116,9 @@ class Logamatic4311 extends IPSModule
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
+                                    case 'ad':  // AD Sammelstörmeldungen
+                                        IPS_LogMessage('Buderus Logamatic', 'Sammelstörmeldung '.$stream);
+                                        break;
                                 }
         $stream = '';
         return true;             
