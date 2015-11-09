@@ -459,24 +459,31 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
 
 function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
     {           
-                    $array = explode("\xAB\x00".$Bus."\x00", $Monitordaten);
+                    $array = str_split($Monitordaten, 44);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
-                        $typ = ord(substr($array[$x], 0, 1));
-                        if ($typ > 79) 
+                        $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+                        if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
                             {
-                            IPS_LogMessage('Logamatic Gateway', 'Array: '.str2hex($array[$x]));
-                            $offset = ord(substr($array[$x], 2, 1));
-                            $text = array(substr($array[$x], 4, 1),substr($array[$x], 6, 1),substr($array[$x], 8, 1),substr($array[$x], 10, 1),substr($array[$x], 12, 1),substr($array[$x], 14, 1));
-                            IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.print_r(str2hex($text)));
-                            $var = CheckVariable($typ, -1, 0, $ID);
-                            $value = GetValueString($var);
-                            $value = array_merge($value, $text);//substr_replace($value, $text, $offset, 6);
-                            SetValueString($var, $value);
-                            EncodeVariableData($ID, $typ);
+                            switch (ord(hex2bin(substr($array[$x], 0, 2))))
+         			{
+         			case 171:
+                                    IPS_LogMessage('Logamatic Gateway', 'Array: '.$array[$x]);
+                                    $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                                    $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
+                                    IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Array: '.$text);
+                                    $var = CheckVariable($typ, -1, 0, $ID);
+                                    $value = GetValueString($var);
+                                    $newvalue = substr_replace($value, $substring, ($offset*2), 12);
+                                    SetValueString($var, $newvalue);
+                                    EncodeVariableData($ID, $typ);
+                                    break;
+                                case 172:
+                                    return 'AC';
+                                }
                             }
                         else
-                            IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorDirektData '.$Monitordaten.' / '.$ID.' / '.$Bus);
+                            IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorDirektData für falsche Bus-Adresse');
                         }
                 return true;
     }
