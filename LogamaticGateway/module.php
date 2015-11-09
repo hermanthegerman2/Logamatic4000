@@ -67,13 +67,18 @@ class LogamaticGateway extends IPSModule
     
     public function RequestErrorLog()
     {
+        $data = $this->ReadPropertyString('Data');
+        $this->SendDataToParent($data);
+        return true;
+    }
+    public function SendRawData()
+    {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
         $data = chr(Command::Datenblock).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL).chr(Command::Fehlerprotokoll).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         return true;
     }
-
 ################## PUBLIC
     /**
      * This function will be available automatically after the module is imported with the module control.

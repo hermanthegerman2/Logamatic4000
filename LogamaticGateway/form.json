@@ -3,7 +3,8 @@
 	[
             { "name": "Open", "type": "CheckBox", "caption": "Open" },
             { "name": "Host", "type": "ValidationTextBox", "caption": "Host" },
-            { "name": "Port", "type": "NumberSpinner", "caption": "Port" }
+            { "name": "Port", "type": "NumberSpinner", "caption": "Port" },
+            { "name": "Data", "type": "ValidationTextBox", "caption": "Data" }
         ],
         "actions":
         [
