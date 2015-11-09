@@ -10,6 +10,11 @@
         [
             {
                 "type": "Button",
+                "label": "Raw Daten senden",
+                "onClick": "Gateway_SendRawData($id);"
+            },
+            {
+                "type": "Button",
                 "label": "Sammelstörmeldung auslesen",
                 "onClick": "Gateway_RequestErrorLog($id);"
             }
