@@ -73,43 +73,43 @@ class Logamatic4311 extends IPSModule
         IPS_LogMessage('Logamatic <- Gateway:', bin2hex(utf8_decode($data->Buffer)));
         $monitorID = $this->GetIDForIdent('Monitordaten');
         $EinstellParID = $this->GetIDForIdent('EinstellPar');
-        $stream = utf8_decode($data->Buffer);
-        $typ = ord(substr($stream, 0, 1));
-        $bus = ord(substr($stream, 2, 1));
+        $stream = bin2hex(utf8_decode($data->Buffer));
+        $typ = substr($stream, 0, 2);
+        $bus = substr($stream, 4, 2);
         
         	switch ($typ)   {
                                       
-                                    case 165:   // A5 Monitordaten einzelmeldung
+                                    case 'a5':   // A5 Monitordaten einzelmeldung
                                         
                                         IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$bus.' is alive');
                                         return true;
                                     
-                                    case 167:   // A7 Monitordaten Normalmodus
+                                    case 'a7':   // A7 Monitordaten Normalmodus
 
                                         IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.str2hex($stream));
                                         EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         break;                                  
                                     
-                                    case 169:   // A9 Kennung für einstellbare Parameter
+                                    case 'a9':   // A9 Kennung für einstellbare Parameter
                                         $head = GetValueString($EinstellParID);
                                         $EinstellPar = $head.$stream;
                                         SetValueString($EinstellParID, $EinstellPar);
                                         break;
                                     
-                                    case 170:   // AA Einstellbare Parameter komplett übertragen
+                                    case 'aa':   // AA Einstellbare Parameter komplett übertragen
                                         IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($EinstellParID)).' Bytes');
                                         EncodeEinstellParData(GetValueString($EinstellParID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
                                     
-                                    case 171:   // AB Monitordaten Direktmodus
+                                    case 'ab':   // AB Monitordaten Direktmodus
                                         $head = GetValueString($monitorID);
                                         $Monitordaten = $head.$stream;
                                         SetValueString($monitorID, $Monitordaten);
                                         break;
                                         
-                                    case 172:   // AC Monitordaten komplett übertragen
+                                    case 'ac':   // AC Monitordaten komplett übertragen
                                         //$monitordaten = GetValueString($monitorID);
                                         IPS_LogMessage('Buderus Logamatic:', 'Monitordaten ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($monitorID)).' Bytes\n');
                                         EncodeMonitorDirektData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
