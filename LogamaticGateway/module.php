@@ -67,7 +67,9 @@ class LogamaticGateway extends IPSModule
     
     public function RequestErrorLog()
     {
-        $data = chr(Command::ErrorLog).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
+        $data = chr(Command::Direktmodus).chr(Command::NUL);
+        $this->SendDataToParent($data);
+        $data = chr(Command::ErrorLog).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         return true;
     }
