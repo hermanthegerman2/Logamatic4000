@@ -79,7 +79,7 @@ class Logamatic4311 extends IPSModule
         
         	switch ($datentyp)   {
                                       
-                                    case 'a5':   // A5 Monitordaten einzelmeldung
+                                    case 'a5':   // A5 Statusmeldung
                                         
                                         IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$bus.' is alive');
                                         return true;
