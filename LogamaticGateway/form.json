@@ -9,7 +9,7 @@
         [
             {
                 "type": "Button",
-                "label": "Monitordaten auslesen",
+                "label": "Sammelstörmeldung auslesen",
                 "onClick": "Gateway_RequestErrorLog($id);"
             }
         ],
