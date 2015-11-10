@@ -556,7 +556,7 @@ function EncodeVariableData($parentID, $typ)
                             $x++;
                             break;
 			case "Betr2":
-                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Minutes", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,($x*2)+1, 2)))*Buderus($typ, $x+1, 2)+ord(hex2bin(substr($value,($x*2)+2,2)))*Buderus($typ, $x+2, 2))); //
+                            SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Minutes", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,($x*2)+1, 2)))*Buderus($typ, $x+1, 2)+ord(hex2bin(substr($value,($x*2)+2,2)))*Buderus($typ, $x+2, 2))/60); //
                             $x++;
                             $x++;
                             break;
