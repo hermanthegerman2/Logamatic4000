@@ -1,19 +1,19 @@
 {	
 	"elements":
 	[
-            { "name": "ID", "type": "SelectInstance", "caption": "ID übergeordnete Steuerung" }
+            { "name": "ID", "type": "SelectInstance", "caption": "Instanz" }
         ],
         "actions":
             [
                 {
                     "type": "Button",
                     "label": "Monitordaten auslesen",
-                    "onClick": "Logamatic_RequestMonitordaten($id);"
+                    "onClick": "Logamatic442_RequestMonitordaten($id);"
                 },
 {
                     "type": "Button",
                     "label": "einstellbare Parameter auslesen",
-                    "onClick": "Logamatic_RequestEinstellPar($id);"
+                    "onClick": "Logamatic442_RequestEinstellPar($id);"
                 }                 
             ],
         "status":
