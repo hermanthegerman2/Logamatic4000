@@ -1,7 +1,7 @@
 {	
 	"elements":
 	[
-            { "name": "ID", "type": "SelectInstance", "caption": "Instanz" }
+            { "name": "ID", "type": "SelectInstance", "caption": "ID" }
         ],
         
         "status":
