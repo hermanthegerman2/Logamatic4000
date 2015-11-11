@@ -1,0 +1,32 @@
+{	
+	"elements":
+	[
+            { "name": "ID", "type": "SelectInstance", "caption": "ID übergeordnete Steuerung" }
+        ],
+        "actions":
+            [
+                {
+                    "type": "Button",
+                    "label": "Monitordaten auslesen",
+                    "onClick": "Logamatic_RequestMonitordaten($id);"
+                },
+{
+                    "type": "Button",
+                    "label": "einstellbare Parameter auslesen",
+                    "onClick": "Logamatic_RequestEinstellPar($id);"
+                }                 
+            ],
+        "status":
+            [
+                {
+                    "code": 102,
+                    "icon": "active",
+                    "caption": "Konfiguration gültig."
+                },
+                {
+                    "code": 202,
+                    "icon": "error",
+                    "caption": "ECO-CAN Adresse ungültig"
+                }             
+            ]
+}

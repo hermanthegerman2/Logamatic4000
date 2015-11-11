@@ -1,0 +1,12 @@
+{
+    "id": "{02B58635-9185-4AA4-90D2-FF0F1C947201}",
+    "name": "FM442",
+    "type": 3,
+    "vendor": "Buderus",
+    "aliases": ["Logamatic FM442"],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "Logamatic442"
+}
+

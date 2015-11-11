@@ -6,7 +6,7 @@ class Command extends stdClass
     const leer = 0x65;          // auufüllen der einstellbaren Parameter
     const EinstellPar = 0xA1;   // Kommando einstellbare Parameter empfangen
     const Monitordaten = 0xA2;  // Kommando Monitordaten anfordern
-    const Datenblock = 0xA3;      // Kommando Datenblock anfordern
+    const Datenblock = 0xA3;    // Kommando Datenblock anfordern
     const Parameter = 0xB0;     // Kommando einstellbare Parameter senden
     const Normalmodus = 0xDC;   // Kommando Umschalten von Direktmodus -> Normalmodus
     const Direktmodus = 0xDD;   // Kommando Umschalten von Normalmodus -> Direktmodus
@@ -492,7 +492,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
    
 function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
     {           
-                    $Bus = 1;
+                    $Bus = 1; 
                     $array = str_split($Monitordaten, 24);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
