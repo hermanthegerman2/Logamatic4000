@@ -3,19 +3,7 @@
 	[
             { "name": "ID", "type": "SelectInstance", "caption": "Instanz" }
         ],
-        "actions":
-            [
-                {
-                    "type": "Button",
-                    "label": "Monitordaten auslesen",
-                    "onClick": "Logamatic442_RequestMonitordaten($id);"
-                },
-{
-                    "type": "Button",
-                    "label": "einstellbare Parameter auslesen",
-                    "onClick": "Logamatic442_RequestEinstellPar($id);"
-                }                 
-            ],
+        
         "status":
             [
                 {
