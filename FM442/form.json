@@ -1,7 +1,7 @@
 {	
 	"elements":
 	[
-            { "name": "ID", "type": "SelectInstance", "caption": "Instanz" }
+            { "name": "HK1", "type": "ValidationTextBox", "caption": "Name Heizkreis 1" }
         ],
         
         "status":

@@ -10,11 +10,16 @@
                     "label": "Monitordaten auslesen",
                     "onClick": "Logamatic_RequestMonitordaten($id);"
                 },
-{
+                {
                     "type": "Button",
                     "label": "einstellbare Parameter auslesen",
                     "onClick": "Logamatic_RequestEinstellPar($id);"
-                }                 
+                },
+                {
+                    "type": "Button",
+                    "label": "Module anlegen",
+                    "onClick": "Logamatic_RequestModule($id);"
+                }
             ],
         "status":
             [

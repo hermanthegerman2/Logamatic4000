@@ -8,31 +8,19 @@ class FM442 extends IPSModule
     {
         //Never delete this line!
         parent::Create();
-
-        $ParentID = IPS_GetInstanceListByModuleID('{9888202F-A490-4785-BDA7-DBB817B163B2}');
+        
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         //$this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
-        $this->RegisterPropertyInteger('ID', $ParentID[0]);
+        $this->RegisterPropertyString('HK1', '');
     }
 
     public function ApplyChanges()
     {
-        /*/*Never delete this line!
+        //Never delete this line!
         parent::ApplyChanges();
-        if ($this->ReadPropertyInteger('ID') == '')
-            $this->SetStatus(202);
-        else*/
-            $this->SetStatus(102);            
-            /*$this->RegisterVariableString('Monitordaten', 'Monitordaten', '', -4);
-            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
-            $this->RegisterVariableString('EinstellPar', 'EinstellPar', '', -4);
-            IPS_SetHidden($this->GetIDForIdent('EinstellPar'), true);
-            $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
-            $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
-            $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
-            $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
-            $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
-            $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);*/
+        $this->SetStatus(102);
+        
+         
     }        
      
 
