@@ -67,7 +67,8 @@ class Logamatic43xx extends IPSModule
         else
         {
            $Slot1 = $this->GetIDForIdent('Modul in Slot 1');
-           if (GetValueString($Slot1) = 'FM442')
+           $Modultyp = GetValueString($Slot1); 
+           if ($Modultyp = 'FM442')
            {
                $InsID = IPS_CreateInstance('{02B58635-9185-4AA4-90D2-FF0F1C947201}');
                IPS_SetName($InsID, 'Logamatic FM442');
