@@ -61,7 +61,7 @@ class Logamatic43xx extends IPSModule
         $string = GetValueString($monitorID);
         if ($string == '')
         {
-            RequestMonitordaten;
+            Logamatic_RequestMonitordaten($this->InstanceID);
             return true;
         }
         else
