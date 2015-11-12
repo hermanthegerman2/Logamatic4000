@@ -246,7 +246,7 @@ $Buderus[137][17] = array ("", "");
 $Buderus[137][18] = array ("Anlagenvorlaufsolltemperatur", "Temp", "1", "°C");
 $Buderus[137][19] = array ("Anlagenvorlaufisttemperatur", "Temp", "1", "°C");
 $Buderus[137][20] = array ("Betriebsflags der Anlage", "Bit", "Pufferspeicher bleibt kalt", "Fühler UST-FK defekt", "Wartezeit läuft");
-$Buderus[137][21] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "%");
+$Buderus[137][21] = array ("max. Ansteuerung für Heizkreispumpe", "Prozent", "1", "%");
 $Buderus[137][22] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "%");
 $Buderus[137][23] = array ("Regelgerätevorlaufisttemperatur", "Temp", "1", "°C");
 
