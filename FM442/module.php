@@ -11,14 +11,14 @@ class FM442 extends IPSModule
 
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         //$this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
-        $this->RegisterPropertyInteger('Instanz', '');
+        $this->RegisterPropertyInteger('ID');
     }
 
     public function ApplyChanges()
     {
         //Never delete this line!
         parent::ApplyChanges();
-        if ($this->ReadPropertyInteger('Instanz') == '')
+        if ($this->ReadPropertyInteger('ID') == '')
             $this->SetStatus(202);
         else
             $this->SetStatus(102);            

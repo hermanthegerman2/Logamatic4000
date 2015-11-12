@@ -494,6 +494,8 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
     {           
                     $Bus = 1; 
                     $array = str_split($Monitordaten, 24);
+                    if (substr($array[$x], 0, 2) == 'A7')
+                    {
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(hex2bin(substr($array[$x], 8, 2)));
@@ -512,6 +514,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
                         else
                             IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorNormalData für falsche Bus-Adresse');
                         }
+                    }
                     return true;
     }
 
