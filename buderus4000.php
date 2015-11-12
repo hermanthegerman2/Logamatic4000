@@ -494,9 +494,9 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
     {           
                     $Bus = 1; 
                     $array = str_split($Monitordaten, 24);
-                    if (substr($array[$x], 0, 2) == 'A7')
-                    {
                     for ( $x = 0; $x < count ( $array ); $x++ )
+                        {
+                        if (substr($array[$x], 0, 2) == 'a7')
                         {
                         $typ = ord(hex2bin(substr($array[$x], 8, 2)));
                         if ($Bus === ord(hex2bin(substr($array[$x], 4, 2)))) 
