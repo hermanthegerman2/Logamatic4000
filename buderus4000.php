@@ -428,22 +428,24 @@ $Buderus[159][41] = array ("","");
 function CheckVariable($typ, $offset, $value, $parentID)
    {
   		//echo "Check: ".$typ." ".$offset." ".$value." ".$ID;
-                $name = Buderus($typ, $offset, $value);
-                /*if ($name === false) 
-                    {
-                    echo "Check: dieses Buderus Modul existiert nicht !";
-                    return false;
-                    }*/
-                //echo "Ergebnis return: ".$name."\n";
-                $InstanzID = @IPS_GetVariableIDByName($name, $parentID);
-                if ($InstanzID === false)
+                if (Buderus($typ, $offset, $value+1) = '0')
                 {
-                $InstanzID = IPS_CreateVariable(3);
-                IPS_SetName($InstanzID, $name); // Instanz benennen
-                IPS_SetParent($InstanzID, $parentID);
+                    return true;
                 }
+                else
+                {
+                    $name = Buderus($typ, $offset, $value);
+                    $InstanzID = @IPS_GetVariableIDByName($name, $parentID);
+                    if ($InstanzID === false)
+                    {
+                        $InstanzID = IPS_CreateVariable(3);
+                        IPS_SetName($InstanzID, $name); // Instanz benennen
+                        IPS_SetParent($InstanzID, $parentID);
+                    }
                 //echo "ID: ".$InstanzID." ".$name."\n";
-                return $InstanzID;
+                return $InstanzID;   
+                }
+                
    }
    
 function CheckVariableTYP($name, $vartyp, $profile, $parentID)
