@@ -479,12 +479,20 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                                     $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
                                     IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Data: '.$typ.' : '.$offset.' : '.$substring);
-                                    $var = CheckVariable($typ, -1, 0, $ID);
-                                    $value = GetValueString($var);
-                                    $newvalue = substr_replace($value, $substring, $offset*2, 12);
-                                    SetValueString($var, $newvalue);
-                                    EncodeVariableData($ID, $typ);
-                                    break;
+                                    $var = Buderus($typ, -1, 1);
+                                    if ($var === '0')
+                                        {
+                                            return true;
+                                        }
+                                    else
+                                        {
+                                            $var = CheckVariable($typ, -1, 0, $ID);
+                                            $value = GetValueString($var);
+                                            $newvalue = substr_replace($value, $substring, $offset*2, 12);
+                                            SetValueString($var, $newvalue);
+                                            EncodeVariableData($ID, $typ);
+                                            break;
+                                        }
                                 }
                             }
                         else
