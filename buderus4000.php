@@ -427,8 +427,8 @@ $Buderus[159][41] = array ("","");
 
 function CheckVariable($typ, $offset, $value, $parentID)
    {
-  		//echo "Check: ".$typ." ".$offset." ".$value." ".$ID;
-                if (Buderus($typ, $offset, $value+1) = '0')
+  		$name = Buderus($typ, $offset, $value+1);
+                if ($name = '0')
                 {
                     return true;
                 }
