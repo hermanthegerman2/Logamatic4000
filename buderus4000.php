@@ -270,6 +270,7 @@ $Buderus[144][15] = array ("Iststellung Mischer",  "Prozent", "1", "%");
 $Buderus[144][16] = array ("Ansteuerung Primärpumpe",  "Prozent", "1", "%");
 $Buderus[144][17] = array ("Ansteuerung Sekundärpumpe",  "Prozent", "1", "%");
 
+$Buderus[153][-1] = array ("Imaginäres Modul", "0");
 
 $Buderus[154][-1] = array ("Imaginäres Modul", "0");
 $Buderus[154][0] = array ("","");
