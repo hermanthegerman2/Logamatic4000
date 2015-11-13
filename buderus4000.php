@@ -482,7 +482,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                                     $var = Buderus($typ, -1, 1);
                                     if ($var === '0')
                                         {
-                                            return true;
+                                            break;
                                         }
                                     else
                                         {
