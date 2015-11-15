@@ -65,14 +65,35 @@ class Logamatic43xx extends IPSModule
             return true;
         }
         else
-        {
-           $Slot1 = $this->GetIDForIdent('Modul in Slot 1');
-           $Modultyp = GetValueString($Slot1); 
-           if ($Modultyp = 'FM442')
+        {  
+           $array = array ('1', '2', '3', '4', 'A'); // mögliche Slot
+           for ( $x = 0; $x < count ( $array ); $x++ )
            {
-               $InsID = IPS_CreateInstance('{02B58635-9185-4AA4-90D2-FF0F1C947201}');
-               IPS_SetName($InsID, 'Logamatic FM442');
-               IPS_SetParent($InsID, $this->InstanceID); 
+                $Slot = $this->GetIDForIdent('Modul in Slot '.$array[$x]);
+                $Modultyp = GetValueString($Slot); 
+                switch ($Modultyp)
+                {
+                case 'FM442':
+                        $InsID = IPS_CreateInstance('{02B58635-9185-4AA4-90D2-FF0F1C947201}');
+                        IPS_SetName($InsID, 'Logamatic FM442');
+                        IPS_SetParent($InsID, $this->InstanceID);
+                        break;
+                case 'FM443':
+                        $InsID = IPS_CreateInstance('{540D690E-35DA-4C96-974F-7F74DA840927}');
+                        IPS_SetName($InsID, 'Logamatic FM443');
+                        IPS_SetParent($InsID, $this->InstanceID);
+                        break;
+                case 'FM444':
+                        $InsID = IPS_CreateInstance('{D887C2E7-9A65-42CB-9DC7-A092FD98FCBA}');
+                        IPS_SetName($InsID, 'Logamatic FM444');
+                        IPS_SetParent($InsID, $this->InstanceID);
+                        break;
+                case 'ZM432':
+                        $InsID = IPS_CreateInstance('{DC32EE80-C473-4806-A8A3-158DCFB6E2EE}');
+                        IPS_SetName($InsID, 'Logamatic ZM432');
+                        IPS_SetParent($InsID, $this->InstanceID);
+                        break;
+                }
            }
         }
         return true;
@@ -98,6 +119,7 @@ class Logamatic43xx extends IPSModule
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
+        $modultyp = substr($stream, 8, 2);
         
         	switch ($datentyp)   {
                                       

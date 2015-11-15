@@ -1,0 +1,20 @@
+{	
+	"elements":
+	[
+            { "name": "AWe", "type": "ValidationTextBox", "caption": "Alternativer WE" }
+        ],
+        
+        "status":
+            [
+                {
+                    "code": 102,
+                    "icon": "active",
+                    "caption": "Konfiguration gültig."
+                },
+                {
+                    "code": 202,
+                    "icon": "error",
+                    "caption": "ECO-CAN Adresse ungültig"
+                }             
+            ]
+}

@@ -54,14 +54,7 @@ class LogamaticGateway extends IPSModule
         if (($this->ReadPropertyBoolean('Open'))
                 and ( $this->HasActiveParent($ParentID)))
         {
-             $this->SetStatus(102);
-            /*$Data = chr(221).chr(0).chr(1).chr(0).chr(0);
-            $this->SendDataToParent($Data);
-            //sleep (0.5);
-            $Data = chr(162).chr(0).chr(1).chr(0).chr(0).chr(0);
-            $this->SendDataToParent($Data);
-            */
-            
+             $this->SetStatus(102);                    
         }
         
     }
@@ -121,8 +114,7 @@ class LogamaticGateway extends IPSModule
         $data = json_decode($JSONString);
         $stream = utf8_decode($data->Buffer);
         IPS_LogMessage('Gateway <- SerialPort:', str2hex(utf8_decode($data->Buffer)));
-        $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => $data->Buffer)));
-        
+        $this->SendDataTo(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => $data->Buffer)));
         return true;
     }
     

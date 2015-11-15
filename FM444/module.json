@@ -1,0 +1,12 @@
+{
+    "id": "{D887C2E7-9A65-42CB-9DC7-A092FD98FCBA}",
+    "name": "FM444",
+    "type": 3,
+    "vendor": "Buderus",
+    "aliases": ["Logamatic FM444"],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "FM444"
+}
+

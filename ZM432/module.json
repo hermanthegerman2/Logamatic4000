@@ -1,0 +1,12 @@
+{
+    "id": "{DC32EE80-C473-4806-A8A3-158DCFB6E2EE}",
+    "name": "ZM432",
+    "type": 3,
+    "vendor": "Buderus",
+    "aliases": ["Logamatic ZM432"],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "ZM432"
+}
+

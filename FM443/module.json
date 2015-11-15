@@ -1,0 +1,12 @@
+{
+    "id": "{540D690E-35DA-4C96-974F-7F74DA840927}",
+    "name": "FM443",
+    "type": 3,
+    "vendor": "Buderus",
+    "aliases": ["Logamatic FM443"],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "FM443"
+}
+
