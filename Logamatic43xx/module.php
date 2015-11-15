@@ -66,11 +66,10 @@ class Logamatic43xx extends IPSModule
         }
         else
         {  
-           $array = array ('1', '2', '3', '4', 'A'); // mögliche Slot
+           $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
            for ( $x = 0; $x < count ( $array ); $x++ )
            {    
-                $name = 'Modul in Slot '.$array[$x];
-                $Slot = $this->GetIDForIdent($name);
+                $Slot = $this->GetIDForIdent($array[$x]);
                 $Modultyp = GetValueString($Slot); 
                 switch ($Modultyp)
                 {
