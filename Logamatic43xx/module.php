@@ -66,10 +66,11 @@ class Logamatic43xx extends IPSModule
         }
         else
         {  
+           $ParentID = $this->GetIDForIdent('Konfiguration');
            $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
            for ( $x = 0; $x < count ( $array ); $x++ )
            {    
-                $Slot = $this->GetIDForIdent($array[$x]);
+                $Slot = @IPS_GetObjectIDByName($array[$x], $ParentID);
                 $Modultyp = GetValueString($Slot); 
                 switch ($Modultyp)
                 {
@@ -93,6 +94,8 @@ class Logamatic43xx extends IPSModule
                         IPS_SetName($InsID, 'Logamatic ZM432');
                         IPS_SetParent($InsID, $this->InstanceID);
                         break;
+                case 'frei':
+                       break; 
                 }
            }
         }
