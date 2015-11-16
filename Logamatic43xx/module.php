@@ -182,8 +182,9 @@ class Logamatic43xx extends IPSModule
                                                         switch (substr($array[$x], 8, 2))
                                                             {
                                                                 case '9f':
-                                                                        IPS_LogMessage('FM444 <- Logamatic 43xx', 'Array: '.$array[$x]);
-                                                                        $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $array[$x]->Buffer)));
+                                                                    $data = $array[$x];
+                                                                        IPS_LogMessage('FM444 <- Logamatic 43xx', 'Array: '.$data);
+                                                                        $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
                                                                         break;
                                                             }
                                                     }
