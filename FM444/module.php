@@ -61,6 +61,7 @@ class FM444 extends IPSModule
                                             {
                                                 if (substr($array[$x], 0, 2) == 'a7')
                                                 {
+                                                    $Bus = ord(hex2bin(substr($array[$x], 4, 2)));
                                                     $typ = ord(hex2bin(substr($array[$x], 8, 2)));                                                    
                                                     IPS_LogMessage('Buderus FM444', 'ECO-CAN Adresse '.$Bus.' Array: '.$array[$x]);
                                                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
