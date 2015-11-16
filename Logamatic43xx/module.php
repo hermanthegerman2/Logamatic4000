@@ -162,16 +162,22 @@ class Logamatic43xx extends IPSModule
                                         break;
                                     
                                     case 'ab':   // AB Monitordaten Direktmodus
-                                        $head = GetValueString($monitorID);
+                                        /*$head = GetValueString($monitorID);
                                         $Monitordaten = $head.$stream;
-                                        SetValueString($monitorID, $Monitordaten);
+                                        SetValueString($monitorID, $Monitordaten);*/
+                                        switch ($modultyp)
+                                            {
+                                                case '9f':
+                                                    IPS_LogMessage('Logamatic FM444 <- 43xx:', $stream);
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
+                                            }
                                         break;
                                         
                                     case 'ac':   // AC Monitordaten komplett übertragen
                                         //$monitordaten = GetValueString($monitorID);
                                         IPS_LogMessage('Buderus Logamatic:', 'Monitordaten ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($monitorID)).' Bytes\n');
                                         //EncodeMonitorDirektData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
-                                        $Bus = 1;
+                                        /*$Bus = 1;
                                         $Monitordaten = GetValueString($monitorID);
                                         $array = str_split($Monitordaten, 44);
                                         for ( $x = 0; $x < count ( $array ); $x++ )
@@ -179,7 +185,7 @@ class Logamatic43xx extends IPSModule
                                                 $typ = ord(hex2bin(substr($array[$x], 8, 2)));
                                                 if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
                                                     {
-                                                        switch (substr($array[$x], 8, 2))
+                                                        switch ($typ)
                                                             {
                                                                 case '9f':
                                                                         $data = utf8_encode($array[$x]);
@@ -190,7 +196,7 @@ class Logamatic43xx extends IPSModule
                                                     }
                                                 else
                                                 IPS_LogMessage('buderus4000', 'EncodeMonitorDirektData für falsche Bus-Adresse');
-                                            }
+                                            }*/
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
