@@ -442,7 +442,7 @@ function CheckVariable($typ, $offset, $value, $parentID)
                         $InstanzID = IPS_CreateVariable(3);
                         IPS_SetName($InstanzID, $name);// Instanz benennen
                         IPS_SetIdent($InstanzID, $name);
-                        IPS_SetInfo($InstanzID, $typ);
+                        //IPS_SetInfo($InstanzID, $typ);// Instanz benennen
                         IPS_SetParent($InstanzID, $parentID);
                     }
                 //echo "ID: ".$InstanzID." ".$name."\n";
@@ -453,11 +453,11 @@ function CheckVariable($typ, $offset, $value, $parentID)
    
 function CheckVariableTYP($name, $vartyp, $profile, $parentID)
    {
-  		$InstanzID = @IPS_GetObjectIDByIdent($name, $parentID);
+  		$InstanzID = @IPS_GetVariableIDByName($name, $parentID);
                 if ($InstanzID === false)
                     {
                     $InstanzID = IPS_CreateVariable($vartyp);
-                    IPS_SetName($InstanzID, $name); // Instanz benennen
+                    IPS_SetName($InstanzID, $name);
                     IPS_SetParent($InstanzID, $parentID);
                     IPS_SetVariableCustomProfile($InstanzID, $profile);
                     }
