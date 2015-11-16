@@ -472,7 +472,7 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
                     foreach($ChildrenIDs as $ID)
                         {
                         //echo $ID."\n";
-                        $VarID = @IPS_GetVariableIDByIdent($ident, $ID);
+                        $VarID = @IPS_GetVariableIDByName($name, $ID);
                         if($VarID === false)
                             {       
 
