@@ -437,20 +437,7 @@ function CheckVariable($typ, $offset, $value, $parentID)
                 {
                     $name = Buderus($typ, -1, 0);
                     $ident = Buderus($typ, -1, 2);
-                    $ChildrenIDs = IPS_GetChildrenIDs($parentID);
-                    foreach($ChildrenIDs as $ID)
-                        {
-                        //echo $ID."\n";
-                        $VarID = @IPS_GetVariableIDByIdent($ident, $ID);
-                        if($VarID === false)
-                            {       
-
-                            }
-                        else
-                            {
-                            $InstanzID = $VarID;
-                            }
-                        }
+                    $InstanzID = GetChildrenID($parentID, $name);
                     //$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
                     if ($InstanzID === false)
                     {
@@ -468,20 +455,7 @@ function CheckVariable($typ, $offset, $value, $parentID)
    
 function CheckVariableTYP($name, $vartyp, $profile, $parentID)
    {            
-                $ChildrenIDs = IPS_GetChildrenIDs($parentID);
-                    foreach($ChildrenIDs as $ID)
-                        {
-                        //echo $ID."\n";
-                        $VarID = @IPS_GetVariableIDByName($name, $ID);
-                        if($VarID === false)
-                            {       
-
-                            }
-                        else
-                            {
-                            $InstanzID = $VarID;
-                            }
-                        }    
+                $InstanzID = GetChildrenID($parentID, $name);
   		//$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
                 if ($InstanzID === false)
                     {
@@ -647,5 +621,22 @@ function str2hex($string) // Funktion String in Hex umwandeln
 			}
 		return $hex;
 	}
+function GetChildrenID($parentID, $name)
+    {
+        $ChildrenIDs = IPS_GetChildrenIDs($parentID);
+                    foreach($ChildrenIDs as $ID)
+                        {
+                        //echo $ID."\n";
+                        $VarID = @IPS_GetVariableIDByName($name, $ID);
+                        if($VarID === false)
+                            {   
+                            }
+                        else
+                            {
+                            return $VarID;
+                            }
+                        }
+        return false;
+    }
 
-?>
+?>  
