@@ -138,7 +138,7 @@ class Logamatic43xx extends IPSModule
                                     
                                     case 'a7':   // A7 Monitordaten Normalmodus
 
-                                        IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                                        //IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                                         switch ($modultyp)
                                             {
                                                 case '9f':

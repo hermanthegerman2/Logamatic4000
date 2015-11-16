@@ -62,7 +62,7 @@ class FM443 extends IPSModule
             }
         else
         {
-            SendDataToParent($stream);
+            return false;
         }
         $stream = '';
         return true;             
