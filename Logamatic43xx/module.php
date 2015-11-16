@@ -182,7 +182,7 @@ class Logamatic43xx extends IPSModule
                                                         switch (substr($array[$x], 8, 2))
                                                             {
                                                                 case '9f':
-                                                                        IPS_LogMessage('Logamatic 43xx', 'Array: '.$array[$x]);
+                                                                        IPS_LogMessage('FM444 <- Logamatic 43xx', 'Array: '.$array[$x]);
                                                                         $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $array[$x]->Buffer)));
                                                                         /*$offset = ord(hex2bin(substr($array[$x], 12, 2)));
                                                                         $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
