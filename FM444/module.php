@@ -37,25 +37,21 @@ class FM444 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Logamatic FM444 <- Logamatic 43xx:', bin2hex(utf8_decode($data->Buffer)));
+        IPS_LogMessage('Logamatic FM444 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
         
         	switch ($datentyp)
-                                    {
-                                      
-                                    case 'a5':   // A5 Statusmeldung
-                                        
-                                        IPS_LogMessage('Logamatic FM444', 'ECO-CAN Adresse '.$bus.' is alive');
-                                        return true;
-                                    
+                                    {                                   
+                                                                     
                                     case 'a7':   // A7 Monitordaten Normalmodus
 
                                         IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                                         EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
                                         break;
+                                    
                                     case 'ab':
                                         IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
                                         EncodeMonitorDirektData($stream, $this->InstanceID, $bus);
