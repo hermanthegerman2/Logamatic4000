@@ -183,7 +183,7 @@ class Logamatic43xx extends IPSModule
                                                             {
                                                                 case '9f':
                                                                         $data = utf8_encode($array[$x]);
-                                                                        IPS_LogMessage('FM444 <- Logamatic 43xx', 'Array: '.$data);
+                                                                        IPS_LogMessage('FM444 <- Logamatic 43xx', $data);
                                                                         $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
                                                                         break;
                                                             }
