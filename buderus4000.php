@@ -624,18 +624,18 @@ function str2hex($string) // Funktion String in Hex umwandeln
 function GetChildrenID($parentID, $name)
     {
         $ChildrenIDs = IPS_GetChildrenIDs($parentID);
-                    foreach($ChildrenIDs as $ID)
-                        {
-                        //echo $ID."\n";
-                        $VarID = @IPS_GetVariableIDByName($name, $ID);
-                        if($VarID === false)
-                            {   
-                            }
-                        else
-                            {
-                            return $VarID;
-                            }
+            foreach($ChildrenIDs as $ID)
+                {
+                    //echo $ID."\n";
+                    $VarID = @IPS_GetVariableIDByName($name, $ID);
+                    if($VarID === false)
+                        {   
                         }
+                    else
+                        {
+                        return $VarID;
+                        }
+                }
         return false;
     }
 
