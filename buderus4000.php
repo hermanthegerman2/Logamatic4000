@@ -496,7 +496,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                                 }
                             }
                         else
-                            IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorDirektData für falsche Bus-Adresse');
+                            IPS_LogMessage('buderus4000', 'EncodeMonitorDirektData für falsche Bus-Adresse');
                         }
                 return true;
     }
@@ -523,7 +523,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
                                     EncodeVariableData($ID, $typ);
                             }
                         else
-                            IPS_LogMessage('Logamatic Gateway', 'EncodeMonitorNormalData für falsche Bus-Adresse');
+                            IPS_LogMessage('buderus4000', 'EncodeMonitorNormalData für falsche Bus-Adresse');
                         }
                     }
                     return true;

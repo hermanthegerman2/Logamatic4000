@@ -21,7 +21,19 @@ class FM444 extends IPSModule
         $this->SetStatus(102);
             
     }        
-     
+    
+    protected function SendDataToParent($data)
+    {
+      
+        $JSONString = json_encode(Array('DataID' => '{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}', 'Buffer' => utf8_encode($data)));
+       
+        IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
+        // Daten senden
+        IPS_SendDataToParent($this->InstanceID, $JSONString);
+        
+        return true;
+    }
+    
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
@@ -44,6 +56,26 @@ class FM444 extends IPSModule
                                         IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                                         
                                         //EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                                        $array = str_split($stream, 24);
+                                        for ( $x = 0; $x < count ( $array ); $x++ )
+                                            {
+                                                if (substr($array[$x], 0, 2) == 'a7')
+                                                {
+                                                    $typ = ord(hex2bin(substr($array[$x], 8, 2)));                                                    
+                                                    IPS_LogMessage('Buderus FM444', 'ECO-CAN Adresse '.$Bus.' Array: '.$array[$x]);
+                                                    $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                                                    $substring = substr($array[$x], 16, 2);
+                                                    IPS_LogMessage('Buderus FM444', 'ECO-CAN Adresse '.$Bus.' Data: '.$typ.' : '.$offset.' : '.$substring);
+                                                    $var = CheckVariable($typ, -1, 0, $ID);
+                                                    $value = GetValueString($var);
+                                                    $newvalue = substr_replace($value, $substring, $offset*2, 2);
+                                                    SetValueString($var, $newvalue);
+                                                    EncodeVariableData($ID, $typ);
+                                                }
+                                                else
+                                                IPS_LogMessage('Buderus FM444', 'EncodeMonitorNormalData');
+                                            }
+                                    
                                         break;                                  
                                     
                                 
