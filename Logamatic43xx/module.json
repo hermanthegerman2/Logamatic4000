@@ -5,8 +5,8 @@
     "vendor": "Buderus",
     "aliases": ["Logamatic 43xx"],
     "parentRequirements": ["{0D923A14-D3B4-4F44-A4AB-D2B534693C35}"],
-    "childRequirements": [],
-    "implemented": ["{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}", "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}"],
+    "childRequirements": ["{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}"],
+    "implemented": ["{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}"],
     "prefix": "Logamatic"
 }
 
