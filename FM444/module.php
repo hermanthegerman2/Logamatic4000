@@ -54,9 +54,8 @@ class FM444 extends IPSModule
                                     case 'a7':   // A7 Monitordaten Normalmodus
 
                                         IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
-                                        
-                                        //EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
-                                        $array = str_split($stream, 24);
+                                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                                        /*$array = str_split($stream, 24);
                                         for ( $x = 0; $x < count ( $array ); $x++ )
                                             {
                                                 if (substr($array[$x], 0, 2) == 'a7')
@@ -75,7 +74,8 @@ class FM444 extends IPSModule
                                                 }
                                                 else
                                                 IPS_LogMessage('Buderus FM444', 'EncodeMonitorNormalData');
-                                            }
+                                            }*/
+                                        break;
                                     case 'ab':
                                         
                                         EncodeMonitorDirektData($stream, $this->InstanceID, $bus);
