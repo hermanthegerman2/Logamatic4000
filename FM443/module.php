@@ -21,7 +21,52 @@ class FM443 extends IPSModule
         $this->SetStatus(102);
             
     }        
-     
+    
+    protected function SendDataToParent($data)
+    {
+      
+        $JSONString = json_encode(Array('DataID' => '{7DADFA25-C0A9-43C6-81E0-523EA0E6D389}', 'Buffer' => utf8_encode($data)));
+       
+        IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
+        // Daten senden
+        IPS_SendDataToParent($this->InstanceID, $JSONString);
+        
+        return true;
+    }
+    
+    public function ReceiveData($JSONString)
+    {
+        $data = json_decode($JSONString);
+        IPS_LogMessage('Logamatic FM443 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
+        $stream = bin2hex(utf8_decode($data->Buffer));
+        $datentyp = substr($stream, 0, 2);
+        $bus = substr($stream, 4, 2);
+        $modultyp = substr($stream, 8, 2);
+        if ($modultyp === '9e')
+            {
+        	switch ($datentyp)
+                                    {                                   
+                                                                     
+                                    case 'a7':   // A7 Monitordaten Normalmodus
+
+                                        IPS_LogMessage('Logamatic FM443', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                                        break;
+                                    
+                                    case 'ab':
+                                        IPS_LogMessage('Logamatic FM443', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
+                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus);
+                                        break;                                  
+                                                                   
+                                    }
+            }
+        else
+        {
+            SendDataToParent($stream);
+        }
+        $stream = '';
+        return true;             
+    }
 
     
         

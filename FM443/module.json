@@ -4,9 +4,9 @@
     "type": 3,
     "vendor": "Buderus",
     "aliases": ["Logamatic FM443"],
-    "parentRequirements": [],
+    "parentRequirements": ["{7DADFA25-C0A9-43C6-81E0-523EA0E6D389}"],
     "childRequirements": [],
-    "implemented": [],
+    "implemented": ["{CFEBE338-C640-4762-83CD-4845C2395970}"],
     "prefix": "FM443"
 }
 
