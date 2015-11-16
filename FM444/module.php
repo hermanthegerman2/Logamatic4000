@@ -76,10 +76,11 @@ class FM444 extends IPSModule
                                                 else
                                                 IPS_LogMessage('Buderus FM444', 'EncodeMonitorNormalData');
                                             }
-                                    
+                                    case 'ab':
+                                        
+                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus);
                                         break;                                  
-                                    
-                                
+                                                                   
                                     }
         $stream = '';
         return true;             
