@@ -437,8 +437,8 @@ function CheckVariable($typ, $offset, $value, $parentID)
                 {
                     $name = Buderus($typ, -1, 0);
                     $ident = Buderus($typ, -1, 2);
-                    $InstanzID = GetChildrenID($parentID, $name);
-                    //$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
+                    //$InstanzID = GetChildrenID($parentID, $name);
+                    $InstanzID = @IPS_GetObjectIDByName($name, $parentID);
                     if ($InstanzID === false)
                     {
                         $InstanzID = IPS_CreateVariable(3);
@@ -455,8 +455,8 @@ function CheckVariable($typ, $offset, $value, $parentID)
    
 function CheckVariableTYP($name, $vartyp, $profile, $parentID)
    {            
-                $InstanzID = GetChildrenID($parentID, $name);
-  		//$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
+                //$InstanzID = GetChildrenID($parentID, $name);
+  		$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
                 if ($InstanzID === false)
                     {
                     $InstanzID = IPS_CreateVariable($vartyp);
