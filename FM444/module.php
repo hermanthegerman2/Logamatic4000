@@ -67,11 +67,11 @@ class FM444 extends IPSModule
                                                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                                                     $substring = substr($array[$x], 16, 2);
                                                     IPS_LogMessage('Buderus FM444', 'ECO-CAN Adresse '.$Bus.' Data: '.$typ.' : '.$offset.' : '.$substring);
-                                                    $var = CheckVariable($typ, -1, 0, $ID);
+                                                    $var = CheckVariable($typ, -1, 0, $this->InstanceID);
                                                     $value = GetValueString($var);
                                                     $newvalue = substr_replace($value, $substring, $offset*2, 2);
                                                     SetValueString($var, $newvalue);
-                                                    EncodeVariableData($ID, $typ);
+                                                    EncodeVariableData($this->InstanceID, $typ);
                                                 }
                                                 else
                                                 IPS_LogMessage('Buderus FM444', 'EncodeMonitorNormalData');
