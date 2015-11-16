@@ -184,19 +184,7 @@ class Logamatic43xx extends IPSModule
                                                                 case '9f':
                                                                         IPS_LogMessage('FM444 <- Logamatic 43xx', 'Array: '.$array[$x]);
                                                                         $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $array[$x]->Buffer)));
-                                                                        /*$offset = ord(hex2bin(substr($array[$x], 12, 2)));
-                                                                        $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
-                                                                        IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Data: '.$typ.' : '.$offset.' : '.$substring);
-                                                                        $var = Buderus($typ, -1, 1);
-                                                                        if ($var === '0')
-                                                                            {
-                                                                                break;
-                                                                            }
-                                                                        else
-                                                                            {
-                                         
-                                                                                break;
-                                                                            }*/
+                                                                        break;
                                                             }
                                                     }
                                                 else
