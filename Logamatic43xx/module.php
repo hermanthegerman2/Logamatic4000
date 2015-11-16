@@ -144,9 +144,11 @@ class Logamatic43xx extends IPSModule
                                                 case '9f':
                                                     IPS_LogMessage('Logamatic FM444 <- 43xx:', $stream);
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
+                                                    break;
                                                 case '9e':
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $stream);
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data->Buffer)));
+                                                    break;
                                             }
                                         //EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         break;                                  
@@ -173,9 +175,11 @@ class Logamatic43xx extends IPSModule
                                                 case '9f':
                                                     IPS_LogMessage('Logamatic FM444 <- 43xx:', $stream);
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
+                                                    break;
                                                 case '9e':
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $stream);
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data->Buffer)));
+                                                    break;
                                             }
                                         break;
                                         
