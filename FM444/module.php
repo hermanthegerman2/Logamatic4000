@@ -11,7 +11,7 @@ class FM444 extends IPSModule
         
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
-        $this->RegisterPropertyString('AWe', '');
+        $this->RegisterPropertyString('AWe', 'Holzvergaser');
     }
 
     public function ApplyChanges()
