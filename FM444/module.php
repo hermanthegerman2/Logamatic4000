@@ -48,36 +48,16 @@ class FM444 extends IPSModule
                                       
                                     case 'a5':   // A5 Statusmeldung
                                         
-                                        IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$bus.' is alive');
+                                        IPS_LogMessage('Logamatic FM444', 'ECO-CAN Adresse '.$bus.' is alive');
                                         return true;
                                     
                                     case 'a7':   // A7 Monitordaten Normalmodus
 
-                                        IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                                        IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                                         EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
-                                        /*$array = str_split($stream, 24);
-                                        for ( $x = 0; $x < count ( $array ); $x++ )
-                                            {
-                                                if (substr($array[$x], 0, 2) == 'a7')
-                                                {
-                                                    $Bus = ord(hex2bin(substr($array[$x], 4, 2)));
-                                                    $typ = ord(hex2bin(substr($array[$x], 8, 2)));                                                    
-                                                    IPS_LogMessage('Buderus FM444', 'ECO-CAN Adresse '.$Bus.' Array: '.$array[$x]);
-                                                    $offset = ord(hex2bin(substr($array[$x], 12, 2)));
-                                                    $substring = substr($array[$x], 16, 2);
-                                                    IPS_LogMessage('Buderus FM444', 'ECO-CAN Adresse '.$Bus.' Data: '.$typ.' : '.$offset.' : '.$substring);
-                                                    $var = CheckVariable($typ, -1, 0, $this->InstanceID);
-                                                    $value = GetValueString($var);
-                                                    $newvalue = substr_replace($value, $substring, $offset*2, 2);
-                                                    SetValueString($var, $newvalue);
-                                                    EncodeVariableData($this->InstanceID, $typ);
-                                                }
-                                                else
-                                                IPS_LogMessage('Buderus FM444', 'EncodeMonitorNormalData');
-                                            }*/
                                         break;
                                     case 'ab':
-                                        
+                                        IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
                                         EncodeMonitorDirektData($stream, $this->InstanceID, $bus);
                                         break;                                  
                                                                    
