@@ -436,12 +436,12 @@ function CheckVariable($typ, $offset, $value, $parentID)
                 else
                 {
                     $name = Buderus($typ, $offset, $value);
-                    $InstanzID = @IPS_GetObjectIDByIdent($name, $parentID);
+                    $InstanzID = @IPS_GetObjectIDByName($name, $parentID);
                     if ($InstanzID === false)
                     {
                         $InstanzID = IPS_CreateVariable(3);
                         IPS_SetName($InstanzID, $name);// Instanz benennen
-                        IPS_SetIdent($InstanzID, $name);
+                        //IPS_SetIdent($InstanzID, $name);
                         //IPS_SetInfo($InstanzID, $typ);// Instanz benennen
                         IPS_SetParent($InstanzID, $parentID);
                     }
