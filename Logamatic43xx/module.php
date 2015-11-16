@@ -170,7 +170,38 @@ class Logamatic43xx extends IPSModule
                                     case 'ac':   // AC Monitordaten komplett übertragen
                                         //$monitordaten = GetValueString($monitorID);
                                         IPS_LogMessage('Buderus Logamatic:', 'Monitordaten ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($monitorID)).' Bytes\n');
-                                        EncodeMonitorDirektData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                                        //EncodeMonitorDirektData(GetValueString($monitorID), $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                                        $Bus = 1;
+                                        $Monitordaten = GetValueString($monitorID);
+                                        $array = str_split($Monitordaten, 44);
+                                        for ( $x = 0; $x < count ( $array ); $x++ )
+                                            {
+                                                $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+                                                if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
+                                                    {
+                                                        switch (substr($array[$x], 8, 2))
+                                                            {
+                                                                case '9f':
+                                                                        IPS_LogMessage('Logamatic 43xx', 'Array: '.$array[$x]);
+                                                                        $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $array[$x]->Buffer)));
+                                                                        /*$offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                                                                        $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
+                                                                        IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$Bus.' Data: '.$typ.' : '.$offset.' : '.$substring);
+                                                                        $var = Buderus($typ, -1, 1);
+                                                                        if ($var === '0')
+                                                                            {
+                                                                                break;
+                                                                            }
+                                                                        else
+                                                                            {
+                                         
+                                                                                break;
+                                                                            }*/
+                                                            }
+                                                    }
+                                                else
+                                                IPS_LogMessage('buderus4000', 'EncodeMonitorDirektData für falsche Bus-Adresse');
+                                            }
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
