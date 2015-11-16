@@ -437,13 +437,27 @@ function CheckVariable($typ, $offset, $value, $parentID)
                 {
                     $name = Buderus($typ, -1, 0);
                     $ident = Buderus($typ, -1, 2);
-                    $InstanzID = @IPS_GetObjectIDByName($name, $parentID);
+                    $ChildrenIDs = IPS_GetChildrenIDs($parentID);
+                    foreach($ChildrenIDs as $ID)
+                        {
+                        //echo $ID."\n";
+                        $VarID = @IPS_GetVariableIDByIdent($ident, $ID);
+                        if($VarID === false)
+                            {       
+
+                            }
+                        else
+                            {
+                            $InstanzID = $VarID;
+                            }
+                        }
+                    //$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
                     if ($InstanzID === false)
                     {
                         $InstanzID = IPS_CreateVariable(3);
                         IPS_SetName($InstanzID, $name);// Instanz benennen
-                        //IPS_SetIdent($InstanzID, $ident);
-                        //IPS_SetInfo($InstanzID, $typ);// Instanz benennen
+                        IPS_SetPosition($InstanzID, $offset);
+                        IPS_SetIdent($InstanzID, $ident);// Instanz benennen
                         IPS_SetParent($InstanzID, $parentID);
                     }
                 //echo "ID: ".$InstanzID." ".$name."\n";
@@ -453,8 +467,22 @@ function CheckVariable($typ, $offset, $value, $parentID)
    }
    
 function CheckVariableTYP($name, $vartyp, $profile, $parentID)
-   {
-  		$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
+   {            
+                $ChildrenIDs = IPS_GetChildrenIDs($parentID);
+                    foreach($ChildrenIDs as $ID)
+                        {
+                        //echo $ID."\n";
+                        $VarID = @IPS_GetVariableIDByIdent($ident, $ID);
+                        if($VarID === false)
+                            {       
+
+                            }
+                        else
+                            {
+                            $InstanzID = $VarID;
+                            }
+                        }    
+  		//$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
                 if ($InstanzID === false)
                     {
                     $InstanzID = IPS_CreateVariable($vartyp);
