@@ -1,0 +1,12 @@
+{
+    "id": "{D12643D0-E4B4-4176-8831-7B79C360984B}",
+    "name": "FM441",
+    "type": 3,
+    "vendor": "Buderus",
+    "aliases": ["Logamatic FM441"],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "FM441"
+}
+
