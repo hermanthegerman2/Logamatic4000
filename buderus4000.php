@@ -41,7 +41,7 @@ class Command extends stdClass
 }
 function Buderus ($typ, $offset, $value)
     {
-    $Buderus[128][-1] = array ("Heizkreis 1", "17", "Heizkreis_1");
+    $Buderus[128][-1] = array ("Heizkreis 1", "17");
     $Buderus[128][0] = array ("Betriebswerte", "Bit", "Ausschaltoptimierung", "Einschaltoptimierung", "Automatik", "Warmwasservorrang", "Estrichtrocknung", "Ferien", "Frostschutz", "Manuell");
     $Buderus[128][1] = array ("Betriebswerte 2", "Bit", "Sommer", "Tag", "keine Kommunikation mit FB", "FB fehlerhaft", "Fehler Vorlauffühler", "maximaler Vorlauf", "externer Störeingang", "Party / Pause");
 $Buderus[128][2] = array ("Vorlaufsolltemperatur", "Temp", "1", "°C");
@@ -61,7 +61,7 @@ $Buderus[128][15] = array ("", "");
 $Buderus[128][16] = array ("", "");
 $Buderus[128][17] = array ("", "");
 
-$Buderus[129][-1] = array ("Heizkreis 2", "17", "Heizkreis_2");
+$Buderus[129][-1] = array ("Heizkreis 2", "17");
 $Buderus[129][0] = array ("Betriebswerte", "Bit", "Ausschaltoptimierung", "Einschaltoptimierung", "Automatik", "Warmwasservorrang", "Estrichtrocknung", "Ferien", "Frostschutz", "Manuell");
 $Buderus[129][1] = array ("Betriebswerte 2", "Bit", "Sommer", "Tag", "keine Kommunikation mit FB", "FB fehlerhaft", "Fehler Vorlauffühler", "maximaler Vorlauf", "externer Störeingang", "Party / Pause");
 $Buderus[129][2] = array ("Vorlaufsolltemperatur", "Temp", "1", "°C");
@@ -81,7 +81,7 @@ $Buderus[129][15] = array ("", "");
 $Buderus[129][16] = array ("", "");
 $Buderus[129][17] = array ("", "");
 
-$Buderus[130][-1] = array ("Heizkreis 3", "17", "Heizkreis_3");
+$Buderus[130][-1] = array ("Heizkreis 3", "17");
 $Buderus[130][0] = array ("Betriebswerte", "Bit", "Ausschaltoptimierung", "Einschaltoptimierung", "Automatik", "Warmwasservorrang", "Estrichtrocknung", "Ferien", "Frostschutz", "Manuell");
 $Buderus[130][1] = array ("Betriebswerte 2", "Bit", "Sommer", "Tag", "keine Kommunikation mit FB", "FB fehlerhaft", "Fehler Vorlauffühler", "maximaler Vorlauf", "externer Störeingang", "Party / Pause");
 $Buderus[130][2] = array ("Vorlaufsolltemperatur", "Temp", "1", "°C");
@@ -101,7 +101,7 @@ $Buderus[130][15] = array ("", "");
 $Buderus[130][16] = array ("", "");
 $Buderus[130][17] = array ("", "");
 
-$Buderus[131][-1] = array ("Heizkreis 4", "17", "Heizkreis_4");
+$Buderus[131][-1] = array ("Heizkreis 4", "17");
 $Buderus[131][0] = array ("Betriebswerte", "Bit", "Ausschaltoptimierung", "Einschaltoptimierung", "Automatik", "Warmwasservorrang", "Estrichtrocknung", "Ferien", "Frostschutz", "Manuell");
 $Buderus[131][1] = array ("Betriebswerte 2", "Bit", "Sommer", "Tag", "keine Kommunikation mit FB", "FB fehlerhaft", "Fehler Vorlauffühler", "maximaler Vorlauf", "externer Störeingang", "Party / Pause");
 $Buderus[131][2] = array ("Vorlaufsolltemperatur", "Temp", "1", "°C");
@@ -122,7 +122,7 @@ $Buderus[131][16] = array ("", "");
 $Buderus[131][17] = array ("", "");
 
 
-$Buderus[132][-1]= array ("Warmwasser", "11", "Warmwasser");
+$Buderus[132][-1]= array ("Warmwasser", "11");
 $Buderus[132][0] = array ("Betriebswerte 1", "Bit", "Automatik", "Desinfektion", "Desinfektion", "Ferien", "Fehler Desinfektion", "Fehler Fühler", "Fehler WW bleibt kalt", "Fehler Anode");
 $Buderus[132][1] = array ("Betriebswerte 2", "Bit", "Laden", "Manuell", "Nachladen", "Ausschaltoptimierung", "Einschaltoptimierung", "Tag", "Warm", "Vorrang");
 $Buderus[132][2] = array ("Warmwassersolltemperatur", "Temp", "1", "°C");
@@ -136,7 +136,7 @@ $Buderus[132][9] = array ("", "");
 $Buderus[132][10] = array ("", "");
 $Buderus[132][11] = array ("", "");
 
-$Buderus[135][-1] = array ("Fehlerprotokoll", "0", "Fehlerprotokoll");
+$Buderus[135][-1] = array ("Fehlerprotokoll", "0");
 $Buderus[135][0] = array ("","");
 $Buderus[135][1] = array ("","");
 $Buderus[135][2] = array ("","");
@@ -180,7 +180,7 @@ $Buderus[135][39] = array ("","");
 $Buderus[135][40] = array ("","");
 $Buderus[135][41] = array ("","");
 
-$Buderus[136][-1] = array ("bodenstehender Kessel", "41", "bodenstehender_Kessel");
+$Buderus[136][-1] = array ("bodenstehender Kessel", "41");
 $Buderus[136][0] = array ("Kesselvorlauf-Solltemperatur", "Temp", "1", "°C");
 $Buderus[136][1] = array ("Kesselvorlauf-Isttemperatur", "Temp", "1", "°C");
 $Buderus[136][2] = array ("Brennereinschalttemperatur", "Temp", "1", "°C");
@@ -224,7 +224,7 @@ $Buderus[136][39] = array ("Heizkennlinie 0 Grad","Temp", "1", "°C");
 $Buderus[136][40] = array ("Heizkennlinie -10 Grad","Temp", "1", "°C");
 $Buderus[136][41] = array ("Kessel Betrieb", "Bit", "Folgeumkehr ( 2 – 1 )", "Lastbegrenzung", "frei", "frei", "frei", "frei", "frei", "frei");
 
-$Buderus[137][-1] = array ("Konfiguration", "23", "Konfiguration");
+$Buderus[137][-1] = array ("Konfiguration", "23");
 $Buderus[137][0] = array ("Außentemperatur", "Temp3", "1", "°C");
 $Buderus[137][1] = array ("gedämpfte Außentemperatur", "Temp3", "1", "°C");
 $Buderus[137][2] = array ("Version", "Version", "", "");
@@ -250,7 +250,7 @@ $Buderus[137][21] = array ("max. Ansteuerung für Heizkreispumpe", "Prozent", "1
 $Buderus[137][22] = array ("max. Ansteuerung für Stellglied", "Prozent", "1", "%");
 $Buderus[137][23] = array ("Regelgerätevorlaufisttemperatur", "Temp", "1", "°C");
 
-$Buderus[144][-1] = array ("LAP", "17", "LAP");
+$Buderus[144][-1] = array ("LAP", "17");
 $Buderus[144][0] = array ("Betriebswerte 1", "Bit", "Automatik", "Desinfektion", "Einmal-Ladung", "Ferien", "Fehler Desinfektion", "Fehler Fühler", "Fehler WW bleibt kalt", "Fehler Anode");
 $Buderus[144][1] = array ("Betriebswerte 2", "Bit", "Laden durch Kesselanforderung", "Manuell", "Laden durch Restwärmenutzung", "Ausschaltoptimierung", "Einschaltoptimierung", "Tag", "Warm", "Vorrang");
 $Buderus[144][2] = array ("Warmwassersolltemperatur", "Temp", "1", "°C");
@@ -270,9 +270,9 @@ $Buderus[144][15] = array ("Iststellung Mischer",  "Prozent", "1", "%");
 $Buderus[144][16] = array ("Ansteuerung Primärpumpe",  "Prozent", "1", "%");
 $Buderus[144][17] = array ("Ansteuerung Sekundärpumpe",  "Prozent", "1", "%");
 
-$Buderus[153][-1] = array ("Imaginäres Modul", "0", "Imaginäres_Modul");
+$Buderus[153][-1] = array ("Imaginäres Modul", "0");
 
-$Buderus[154][-1] = array ("Imaginäres Modul", "0", "Imaginäres_Modul");
+$Buderus[154][-1] = array ("Imaginäres Modul", "0");
 $Buderus[154][0] = array ("","");
 $Buderus[154][1] = array ("Offset 1","Modul");
 $Buderus[154][2] = array ("Offset 2","Modul");
@@ -334,7 +334,7 @@ $Buderus[154][57] = array ("Offset 57","Modul");
 $Buderus[154][58] = array ("Offset 58","Modul");
 $Buderus[154][59] = array ("Offset 59","Modul");
 
-$Buderus[158][-1] = array ("Solarfunktion", "35", "Solarfunktion");
+$Buderus[158][-1] = array ("Solarfunktion", "35");
 $Buderus[158][0] = array ("Betriebswerte 1", "Bit", "Fehler Einstellung Hysterese", "Speicher 2 auf max. Temperatur", "Speicher 1 auf max. Temperatur", "Kollektor auf max. Temperatur", "", "", "", "");
 $Buderus[158][1] = array ("Betriebswerte 2", "Bit", "Fehler Fühler Anlagenrücklauf Bypass defekt", "Fehler Fühler Speichermitte Bypass defekt", "Fehler Volumenstromzähler WZ defekt", "Fehler Fühler Rücklauf WZ defekt", "Fehler Fühler Vorlauf WZ defekt", "Fehler Fühler Speicher-unten 2 defekt", "Fehler Fühler Speicher-unten 1 defekt", "Fehler Fühler Kollektor defekt");
 $Buderus[158][2] = array ("Betriebswerte 3", "Bit", "Umschaltventil Speicher 2 zu", "Umschaltventil Speicher 2 auf/Speicherladepumpe2", "Umschaltventil Bypass zu", "Umschaltventil Bypass auf", "Sekundärpumpe Speicher 2 Betrieb", "", "", "");
@@ -372,7 +372,7 @@ $Buderus[158][33] = array ("","");
 $Buderus[158][34] = array ("","");
 $Buderus[158][35] = array ("","");
 
-$Buderus[159][-1] = array ("Alternativer WE", "41", "Alternativer_WE");
+$Buderus[159][-1] = array ("Alternativer WE", "41");
 $Buderus[159][0] = array ("Wärmeerzeuger Vorlauf", "Temp", "1", "°C");
 $Buderus[159][1] = array ("Wärmeerzeuger Anl.-Rücklauf", "Temp", "1", "°C");
 $Buderus[159][2] = array ("Puffer Oben", "Temp", "1", "°C");
@@ -435,16 +435,12 @@ function CheckVariable($typ, $offset, $value, $parentID)
                 }
                 else
                 {
-                    $name = Buderus($typ, -1, 0);
-                    $ident = Buderus($typ, -1, 2);
-                    //$InstanzID = GetChildrenID($parentID, $name);
-                    $InstanzID = @IPS_GetObjectIDByName($name, $parentID);
+                    $name = Buderus($typ, $offset, $value);
+                    $InstanzID = @IPS_GetVariableIDByName($name, $parentID);
                     if ($InstanzID === false)
                     {
                         $InstanzID = IPS_CreateVariable(3);
-                        IPS_SetName($InstanzID, $name);// Instanz benennen
-                        IPS_SetPosition($InstanzID, $offset);
-                        IPS_SetIdent($InstanzID, $ident);// Instanz benennen
+                        IPS_SetName($InstanzID, $name); // Instanz benennen
                         IPS_SetParent($InstanzID, $parentID);
                     }
                 //echo "ID: ".$InstanzID." ".$name."\n";
@@ -454,13 +450,12 @@ function CheckVariable($typ, $offset, $value, $parentID)
    }
    
 function CheckVariableTYP($name, $vartyp, $profile, $parentID)
-   {            
-                //$InstanzID = GetChildrenID($parentID, $name);
-  		$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
+   {
+  		$InstanzID = @IPS_GetVariableIDByName($name, $parentID);
                 if ($InstanzID === false)
                     {
                     $InstanzID = IPS_CreateVariable($vartyp);
-                    IPS_SetName($InstanzID, $name);
+                    IPS_SetName($InstanzID, $name); // Instanz benennen
                     IPS_SetParent($InstanzID, $parentID);
                     IPS_SetVariableCustomProfile($InstanzID, $profile);
                     }
@@ -622,4 +617,4 @@ function str2hex($string) // Funktion String in Hex umwandeln
 		return $hex;
 	}
 
-?>  
+?>
