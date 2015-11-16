@@ -453,7 +453,7 @@ function CheckVariable($typ, $offset, $value, $parentID)
    
 function CheckVariableTYP($name, $vartyp, $profile, $parentID)
    {
-  		$InstanzID = @IPS_GetVariableIDByName($name, $parentID);
+  		$InstanzID = @IPS_GetObjectIDByName($name, $parentID);
                 if ($InstanzID === false)
                     {
                     $InstanzID = IPS_CreateVariable($vartyp);
