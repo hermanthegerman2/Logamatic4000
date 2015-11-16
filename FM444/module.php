@@ -10,7 +10,7 @@ class FM444 extends IPSModule
         parent::Create();
         
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
-        //$this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
+        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
         $this->RegisterPropertyString('AWe', '');
     }
 
@@ -22,7 +22,35 @@ class FM444 extends IPSModule
             
     }        
      
+    public function ReceiveData($JSONString)
+    {
+        $data = json_decode($JSONString);
+        IPS_LogMessage('Logamatic FM444 <- Logamatic 43xx:', bin2hex(utf8_decode($data->Buffer)));
+        $stream = bin2hex(utf8_decode($data->Buffer));
+        $datentyp = substr($stream, 0, 2);
+        $bus = substr($stream, 4, 2);
+        $modultyp = substr($stream, 8, 2);
+        
+        	switch ($datentyp)
+                                    {
+                                      
+                                    case 'a5':   // A5 Statusmeldung
+                                        
+                                        IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse '.$bus.' is alive');
+                                        return true;
+                                    
+                                    case 'a7':   // A7 Monitordaten Normalmodus
 
+                                        IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                                        
+                                        //EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                                        break;                                  
+                                    
+                                
+                                    }
+        $stream = '';
+        return true;             
+    }
     
         
 ################## DUMMYS / WOARKAROUNDS - protected
