@@ -173,7 +173,7 @@ class Logamatic43xx extends IPSModule
                                             $array = str_split($Monitordaten, 44);
                                             for ( $x = 0; $x < count ( $array ); $x++ )
                                             {
-                                                $modultyp = ord(hex2bin(substr($array[$x], 8, 2)));
+                                                $modultyp = (substr($array[$x], 8, 2));
                                                 switch ($modultyp)
                                                 {
                                                 case '9f':
@@ -208,7 +208,7 @@ class Logamatic43xx extends IPSModule
                                         $array = str_split($Monitordaten, 44);
                                         for ( $x = 0; $x < count ( $array ); $x++ )
                                             {
-                                                $modultyp = ord(hex2bin(substr($array[$x], 8, 2)));
+                                                $modultyp = (substr($array[$x], 8, 2));
                                                 switch ($modultyp)
                                                 {
                                                 case '9f':
