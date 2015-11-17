@@ -188,41 +188,6 @@ class Logamatic43xx extends IPSModule
         
 ################## DUMMYS / WOARKAROUNDS - protected
     
-    function DistributeDataToChildren($Monitordaten)
-    {
-        $array = str_split($Monitordaten, 44);
-        for ( $x = 0; $x < count ( $array ); $x++ )
-            {
-                $modultyp = (substr($array[$x], 8, 2));
-                $datentyp = (substr($array[$x], 0, 2));
-                $data = hex2bin($array[$x]);
-                switch ($modultyp)
-                    {
-                    case '9f':
-                            $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
-                            IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                            IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
-                            break;
-                    case '9e':
-                            $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
-                            IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                            IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
-                            break;
-                    case '88':
-                            $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
-                            IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                            IPS_LogMessage('Logamatic ZM432 <- 43xx:', $array[$x]);
-                            break;   
-                    case '89':
-                            if ($datentyp = 'ab') EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
-                            if ($datentyp = 'a7') EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
-                            break;                                
-                                                                                             
-                    }
-            }
-        return true;    
-    }
- 
     protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
     {
         if (!IPS_VariableProfileExists($Name))
