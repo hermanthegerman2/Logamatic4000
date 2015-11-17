@@ -174,7 +174,7 @@ class Logamatic43xx extends IPSModule
                                             for ( $x = 0; $x < count ( $array ); $x++ )
                                             {
                                                 $modultyp = (substr($array[$x], 8, 2));
-                                                $data = utf8_encode($array[$x]);
+                                                $data = $array[$x];
                                                 switch ($modultyp)
                                                 {
                                                 case '9f':
@@ -210,7 +210,7 @@ class Logamatic43xx extends IPSModule
                                         for ( $x = 0; $x < count ( $array ); $x++ )
                                             {
                                                 $modultyp = (substr($array[$x], 8, 2));
-                                                $data = utf8_encode($array[$x]);
+                                                $data = $array[$x];
                                                 switch ($modultyp)
                                                 {
                                                 case '9f':
