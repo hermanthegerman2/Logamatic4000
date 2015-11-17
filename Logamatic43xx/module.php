@@ -184,12 +184,16 @@ class Logamatic43xx extends IPSModule
                                                     //$this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data)));
                                                     break;
                                                 case '9e':
+                                                    $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
+                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data)));
+                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data)));
                                                     break;
                                                 case '88':
+                                                    $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
+                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
                                                     IPS_LogMessage('Logamatic ZM432 <- 43xx:', $array[$x]);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data)));
+                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data)));
                                                     break;
                                                 case '89':
                                                     EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
@@ -222,16 +226,20 @@ class Logamatic43xx extends IPSModule
                                                     //$this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data)));
                                                     break;
                                                 case '9e':
+                                                    $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
+                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data)));
+                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data)));
                                                     break;
                                                 case '88':
+                                                    $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
+                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
                                                     IPS_LogMessage('Logamatic ZM432 <- 43xx:', $array[$x]);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data)));
+                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data)));
                                                     break;
                                                 case '89':
                                                     EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
-                                                    break;                                                
+                                                    break;                                     
                                                 }
                                             }
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
