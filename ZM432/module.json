@@ -4,9 +4,9 @@
     "type": 3,
     "vendor": "Buderus",
     "aliases": ["Logamatic ZM432"],
-    "parentRequirements": [],
+    "parentRequirements": ["{054466C5-C0E0-46C6-82D7-29A2FAE4276C}"],
     "childRequirements": [],
-    "implemented": [],
+    "implemented": ["{487A7347-AAC6-4084-9A86-25C61A2482DC}"],
     "prefix": "ZM432"
 }
 

@@ -10,8 +10,8 @@ class ZM432 extends IPSModule
         parent::Create();
         
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
-        //$this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
-        $this->RegisterPropertyString('Kessel', '');
+        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
+        $this->RegisterPropertyString('Kessel', 'bodenstehender Kessel');
     }
 
     public function ApplyChanges()
@@ -21,7 +21,51 @@ class ZM432 extends IPSModule
         $this->SetStatus(102);
             
     }        
-     
+     protected function SendDataToParent($data)
+    {
+      
+        $JSONString = json_encode(Array('DataID' => '{054466C5-C0E0-46C6-82D7-29A2FAE4276C}', 'Buffer' => utf8_encode($data)));
+       
+        IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
+        // Daten senden
+        IPS_SendDataToParent($this->InstanceID, $JSONString);
+        
+        return true;
+    }
+    
+    protected function ReceiveData($JSONString)
+    {
+        $data = json_decode($JSONString);
+        IPS_LogMessage('Logamatic ZM432 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
+        $stream = bin2hex(utf8_decode($data->Buffer));
+        $datentyp = substr($stream, 0, 2);
+        $bus = substr($stream, 4, 2);
+        $modultyp = substr($stream, 8, 2);
+        if ($modultyp === '88')
+            {
+        	switch ($datentyp)
+                                    {                                   
+                                                                     
+                                    case 'a7':   // A7 Monitordaten Normalmodus
+
+                                        IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                                        break;
+                                    
+                                    case 'ab':
+                                        IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
+                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus);
+                                        break;                                  
+                                                                   
+                                    }
+            }
+        else
+        {
+            return false;
+        }
+        $stream = '';
+        return true;             
+    } 
 
     
         

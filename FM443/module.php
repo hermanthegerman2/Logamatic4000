@@ -22,7 +22,7 @@ class FM443 extends IPSModule
             
     }        
     
-    public function SendDataToParent($data)
+    protected function SendDataToParent($data)
     {
       
         $JSONString = json_encode(Array('DataID' => '{7DADFA25-C0A9-43C6-81E0-523EA0E6D389}', 'Buffer' => utf8_encode($data)));
@@ -34,7 +34,7 @@ class FM443 extends IPSModule
         return true;
     }
     
-    public function ReceiveData($JSONString)
+    protected function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('Logamatic FM443 Receive Data:', bin2hex(utf8_decode($data->Buffer)));

@@ -149,6 +149,10 @@ class Logamatic43xx extends IPSModule
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $stream);
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data->Buffer)));
                                                     break;
+                                                case '88':
+                                                    IPS_LogMessage('Logamatic ZM432 <- 43xx:', $stream);
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
+                                                    break;
                                             }
                                         //EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                                         break;                                  
@@ -180,6 +184,11 @@ class Logamatic43xx extends IPSModule
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $stream);
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data->Buffer)));
                                                     break;
+                                                case '88':
+                                                    IPS_LogMessage('Logamatic ZM432 <- 43xx:', $stream);
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
+                                                    break;
+                                                
                                             }
                                         break;
                                         
