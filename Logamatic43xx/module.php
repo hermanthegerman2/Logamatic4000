@@ -61,10 +61,8 @@ class Logamatic43xx extends IPSModule
         if ($ParentID == false)
         {
             Logamatic_RequestMonitordaten($this->InstanceID);
-            return true;
-        }
-        else
-        {  
+        }    
+        
            $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
            for ( $x = 0; $x < count ( $array ); $x++ )
            {    
@@ -100,8 +98,7 @@ class Logamatic43xx extends IPSModule
                 case 'frei':
                        break; 
                 }
-           }
-        }
+            }
         return true;
     }        
     protected function SendDataToParent($data)
