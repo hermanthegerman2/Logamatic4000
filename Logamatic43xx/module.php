@@ -165,86 +165,18 @@ class Logamatic43xx extends IPSModule
                                         break;
                                     
                                     case 'ab':   // AB Monitordaten Direktmodus
-                                        if (substr($stream, -12, 4) == 'ac00')
-                                        {
-                                            $head = GetValueString($monitorID);
-                                            $Monitordaten = $head.$stream;
-                                            SetValueString($monitorID, $Monitordaten);
-                                            $array = str_split($Monitordaten, 44);
-                                            for ( $x = 0; $x < count ( $array ); $x++ )
-                                            {
-                                                $modultyp = (substr($array[$x], 8, 2));
-                                                $data = hex2bin($array[$x]);
-                                                switch ($modultyp)
-                                                {
-                                                case '9f':
-                                                    $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
-                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                                                    IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
-                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data)));
-                                                    break;
-                                                case '9e':
-                                                    $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
-                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                                                    IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
-                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data)));
-                                                    break;
-                                                case '88':
-                                                    $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
-                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                                                    IPS_LogMessage('Logamatic ZM432 <- 43xx:', $array[$x]);
-                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data)));
-                                                    break;
-                                                case '89':
-                                                    EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
-                                                    break;                                              
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            $head = GetValueString($monitorID);
-                                            $Monitordaten = $head.$stream;
-                                            SetValueString($monitorID, $Monitordaten);
-                                        }
+                                        $head = GetValueString($monitorID);
+                                        $Monitordaten = $head.$stream;
+                                        SetValueString($monitorID, $Monitordaten);
+                                        if (substr($stream, -12, 4) == 'ac00') DistributeDataToChildren($Monitordaten);                                      
                                         break;
                                         
                                     case 'ac':   // AC Monitordaten komplett übertragen
-                                        $Monitordaten = GetValueString($monitorID);
-                                        IPS_LogMessage('Buderus Logamatic:', 'Monitordaten ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($monitorID)).' Bytes\n');
-                                        $array = str_split($Monitordaten, 44);
-                                        for ( $x = 0; $x < count ( $array ); $x++ )
-                                            {
-                                                $modultyp = (substr($array[$x], 8, 2));
-                                                $data = hex2bin($array[$x]);
-                                                switch ($modultyp)
-                                                {
-                                                case '9f':
-                                                    $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
-                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                                                    IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
-                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data)));
-                                                    break;
-                                                case '9e':
-                                                    $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
-                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                                                    IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
-                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data)));
-                                                    break;
-                                                case '88':
-                                                    $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
-                                                    IPS_SendDataToChildren($this->InstanceID, $JSONString);
-                                                    IPS_LogMessage('Logamatic ZM432 <- 43xx:', $array[$x]);
-                                                    //$this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data)));
-                                                    break;
-                                                case '89':
-                                                    EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
-                                                    break;                                     
-                                                }
-                                            }
+                                        DistributeDataToChildren(GetValueString($monitorID));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
+                                    
                                     case 'ad':  // AD Datenblock empfangen
                                         IPS_LogMessage('Buderus Logamatic', 'Datenblock '.$stream);
                                         break;
@@ -254,6 +186,41 @@ class Logamatic43xx extends IPSModule
     }
         
 ################## DUMMYS / WOARKAROUNDS - protected
+    
+    protected function DistributeDataToChildren($Monitordaten)
+    {
+        $array = str_split($Monitordaten, 44);
+        for ( $x = 0; $x < count ( $array ); $x++ )
+            {
+                $modultyp = (substr($array[$x], 8, 2));
+                $datentyp = (substr($array[$x], 0, 2));
+                $data = hex2bin($array[$x]);
+                switch ($modultyp)
+                    {
+                    case '9f':
+                            $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
+                            IPS_SendDataToChildren($this->InstanceID, $JSONString);
+                            IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
+                            break;
+                    case '9e':
+                            $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
+                            IPS_SendDataToChildren($this->InstanceID, $JSONString);
+                            IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
+                            break;
+                    case '88':
+                            $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
+                            IPS_SendDataToChildren($this->InstanceID, $JSONString);
+                            IPS_LogMessage('Logamatic ZM432 <- 43xx:', $array[$x]);
+                            break;   
+                    case '89':
+                            if ($datentyp = 'ab') EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
+                            if ($datentyp = 'a7') EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                            break;                                
+                                                                                             
+                    }
+            }
+        return true;    
+    }
  
     protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
     {
