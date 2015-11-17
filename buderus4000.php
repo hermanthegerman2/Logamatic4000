@@ -622,7 +622,17 @@ function DistributeDataToChildren($Monitordaten, $ID, $Bus)
                 $datentyp = (substr($array[$x], 0, 2));
                 $data = hex2bin($array[$x]);
                 switch ($modultyp)
-                    {
+                    {                    
+                    case '80':
+                            $JSONString = json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => utf8_encode($data)));
+                            IPS_SendDataToChildren($ID, $JSONString);
+                            IPS_LogMessage('Logamatic FM441 <- 43xx:', $array[$x]);
+                            break;
+                    case '81':
+                            $JSONString = json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => utf8_encode($data)));
+                            IPS_SendDataToChildren($ID, $JSONString);
+                            IPS_LogMessage('Logamatic FM441 <- 43xx:', $array[$x]);
+                            break;
                     case '82':
                             $JSONString = json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
