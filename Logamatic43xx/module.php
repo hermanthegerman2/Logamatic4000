@@ -192,7 +192,7 @@ class Logamatic43xx extends IPSModule
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
                                                     break;
                                                 case '89':
-                                                    EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus'), $modultyp));
+                                                    EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
                                                     break;
                                                 
                                             }
