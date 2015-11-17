@@ -639,8 +639,8 @@ function DistributeDataToChildren($Monitordaten, $ID, $Bus)
                             IPS_LogMessage('Logamatic ZM432 <- 43xx:', $array[$x]);
                             break;   
                     case '89':
-                            if ($datentyp = 'ab') EncodeMonitorDirektData($$array[$x], $ID, $Bus, $modultyp);
-                            if ($datentyp = 'a7') EncodeMonitorNormalData($$array[$x], $ID, $Bus);
+                            if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $Bus, $modultyp);
+                            if ($datentyp = 'a7') EncodeMonitorNormalData($array[$x], $ID, $Bus);
                             break;                                
                                                                                              
                     }

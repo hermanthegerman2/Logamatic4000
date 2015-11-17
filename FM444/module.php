@@ -37,7 +37,7 @@ class FM444 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Logamatic FM444 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
+        //IPS_LogMessage('Logamatic FM444 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
