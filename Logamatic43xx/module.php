@@ -174,23 +174,24 @@ class Logamatic43xx extends IPSModule
                                             for ( $x = 0; $x < count ( $array ); $x++ )
                                             {
                                                 $modultyp = (substr($array[$x], 8, 2));
+                                                $data = utf8_encode($array[$x]);
                                                 switch ($modultyp)
                                                 {
                                                 case '9f':
                                                     IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($array[$x])->Buffer)));
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
                                                     break;
                                                 case '9e':
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $stream);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($array[$x])->Buffer)));
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data->Buffer)));
                                                     break;
                                                 case '88':
                                                     IPS_LogMessage('Logamatic ZM432 <- 43xx:', $stream);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($array[$x])->Buffer)));
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
                                                     break;
                                                 case '89':
                                                     EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
-                                                    break;                                                
+                                                    break;                                              
                                                 }
                                             }
                                         }
@@ -209,19 +210,20 @@ class Logamatic43xx extends IPSModule
                                         for ( $x = 0; $x < count ( $array ); $x++ )
                                             {
                                                 $modultyp = (substr($array[$x], 8, 2));
+                                                $data = utf8_encode($array[$x]);
                                                 switch ($modultyp)
                                                 {
                                                 case '9f':
                                                     IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($array[$x])->Buffer)));
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
                                                     break;
                                                 case '9e':
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $stream);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($array[$x])->Buffer)));
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data->Buffer)));
                                                     break;
                                                 case '88':
                                                     IPS_LogMessage('Logamatic ZM432 <- 43xx:', $stream);
-                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($array[$x])->Buffer)));
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
                                                     break;
                                                 case '89':
                                                     EncodeMonitorDirektData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')), $modultyp);
