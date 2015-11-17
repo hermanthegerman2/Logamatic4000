@@ -1,7 +1,7 @@
 {	
 	"elements":
 	[
-            { "name": "HK-WW", "type": "ValidationTextBox", "caption": "Heizkreis/Warmwasser" }
+            { "name": "HKWW", "type": "ValidationTextBox", "caption": "Heizkreis/Warmwasser" }
         ],
         
         "status":
