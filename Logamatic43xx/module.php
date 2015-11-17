@@ -172,7 +172,8 @@ class Logamatic43xx extends IPSModule
                                         break;
                                         
                                     case 'ac':   // AC Monitordaten komplett übertragen
-                                        DistributeDataToChildren(GetValueString($monitorID));
+                                        $Monitordaten = GetValueString($monitorID);
+                                        DistributeDataToChildren(GetValueString($Monitordaten));
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
