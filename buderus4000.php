@@ -623,16 +623,16 @@ function DistributeDataToChildren($Monitordaten, $ID, $Bus)
                 $data = hex2bin($array[$x]);
                 switch ($modultyp)
                     {
-                    case '9f':
-                            $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
+                    case '83':
+                            $JSONString = json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
-                            IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
+                            IPS_LogMessage('Logamatic FM441 <- 43xx:', $array[$x]);
                             break;
-                    case '9e':
-                            $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
+                    case '84':
+                            $JSONString = json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
-                            IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
-                            break;
+                            IPS_LogMessage('Logamatic FM441 <- 43xx:', $array[$x]);
+                            break;                       
                     case '88':
                             $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
@@ -642,7 +642,16 @@ function DistributeDataToChildren($Monitordaten, $ID, $Bus)
                             if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $Bus, $modultyp);
                             if ($datentyp = 'a7') EncodeMonitorNormalData($array[$x], $ID, $Bus);
                             break;                                
-                                                                                             
+                    case '9e':
+                            $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
+                            IPS_SendDataToChildren($ID, $JSONString);
+                            IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
+                            break;
+                    case '9f':
+                            $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
+                            IPS_SendDataToChildren($ID, $JSONString);
+                            IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
+                            break;
                     }
             }
         return true;    

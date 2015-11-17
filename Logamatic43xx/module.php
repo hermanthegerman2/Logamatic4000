@@ -136,6 +136,14 @@ class Logamatic43xx extends IPSModule
                                                     IPS_LogMessage('Logamatic FM444 <- 43xx:', $stream);
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
                                                     break;
+                                                case '84':
+                                                    IPS_LogMessage('Logamatic FM441 <- 43xx:', $stream);
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => $data->Buffer)));
+                                                    break;
+                                                case '82':
+                                                    IPS_LogMessage('Logamatic FM441 <- 43xx:', $stream);
+                                                    $this->SendDataToChildren(json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => $data->Buffer)));
+                                                    break;                                                
                                                 case '9e':
                                                     IPS_LogMessage('Logamatic FM443 <- 43xx:', $stream);
                                                     $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data->Buffer)));
