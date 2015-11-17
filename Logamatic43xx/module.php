@@ -173,7 +173,7 @@ class Logamatic43xx extends IPSModule
                                         
                                     case 'ac':   // AC Monitordaten komplett übertragen
                                         $Monitordaten = GetValueString($monitorID);
-                                        DistributeDataToChildren(GetValueString($Monitordaten));
+                                        DistributeDataToChildren($Monitordaten);
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
@@ -188,7 +188,7 @@ class Logamatic43xx extends IPSModule
         
 ################## DUMMYS / WOARKAROUNDS - protected
     
-    protected function DistributeDataToChildren($Monitordaten)
+    function DistributeDataToChildren($Monitordaten)
     {
         $array = str_split($Monitordaten, 44);
         for ( $x = 0; $x < count ( $array ); $x++ )
