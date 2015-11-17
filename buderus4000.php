@@ -470,7 +470,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-                        if ($typ = $Modultyp)
+                        if ($typ === $Modultyp)
                         {
                             if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
                             {
@@ -500,7 +500,8 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
                             else
                             IPS_LogMessage('buderus4000', 'EncodeMonitorDirektData für falsche Bus-Adresse');
                         }
-                        else return $array[$x];
+                        else
+                        IPS_LogMessage('buderus4000', $array[$x]);
                         }
                 return true;
     }
