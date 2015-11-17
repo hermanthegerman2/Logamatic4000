@@ -41,7 +41,7 @@ class ZM432 extends IPSModule
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
-        if ($modultyp === '88')
+        if ($modultyp == '88')
             {
         	switch ($datentyp)
                                     {                                   
@@ -54,7 +54,7 @@ class ZM432 extends IPSModule
                                     
                                     case 'ab':
                                         IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
-                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus);
+                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
                                         break;                                  
                                                                    
                                     }

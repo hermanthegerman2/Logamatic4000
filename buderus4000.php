@@ -463,14 +463,16 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
                 return $InstanzID;
    }
 
-function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
+function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
     {           
                     $Bus = 1;
                     $array = str_split($Monitordaten, 44);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
                         $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-                        if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
+                        if ($typ = $Modultyp)
+                        {
+                            if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
                             {
                             switch (substr($array[$x], 0, 2))
          			{
@@ -495,8 +497,10 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus)
                                         }
                                 }
                             }
-                        else
+                            else
                             IPS_LogMessage('buderus4000', 'EncodeMonitorDirektData für falsche Bus-Adresse');
+                        }
+                        else return $array[$x];
                         }
                 return true;
     }

@@ -23,7 +23,51 @@ class FM441 extends IPSModule
          
     }        
      
+     protected function SendDataToParent($data)
+    {
+      
+        $JSONString = json_encode(Array('DataID' => '{054466C5-C0E0-46C6-82D7-29A2FAE4276C}', 'Buffer' => utf8_encode($data)));
+       
+        IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
+        // Daten senden
+        IPS_SendDataToParent($this->InstanceID, $JSONString);
+        
+        return true;
+    }
+    
+    public function ReceiveData($JSONString)
+    {
+        $data = json_decode($JSONString);
+        IPS_LogMessage('Logamatic FM441 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
+        $stream = bin2hex(utf8_decode($data->Buffer));
+        $datentyp = substr($stream, 0, 2);
+        $bus = substr($stream, 4, 2);
+        $modultyp = substr($stream, 8, 2);
+        if ($modultyp == '82')
+            {
+        	switch ($datentyp)
+                                    {                                   
+                                                                     
+                                    case 'a7':   // A7 Monitordaten Normalmodus
 
+                                        IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                                        break;
+                                    
+                                    case 'ab':
+                                        IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
+                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
+                                        break;                                  
+                                                                   
+                                    }
+            }
+        else
+        {
+            return false;
+        }
+        $stream = '';
+        return true;             
+    }
     
         
 ################## DUMMYS / WOARKAROUNDS - protected
