@@ -168,12 +168,12 @@ class Logamatic43xx extends IPSModule
                                         $head = GetValueString($monitorID);
                                         $Monitordaten = $head.$stream;
                                         SetValueString($monitorID, $Monitordaten);
-                                        if (substr($stream, -12, 4) == 'ac00') DistributeDataToChildren($Monitordaten);                                      
+                                        if (substr($stream, -12, 4) == 'ac00') DistributeDataToChildren($Monitordaten,  $this->InstanceID, $bus);                                     
                                         break;
                                         
                                     case 'ac':   // AC Monitordaten komplett übertragen
                                         $Monitordaten = GetValueString($monitorID);
-                                        DistributeDataToChildren($Monitordaten);
+                                        DistributeDataToChildren($Monitordaten,  $this->InstanceID, $bus);
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
