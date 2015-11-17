@@ -466,6 +466,7 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
 function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
     {           
                     $Bus = 1;
+                    $Modultyp = ord(hex2bin($Modultyp));
                     $array = str_split($Monitordaten, 44);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
