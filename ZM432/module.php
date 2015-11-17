@@ -33,7 +33,7 @@ class ZM432 extends IPSModule
         return true;
     }
     
-    protected function ReceiveData($JSONString)
+    public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('Logamatic ZM432 Receive Data:', bin2hex(utf8_decode($data->Buffer)));

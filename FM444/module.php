@@ -22,7 +22,7 @@ class FM444 extends IPSModule
             
     }        
     
-    public function SendDataToParent($data)
+    protected function SendDataToParent($data)
     {
       
         $JSONString = json_encode(Array('DataID' => '{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}', 'Buffer' => utf8_encode($data)));
