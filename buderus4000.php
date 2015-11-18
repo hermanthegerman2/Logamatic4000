@@ -540,12 +540,18 @@ function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
     return true;
     }
 
-function EncodeCyclicEventData ($EinstellPar, $ID, $Bus, $Datentyp)
+function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
 {
-    $Bus = 1;
     $array = str_split($EinstellPar, 44);
+    
 
 }
+
+function CalculateTimeValue ($value)
+{
+ 
+}
+
     
 function EncodeVariableData($parentID, $typ)
     {
