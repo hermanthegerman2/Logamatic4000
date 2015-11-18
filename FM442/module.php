@@ -42,7 +42,7 @@ class FM442 extends IPSModule
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
-        if ($modultyp == '80')
+        if ($modultyp == '80' or $modultyp == '81')
             {
         	switch ($datentyp)
                                     {                                   
