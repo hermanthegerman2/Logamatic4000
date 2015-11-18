@@ -57,8 +57,10 @@ class FM442 extends IPSModule
                                     case 'ab':
                                         IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
                                         EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
-                                        break;                                  
-                                                                   
+                                        break;
+                                    
+                                    case '11':
+                                        IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse '.$bus.' Schaltuhr :'.$stream);
                                     }
             }
         else
