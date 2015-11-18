@@ -1,7 +1,8 @@
 {	
 	"elements":
 	[
-            { "name": "HK1", "type": "ValidationTextBox", "caption": "Name Heizkreis 1" }
+            { "name": "HK1", "type": "ValidationTextBox", "caption": "Heizkreis 1" },
+            { "name": "HK2", "type": "ValidationTextBox", "caption": "Heizkreis 2" }
         ],
         
         "status":
