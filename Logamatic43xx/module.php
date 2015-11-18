@@ -176,6 +176,7 @@ class Logamatic43xx extends IPSModule
                                     
                                     case 'aa':   // AA Einstellbare Parameter komplett übertragen
                                         IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($EinstellParID)).' Bytes');
+                                        $EinstellPar = GetValueString($EinstellParID);
                                         DistributeDataToChildren($EinstellPar,  $this->InstanceID, $bus);
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
