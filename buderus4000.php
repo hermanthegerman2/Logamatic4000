@@ -539,6 +539,13 @@ function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
     {
     return true;
     }
+
+function EncodeCyclicEventData ($EinstellPar, $ID, $Bus, $Datentyp)
+{
+    $Bus = 1;
+    $array = str_split($EinstellPar, 44);
+
+}
     
 function EncodeVariableData($parentID, $typ)
     {
@@ -652,7 +659,7 @@ function DistributeDataToChildren($Monitordaten, $ID, $Bus)
                             if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $Bus, $modultyp);
                             if ($datentyp = 'a7') EncodeMonitorNormalData($array[$x], $ID, $Bus);
                             break;                                
-                    case '9e':
+                    case '9e' or '24':
                             $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
                             IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
