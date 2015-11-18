@@ -20,6 +20,9 @@ class FM442 extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         $this->SetStatus(102);
+        $this->RegisterVariableString('Schaltuhr '.ReadPropertyString('HK1'), '', '', -4);
+        $this->RegisterVariableString('Schaltuhr '.ReadPropertyString('HK2'), '', '', -4);
+        //IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
         
          
     }        
@@ -61,6 +64,7 @@ class FM442 extends IPSModule
                                     
                                     case 'a9':
                                         IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. '.$modultyp.' Daten :'.$stream);
+                                        EncodeCyclicEventData($EinstellPar, $this->InstanceID, $modultyp);
                                     }
             }
         else
