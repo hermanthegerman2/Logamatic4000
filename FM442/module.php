@@ -43,7 +43,7 @@ class FM442 extends IPSModule
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
-        if ($modultyp == '80' or $modultyp == '81')
+        if ($modultyp == '80' or $modultyp == '81' or $modultyp == '11' or $modultyp == '12')
             {
         	switch ($datentyp)
                                     {                                   
@@ -59,8 +59,8 @@ class FM442 extends IPSModule
                                         EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
                                         break;
                                     
-                                    case '11':
-                                        IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse '.$bus.' Schaltuhr :'.$stream);
+                                    case 'a9':
+                                        IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. '.$modultyp.' Daten :'.$stream);
                                     }
             }
         else
