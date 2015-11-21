@@ -643,7 +643,8 @@ function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
       						   if ($hour != 24) @IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
       						   echo  $SchaltpunktID." : ".$tag." : " .$hour.":".$min." : ".$ein." | ";
       						   
-								}
+            }
+            return true;
 	}
 
 function CalculateTimeValue ($value)
