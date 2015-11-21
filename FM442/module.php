@@ -63,7 +63,7 @@ class FM442 extends IPSModule
                                     
                                     case 'a9':
                                         IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. '.$modultyp.' Daten :'.$stream);
-                                        EncodeCyclicEventData($EinstellPar, $this->InstanceID, $modultyp);
+                                        EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
                                         break;
                                     }
             }
