@@ -64,9 +64,12 @@ function Buderus ($typ, $offset, $value)
     $Buderus[27][-1] = array ("Kanal 8");
     $Buderus[28][-1] = array ("Heizkreis 8");
     $Buderus[29][-1] = array ("Kanal 9");
+    $Buderus[30][-1] = array ("");
     $Buderus[31][-1] = array ("Kanal 10");
     $Buderus[32][-1] = array ("Strategie");
+    $Buderus[35][-1] = array ("");
     $Buderus[36][-1] = array ("Solar");
+    $Buderus[37][-1] = array ("");
     $Buderus[38][-1] = array ("FM458");
     
     $Buderus[128][-1] = array ("Heizkreis 1", "17");
