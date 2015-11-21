@@ -41,6 +41,34 @@ class Command extends stdClass
 }
 function Buderus ($typ, $offset, $value)
     {
+    
+    $Buderus[7][-1] = array ("Heizkreis 1");
+    $Buderus[8][-1] = array ("Heizkreis 2");
+    $Buderus[9][-1] = array ("Heizkreis 3");
+    $Buderus[10][-1] = array ("Heizkreis 4");
+    $Buderus[11][-1] = array ("Außenparameter");
+    $Buderus[12][-1] = array ("Warmwasser");
+    $Buderus[13][-1] = array ("Konfiguration");
+    $Buderus[14][-1] = array ("UBA");
+    $Buderus[16][-1] = array ("Kessel");
+    $Buderus[17][-1] = array ("Kanal 1");
+    $Buderus[18][-1] = array ("Kanal 2");
+    $Buderus[19][-1] = array ("Kanal 3");
+    $Buderus[20][-1] = array ("Kanal 4");
+    $Buderus[21][-1] = array ("Kanal 5");
+    $Buderus[22][-1] = array ("Heizkreis 5");
+    $Buderus[23][-1] = array ("Kanal 6");
+    $Buderus[24][-1] = array ("Heizkreis 6");
+    $Buderus[25][-1] = array ("Kanal 7");
+    $Buderus[26][-1] = array ("Heizkreis 7");
+    $Buderus[27][-1] = array ("Kanal 8");
+    $Buderus[28][-1] = array ("Heizkreis 8");
+    $Buderus[29][-1] = array ("Kanal 9");
+    $Buderus[31][-1] = array ("Kanal 10");
+    $Buderus[32][-1] = array ("Strategie");
+    $Buderus[36][-1] = array ("Solar");
+    $Buderus[38][-1] = array ("FM458");
+    
     $Buderus[128][-1] = array ("Heizkreis 1", "17");
     $Buderus[128][0] = array ("Betriebswerte", "Bit", "Ausschaltoptimierung", "Einschaltoptimierung", "Automatik", "Warmwasservorrang", "Estrichtrocknung", "Ferien", "Frostschutz", "Manuell");
     $Buderus[128][1] = array ("Betriebswerte 2", "Bit", "Sommer", "Tag", "keine Kommunikation mit FB", "FB fehlerhaft", "Fehler Vorlauffühler", "maximaler Vorlauf", "externer Störeingang", "Party / Pause");
@@ -463,6 +491,32 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
                 return $InstanzID;
    }
 
+function CheckEventVariable($typ, $parentID)
+   {
+		//$typ = ord(hex2bin($typ));
+		$name = Buderus($typ, -1, 0);
+  		//print $typ." ".$name;
+      $InstanzID = @IPS_GetEventIDByName($name, $parentID);
+      if ($InstanzID === false)
+      	{
+            $InstanzID = IPS_CreateEvent(2);
+         	IPS_SetName($InstanzID, $name); // Instanz benennen
+            IPS_SetParent($InstanzID, $parentID);
+            IPS_SetEventActive($InstanzID, true);
+            IPS_SetEventScheduleAction($InstanzID, 0, "Aus", 0x0000FF, '');
+            IPS_SetEventScheduleAction($InstanzID, 1, "Ein", 0xFF0000, '');
+            IPS_SetEventScheduleGroup($InstanzID, 0, 1);
+            IPS_SetEventScheduleGroup($InstanzID, 1, 2);
+            IPS_SetEventScheduleGroup($InstanzID, 2, 4);
+            IPS_SetEventScheduleGroup($InstanzID, 3, 8);
+            IPS_SetEventScheduleGroup($InstanzID, 4, 16);
+            IPS_SetEventScheduleGroup($InstanzID, 5, 32);
+            IPS_SetEventScheduleGroup($InstanzID, 6, 64);
+        }
+      //echo "ID: ".$InstanzID." ".$name."\n";
+      return $InstanzID;
+   }
+   
 function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
     {           
                     $Bus = 1;
@@ -541,11 +595,53 @@ function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
     }
 
 function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
-{
+	{
+	 $modultyp = ord(hex2bin($modultyp));
     $array = str_split($EinstellPar, 44);
-    
-
-}
+    $array1 = '';
+    for ( $x = 0; $x < count ( $array ); $x++ )
+      {
+       	if (substr($array[$x], 0, 2) == 'a9')
+           	{
+           		$typ = ord(hex2bin(substr($array[$x], 8, 2)));
+           		$offset = ord(hex2bin(substr($array[$x], 12, 2)));
+           		if ($typ == $modultyp and $offset != '0')
+						{
+						   $InstanzID = CheckEventVariable($typ, $ID);
+						   print $array[$x]." ";
+						   $data = substr($array[$x],16,24);
+						   $array1=$array1.$data;
+         			}
+					 
+           	}
+      }
+      
+      print "\n".$array1."\n";
+      $SchaltpunktID = 0;
+      $tag = 0;
+      for ( $y = 0; $y < strlen($array1); $y=$y+8 )
+      						{
+      						   //print $array1[$y].$array1[$y+1]."\n";
+      						   $byte1 = str_pad(base_convert(ord(hex2bin($array1[$y].$array1[$y+1])),16,2),8,"0",STR_PAD_LEFT);
+      						   $ein = (int)(substr($byte1,-1,1));
+                           $day = bindec(substr($byte1,0,3));
+                           if ($day == $tag)
+										{
+											$SchaltpunktID++;
+										}
+									else
+										{
+											$SchaltpunktID=0 ;
+										}
+                           $tag = $day;
+      						   $byte2 = ord(hex2bin($array1[$y+4].$array1[$y+5]));
+      						   $hour = (int)($byte2/6);
+      						   $min = $byte2%6*10;
+      						   if ($hour != 24) @IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
+      						   echo  $SchaltpunktID." : ".$tag." : " .$hour.":".$min." : ".$ein." | ";
+      						   
+								}
+	}
 
 function CalculateTimeValue ($value)
 {
