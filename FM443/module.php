@@ -1,4 +1,4 @@
-<?php
+ <?php
 require_once(__DIR__ . "/../buderus4000.php");  // diverse Klassen
 
 class FM443 extends IPSModule
