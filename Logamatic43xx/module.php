@@ -55,10 +55,14 @@ class Logamatic43xx extends IPSModule
         SetValueString($EinstellParID, '');
         return true;
     }
+
     public function RequestModule()
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false) Logamatic_RequestMonitordaten($this->InstanceID);        
+        if ($ParentID == false) Logamatic_RequestMonitordaten($this->InstanceID);
+        $monitorID = @GetIDForIdent('Monitordaten');
+        $Monitordaten = GetValueString($monitorID);
+        EncodeKonfigurationData($Monitordaten, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
         $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
         for ( $x = 0; $x < count ( $array ); $x++ )
            {    

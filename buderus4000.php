@@ -533,8 +533,8 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
                             if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
                             {
                             switch (substr($array[$x], 0, 2))
-         			{
-         			case 'ab':
+         			        {
+         			            case 'ab':
                                     IPS_LogMessage('Logamatic Gateway', 'Array: '.$array[$x]);
                                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                                     $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
@@ -591,6 +591,38 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
                     }
                     return true;
     }
+
+function EncodeKonfigurationData($Monitordaten, $ID, $Bus)
+{
+    $Bus = 1;
+    $array = str_split($Monitordaten, 24);
+    for ( $x = 0; $x < count ( $array ); $x++ )
+    {
+        if (substr($array[$x], 0, 2) == 'a7')
+        {
+            $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+            if ($Bus === ord(hex2bin(substr($array[$x], 4, 2))))
+            {
+                switch ($typ) {
+                    case 137:
+                        IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse ' . $Bus . ' Array: ' . $array[$x]);
+                        $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                        $substring = substr($array[$x], 16, 2);
+                        IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse ' . $Bus . ' Data: ' . $typ . ' : ' . $offset . ' : ' . $substring);
+                        $var = CheckVariable($typ, -1, 0, $ID);
+                        $value = GetValueString($var);
+                        $newvalue = substr_replace($value, $substring, $offset * 2, 2);
+                        SetValueString($var, $newvalue);
+                        EncodeVariableData($ID, $typ);
+                        break;
+                }
+            }
+            else
+                IPS_LogMessage('buderus4000', 'EncodeKonfigurationData für falsche Bus-Adresse');
+        }
+    }
+    return true;
+}
 
 function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
     {
@@ -694,7 +726,7 @@ function EncodeVariableData($parentID, $typ)
                                         $x++;
                                         $x++;
                                         break;
-                        	case "Betr2":
+                        	    case "Betr2":
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "Minutes", $ID),(ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2)+ord(hex2bin(substr($value,($x*2)+1, 2)))*Buderus($typ, $x+1, 2)+ord(hex2bin(substr($value,($x*2)+2,2)))*Buderus($typ, $x+2, 2))/60); //
                                         $x++;
                                         $x++;
