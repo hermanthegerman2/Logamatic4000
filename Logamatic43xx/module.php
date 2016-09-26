@@ -208,7 +208,50 @@ class Logamatic43xx extends IPSModule
         $stream = '';
         return true;             
     }
-        
+    public function DistributeDataToChildren($Monitordaten, $ID, $Bus)
+    {
+        $array = str_split($Monitordaten, 44);
+        for ( $x = 0; $x < count ( $array ); $x++ )
+        {
+            $modultyp = ord(hex2bin(substr($array[$x], 8, 2)));
+            $datentyp = (substr($array[$x], 0, 2));
+            IPS_LogMessage('DDC Modultyp', $modultyp." Datentyp ".$datentyp);
+            $data = hex2bin($array[$x]);
+            switch ($modultyp)
+            {
+                case '128' or '129':
+                    $JSONString = json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => utf8_encode($data)));
+                    IPS_SendDataToChildren($ID, $JSONString);
+                    IPS_LogMessage('DDC Logamatic FM442', $array[$x]);
+                    break;
+                case '130' or '132':
+                    $JSONString = json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => utf8_encode($data)));
+                    IPS_SendDataToChildren($ID, $JSONString);
+                    IPS_LogMessage('DDC Logamatic FM441', $array[$x]);
+                    break;
+                case '136':
+                    $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
+                    IPS_SendDataToChildren($ID, $JSONString);
+                    IPS_LogMessage('DDC Logamatic ZM432', $array[$x]);
+                    break;
+                case '137':
+                    if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $Bus, $modultyp);
+                    if ($datentyp = 'a7') EncodeMonitorNormalData($array[$x], $ID, $Bus);
+                    break;
+                case '158':
+                    $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
+                    IPS_SendDataToChildren($ID, $JSONString);
+                    IPS_LogMessage('DDC Logamatic FM443', $array[$x]);
+                    break;
+                case '159':
+                    $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
+                    IPS_SendDataToChildren($ID, $JSONString);
+                    IPS_LogMessage('DDC Logamatic FM444', $array[$x]);
+                    break;
+            }
+        }
+        return true;
+    }
 ################## DUMMYS / WOARKAROUNDS - protected
     
     protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
