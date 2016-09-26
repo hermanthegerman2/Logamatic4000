@@ -447,7 +447,7 @@ $Buderus[159][39] = array ("","");
 $Buderus[159][40] = array ("","");
 $Buderus[159][41] = array ("","");
 
-    echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
+    //echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
     $name = $Buderus[$typ][$offset][$value];
     if ($name === false) 
         {
@@ -474,7 +474,7 @@ function CheckVariable($typ, $offset, $value, $parentID)
                         IPS_SetName($InstanzID, $name); // Instanz benennen
                         IPS_SetParent($InstanzID, $parentID);
                     }
-                //echo "ID: ".$InstanzID." ".$name."\n";
+                echo "ID: ".$InstanzID." ".$name."\n";
                 return $InstanzID;   
                 }
                 
