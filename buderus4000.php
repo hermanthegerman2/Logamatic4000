@@ -402,7 +402,6 @@ $Buderus[158][32] = array ("Betriebsstunden Speicher 2", "Betr2", "1", "min");
 $Buderus[158][33] = array ("","");
 $Buderus[158][34] = array ("","");
 $Buderus[158][35] = array ("","");
-        $Buderus[158][45] = array ("","");
 
 $Buderus[159][-1] = array ("Alternativer WE", "41");
 $Buderus[159][0] = array ("Wärmeerzeuger Vorlauf", "Temp", "1", "°C");
@@ -448,7 +447,7 @@ $Buderus[159][39] = array ("","");
 $Buderus[159][40] = array ("","");
 $Buderus[159][41] = array ("","");
 
-    //echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
+    echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
     $name = $Buderus[$typ][$offset][$value];
     if ($name === false) 
         {
