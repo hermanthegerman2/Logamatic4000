@@ -222,6 +222,16 @@ class Logamatic43xx extends IPSModule
             $data = hex2bin($array[$x]);
             switch ($modultyp)
             {
+
+                case '89':
+                    if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $Bus, $modultyp);
+                    if ($datentyp = 'a7') EncodeMonitorNormalData($array[$x], $ID, $Bus);
+                    break;
+                case '9f':
+                    $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
+                    IPS_SendDataToChildren($ID, $JSONString);
+                    IPS_LogMessage('DDC Logamatic FM444', $array[$x]);
+                    break;
                 case '80' or '81':
                     $JSONString = json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
@@ -237,19 +247,10 @@ class Logamatic43xx extends IPSModule
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic ZM432', $array[$x]);
                     break;
-                case '89':
-                    if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $Bus, $modultyp);
-                    if ($datentyp = 'a7') EncodeMonitorNormalData($array[$x], $ID, $Bus);
-                    break;
                 case '9e':
                     $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic FM443', $array[$x]);
-                    break;
-                case '9f':
-                    $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
-                    IPS_SendDataToChildren($ID, $JSONString);
-                    IPS_LogMessage('DDC Logamatic FM444', $array[$x]);
                     break;
             }
         }
