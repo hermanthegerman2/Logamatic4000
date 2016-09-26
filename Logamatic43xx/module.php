@@ -176,13 +176,13 @@ class Logamatic43xx extends IPSModule
                                         $head = GetValueString($EinstellParID);
                                         $EinstellPar = $head.$stream;
                                         SetValueString($EinstellParID, $EinstellPar);
-                                        if (substr($stream, -12, 4) == 'aa00') DistributeDataToChildren($EinstellPar,  $this->InstanceID, $bus); 
+                                        if (substr($stream, -12, 4) == 'aa00') $this->DistributeDataToChildren($EinstellPar,  $this->InstanceID, $bus);
                                         break;
                                     
                                     case 'aa':   // AA Einstellbare Parameter komplett übertragen
                                         IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($EinstellParID)).' Bytes');
                                         $EinstellPar = GetValueString($EinstellParID);
-                                        DistributeDataToChildren($EinstellPar,  $this->InstanceID, $bus);
+                                        $this->DistributeDataToChildren($EinstellPar,  $this->InstanceID, $bus);
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
@@ -191,12 +191,12 @@ class Logamatic43xx extends IPSModule
                                         $head = GetValueString($monitorID);
                                         $Monitordaten = $head.$stream;
                                         SetValueString($monitorID, $Monitordaten);
-                                        if (substr($stream, -12, 4) == 'ac00') DistributeDataToChildren($Monitordaten,  $this->InstanceID, $bus);                                     
+                                        if (substr($stream, -12, 4) == 'ac00') $this->DistributeDataToChildren($Monitordaten,  $this->InstanceID, $bus);
                                         break;
                                         
                                     case 'ac':   // AC Monitordaten komplett übertragen
                                         $Monitordaten = GetValueString($monitorID);
-                                        DistributeDataToChildren($Monitordaten,  $this->InstanceID, $bus);
+                                        Dis($Monitordaten,  $this->InstanceID, $bus);
                                         $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
                                         $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                                         break;
@@ -208,42 +208,45 @@ class Logamatic43xx extends IPSModule
         $stream = '';
         return true;             
     }
-    public function DistributeDataToChildren($Monitordaten, $ID, $Bus)
+
+    ################## DUMMYS / WOARKAROUNDS - protected
+
+    protected function DistributeDataToChildren($Monitordaten, $ID, $Bus)
     {
         $array = str_split($Monitordaten, 44);
         for ( $x = 0; $x < count ( $array ); $x++ )
         {
-            $modultyp = ord(hex2bin(substr($array[$x], 8, 2)));
+            $modultyp = substr($array[$x], 8, 2);
             $datentyp = (substr($array[$x], 0, 2));
             IPS_LogMessage('DDC Modultyp', $modultyp." Datentyp ".$datentyp);
             $data = hex2bin($array[$x]);
             switch ($modultyp)
             {
-                case '128' or '129':
+                case '80' or '81':
                     $JSONString = json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic FM442', $array[$x]);
                     break;
-                case '130' or '132':
+                case '82' or '84':
                     $JSONString = json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic FM441', $array[$x]);
                     break;
-                case '136':
+                case '88':
                     $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic ZM432', $array[$x]);
                     break;
-                case '137':
+                case '89':
                     if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $Bus, $modultyp);
                     if ($datentyp = 'a7') EncodeMonitorNormalData($array[$x], $ID, $Bus);
                     break;
-                case '158':
+                case '9e':
                     $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic FM443', $array[$x]);
                     break;
-                case '159':
+                case '9f':
                     $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic FM444', $array[$x]);
@@ -252,8 +255,7 @@ class Logamatic43xx extends IPSModule
         }
         return true;
     }
-################## DUMMYS / WOARKAROUNDS - protected
-    
+
     protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
     {
         if (!IPS_VariableProfileExists($Name))
