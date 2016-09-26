@@ -771,17 +771,17 @@ function DistributeDataToChildren($Monitordaten, $ID, $Bus)
                     case '80' or '81':
                             $JSONString = json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
-                            IPS_LogMessage('Logamatic FM442 <- 43xx:', $array[$x]);
+                            IPS_LogMessage('DDC Logamatic FM442', $array[$x]);
                             break;
                     case '82' or '84':
                             $JSONString = json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
-                            IPS_LogMessage('Logamatic FM441 <- 43xx:', $array[$x]);
+                            IPS_LogMessage('DDC Logamatic FM441', $array[$x]);
                             break;                                         
                     case '88':
                             $JSONString = json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
-                            IPS_LogMessage('Logamatic ZM432 <- 43xx:', $array[$x]);
+                            IPS_LogMessage('DDC Logamatic ZM432', $array[$x]);
                             break;   
                     case '89':
                             if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $Bus, $modultyp);
@@ -790,12 +790,12 @@ function DistributeDataToChildren($Monitordaten, $ID, $Bus)
                     case '9e' or '24':
                             $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
-                            IPS_LogMessage('Logamatic FM443 <- 43xx:', $array[$x]);
+                            IPS_LogMessage('DDC Logamatic FM443', $array[$x]);
                             break;
                     case '9f':
                             $JSONString = json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => utf8_encode($data)));
                             IPS_SendDataToChildren($ID, $JSONString);
-                            IPS_LogMessage('Logamatic FM444 <- 43xx:', $array[$x]);
+                            IPS_LogMessage('DDC Logamatic FM444', $array[$x]);
                             break;
                     }
             }
