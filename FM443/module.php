@@ -25,7 +25,7 @@ class FM443 extends IPSModule
     protected function SendDataToParent($data)
     {
       
-        $JSONString = json_encode(Array('DataID' => '{7DADFA25-C0A9-43C6-81E0-523EA0E6D389}', 'Buffer' => utf8_encode($data)));
+        $JSONString = json_encode(Array('DataID' => '{054466C5-C0E0-46C6-82D7-29A2FAE4276C}', 'Buffer' => utf8_encode($data)));
        
         IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
         // Daten senden
