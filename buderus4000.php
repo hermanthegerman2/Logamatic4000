@@ -661,7 +661,7 @@ function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
         $tag = 0;
         for ( $y = 0; $y < strlen($array1); $y=$y+8 )
             {
-                //print $array1[$y].$array1[$y+1]."\n";
+                print $array1[$y].$array1[$y+1]."\n";
                 $byte1 = str_pad(base_convert(ord(hex2bin($array1[$y].$array1[$y+1])),16,2),8,"0",STR_PAD_LEFT);
                 $ein = (int)(substr($byte1,-1,1));
                 $day = bindec(substr($byte1,0,3));
