@@ -46,30 +46,28 @@ class FM442 extends IPSModule
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
-        if ($modultyp == '80' or $modultyp == '81' or $modultyp == '11' or $modultyp == '12')
-            {
-        	switch ($datentyp)
-                                    {                                   
-                                                                     
-                                    case 'a7':   // A7 Monitordaten Normalmodus
-                                        IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
-                                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
-                                        break;
-                                    
-                                    case 'ab':
-                                        IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
-                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
-                                        break;
-                                    
-                                    case 'a9':
-                                        IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. '.$modultyp.' Daten :'.$stream);
-                                        EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
-                                        break;
-                                    }
-            }
-        else
-        {
-            return false;
+        switch ($modultyp) {
+            case '80':
+            case '81':
+                switch ($datentyp) {
+                    case 'a7':   // A7 Monitordaten Normalmodus
+                        IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Normalmodus :' . $stream);
+                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                        break;
+                    case 'ab':
+                        IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Direktmodus :' . $stream);
+                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
+                        break;
+                }
+            case '11':
+            case '12':
+                switch ($datentyp) {
+                    case 'a9':
+                        IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
+                        EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
+                        break;
+                }
+                return false;
         }
         $stream = '';
         return true;             
