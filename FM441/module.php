@@ -44,33 +44,35 @@ class FM441 extends IPSModule
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
-        if ($modultyp == '84' or $modultyp == '82')
-            {
-        	switch ($datentyp)
-                                    {                                   
-                                                                     
-                                    case 'a7':   // A7 Monitordaten Normalmodus
-
-                                        IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
-                                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
-                                        break;
-                                    
-                                    case 'ab':
-                                        IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
-                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
-                                        break;                                  
-                                                                   
-                                    }
-            }
-        else
-        {
+        switch ($modultyp) {
+            case '82':
+            case '84':
+                switch ($datentyp) {
+                    case 'a7':   // A7 Monitordaten Normalmodus
+                        IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                        break;
+                    case 'ab':
+                        IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
+                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
+                        break;
+                }
+            case '13':
+            case '14':
+                switch ($datentyp) {
+                    case 'a9':
+                        IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
+                        EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
+                        break;
+                }
             return false;
         }
         $stream = '';
-        return true;             
+        return true;
     }
-    
-        
+
+
+
 ################## DUMMYS / WOARKAROUNDS - protected
  
     protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
