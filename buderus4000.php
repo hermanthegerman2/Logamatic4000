@@ -492,32 +492,6 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
                 return $InstanzID;
    }
 
-function CheckEventVariable($typ, $parentID)
-   {
-		$typ = ord(hex2bin($typ));
-		$name = Buderus($typ, -1, 0);
-  		//print $typ." ".$name;
-        $InstanzID = @IPS_GetEventIDByName($name, $parentID);
-        if ($InstanzID === false)
-      	{
-            $InstanzID = IPS_CreateEvent(2);
-         	IPS_SetName($InstanzID, $name); // Instanz benennen
-            IPS_SetParent($InstanzID, $parentID);
-            IPS_SetEventActive($InstanzID, true);
-            IPS_SetEventScheduleAction($InstanzID, 0, "Aus", 0x0000FF, '');
-            IPS_SetEventScheduleAction($InstanzID, 1, "Ein", 0xFF0000, '');
-            IPS_SetEventScheduleGroup($InstanzID, 0, 1);
-            IPS_SetEventScheduleGroup($InstanzID, 1, 2);
-            IPS_SetEventScheduleGroup($InstanzID, 2, 4);
-            IPS_SetEventScheduleGroup($InstanzID, 3, 8);
-            IPS_SetEventScheduleGroup($InstanzID, 4, 16);
-            IPS_SetEventScheduleGroup($InstanzID, 5, 32);
-            IPS_SetEventScheduleGroup($InstanzID, 6, 64);
-        }
-        //echo "ID: ".$InstanzID." ".$name."\n";
-        return $InstanzID;
-   }
-   
 function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
     {           
                     $Bus = 1;
@@ -626,6 +600,39 @@ function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
     {
     return true;
     }
+
+function CheckEventVariable($typ, $parentID)
+{
+    $typ = ord(hex2bin($typ));
+    $name = Buderus($typ, -1, 0);
+    $subname = substr($name, 0, 5);
+    if ($subname === "Kanal")
+    {
+        //print substr($name, 0, 5);
+        $InstanzID = @IPS_GetEventIDByName($name, $parentID);
+        if ($InstanzID === false)
+        {
+            $InstanzID = IPS_CreateEvent(2);
+            IPS_SetName($InstanzID, $name); // Instanz benennen
+            IPS_SetParent($InstanzID, $parentID);
+            IPS_SetEventActive($InstanzID, true);
+            IPS_SetEventScheduleAction($InstanzID, 0, "Aus", 0x0000FF, '');
+            IPS_SetEventScheduleAction($InstanzID, 1, "Ein", 0xFF0000, '');
+            IPS_SetEventScheduleGroup($InstanzID, 0, 1);
+            IPS_SetEventScheduleGroup($InstanzID, 1, 2);
+            IPS_SetEventScheduleGroup($InstanzID, 2, 4);
+            IPS_SetEventScheduleGroup($InstanzID, 3, 8);
+            IPS_SetEventScheduleGroup($InstanzID, 4, 16);
+            IPS_SetEventScheduleGroup($InstanzID, 5, 32);
+            IPS_SetEventScheduleGroup($InstanzID, 6, 64);
+            return $InstanzID;
+        }
+        return true;
+        //echo "ID: ".$InstanzID." ".$name."\n";
+    }
+    //echo "ID: ".$typ." ".$name."\n";
+    return true;
+}
 
 function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
 	{
