@@ -20,8 +20,6 @@ class FM441 extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         $this->SetStatus(102);
-        
-         
     }        
      
      protected function SendDataToParent($data)
@@ -59,9 +57,10 @@ class FM441 extends IPSModule
                 }
             case '13':
             case '14':
+            case '1f':
                 switch ($datentyp) {
                     case 'a9':
-                        IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
+                        IPS_LogMessage('Logamatic FM441', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
                         EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
                         break;
                 }

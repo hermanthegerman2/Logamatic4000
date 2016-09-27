@@ -19,7 +19,6 @@ class ZM432 extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         $this->SetStatus(102);
-            
     }        
      protected function SendDataToParent($data)
     {
@@ -41,31 +40,32 @@ class ZM432 extends IPSModule
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
-        if ($modultyp == '88')
-            {
-        	switch ($datentyp)
-                                    {                                   
-                                                                     
-                                    case 'a7':   // A7 Monitordaten Normalmodus
-
-                                        IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
-                                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
-                                        break;
+        switch ($modultyp) {
+            case '88':
+                switch ($datentyp) {
+                    case 'a7':   // A7 Monitordaten Normalmodus
+                        IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                        break;
                                     
-                                    case 'ab':
-                                        IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
-                                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
-                                        break;                                  
-                                                                   
-                                    }
-            }
-        else
-        {
-            return false;
+                    case 'ab':
+                        IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
+                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
+                        break;
+                }
+            case '1d':
+                switch ($datentyp) {
+                    case 'a9':
+                        IPS_LogMessage('Logamatic ZM432', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
+                        EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
+                        break;
+                }
+                return false;
         }
         $stream = '';
-        return true;             
-    } 
+        return true;
+    }
+
 
     
         

@@ -20,11 +20,6 @@ class FM442 extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         $this->SetStatus(102);
-        //$this->RegisterVariableString('Schaltuhr '.ReadPropertyString('HK1'), '', '', -4);
-        //$this->RegisterVariableString('Schaltuhr '.ReadPropertyString('HK2'), '', '', -4);
-        //IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
-        
-         
     }        
      protected function SendDataToParent($data)
     {
@@ -70,8 +65,8 @@ class FM442 extends IPSModule
                 return false;
         }
         $stream = '';
-        return true;             
-    }     
+        return true;
+    }
 
     
         
