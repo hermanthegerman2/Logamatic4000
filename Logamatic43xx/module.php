@@ -235,18 +235,18 @@ class Logamatic43xx extends IPSModule
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic 43xx -> ZM432', $array[$x]);
                     break;
-                case '82': case '09': case '84': case '0c':
+                case '82': case '09': case '84': case '0c': case '13': case '14':
                     $JSONString = json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic 43xx -> FM441', $array[$x]);
                     break;
-                case '80': case '81': case '07': case '08':
+                case '80': case '81': case '07': case '08': case '11': case '12':
                     $JSONString = json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DDC Logamatic 43xx -> FM442', $array[$x]);
                     break;
-                case '11': case '12': case '13': case '14': case '15': case '17': case '19': case '1b': case '1d': case '1f':
-
+                case '15': case '17': case '19': case '1b': case '1d': case '1f':
+                    break;
 
             }
         }
