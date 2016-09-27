@@ -220,7 +220,7 @@ function Buderus ($typ, $offset, $value)
     $Buderus[136][5] = array ("Kesselintegral_LB", "KKs", "1", "KKs");
     $Buderus[136][6] = array ("Kessel Bit Fehler", "Bit", "Brennerstörung", "Kesselfühler", "Zusatzfühler", "Kessel bleibt kalt", "Abgas Fühler", "Abgas über Grenzwert", "Sicherheitskette ausgelöst", "externe Störung");
     $Buderus[136][7] = array ("Kessel Bit Betrieb", "Bit", "Abgastest", "Betriebsstunden 1. Stufe", "Kesselschutz", "unter Betrieb", "Leistung frei", "Leistung hoch", "Betriebsstunden 2. Stufe", "frei");
-    $Buderus[136][8] = array ("Brenner Ansteuerung", "Bit", "Kessel aus", "1. Stufe an", "2.Stufe an bzw. Modulation frei", "frei", "frei", "frei", "frei", "frei")
+    $Buderus[136][8] = array ("Brenner Ansteuerung", "Bit", "Kessel aus", "1. Stufe an", "2.Stufe an bzw. Modulation frei", "frei", "frei", "frei", "frei", "frei");
     $Buderus[136][9] = array ("Abgastemperatur", "Temp", "1", "°C");
     $Buderus[136][10] = array ("Mod. Brenner Stellglied", "Prozent", "1", "%");
     $Buderus[136][11] = array ("Mod. Brenner Ist Leistung", "Prozent", "1", "%");
