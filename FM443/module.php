@@ -111,12 +111,6 @@ class FM443 extends IPSModule
              parent::SetStatus($InstanceStatus);
      }
 
-     protected function SetStatus($InstanceStatus)
-    {
-        if ($InstanceStatus <> IPS_GetInstance($this->InstanceID)['InstanceStatus'])
-            parent::SetStatus($InstanceStatus);
-    }
-
      ################## SEMAPHOREN Helper  - private
      private function lock($ident)
      {
