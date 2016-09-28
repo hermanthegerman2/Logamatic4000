@@ -11,7 +11,7 @@ class Logamatic43xx extends IPSModule
 
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
-        $this->RegisterPropertyInteger ('Bus', '1');
+        $this->RegisterPropertyInteger ('Bus', 1);
     }
 
     public function ApplyChanges()
@@ -23,10 +23,11 @@ class Logamatic43xx extends IPSModule
         else
             $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
             $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
+            //$this->RegisterPropertyInteger ('Bus', '1');
             //$this->RegisterVariableString('Monitordaten', 'Monitordaten', '', -4);
-            IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
+            $this->IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
             //$this->RegisterVariableString('EinstellPar', 'EinstellPar', '', -4);
-            IPS_SetHidden($this->GetIDForIdent('Einstellparameter'), true);
+            $this->IPS_SetHidden($this->GetIDForIdent('Einstellparameter'), true);
             $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
             $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
             $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
