@@ -3,13 +3,13 @@
 class Command extends stdClass
 {
     const NUL = 0x00;
-    const leer = 0x65;          // auufüllen der einstellbaren Parameter
-    const EinstellPar = 0xA1;   // Kommando einstellbare Parameter empfangen
-    const Monitordaten = 0xA2;  // Kommando Monitordaten anfordern
-    const Datenblock = 0xA3;    // Kommando Datenblock anfordern
-    const Parameter = 0xB0;     // Kommando einstellbare Parameter senden
-    const Normalmodus = 0xDC;   // Kommando Umschalten von Direktmodus -> Normalmodus
-    const Direktmodus = 0xDD;   // Kommando Umschalten von Normalmodus -> Direktmodus
+    const leer = 0x65;                  // auufüllen der einstellbaren Parameter
+    const Einstellparameter = 0xA1;     // Kommando einstellbare Parameter empfangen
+    const Monitordaten = 0xA2;          // Kommando Monitordaten anfordern
+    const Datenblock = 0xA3;            // Kommando Datenblock anfordern
+    const Parameter = 0xB0;             // Kommando einstellbare Parameter senden
+    const Normalmodus = 0xDC;           // Kommando Umschalten von Direktmodus -> Normalmodus
+    const Direktmodus = 0xDD;           // Kommando Umschalten von Normalmodus -> Direktmodus
 
     const Heizkreis1 = 0x07;    // Datentyp für Heizkreis1 der einstellbaren Parameter
     const Heizkreis2 = 0x08;    // Datentyp für Heizkreis1 der einstellbaren Parameter

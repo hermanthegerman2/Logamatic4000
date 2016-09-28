@@ -28,15 +28,15 @@ class Logamatic43xx extends IPSModule
                 $this->SetStatus(203);
             }
             else
-            $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
-            $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
-            $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
-            $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
-            $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
-            $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
-            $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
-            $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
-            $this->SetStatus(102);
+                $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
+                $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
+                $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
+                $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
+                $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
+                $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
+                $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
+                $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
+                $this->SetStatus(102);
     }        
      
 
@@ -54,7 +54,7 @@ class Logamatic43xx extends IPSModule
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $data = chr(Command::EinstellPar).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
+        $data = chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         //$EinstellParID = $this->GetIDForIdent('EinstellPar');
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
@@ -76,38 +76,36 @@ class Logamatic43xx extends IPSModule
                 $Modultyp = GetValueString($Slot); 
                 switch ($Modultyp)
                 {
-                case 'FM441':
+                    case 'FM441':
                         $InsID = IPS_CreateInstance('{08E2244F-D084-4574-9EE7-C6A23A008CFA}');
                         IPS_SetName($InsID, 'Logamatic FM441');
                         IPS_SetParent($InsID, $this->InstanceID);
                         IPS_LogMessage('Logamatic Modul FM441 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
                         break;
-                case 'FM442':
+                    case 'FM442':
                         $InsID = IPS_CreateInstance('{02B58635-9185-4AA4-90D2-FF0F1C947201}');
                         IPS_SetName($InsID, 'Logamatic FM442');
                         IPS_SetParent($InsID, $this->InstanceID);
                         IPS_LogMessage('Logamatic Modul FM442 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
                         break;
-                case 'FM443':
-                        $InsID = IPS_CreateInstance('{540D690E-35DA-4C96-974F-7F74DA840927}');
-                        IPS_SetName($InsID, 'Logamatic FM443');
-                        IPS_SetParent($InsID, $this->InstanceID);
-                        IPS_LogMessage('Logamatic Modul FM443 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
-                        break;
-                case 'FM444':
+                    case 'FM444':
                         $InsID = IPS_CreateInstance('{D887C2E7-9A65-42CB-9DC7-A092FD98FCBA}');
                         IPS_SetName($InsID, 'Logamatic FM444');
                         IPS_SetParent($InsID, $this->InstanceID);
                         IPS_LogMessage('Logamatic Modul FM444 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
                         break;
-                case 'ZM432':
+                    case 'ZM432':
                         $InsID = IPS_CreateInstance('{DC32EE80-C473-4806-A8A3-158DCFB6E2EE}');
                         IPS_SetName($InsID, 'Logamatic ZM432');
                         IPS_SetParent($InsID, $this->InstanceID);
                         IPS_LogMessage('Logamatic Modul ZM432 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
                         break;
-                case 'frei':
-                       break; 
+                    case 'FM443':
+                        $InsID = IPS_CreateInstance('{540D690E-35DA-4C96-974F-7F74DA840927}');
+                        IPS_SetName($InsID, 'Logamatic FM443');
+                        IPS_SetParent($InsID, $this->InstanceID);
+                        IPS_LogMessage('Logamatic Modul FM443 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
+                        break;
                 }
             }
 
