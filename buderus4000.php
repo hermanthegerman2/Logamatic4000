@@ -494,7 +494,7 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
 
 function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
     {           
-                    $Bus = 1;
+                    //$Bus = 1;
                     $Modultyp = ord(hex2bin($Modultyp));
                     $array = str_split($Monitordaten, 44);
                     for ( $x = 0; $x < count ( $array ); $x++ )
@@ -538,7 +538,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
    
 function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
     {           
-                    $Bus = 1; 
+                    //$Bus = 1;
                     $array = str_split($Monitordaten, 24);
                     for ( $x = 0; $x < count ( $array ); $x++ )
                         {
@@ -566,7 +566,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
 
 function EncodeKonfigurationData($Monitordaten, $ID, $Bus)
 {
-    $Bus = 1;
+    //$Bus = 1;
     $array = str_split($Monitordaten, 24);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {

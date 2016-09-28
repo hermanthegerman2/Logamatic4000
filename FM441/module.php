@@ -64,7 +64,7 @@ class FM441 extends IPSModule
                         EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
                         break;
                 }
-            return false;
+
         }
         $stream = '';
         return true;

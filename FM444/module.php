@@ -62,7 +62,7 @@ class FM444 extends IPSModule
             }
         else
         {
-             return false;
+             return true;
         }
         $stream = '';
         return true;             
