@@ -203,7 +203,7 @@ class Logamatic43xx extends IPSModule
         return true;             
     }
 
-    public function DistributeDataToChildren($Monitordaten, $ID, $Bus)
+    protected function DistributeDataToChildren($Monitordaten, $ID, $Bus)
     {
         $array = str_split($Monitordaten, 44);
         for ( $x = 0; $x < count ( $array ); $x++ )
