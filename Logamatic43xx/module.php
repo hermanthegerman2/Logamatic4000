@@ -11,29 +11,29 @@ class Logamatic43xx extends IPSModule
 
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
-        $this->RegisterPropertyString('Bus', '');
+        $this->RegisterPropertyInteger ('Bus', '1');
     }
 
     public function ApplyChanges()
     {
         //Never delete this line!
         parent::ApplyChanges();
-        if ($this->ReadPropertyString('Bus') == '')
+        if ($this->RegisterPropertyInteger('Bus') == '')
             $this->SetStatus(202);
         else
             $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
             $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
-            $this->SetStatus(102);            
-            $this->RegisterVariableString('Monitordaten', 'Monitordaten', '', -4);
+            //$this->RegisterVariableString('Monitordaten', 'Monitordaten', '', -4);
             IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
-            $this->RegisterVariableString('EinstellPar', 'EinstellPar', '', -4);
-            IPS_SetHidden($this->GetIDForIdent('EinstellPar'), true);
+            //$this->RegisterVariableString('EinstellPar', 'EinstellPar', '', -4);
+            IPS_SetHidden($this->GetIDForIdent('Einstellparameter'), true);
             $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
             $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
             $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
             $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
             $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
             $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
+            $this->SetStatus(102);
     }        
      
 
@@ -41,34 +41,31 @@ class Logamatic43xx extends IPSModule
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $data = chr(Command::Monitordaten).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
+        $data = chr(Command::Monitordaten).chr($this->RegisterPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $monitorID = $this->GetIDForIdent('Monitordaten');
-        SetValueString($monitorID, '');
+        //$monitorID = $this->GetIDForIdent('Monitordaten');
+        SetValueString($this->GetIDForIdent('Monitordaten'), '');
         return true;
     }
     public function RequestEinstellPar()
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $data = chr(Command::EinstellPar).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
+        $data = chr(Command::EinstellPar).chr($this->RegisterPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $EinstellParID = $this->GetIDForIdent('EinstellPar');
-        SetValueString($EinstellParID, '');
+        //$EinstellParID = $this->GetIDForIdent('EinstellPar');
+        SetValueString($this->GetIDForIdent('Einstellparameter'), '');
         return true;
     }
 
     public function RequestModule()
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false) {
-            Logamatic_RequestMonitordaten($this->InstanceID);
-            return false; // Monitordaten abrufen
-        }
-        $monitorID = $this->GetIDForIdent('Monitordaten');
-        $Monitordaten = GetValueString($monitorID);
+        if ($ParentID == false) Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+        //$monitorID = $this->GetIDForIdent('Monitordaten');
+        $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
         IPS_LogMessage('Konfiguration', $Monitordaten);
-        EncodeKonfigurationData($Monitordaten, $this->InstanceID, chr($this->ReadPropertyString('Bus'))); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
+        EncodeKonfigurationData($Monitordaten, $this->InstanceID, chr($this->RegisterPropertyInteger('Bus'))); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
         $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
         for ( $x = 0; $x < count ( $array ); $x++ )
            {    
@@ -128,8 +125,8 @@ class Logamatic43xx extends IPSModule
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('Gateway -> Logamatic 43xx', bin2hex(utf8_decode($data->Buffer)));
-        $monitorID = $this->GetIDForIdent('Monitordaten');
-        $EinstellParID = $this->GetIDForIdent('EinstellPar');
+        //$monitorID = $this->GetIDForIdent('Monitordaten');
+        $EinstellParID = $this->GetIDForIdent('Einstellparameter');
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
@@ -166,38 +163,37 @@ class Logamatic43xx extends IPSModule
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
                             break;
                         case '89':
-                            EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
+                            EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->RegisterPropertyInteger('Bus')));
                             break;
                     }
-                    //EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyString('Bus')));
                     break;
                                     
                 case 'a9':   // A9 Kennung für einstellbare Parameter
-                    $head = GetValueString($EinstellParID);
-                    $EinstellPar = $head.$stream; // $stream anhängen
-                    SetValueString($EinstellParID, $EinstellPar);
-                    if (substr($stream, -12, 4) == 'aa00') $this->DistributeDataToChildren($EinstellPar,  $this->InstanceID, $bus); // einstellbare Parameter schon komplett
+                    $head = GetValueString($this->GetIDForIdent('Einstellparameter'));
+                    $Einstellparameter = $head.$stream; // $stream anhängen
+                    SetValueString($this->GetIDForIdent('Einstellparameter'), $Einstellparameter);
+                    if (substr($stream, -12, 4) == 'aa00') $this->DistributeDataToChildren($Einstellparameter,  $this->InstanceID, $bus); // einstellbare Parameter schon komplett
                     break;
                                     
                 case 'aa':   // AA Einstellbare Parameter komplett übertragen
-                    IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($EinstellParID)).' Bytes');
-                    $EinstellPar = GetValueString($EinstellParID);
-                    $this->DistributeDataToChildren($EinstellPar,  $this->InstanceID, $bus);
-                    $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
+                    IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($this->GetIDForIdent('Einstellparameter'))).' Bytes');
+                    $Einstellparameter = GetValueString($this->GetIDForIdent('Einstellparameter'));
+                    $this->DistributeDataToChildren($Einstellparameter,  $this->InstanceID, $bus);
+                    $data = chr(Command::Normalmodus).chr($this->RegisterPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL);
                     $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                     break;
                                     
                 case 'ab':   // AB Monitordaten Direktmodus
-                    $head = GetValueString($monitorID);
+                    $head = GetValueString($this->GetIDForIdent('Monitordaten'));
                     $Monitordaten = $head.$stream; // $stream anhängen
-                    SetValueString($monitorID, $Monitordaten);
+                    SetValueString($this->GetIDForIdent('Monitordaten'), $Monitordaten);
                     if (substr($stream, -12, 4) == 'ac00') $this->DistributeDataToChildren($Monitordaten,  $this->InstanceID, $bus); // Monitordaten schon komplett
                     break;
                                         
                 case 'ac':   // AC Monitordaten komplett übertragen
-                    $Monitordaten = GetValueString($monitorID);
+                    $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
                     $this->DistributeDataToChildren($Monitordaten,  $this->InstanceID, $bus);
-                    $data = chr(Command::Normalmodus).chr($this->ReadPropertyString('Bus')).chr(Command::NUL).chr(Command::NUL);
+                    $data = chr(Command::Normalmodus).chr($this->RegisterPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL);
                     $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                     break;
                                     
@@ -216,7 +212,7 @@ class Logamatic43xx extends IPSModule
         {
             $modultyp = substr($array[$x], 8, 2);
             $datentyp = (substr($array[$x], 0, 2));
-            IPS_LogMessage('DM Modultyp', $modultyp." Datentyp ".$datentyp);
+            //IPS_LogMessage('DM Modultyp', $modultyp." Datentyp ".$datentyp);
             $data = hex2bin($array[$x]);
             switch ($modultyp)
             {
