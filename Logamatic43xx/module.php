@@ -255,7 +255,7 @@ class Logamatic43xx extends IPSModule
         return true;
     }
 
-    protected function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
+    public function EncodeMonitorDirektData($Monitordaten, $ID, $Bus, $Modultyp)
     {
         //$Bus = 1;
         $Modultyp = ord(hex2bin($Modultyp));
@@ -299,7 +299,7 @@ class Logamatic43xx extends IPSModule
         return true;
     }
 
-    protected function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
+    public function EncodeMonitorNormalData($Monitordaten, $ID, $Bus)
     {
         //$Bus = 1;
         $array = str_split($Monitordaten, 24);
@@ -327,7 +327,7 @@ class Logamatic43xx extends IPSModule
         return true;
     }
 
-    protected function EncodeKonfigurationData($Monitordaten, $ID, $Bus)
+    public function EncodeKonfigurationData($Monitordaten, $ID, $Bus)
     {
         //$Bus = 1;
         $array = str_split($Monitordaten, 24);
@@ -359,7 +359,7 @@ class Logamatic43xx extends IPSModule
         return true;
     }
 
-    protected function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
+    public function EncodeEinstellParData ($EinstellPar, $ID, $Bus)
     {
         return true;
     }
