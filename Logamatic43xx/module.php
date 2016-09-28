@@ -101,7 +101,7 @@ class Logamatic43xx extends IPSModule
                         IPS_LogMessage('Logamatic Modul ZM432 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
                         break;
                     case 'FM443':
-                        $InsID = IPS_CreateInstance('{36786216-2954-48e9-8849-6f6fa51e17b2}');
+                        $InsID = IPS_CreateInstance('{882E275E-A658-4FE4-9947-FE0178A7149D}');
                         IPS_SetName($InsID, 'Logamatic FM443');
                         IPS_SetParent($InsID, $this->InstanceID);
                         IPS_LogMessage('Logamatic Modul FM443 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
@@ -157,7 +157,7 @@ class Logamatic43xx extends IPSModule
                             break;
                         case '9e':
                             IPS_LogMessage('NM Logamatic 43xx -> FM443', $stream);
-                            $this->SendDataToChildren(json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => $data->Buffer)));
+                            $this->SendDataToChildren(json_encode(Array("DataID" => "{0774465C-7A72-496E-B1BC-E16392A67EBD}", "Buffer" => $data->Buffer)));
                             break;
                         case '88':
                             IPS_LogMessage('NM Logamatic 43xx -> ZM432', $stream);
@@ -223,7 +223,7 @@ class Logamatic43xx extends IPSModule
                     IPS_LogMessage('DM Logamatic 43xx -> FM444', $array[$x]);
                     break;
                 case '9e': case '24':
-                    $JSONString = json_encode(Array("DataID" => "{CFEBE338-C640-4762-83CD-4845C2395970}", "Buffer" => utf8_encode($data)));
+                    $JSONString = json_encode(Array("DataID" => "{0774465C-7A72-496E-B1BC-E16392A67EBD}", "Buffer" => utf8_encode($data)));
                     IPS_SendDataToChildren($ID, $JSONString);
                     IPS_LogMessage('DM Logamatic 43xx -> FM443', $array[$x]);
                     break;
