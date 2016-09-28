@@ -18,11 +18,12 @@ class Logamatic43xx extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
-            if ($this->RegisterPropertyInteger('Bus') < 0)
+        $id = $this->RegisterPropertyInteger('Bus');
+            if ($id < 0)
             {
                 $this->SetStatus(202);
             }
-            if ($this->RegisterPropertyInteger('Bus') > 15)
+            elseif ($id > 15)
             {
                 $this->SetStatus(203);
             }
