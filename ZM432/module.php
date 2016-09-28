@@ -113,17 +113,6 @@ class ZM432 extends IPSModule
             parent::SetStatus($InstanceStatus);
     }
 
-    protected function GetParent()
-    {
-        $instance = @IPS_GetInstance($this->InstanceID);
-        return ($instance['ConnectionID'] > 0) ? $instance['ConnectionID'] : false;
-    }
-    protected function SetStatus($InstanceStatus)
-    {
-        if ($InstanceStatus <> IPS_GetInstance($this->InstanceID)['InstanceStatus'])
-            parent::SetStatus($InstanceStatus);
-    }
-
     ################## SEMAPHOREN Helper  - private
     private function lock($ident)
     {
