@@ -18,7 +18,7 @@ class Logamatic43xx extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
-        $id = $this->RegisterPropertyInteger('Bus');
+        $id = $this->ReadPropertyInteger('Bus');
             if ($id < 0)
             {
                 $this->SetStatus(202);
@@ -44,7 +44,7 @@ class Logamatic43xx extends IPSModule
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $data = chr(Command::Monitordaten).chr($this->RegisterPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
+        $data = chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         //$monitorID = $this->GetIDForIdent('Monitordaten');
         SetValueString($this->GetIDForIdent('Monitordaten'), '');
@@ -54,7 +54,7 @@ class Logamatic43xx extends IPSModule
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
         $this->SendDataToParent($data);
-        $data = chr(Command::EinstellPar).chr($this->RegisterPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
+        $data = chr(Command::EinstellPar).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
         //$EinstellParID = $this->GetIDForIdent('EinstellPar');
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
@@ -68,7 +68,7 @@ class Logamatic43xx extends IPSModule
         //$monitorID = $this->GetIDForIdent('Monitordaten');
         $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
         IPS_LogMessage('Konfiguration', $Monitordaten);
-        EncodeKonfigurationData($Monitordaten, $this->InstanceID, chr($this->RegisterPropertyInteger('Bus'))); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
+        EncodeKonfigurationData($Monitordaten, $this->InstanceID, chr($this->ReadPropertyInteger('Bus'))); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
         $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
         for ( $x = 0; $x < count ( $array ); $x++ )
            {    
@@ -166,7 +166,7 @@ class Logamatic43xx extends IPSModule
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
                             break;
                         case '89':
-                            EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->RegisterPropertyInteger('Bus')));
+                            EncodeMonitorNormalData($stream, $this->InstanceID, chr($this->ReadPropertyInteger('Bus')));
                             break;
                     }
                     break;
@@ -182,7 +182,7 @@ class Logamatic43xx extends IPSModule
                     IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse '.$bus.' komplett :'.strlen(GetValueString($this->GetIDForIdent('Einstellparameter'))).' Bytes');
                     $Einstellparameter = GetValueString($this->GetIDForIdent('Einstellparameter'));
                     $this->DistributeDataToChildren($Einstellparameter,  $this->InstanceID, $bus);
-                    $data = chr(Command::Normalmodus).chr($this->RegisterPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL);
+                    $data = chr(Command::Normalmodus).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL);
                     $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                     break;
                                     
@@ -196,7 +196,7 @@ class Logamatic43xx extends IPSModule
                 case 'ac':   // AC Monitordaten komplett übertragen
                     $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
                     $this->DistributeDataToChildren($Monitordaten,  $this->InstanceID, $bus);
-                    $data = chr(Command::Normalmodus).chr($this->RegisterPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL);
+                    $data = chr(Command::Normalmodus).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL);
                     $this->SendDataToParent($data); // Umschalten in Normalmodus senden
                     break;
                                     
