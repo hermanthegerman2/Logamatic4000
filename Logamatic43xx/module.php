@@ -21,6 +21,8 @@ class Logamatic43xx extends IPSModule
         if ($this->ReadPropertyString('Bus') == '')
             $this->SetStatus(202);
         else
+            $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
+            $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
             $this->SetStatus(102);            
             $this->RegisterVariableString('Monitordaten', 'Monitordaten', '', -4);
             IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
@@ -59,9 +61,9 @@ class Logamatic43xx extends IPSModule
     public function RequestModule()
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false)
-        {
-            Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+        if ($ParentID == false) {
+            Logamatic_RequestMonitordaten($this->InstanceID);
+            return // Monitordaten abrufen
         }
         $monitorID = $this->GetIDForIdent('Monitordaten');
         $Monitordaten = GetValueString($monitorID);
@@ -108,7 +110,7 @@ class Logamatic43xx extends IPSModule
                        break; 
                 }
             }
-        Logamatic_RequestEinstellPar($this->InstanceID);  // Einstellbare Parameter abrufen
+
         return true;
     }        
     protected function SendDataToParent($data)
