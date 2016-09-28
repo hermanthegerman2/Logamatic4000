@@ -721,7 +721,7 @@ function EncodeVariableData($parentID, $typ)
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2));
                                         break;
                                 case "Zeit":
-                                        SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "~Temperature", $ID),ord(hex2bin(substr($value, $x*2, 2))));//Minutes
+                                        SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "Minutes", $ID),ord(hex2bin(substr($value, $x*2, 2))));//Minutes
                                         break;
                                 case "Prozent":
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "~Valve", $ID),ord(hex2bin(substr($value, $x*2, 2))));

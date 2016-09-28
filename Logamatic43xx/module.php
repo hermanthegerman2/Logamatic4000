@@ -26,8 +26,8 @@ class Logamatic43xx extends IPSModule
             IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
             $this->RegisterVariableString('EinstellPar', 'EinstellPar', '', -4);
             IPS_SetHidden($this->GetIDForIdent('EinstellPar'), true);
-            $this->RegisterProfile('Minutes', '1', '', '', ' m',  0, 0, 0);
-            $this->RegisterProfile('Hours', '1', '', '', ' h',  0, 0, 0);
+            $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
+            $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
             $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
             $this->RegisterProfile('Waerme', '2', '', '', ' Wh', 0, 0, 0);
             $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
