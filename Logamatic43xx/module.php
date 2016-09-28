@@ -59,7 +59,10 @@ class Logamatic43xx extends IPSModule
     public function RequestModule()
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false) Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+        if ($ParentID == false)
+        {
+            Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+        }
         $monitorID = $this->GetIDForIdent('Monitordaten');
         $Monitordaten = GetValueString($monitorID);
         IPS_LogMessage('Konfiguration', $Monitordaten);
@@ -105,6 +108,7 @@ class Logamatic43xx extends IPSModule
                        break; 
                 }
             }
+        Logamatic_RequestEinstellPar($this->InstanceID);  // Einstellbare Parameter abrufen
         return true;
     }        
     protected function SendDataToParent($data)

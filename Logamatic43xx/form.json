@@ -1,10 +1,16 @@
 {	
 	"elements":
 	[
-            { "name": "Bus", "type": "ValidationTextBox", "caption": "ECO-CAN Adresse:" }
+            //{ "name": "Bus", "type": "ValidationTextBox", "caption": "ECO-CAN Adresse:" }
+        {"type": "NumberSpinner", "name": "Bus", "caption": "ECO-CAN Adresse:", "digits": 2}
         ],
         "actions":
             [
+                {
+                    "type": "Button",
+                    "label": "Module anlegen",
+                    "onClick": "Logamatic_RequestModule($id);"
+                },
                 {
                     "type": "Button",
                     "label": "Monitordaten auslesen",
@@ -14,11 +20,6 @@
                     "type": "Button",
                     "label": "einstellbare Parameter auslesen",
                     "onClick": "Logamatic_RequestEinstellPar($id);"
-                },
-                {
-                    "type": "Button",
-                    "label": "Module anlegen",
-                    "onClick": "Logamatic_RequestModule($id);"
                 }
             ],
         "status":

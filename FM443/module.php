@@ -70,41 +70,39 @@ class FM443 extends IPSModule
     
         
 ################## DUMMYS / WOARKAROUNDS - protected
- 
-    protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
-    {
-        if (!IPS_VariableProfileExists($Name))
-        {
-            IPS_CreateVariableProfile($Name, $VariablenTyp);
-        }
-        else
-        {
-            $profile = IPS_GetVariableProfile($Name);
-            if ($profile['ProfileType'] != $VariablenTyp)
-                throw new Exception("Variable profile type does not match for profile " . $Name);
-        }
-        IPS_SetVariableProfileIcon($Name, $Icon);
-        IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
-        IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
-    }
 
-    protected function HasActiveParent()
-    {
-        $instance = @IPS_GetInstance($this->InstanceID);
-        if ($instance['ConnectionID'] > 0)
-        {
-            $parent = IPS_GetInstance($instance['ConnectionID']);
-            if ($parent['InstanceStatus'] == 102)
-                return true;
-        }
-        return false;
-    }
+     protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+     {
+         if (!IPS_VariableProfileExists($Name))
+         {
+             IPS_CreateVariableProfile($Name, $VariablenTyp);
+         }
+         else
+         {
+             $profile = IPS_GetVariableProfile($Name);
+             if ($profile['ProfileType'] != $VariablenTyp)
+                 throw new Exception("Variable profile type does not match for profile " . $Name);
+         }
+         IPS_SetVariableProfileIcon($Name, $Icon);
+         IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
+         IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
+     }
+     protected function HasActiveParent()
+     {
+         $instance = @IPS_GetInstance($this->InstanceID);
+         if ($instance['ConnectionID'] > 0)
+         {
+             $parent = IPS_GetInstance($instance['ConnectionID']);
+             if ($parent['InstanceStatus'] == 102)
+                 return true;
+         }
+         return false;
+     }
      protected function GetParent()
      {
          $instance = @IPS_GetInstance($this->InstanceID);
          return ($instance['ConnectionID'] > 0) ? $instance['ConnectionID'] : false;
      }
-
      protected function SetStatus($InstanceStatus)
      {
          if ($InstanceStatus <> IPS_GetInstance($this->InstanceID)['InstanceStatus'])
