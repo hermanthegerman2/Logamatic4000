@@ -1,12 +1,12 @@
 {
-    "id": "{540D690E-35DA-4C96-974F-7F74DA840927}",
+    "id": "{36786216-2954-48e9-8849-6f6fa51e17b2}",
     "name": "FM443",
     "type": 3,
     "vendor": "Buderus",
     "aliases": ["Logamatic FM443"],
     "parentRequirements": ["{7DADFA25-C0A9-43C6-81E0-523EA0E6D389}"],
     "childRequirements": [],
-    "implemented": ["{CFEBE338-C640-4762-83CD-4845C2395970}"],
+    "implemented": ["{a4efd003-282c-49c3-a8ca-9d82eda6165a}"],
     "prefix": "FM443"
 }
 

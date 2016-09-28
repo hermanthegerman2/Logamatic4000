@@ -27,7 +27,7 @@ class Logamatic43xx extends IPSModule
             {
                 $this->SetStatus(203);
             }
-            elseif ($id <= 15 && $id >= 1)
+            if ($id <= 15 && $id >= 1)
                 $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
                 $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
                 $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
@@ -101,7 +101,7 @@ class Logamatic43xx extends IPSModule
                         IPS_LogMessage('Logamatic Modul ZM432 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
                         break;
                     case 'FM443':
-                        $InsID = IPS_CreateInstance('{540D690E-35DA-4C96-974F-7F74DA840927}');
+                        $InsID = IPS_CreateInstance('{36786216-2954-48e9-8849-6f6fa51e17b2}');
                         IPS_SetName($InsID, 'Logamatic FM443');
                         IPS_SetParent($InsID, $this->InstanceID);
                         IPS_LogMessage('Logamatic Modul FM443 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
