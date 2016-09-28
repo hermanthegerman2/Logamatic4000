@@ -7,7 +7,7 @@
         [
             {
                 "type": "Button",
-                "label": "Logamatic Auslesen und Module anlegen",
+                "label": "Logamatic Module anlegen",
                 "onClick": "Logamatic_RequestModule($id);"
             },
             {
@@ -26,12 +26,17 @@
             {
                 "code": 102,
                 "icon": "active",
-                "caption": "Konfiguration gültig."
+                "caption": "ECO-CAN Adresse gültig."
             },
             {
                 "code": 202,
                 "icon": "error",
-                "caption": "ECO-CAN Adresse ungültig"
-            }
+                "caption": "ECO-CAN Adresse zu klein"
+            },
+            {
+                "code": 203,
+                "icon": "error",
+                "caption": "ECO-CAN Adresse zu gross"
+            },
         ]
 }

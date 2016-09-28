@@ -18,16 +18,17 @@ class Logamatic43xx extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
-        if ($this->RegisterPropertyInteger('Bus') == '')
-            $this->SetStatus(202);
-        else
+            if ($this->RegisterPropertyInteger('Bus') < 0)
+            {
+                $this->SetStatus(202);
+            }
+            if ($this->RegisterPropertyInteger('Bus') > 15)
+            {
+                $this->SetStatus(203);
+            }
+            else
             $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
             $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
-            //$this->RegisterPropertyInteger ('Bus', '1');
-            //$this->RegisterVariableString('Monitordaten', 'Monitordaten', '', -4);
-            $this->IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
-            //$this->RegisterVariableString('EinstellPar', 'EinstellPar', '', -4);
-            $this->IPS_SetHidden($this->GetIDForIdent('Einstellparameter'), true);
             $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
             $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
             $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
