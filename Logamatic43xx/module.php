@@ -212,6 +212,11 @@ class Logamatic43xx extends IPSModule
     protected function DistributeDataToChildren($Monitordaten, $ID)
     {
         if ($this->ReadPropertyInteger('ModuleAngelegt') == 0) Logamatic_RequestModule($this->InstanceID);
+        if ($this->ReadPropertyInteger('ModuleAngelegt') == 1)
+        {
+            Logamatic_RequestEinstellPar($this->InstanceID);
+            SetValueInteger($this->GetIDForIdent("ModuleAngelegt"), 2);
+        }
         $array = str_split($Monitordaten, 44);
         for ( $x = 0; $x < count ( $array ); $x++ )
         {
