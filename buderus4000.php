@@ -526,7 +526,7 @@ function CheckEventVariable($typ, $parentID)
     }
 
 
-public function EncodeMonitorDirektData( $Monitordaten, $ID, $Modultyp)
+function EncodeMonitorDirektData( $Monitordaten, $ID, $Modultyp)
 {
     $Modultyp = ord(hex2bin($Modultyp));
     $array = str_split($Monitordaten, 44);
@@ -564,7 +564,7 @@ public function EncodeMonitorDirektData( $Monitordaten, $ID, $Modultyp)
     return true;
 }
 
-public function EncodeMonitorNormalData($Monitordaten, $ID)
+function EncodeMonitorNormalData($Monitordaten, $ID)
 {
     $array = str_split($Monitordaten, 24);
     for ( $x = 0; $x < count ( $array ); $x++ )
@@ -586,7 +586,7 @@ public function EncodeMonitorNormalData($Monitordaten, $ID)
     return true;
 }
 
-public function EncodeKonfigurationData($Monitordaten, $ID)
+function EncodeKonfigurationData($Monitordaten, $ID)
 {
     $array = str_split($Monitordaten, 24);
     for ( $x = 0; $x < count ( $array ); $x++ )
@@ -615,7 +615,7 @@ public function EncodeKonfigurationData($Monitordaten, $ID)
     return true;
 }
 
-public function EncodeEinstellParmeterData ($EinstellParameter, $ID)
+function EncodeEinstellParmeterData ($EinstellParameter, $ID)
 {
     return true;
 }
