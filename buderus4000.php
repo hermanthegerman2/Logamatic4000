@@ -526,7 +526,7 @@ function CheckEventVariable($typ, $parentID)
     }
 
 
-function EncodeMonitorDirektData( $Monitordaten, $ID, $Modultyp)
+function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
 {
     $Modultyp = ord(hex2bin($Modultyp));
     $array = str_split($Monitordaten, 44);
@@ -558,8 +558,8 @@ function EncodeMonitorDirektData( $Monitordaten, $ID, $Modultyp)
                     }
             }
         }
-        else
-            IPS_LogMessage('buderus4000 not', $array[$x]);
+        //else
+        //    IPS_LogMessage('buderus4000 not', $array[$x]);
     }
     return true;
 }
