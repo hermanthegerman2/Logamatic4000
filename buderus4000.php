@@ -528,11 +528,11 @@ function CheckEventVariable($typ, $parentID)
 
 function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
 {
-    //$Modultyp = ord(hex2bin($Modultyp));
+    $Modultyp = ord(hex2bin($Modultyp));
     $array = str_split($Monitordaten, 44);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
-        $typ = substr($array[$x], 8, 2);
+        $typ = ord(hexbin(substr($array[$x], 8, 2)));
         if ($typ == $Modultyp)
         {
             switch (substr($array[$x], 0, 2))
