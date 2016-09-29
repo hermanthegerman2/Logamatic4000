@@ -12,6 +12,7 @@ class Logamatic43xx extends IPSModule
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
         $this->RegisterPropertyInteger ('Bus', 1);
+        $this->RegisterPropertyInteger ('ModuleAngelegt', 0);
     }
 
     public function ApplyChanges()
@@ -28,6 +29,7 @@ class Logamatic43xx extends IPSModule
                 $this->SetStatus(203);
             }
             if ($id <= 15 && $id >= 1)
+                SetValueInteger($this->GetIDForIdent('Bus'), $id);
                 $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
                 $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
                 $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
@@ -46,7 +48,6 @@ class Logamatic43xx extends IPSModule
         $this->SendDataToParent($data);
         $data = chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
-        //$monitorID = $this->GetIDForIdent('Monitordaten');
         SetValueString($this->GetIDForIdent('Monitordaten'), '');
         return true;
     }
@@ -56,7 +57,6 @@ class Logamatic43xx extends IPSModule
         $this->SendDataToParent($data);
         $data = chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
         $this->SendDataToParent($data);
-        //$EinstellParID = $this->GetIDForIdent('EinstellPar');
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
         return true;
     }
@@ -64,14 +64,19 @@ class Logamatic43xx extends IPSModule
     public function RequestModule()
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false) Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
-        //$monitorID = $this->GetIDForIdent('Monitordaten');
-        $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
-        IPS_LogMessage('Konfiguration', $Monitordaten);
-        EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
-        $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
-        for ( $x = 0; $x < count ( $array ); $x++ )
-           {    
+        if ($ParentID == false)
+        {
+            Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+            return true;
+        }
+        if ($this->ReadPropertyInteger('ModuleAngelegt') == 0)
+        {
+            $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
+            IPS_LogMessage('Konfiguration', $Monitordaten);
+            EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
+            $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
+            for ( $x = 0; $x < count ( $array ); $x++ )
+            {
                 $Slot = @IPS_GetObjectIDByName($array[$x], $ParentID);
                 $Modultyp = GetValueString($Slot); 
                 switch ($Modultyp)
@@ -108,17 +113,14 @@ class Logamatic43xx extends IPSModule
                         break;
                 }
             }
-
-        return true;
-    }        
+            SetValueInteger($this->GetIDForIdent("ModuleAngelegt"), 1);
+            return true;
+        }
     protected function SendDataToParent($data)
     {
-      
         $JSONString = json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', 'Buffer' => utf8_encode($data)));
-       
         IPS_LogMessage('Gateway <- Logamatic 43xx',str2hex(utf8_decode($data)));
         IPS_SendDataToParent($this->InstanceID, $JSONString); // Daten senden
-        
         return true;
     }
     
@@ -126,8 +128,6 @@ class Logamatic43xx extends IPSModule
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('Gateway -> Logamatic 43xx', bin2hex(utf8_decode($data->Buffer)));
-        //$monitorID = $this->GetIDForIdent('Monitordaten');
-        $EinstellParID = $this->GetIDForIdent('Einstellparameter');
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
         $bus = ord(hex2bin(substr($stream, 4, 2)));
@@ -215,6 +215,7 @@ class Logamatic43xx extends IPSModule
 
     protected function DistributeDataToChildren($Monitordaten, $ID)
     {
+        if ($this->ReadPropertyInteger('ModuleAngelegt') == 0) Logamatic_RequestModule($this->InstanceID);
         $array = str_split($Monitordaten, 44);
         for ( $x = 0; $x < count ( $array ); $x++ )
         {
