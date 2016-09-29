@@ -20,8 +20,9 @@ class FM442 extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         $this->SetStatus(102);
-    }        
-     protected function SendDataToParent($data)
+    }
+
+    protected function SendDataToParent($data)
     {
       
         $JSONString = json_encode(Array('DataID' => '{054466C5-C0E0-46C6-82D7-29A2FAE4276C}', 'Buffer' => utf8_encode($data)));
@@ -47,11 +48,11 @@ class FM442 extends IPSModule
                 switch ($datentyp) {
                     case 'a7':   // A7 Monitordaten Normalmodus
                         IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Normalmodus :' . $stream);
-                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                        EncodeMonitorNormalData($stream, $this->InstanceID);
                         break;
                     case 'ab':
                         IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Direktmodus :' . $stream);
-                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
+                        EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
                 }
             case '11':
