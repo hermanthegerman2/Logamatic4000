@@ -532,7 +532,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
     $array = str_split($Monitordaten, 44);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
-        $typ = ord(hexbin(substr($array[$x], 8, 2)));
+        $typ = ord(hex2bin(substr($array[$x], 8, 2)));
         if ($typ == $Modultyp)
         {
             switch (substr($array[$x], 0, 2))
