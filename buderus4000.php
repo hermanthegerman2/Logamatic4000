@@ -525,6 +525,101 @@ function CheckEventVariable($typ, $parentID)
     return true;
     }
 
+
+public function EncodeMonitorDirektData( $Monitordaten, $ID, $Modultyp)
+{
+    $Modultyp = ord(hex2bin($Modultyp));
+    $array = str_split($Monitordaten, 44);
+    for ( $x = 0; $x < count ( $array ); $x++ )
+    {
+        $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+        if ($typ == $Modultyp)
+        {
+            switch (substr($array[$x], 0, 2))
+            {
+                case 'ab':
+                    IPS_LogMessage('Logamatic Gateway', 'Array: '.$array[$x]);
+                    $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                    $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
+                    IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse Data: '.$typ.' : '.$offset.' : '.$substring);
+                    $var = Buderus($typ, -1, 1);
+                    if ($var === '0')
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        $var = CheckVariable($typ, -1, 0, $ID);
+                        $value = GetValueString($var);
+                        $newvalue = substr_replace($value, $substring, $offset*2, 12);
+                        SetValueString($var, $newvalue);
+                        EncodeVariableData($ID, $typ);
+                        break;
+                    }
+            }
+        }
+        else
+            IPS_LogMessage('buderus4000 not', $array[$x]);
+    }
+    return true;
+}
+
+public function EncodeMonitorNormalData($Monitordaten, $ID)
+{
+    $array = str_split($Monitordaten, 24);
+    for ( $x = 0; $x < count ( $array ); $x++ )
+    {
+        if (substr($array[$x], 0, 2) == 'a7')
+        {
+            $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+            IPS_LogMessage('Buderus Logamatic', 'Array: '.$array[$x]);
+            $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+            $substring = substr($array[$x], 16, 2);
+            IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
+            $var = CheckVariable($typ, -1, 0, $ID);
+            $value = GetValueString($var);
+            $newvalue = substr_replace($value, $substring, $offset*2, 2);
+            SetValueString($var, $newvalue);
+            EncodeVariableData($ID, $typ);
+        }
+    }
+    return true;
+}
+
+public function EncodeKonfigurationData($Monitordaten, $ID)
+{
+    $array = str_split($Monitordaten, 24);
+    for ( $x = 0; $x < count ( $array ); $x++ )
+    {
+        if (substr($array[$x], 0, 2) == 'a7')
+        {
+            $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+            switch ($typ)
+            {
+                case 137:
+                    IPS_LogMessage('Buderus Logamatic', 'Array: ' . $array[$x]);
+                    $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                    $substring = substr($array[$x], 16, 2);
+                    IPS_LogMessage('Buderus Logamatic', 'Data: ' . $typ . ' : ' . $offset . ' : ' . $substring);
+                    $var = CheckVariable($typ, -1, 0, $ID);
+                    $value = GetValueString($var);
+                    $newvalue = substr_replace($value, $substring, $offset * 2, 2);
+                    SetValueString($var, $newvalue);
+                    EncodeVariableData($ID, $typ);
+                    break;
+            }
+
+
+        }
+    }
+    return true;
+}
+
+public function EncodeEinstellParmeterData ($EinstellParameter, $ID)
+{
+    return true;
+}
+
 function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
 	{
 	    $modultyp = ord(hex2bin($modultyp));
