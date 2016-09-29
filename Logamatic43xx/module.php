@@ -30,7 +30,7 @@ class Logamatic43xx extends IPSModule
                 $this->SetStatus(203);
             }
             if ($id <= 15 && $id >= 1)
-                SetValue($this->GetIDForIdent('Bus'), $id);
+                $this->SetValue($this->GetIDForIdent('Bus'), $id);
                 $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
                 $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
                 $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
