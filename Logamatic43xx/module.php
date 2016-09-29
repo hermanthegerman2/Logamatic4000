@@ -109,8 +109,8 @@ class Logamatic43xx extends IPSModule
                 }
             }
             SetValueInteger($this->GetIDForIdent("ModuleAngelegt"), 1);
-            return true;
         }
+        return true;
     }
     protected function SendDataToParent($data)
     {
