@@ -64,58 +64,55 @@ class Logamatic43xx extends IPSModule
     public function RequestModule()
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false)
-        {
+        if ($ParentID == false) {
             Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
             return true;
         }
-        if ($this->ReadPropertyInteger('ModuleAngelegt') == 0)
-        {
+        if ($this->ReadPropertyInteger('ModuleAngelegt') == 0) {
             $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
             IPS_LogMessage('Konfiguration', $Monitordaten);
             EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
-            $array = array ('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
-            for ( $x = 0; $x < count ( $array ); $x++ )
-            {
+            $array = array('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
+            for ($x = 0; $x < count($array); $x++) {
                 $Slot = @IPS_GetObjectIDByName($array[$x], $ParentID);
-                $Modultyp = GetValueString($Slot); 
-                switch ($Modultyp)
-                {
+                $Modultyp = GetValueString($Slot);
+                switch ($Modultyp) {
                     case 'FM441':
                         $InsID = IPS_CreateInstance('{08E2244F-D084-4574-9EE7-C6A23A008CFA}');
                         IPS_SetName($InsID, 'Logamatic FM441');
                         IPS_SetParent($InsID, $this->InstanceID);
-                        IPS_LogMessage('Logamatic Modul FM441 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
+                        IPS_LogMessage('Logamatic Modul FM441 angelegt', 'Parent-ID: ' . $this->InstanceID . ' Instanz-ID: ' . $InsID);
                         break;
                     case 'FM442':
                         $InsID = IPS_CreateInstance('{02B58635-9185-4AA4-90D2-FF0F1C947201}');
                         IPS_SetName($InsID, 'Logamatic FM442');
                         IPS_SetParent($InsID, $this->InstanceID);
-                        IPS_LogMessage('Logamatic Modul FM442 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
+                        IPS_LogMessage('Logamatic Modul FM442 angelegt', 'Parent-ID: ' . $this->InstanceID . ' Instanz-ID: ' . $InsID);
                         break;
                     case 'FM444':
                         $InsID = IPS_CreateInstance('{D887C2E7-9A65-42CB-9DC7-A092FD98FCBA}');
                         IPS_SetName($InsID, 'Logamatic FM444');
                         IPS_SetParent($InsID, $this->InstanceID);
-                        IPS_LogMessage('Logamatic Modul FM444 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
+                        IPS_LogMessage('Logamatic Modul FM444 angelegt', 'Parent-ID: ' . $this->InstanceID . ' Instanz-ID: ' . $InsID);
                         break;
                     case 'ZM432':
                         $InsID = IPS_CreateInstance('{DC32EE80-C473-4806-A8A3-158DCFB6E2EE}');
                         IPS_SetName($InsID, 'Logamatic ZM432');
                         IPS_SetParent($InsID, $this->InstanceID);
-                        IPS_LogMessage('Logamatic Modul ZM432 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
+                        IPS_LogMessage('Logamatic Modul ZM432 angelegt', 'Parent-ID: ' . $this->InstanceID . ' Instanz-ID: ' . $InsID);
                         break;
                     case 'FM443':
                         $InsID = IPS_CreateInstance('{882E275E-A658-4FE4-9947-FE0178A7149D}');
                         IPS_SetName($InsID, 'Logamatic FM443');
                         IPS_SetParent($InsID, $this->InstanceID);
-                        IPS_LogMessage('Logamatic Modul FM443 angelegt', 'Parent-ID: '.$this->InstanceID.' Instanz-ID: '.$InsID);
+                        IPS_LogMessage('Logamatic Modul FM443 angelegt', 'Parent-ID: ' . $this->InstanceID . ' Instanz-ID: ' . $InsID);
                         break;
                 }
             }
             SetValueInteger($this->GetIDForIdent("ModuleAngelegt"), 1);
             return true;
         }
+    }
     protected function SendDataToParent($data)
     {
         $JSONString = json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', 'Buffer' => utf8_encode($data)));
