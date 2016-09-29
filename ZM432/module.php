@@ -46,12 +46,12 @@ class ZM432 extends IPSModule
                 switch ($datentyp) {
                     case 'a7':   // A7 Monitordaten Normalmodus
                         IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
-                        EncodeMonitorNormalData($stream, $this->InstanceID, $bus);
+                        EncodeMonitorNormalData($stream, $this->InstanceID);
                         break;
                                     
                     case 'ab':
                         IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
-                        EncodeMonitorDirektData($stream, $this->InstanceID, $bus, $modultyp);
+                        EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
                 }
             case '1d':
