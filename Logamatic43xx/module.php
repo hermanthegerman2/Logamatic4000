@@ -130,7 +130,7 @@ class Logamatic43xx extends IPSModule
         $EinstellParID = $this->GetIDForIdent('Einstellparameter');
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
-        $bus = ord(hex2bin(substr($stream, 4, 2));
+        $bus = ord(hex2bin(substr($stream, 4, 2)));
         $modultyp = substr($stream, 8, 2);
         if ($bus === $this->ReadPropertyInteger('Bus'))
         {
