@@ -528,11 +528,11 @@ function CheckEventVariable($typ, $parentID)
 
 function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
 {
-    $Modultyp = ord(hex2bin($Modultyp));
+    //$Modultyp = ord(hex2bin($Modultyp));
     $array = str_split($Monitordaten, 44);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
-        $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+        $typ = substr($array[$x], 8, 2);
         if ($typ == $Modultyp)
         {
             switch (substr($array[$x], 0, 2))
@@ -558,8 +558,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
                     }
             }
         }
-        //else
-        //    IPS_LogMessage('buderus4000 not', $array[$x]);
+        else IPS_LogMessage('Logamatic 4000', 'Modultyp: '.$Modultyp." Typ: ".$typ);
     }
     return true;
 }
