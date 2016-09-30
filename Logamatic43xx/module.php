@@ -112,7 +112,7 @@ class Logamatic43xx extends IPSModule
         return true;
     }
 
-    public function SendDataToParent($data)
+    protected function SendDataToParent($data)
     {
         $JSONString = json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', 'Buffer' => utf8_encode($data)));
         IPS_LogMessage('Gateway <- Logamatic 43xx',str2hex(utf8_decode($data)));
@@ -209,7 +209,7 @@ class Logamatic43xx extends IPSModule
             }
     }
 
-    public function DistributeDataToChildren($Monitordaten, $ID)
+    protected function DistributeDataToChildren($Monitordaten, $ID)
     {
         if ($this->ReadPropertyInteger('ModuleAngelegt') == 0) Logamatic_RequestModule($this->InstanceID);
         if ($this->ReadPropertyInteger('ModuleAngelegt') == 1)
