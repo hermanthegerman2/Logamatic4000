@@ -669,7 +669,7 @@ function EncodeVariableData($parentID, $typ)
                             switch (Buderus($typ, $x, 1))
                                 {
                                 case "Bit":
-                                        SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), sprintf('%08b'ord(hex2bin(substr($value, $x*2, 2)))));
+                                        SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), sprintf('%08b', ord(hex2bin(substr($value, $x*2, 2)))));
                                         break;
                                 case "Temp":
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2));
