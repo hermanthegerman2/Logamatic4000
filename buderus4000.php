@@ -472,8 +472,7 @@ function CheckVariable($typ, $offset, $value, $parentID)
                         IPS_SetName($InstanzID, $name); // Instanz benennen
                         IPS_SetParent($InstanzID, $parentID);
                     }
-                echo "ID: ".$InstanzID." ".$name."\n";
-                return $InstanzID;   
+                    return $InstanzID;
                 }
                 
    }
@@ -518,7 +517,7 @@ function CheckEventVariable($typ, $parentID)
             return $InstanzID;
         }
         return true;
-        echo "ID: ".$InstanzID." ".$name."\n";
+        IPS_LogMessage('Schaltuhr', $name.' : '.$InstanzID);
     }
     //echo "ID: ".$typ." ".$name."\n";
     return true;
@@ -553,7 +552,7 @@ function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
         if ($hour == 24) $hour = 0;
         $min = fmod($byte2, 6) * 10;
         IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
-        echo $SchaltpunktID . " : " . $tag . " : " . $hour . ":" . $min . " : " . $ein . " | ";
+        IPS_LogMessage('Schaltuhr', $name.' : '.$InstanzID.' | '.$SchaltpunktID . " : " . $tag . " : " . $hour . ":" . $min . " : " . $ein . " | ");
     }
     return true;
 }
@@ -639,8 +638,6 @@ function EncodeKonfigurationData($Monitordaten, $ID)
                     EncodeVariableData($ID, $typ);
                     break;
             }
-
-
         }
     }
     return true;
