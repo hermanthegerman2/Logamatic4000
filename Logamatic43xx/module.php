@@ -65,7 +65,7 @@ class Logamatic43xx extends IPSModule
             Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
             return true;
         }
-        if ($this->ReadPropertyInteger('ModuleAngelegt') == 0)
+        if (GetValueInteger($this->GetIDForIdent('ModuleAngelegt') == 0))
         {
             $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
             IPS_LogMessage('Konfiguration', $Monitordaten);
@@ -211,8 +211,8 @@ class Logamatic43xx extends IPSModule
 
     protected function DistributeDataToChildren($Monitordaten, $ID)
     {
-        if ($this->ReadPropertyInteger('ModuleAngelegt') == 0) Logamatic_RequestModule($this->InstanceID);
-        if ($this->ReadPropertyInteger('ModuleAngelegt') == 1)
+        if (GetValueInteger($this->GetIDForIdent('ModuleAngelegt') == 0)) Logamatic_RequestModule($this->InstanceID);
+        if (GetValueInteger($this->GetIDForIdent('ModuleAngelegt') == 1))
         {
             Logamatic_RequestEinstellPar($this->InstanceID);
             SetValueInteger($this->GetIDForIdent("ModuleAngelegt"), 2);
