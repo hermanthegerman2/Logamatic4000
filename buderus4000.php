@@ -648,7 +648,7 @@ function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
             $hour = floor($byte2 / 6);
             if ($hour == 24) $hour = 0;
             $min = fmod($byte2, 6) * 10;
-            @IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
+            IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
             echo $SchaltpunktID . " : " . $tag . " : " . $hour . ":" . $min . " : " . $ein . " | ";
         }
         return true;
