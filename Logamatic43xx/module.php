@@ -35,6 +35,7 @@ class Logamatic43xx extends IPSModule
                 $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
                 $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
                 $this->SetStatus(102);
+                break;
         }
     }
 
@@ -65,7 +66,8 @@ class Logamatic43xx extends IPSModule
             Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
             return true;
         }
-        if (GetValueInteger($this->GetIDForIdent('ModuleAngelegt') == 0))
+        $id = $this->ReadPropertyInteger('ModuleAngelegt');
+        if ($id == 0)
         {
             $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
             IPS_LogMessage('Konfiguration', $Monitordaten);
