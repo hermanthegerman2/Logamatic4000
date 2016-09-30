@@ -550,7 +550,7 @@ function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
         if ($hour == 24) $hour = 0;
         $min = fmod($byte2, 6) * 10;
         IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
-        IPS_LogMessage('Schaltuhr', $name.' : '.$InstanzID.' | '.$SchaltpunktID . " : " . $tag . " : " . $hour . ":" . $min . " : " . $ein . " | ");
+        IPS_LogMessage('Schaltuhr', $InstanzID.' | '.$SchaltpunktID . " : " . $tag . " : " . $hour . ":" . $min . " : " . $ein . " | ");
     }
     return true;
 }
