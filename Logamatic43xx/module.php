@@ -219,6 +219,8 @@ class Logamatic43xx extends IPSModule
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
         if ($ParentID == false) Logamatic_RequestModule($this->InstanceID);
+        $Einstellparameter = GetValueString($this->GetIDForIdent('Einstellparameter'));
+        if ($Einstellparameter == '') Logamatic_RequestEinstellPar($this->InstanceID);
         $array = str_split($Monitordaten, 44);
         for ( $x = 0; $x < count ( $array ); $x++ )
         {

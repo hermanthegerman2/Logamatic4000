@@ -7,11 +7,6 @@
         [
             {
                 "type": "Button",
-                "label": "Logamatic Module anlegen",
-                "onClick": "Logamatic_RequestModule($id);"
-            },
-            {
-                "type": "Button",
                 "label": "Monitordaten auslesen",
                 "onClick": "Logamatic_RequestMonitordaten($id);"
             },
