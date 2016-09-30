@@ -1,4 +1,4 @@
- <?php
+<?php
 require_once(__DIR__ . "/../buderus4000.php");  // diverse Klassen
 
 class FM443 extends IPSModule
@@ -10,7 +10,6 @@ class FM443 extends IPSModule
         parent::Create();
         
         // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
-        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
         $this->RegisterPropertyString('Solar', 'Solarfunktion');
     }
 
@@ -18,6 +17,7 @@ class FM443 extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
         $this->SetStatus(102);
     }        
     
@@ -103,12 +103,11 @@ class FM443 extends IPSModule
          $instance = @IPS_GetInstance($this->InstanceID);
          return ($instance['ConnectionID'] > 0) ? $instance['ConnectionID'] : false;
      }
-     protected function SetStatus($InstanceStatus)
-     {
-         if ($InstanceStatus <> IPS_GetInstance($this->InstanceID)['InstanceStatus'])
-             parent::SetStatus($InstanceStatus);
-     }
-
+    //protected function SetStatus($InstanceStatus)
+    //{
+    //    if ($InstanceStatus <> IPS_GetInstance($this->InstanceID)['InstanceStatus'])
+    //        parent::SetStatus($InstanceStatus);
+    //}
      ################## SEMAPHOREN Helper  - private
      private function lock($ident)
      {

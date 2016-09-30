@@ -67,7 +67,8 @@ class Logamatic43xx extends IPSModule
             Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
             return true;
         }
-        if ($this->ReadPropertyInteger('ModuleAngelegt') == 0) {
+        if ($this->ReadPropertyInteger('ModuleAngelegt') == 0)
+        {
             $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
             IPS_LogMessage('Konfiguration', $Monitordaten);
             EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
