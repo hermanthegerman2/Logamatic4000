@@ -499,7 +499,6 @@ function CheckEventVariable($typ, $parentID)
     $subname = substr($name, 0, 5);
     if ($subname === "Kanal")
     {
-        //print substr($name, 0, 5);
         $InstanzID = @IPS_GetEventIDByName($name, $parentID);
         if ($InstanzID === false)
         {
@@ -519,12 +518,45 @@ function CheckEventVariable($typ, $parentID)
             return $InstanzID;
         }
         return true;
-        //echo "ID: ".$InstanzID." ".$name."\n";
+        echo "ID: ".$InstanzID." ".$name."\n";
     }
     //echo "ID: ".$typ." ".$name."\n";
     return true;
     }
-
+function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
+{
+    $modultyp = ord(hex2bin($modultyp));
+    $array = str_split($EinstellPar, 44);
+    $array1 = '';
+    for ( $x = 0; $x < count ( $array ); $x++ )
+    {
+        if (substr($array[$x], 0, 2) == 'a9')
+        {
+            $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+            $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+            if ($typ == $modultyp and $offset != '0')
+            {
+                $InstanzID = CheckEventVariable($typ, $ID);
+                $data = substr($array[$x], 16, 24);
+                $array1 = $array1.$data;
+            }
+        }
+    }
+    for ( $y = 0; $y < strlen($array1); $y=$y+8 )
+    {
+        $byte1 = sprintf('%08b', ord(hex2bin($array1[$y] . $array1[$y + 1])));
+        $ein = (int)(substr($byte1, -1, 1));
+        $tag = bindec(substr($byte1, 0, 3));
+        $SchaltpunktID = $y / 8;
+        $byte2 = ord(hex2bin($array1[$y + 4] . $array1[$y + 5]));
+        $hour = floor($byte2 / 6);
+        if ($hour == 24) $hour = 0;
+        $min = fmod($byte2, 6) * 10;
+        IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
+        echo $SchaltpunktID . " : " . $tag . " : " . $hour . ":" . $min . " : " . $ein . " | ";
+    }
+    return true;
+}
 
 function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
 {
@@ -618,41 +650,6 @@ function EncodeEinstellParameterData ($EinstellParameter, $ID)
 {
     return true;
 }
-
-function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
-	{
-	    $modultyp = ord(hex2bin($modultyp));
-        $array = str_split($EinstellPar, 44);
-        $array1 = '';
-        for ( $x = 0; $x < count ( $array ); $x++ )
-        {
-       	    if (substr($array[$x], 0, 2) == 'a9')
-       	    {
-                $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-           		$offset = ord(hex2bin(substr($array[$x], 12, 2)));
-           		if ($typ == $modultyp and $offset != '0')
-           		{
-                    $InstanzID = CheckEventVariable($typ, $ID);
-                    $data = substr($array[$x], 16, 24);
-                    $array1 = $array1.$data;
-                }
-           	}
-        }
-        for ( $y = 0; $y < strlen($array1); $y=$y+8 )
-        {
-            $byte1 = sprintf('%08b', ord(hex2bin($array1[$y] . $array1[$y + 1])));
-            $ein = (int)(substr($byte1, -1, 1));
-            $tag = bindec(substr($byte1, 0, 3));
-            $SchaltpunktID = $y / 8;
-            $byte2 = ord(hex2bin($array1[$y + 4] . $array1[$y + 5]));
-            $hour = floor($byte2 / 6);
-            if ($hour == 24) $hour = 0;
-            $min = fmod($byte2, 6) * 10;
-            IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
-            echo $SchaltpunktID . " : " . $tag . " : " . $hour . ":" . $min . " : " . $ein . " | ";
-        }
-        return true;
-	}
 
 function CalculateTimeValue ($value)
 {
