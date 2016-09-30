@@ -493,7 +493,7 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
 
 function CheckEventVariable($typ, $parentID)
     {
-    //$typ = ord(hex2bin($typ));
+    $typ = ord(hex2bin($typ));
     $name = Buderus($typ, -1, 0);
     $subname = substr($name, 0, 5);
     if ($subname == "Kanal")
@@ -514,12 +514,10 @@ function CheckEventVariable($typ, $parentID)
             IPS_SetEventScheduleGroup($InstanzID, 4, 16);
             IPS_SetEventScheduleGroup($InstanzID, 5, 32);
             IPS_SetEventScheduleGroup($InstanzID, 6, 64);
-            return $InstanzID;
         }
-        return true;
+        return $InstanzID;
         IPS_LogMessage('Schaltuhr', $name.' : '.$InstanzID);
     }
-    //echo "ID: ".$typ." ".$name."\n";
     return true;
     }
 function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
