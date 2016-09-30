@@ -493,7 +493,6 @@ function CheckVariableTYP($name, $vartyp, $profile, $parentID)
 
 function CheckEventVariable($typ, $parentID)
     {
-    $typ = ord(hex2bin($typ));
     $name = Buderus($typ, -1, 0);
     $subname = substr($name, 0, 5);
     if ($subname === "Kanal")
