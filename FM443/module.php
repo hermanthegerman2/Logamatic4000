@@ -8,8 +8,6 @@ class FM443 extends IPSModule
     {
         //Never delete this line!
         parent::Create();
-        
-        // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->RegisterPropertyString('Solar', 'Solarfunktion');
     }
 
@@ -17,7 +15,7 @@ class FM443 extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
-        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
+        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}'); // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->SetStatus(102);
     }        
     

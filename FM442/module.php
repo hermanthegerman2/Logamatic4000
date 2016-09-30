@@ -8,9 +8,6 @@ class FM442 extends IPSModule
     {
         //Never delete this line!
         parent::Create();
-        
-        // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
-        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
         $this->RegisterPropertyString('HK1', 'Heizkreis 1');
         $this->RegisterPropertyString('HK2', 'Heizkreis 2');
     }
@@ -19,6 +16,7 @@ class FM442 extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}'); // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->SetStatus(102);
     }
 
@@ -28,8 +26,8 @@ class FM442 extends IPSModule
         $JSONString = json_encode(Array('DataID' => '{054466C5-C0E0-46C6-82D7-29A2FAE4276C}', 'Buffer' => utf8_encode($data)));
        
         IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
-        // Daten senden
-        IPS_SendDataToParent($this->InstanceID, $JSONString);
+        IPS_SendDataToParent($this->InstanceID, $JSONString); // Daten senden
+
         
         return true;
     }

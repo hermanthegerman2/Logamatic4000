@@ -8,9 +8,6 @@ class ZM432 extends IPSModule
     {
         //Never delete this line!
         parent::Create();
-        
-        // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
-        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}');
         $this->RegisterPropertyString('Kessel', 'bodenstehender Kessel');
     }
 
@@ -18,6 +15,7 @@ class ZM432 extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+        $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}'); // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->SetStatus(102);
     }
 

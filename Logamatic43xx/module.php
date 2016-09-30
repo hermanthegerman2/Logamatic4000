@@ -8,9 +8,6 @@ class Logamatic43xx extends IPSModule
     {
         //Never delete this line!
         parent::Create();
-
-        // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
-        $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}');
         $this->RegisterPropertyInteger ('Bus', 1);
     }
 
@@ -18,6 +15,7 @@ class Logamatic43xx extends IPSModule
     {
         //Never delete this line!
         parent::ApplyChanges();
+        $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}'); // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $id = $this->ReadPropertyInteger('Bus');
             if ($id < 0)
             {
@@ -29,8 +27,8 @@ class Logamatic43xx extends IPSModule
             }
             if ($id <= 15 && $id >= 1)
                 $this->MaintainVariable ('ModuleAngelegt', 'ModuleAngelegt', 1, '', 0, 1);
-                $this->MaintainVariable("Einstellparameter", "Einstellparameter", 3, "~String", 0, 1);
-                $this->MaintainVariable("Monitordaten", "Monitordaten", 3, "~String", 0, 1);
+                $this->MaintainVariable('Einstellparameter', 'Einstellparameter', 3, '~String', 0, 1);
+                $this->MaintainVariable('Monitordaten', 'Monitordaten', 3, '~String', 0, 1);
                 $this->RegisterProfile('Minutes', '2', '', '', ' m',  0, 0, 0);
                 $this->RegisterProfile('Hours', '2', '', '', ' h',  0, 0, 0);
                 $this->RegisterProfile('Watt', '2', '', '', ' kWh',  0, 0, 0);
@@ -38,8 +36,7 @@ class Logamatic43xx extends IPSModule
                 $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
                 $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
                 $this->SetStatus(102);
-    }        
-     
+    }
 
     public function RequestMonitordaten()
     {
@@ -50,6 +47,7 @@ class Logamatic43xx extends IPSModule
         SetValueString($this->GetIDForIdent('Monitordaten'), '');
         return true;
     }
+
     public function RequestEinstellPar()
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
@@ -113,7 +111,8 @@ class Logamatic43xx extends IPSModule
         }
         return true;
     }
-    protected function SendDataToParent($data)
+
+    public function SendDataToParent($data)
     {
         $JSONString = json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', 'Buffer' => utf8_encode($data)));
         IPS_LogMessage('Gateway <- Logamatic 43xx',str2hex(utf8_decode($data)));
@@ -210,7 +209,7 @@ class Logamatic43xx extends IPSModule
             }
     }
 
-    protected function DistributeDataToChildren($Monitordaten, $ID)
+    public function DistributeDataToChildren($Monitordaten, $ID)
     {
         if ($this->ReadPropertyInteger('ModuleAngelegt') == 0) Logamatic_RequestModule($this->InstanceID);
         if ($this->ReadPropertyInteger('ModuleAngelegt') == 1)
