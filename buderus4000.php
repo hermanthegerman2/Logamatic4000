@@ -496,10 +496,10 @@ function CheckEventVariable($typ, $parentID)
     //$typ = ord(hex2bin($typ));
     $name = Buderus($typ, -1, 0);
     $subname = substr($name, 0, 5);
-    if ($subname === "Kanal")
+    if ($subname == "Kanal")
     {
         $InstanzID = @IPS_GetEventIDByName($name, $parentID);
-        if ($InstanzID === false)
+        if ($InstanzID == false)
         {
             $InstanzID = IPS_CreateEvent(2);
             IPS_SetName($InstanzID, $name); // Instanz benennen
