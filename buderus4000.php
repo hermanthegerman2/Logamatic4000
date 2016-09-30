@@ -614,7 +614,7 @@ function EncodeKonfigurationData($Monitordaten, $ID)
     return true;
 }
 
-function EncodeEinstellParmeterData ($EinstellParameter, $ID)
+function EncodeEinstellParameterData ($EinstellParameter, $ID)
 {
     return true;
 }
@@ -633,38 +633,25 @@ function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
            		if ($typ == $modultyp and $offset != '0')
 						{
 						   $InstanzID = CheckEventVariable($typ, $ID);
-						   print $array[$x]." ";
+						   //print $array[$x]." ";
 						   $data = substr($array[$x],16,24);
 						   $array1=$array1.$data;
          			    }
 					 
            	}
         }
-      
-        print "\n".$array1."\n";
-        $SchaltpunktID = 0;
-        $tag = 0;
         for ( $y = 0; $y < strlen($array1); $y=$y+8 )
             {
-                print $array1[$y].$array1[$y+1]."\n";
-                $byte1 = str_pad(base_convert(ord(hex2bin($array1[$y].$array1[$y+1])),16,2),8,"0",STR_PAD_LEFT);
+                //print $array1[$y].$array1[$y+1]."\n";
+                $byte1 = sprintf('%08b', ord(hex2bin($array1[$y].$array1[$y+1])));
                 $ein = (int)(substr($byte1,-1,1));
-                $day = bindec(substr($byte1,0,3));
-                if ($day == $tag)
-                {
-                    $SchaltpunktID++;
-                }
-                else
-                {
-                    $SchaltpunktID=0 ;
-                }
-                $tag = $day;
+                $tag = bindec(substr($byte1,0,3));
+                $SchaltpunktID = $y/8;
                 $byte2 = ord(hex2bin($array1[$y+4].$array1[$y+5]));
                 $hour = floor($byte2/6);
                 $min = fmod($byte2, 6)*10;
                 if ($hour != 24) @IPS_SetEventScheduleGroupPoint($InstanzID, $tag, $SchaltpunktID, $hour, $min, 0, $ein);
                 echo  $SchaltpunktID." : ".$tag." : " .$hour.":".$min." : ".$ein." | ";
-      						   
             }
             return true;
 	}
