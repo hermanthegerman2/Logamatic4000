@@ -26,7 +26,6 @@ class FM442 extends IPSModule
     {
       
         $JSONString = json_encode(Array('DataID' => '{054466C5-C0E0-46C6-82D7-29A2FAE4276C}', 'Buffer' => utf8_encode($data)));
-       
         IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
         IPS_SendDataToParent($this->InstanceID, $JSONString); // Daten senden
         return true;
@@ -67,9 +66,9 @@ class FM442 extends IPSModule
         return true;
     }
 
-    public function Tagsolltemperatur($id)
+    public function Tagsolltemperatur(float $temp)
     {
-        IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $id . '°C');
+        IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $temp . '°C');
         return true;
     }
     
