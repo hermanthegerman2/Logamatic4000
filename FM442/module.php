@@ -10,6 +10,7 @@ class FM442 extends IPSModule
         parent::Create();
         $this->RegisterPropertyString('HK1', 'Heizkreis 1');
         $this->RegisterPropertyString('HK2', 'Heizkreis 2');
+        $this->RegisterPropertyFloat('Tagsolltemperatur', 21);
     }
 
     public function ApplyChanges()
