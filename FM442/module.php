@@ -65,7 +65,7 @@ class FM442 extends IPSModule
         return true;
     }
 
-    protected function Tagsolltemperatur($temp)
+    public function Tagsolltemperatur($temp)
     {
         IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $temp . '°C');
         return true;
