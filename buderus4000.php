@@ -519,16 +519,17 @@ function CheckEventVariable($typ, $parentID)
     }
     return true;
     }
+
 function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
 {
     $modultyp = ord(hex2bin($modultyp));
     $array = str_split($EinstellPar, 44);
-    $array1 = '';
     for ( $x = 0; $x < count ( $array ); $x++ ) {
         if (substr($array[$x], 0, 2) == 'a9') {
             $typ = ord(hex2bin(substr($array[$x], 8, 2)));
             $offset = ord(hex2bin(substr($array[$x], 12, 2)));
             if ($typ == $modultyp and $offset != '0') {
+                $InstanzID = CheckEventVariable($typ, $ID);
                 for ($y = 0; $y < 3; $y++) {
                     $byte1 = sprintf('%08b', ord(hex2bin(substr($array[$x], 16 + (8 * $y), 2))));
                     $byte2 = ord(hex2bin(substr($array[$x], 20 + (8 * $y), 2)));
