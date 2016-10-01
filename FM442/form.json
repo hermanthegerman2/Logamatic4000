@@ -13,7 +13,7 @@
     {
       "name": "Slider",
       "type": "HorizontalSlider",
-      "minimum": 10,
+      "minimum": 0,
       "maximum": 30,
       "onChange": "FM442_Tagsolltemperatur($id, $Slider);"
     }
