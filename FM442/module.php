@@ -30,6 +30,14 @@ class FM442 extends IPSModule
         IPS_SendDataToParent($this->InstanceID, $JSONString); // Daten senden
         return true;
     }
+
+    public function Tagsolltemperatur(float $temp)
+    {
+        IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $temp . '°C');
+        $data = chr(Command::Parameter).chr(Command::NUL).chr(0x00).chr(Command::NUL).chr(Command::Heizkreis1).chr(Command::NUL).chr(0x00).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL).ord($temp).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL);
+        $this->SendDataToParent($data);
+        return true;
+    }
     
     public function ReceiveData($JSONString)
     {
@@ -66,12 +74,6 @@ class FM442 extends IPSModule
         return true;
     }
 
-    public function Tagsolltemperatur(float $temp)
-    {
-        IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $temp . '°C');
-        return true;
-    }
-    
         
 ################## DUMMYS / WOARKAROUNDS - protected
  
