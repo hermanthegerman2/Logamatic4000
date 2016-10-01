@@ -543,7 +543,7 @@ function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
         $byte1 = sprintf('%08b', ord(hex2bin($array1[$y] . $array1[$y + 1])));
         $ein = (int)(substr($byte1, -1, 1));
         $tag = bindec(substr($byte1, 0, 3));
-        $SchaltpunktID = $y / 8 + $tag;
+        $SchaltpunktID = $y / 8 + 1;
         $byte2 = ord(hex2bin($array1[$y + 4] . $array1[$y + 5]));
         $hour = floor($byte2 / 6);
         if ($hour == 24) $hour = 0;
