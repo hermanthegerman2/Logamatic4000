@@ -4,12 +4,7 @@
     { "name": "HK1", "type": "ValidationTextBox", "caption": "Heizkreis 1" },
     { "name": "HK2", "type": "ValidationTextBox", "caption": "Heizkreis 2" }
   ],
-  "actions":
-  [
-    {
-      "type": "HorizontalSlider", "name": "Tagsolltemperatur", "minimum": 10, "maximum": 30, "onChange": "FM442_Tagsolltemperatur($id, $Slider);"
-    }
-  ],
+
   "status":
   [
     {
