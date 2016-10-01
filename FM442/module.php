@@ -27,8 +27,6 @@ class FM442 extends IPSModule
        
         IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
         IPS_SendDataToParent($this->InstanceID, $JSONString); // Daten senden
-
-        
         return true;
     }
     
@@ -67,6 +65,11 @@ class FM442 extends IPSModule
         return true;
     }
 
+    protected function Tagsolltemperatur($temp)
+    {
+        IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $temp . '°C');
+        return true;
+    }
     
         
 ################## DUMMYS / WOARKAROUNDS - protected

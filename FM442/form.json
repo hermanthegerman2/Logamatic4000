@@ -1,21 +1,26 @@
-{	
-	"elements":
-	[
-            { "name": "HK1", "type": "ValidationTextBox", "caption": "Heizkreis 1" },
-            { "name": "HK2", "type": "ValidationTextBox", "caption": "Heizkreis 2" }
-        ],
-        
-        "status":
-            [
-                {
-                    "code": 102,
-                    "icon": "active",
-                    "caption": "Konfiguration gültig."
-                },
-                {
-                    "code": 202,
-                    "icon": "error",
-                    "caption": "ECO-CAN Adresse ungültig"
-                }             
-            ]
+{
+  "elements":
+  [
+    { "name": "HK1", "type": "ValidationTextBox", "caption": "Heizkreis 1" },
+    { "name": "HK2", "type": "ValidationTextBox", "caption": "Heizkreis 2" }
+  ],
+  "actions":
+  [
+    {
+      "type": "HorizontalSlider", "name": "Tagsolltemperatur", "minimum": 10, "maximum": 30, "onChange": "FM442_Tagsolltemperatur($temp);"
+    }
+  ],
+  "status":
+  [
+    {
+      "code": 102,
+      "icon": "active",
+      "caption": "Konfiguration gültig."
+    },
+    {
+      "code": 202,
+      "icon": "error",
+      "caption": "ECO-CAN Adresse ungültig"
+    }
+  ]
 }
