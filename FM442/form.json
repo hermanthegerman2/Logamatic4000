@@ -7,6 +7,10 @@
   "actions":
   [
     {
+      "type": "Label",
+      "label": "Tagsolltemperatur:"
+    },
+    {
       "name": "Slider",
       "type": "HorizontalSlider",
       "minimum": 10,
