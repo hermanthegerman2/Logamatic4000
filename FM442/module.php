@@ -34,7 +34,7 @@ class FM442 extends IPSModule
     public function Tagsolltemperatur(float $temp)
     {
         IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $temp . '°C');
-        $data = chr(Command::Parameter).chr(Command::NUL).chr(0x00).chr(Command::NUL).chr(Command::Heizkreis1).chr(Command::NUL).chr(0x00).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL).ord($temp).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL);
+        $data = chr(Command::Parameter).chr(Command::NUL).chr(0x01).chr(Command::NUL).chr(Command::Heizkreis1).chr(Command::NUL).chr(0x00).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL).dechex($temp).chr(Command::NUL).chr(0x65).chr(Command::NUL).chr(0x65).chr(Command::NUL);
         $this->SendDataToParent($data);
         return true;
     }
