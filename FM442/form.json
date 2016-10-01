@@ -7,7 +7,7 @@
   "actions":
   [
     {
-      "type": "HorizontalSlider", "name": "Tagsolltemperatur", "minimum": 10, "maximum": 30, "onChange": "FM442_Tagsolltemperatur($temp);"
+      "type": "HorizontalSlider", "name": "Tagsolltemperatur", "minimum": 10, "maximum": 30, "onChange": "FM442_Tagsolltemperatur($id);"
     }
   ],
   "status":
