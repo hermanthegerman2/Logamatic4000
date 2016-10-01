@@ -10,7 +10,8 @@ class FM442 extends IPSModule
         parent::Create();
         $this->RegisterPropertyString('HK1', 'Heizkreis 1');
         $this->RegisterPropertyString('HK2', 'Heizkreis 2');
-        $this->RegisterPropertyFloat('Tagsolltemperatur', 20.5);
+        //$this->RegisterPropertyFloat('Tagsolltemperatur', 20.5);
+
     }
 
     public function ApplyChanges()
@@ -66,9 +67,9 @@ class FM442 extends IPSModule
         return true;
     }
 
-    public function Tagsolltemperatur($Tagsolltemperatur)
+    public function Tagsolltemperatur($id)
     {
-        IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $Tagsolltemperatur . '°C');
+        IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden' . $id . '°C');
         return true;
     }
     
