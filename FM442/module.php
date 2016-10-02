@@ -30,7 +30,7 @@ class FM442 extends IPSModule
 
     public function Umschaltschwelle(float $temp)
     {
-        IPS_LogMessage('Logamatic FM442', 'Umschaltschwelle senden: ' . $temp . '°C');
+        IPS_LogMessage('Logamatic FM442', 'Umschaltschwelle Sommer/Winter senden: ' . $temp . '°C');
         $data = utf8_encode(chr(Command::Parameter).chr(0x65).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
         return $id;
