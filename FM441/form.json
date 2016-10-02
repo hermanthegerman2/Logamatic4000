@@ -21,7 +21,7 @@
       "type": "HorizontalSlider",
       "minimum": 0,
       "maximum": 75,
-      "onChange": "FM442_Desinfektiontemperatur($id, $Desinfektiontemperatur);"
+      "onChange": "FM441_Desinfektiontemperatur($id, $Desinfektiontemperatur);"
     },
     { "type": "Select", "name": "Desinfektionstag", "caption": "Desinfektionstag 0-6 (Mo-So), 7=täglich",
       "options": [
@@ -44,7 +44,7 @@
       "type": "HorizontalSlider",
       "minimum": 0,
       "maximum": 23,
-      "onChange": "FM442_Desinfektionsuhrzeit($id, $Desinfektionsuhrzeit);"
+      "onChange": "FM441_Desinfektionsuhrzeit($id, $Desinfektionsuhrzeit);"
     },
     {
       "type": "Label",
@@ -55,7 +55,7 @@
       "type": "HorizontalSlider",
       "minimum": 0,
       "maximum": 30,
-      "onChange": "FM442_Warmwassersolltemperatur($id, $Warmwassersolltemperatur);"
+      "onChange": "FM441_Warmwassersolltemperatur($id, $Warmwassersolltemperatur);"
     },
     { "type": "Select", "name": "BetriebsartWarmwasser", "caption": "Betriebsart Warmwasser",
       "options": [
@@ -92,7 +92,7 @@
       "type": "HorizontalSlider",
       "minimum": 0,
       "maximum": 23,
-      "onChange": "FM442_Aufheizzeit($id, $Aufheizzeit);"
+      "onChange": "FM441_Aufheizzeit($id, $Aufheizzeit);"
     }
   ],
 
