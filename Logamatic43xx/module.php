@@ -123,7 +123,6 @@ class Logamatic43xx extends IPSModule
         $data = json_decode($JSONString);
         IPS_LogMessage('Logamatic 43xx -> Gateway', bin2hex(utf8_decode($data->Buffer)));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data->Buffer)));
-        //$id = IPS_SendDataToParent( $this->InstanceID, json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => $data))); // Daten senden
         return $id;
     }
     
@@ -184,8 +183,8 @@ class Logamatic43xx extends IPSModule
                     IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse ' . $bus . ' komplett :' . strlen(GetValueString($this->GetIDForIdent('Einstellparameter'))) . ' Bytes');
                     $Einstellparameter = GetValueString($this->GetIDForIdent('Einstellparameter'));
                     $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID);
-                    $data = chr(Command::Normalmodus) . chr($this->ReadPropertyInteger('Bus')) . chr(Command::NUL) . chr(Command::NUL);
-                    $this->ForwardData($data); // Umschalten in Normalmodus senden
+                    $data = utf8_encode(chr(Command::Normalmodus) . chr($this->ReadPropertyInteger('Bus')) . chr(Command::NUL) . chr(Command::NUL));
+                    $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));// Umschalten in Normalmodus senden
                     break;
 
                 case 'ab':   // AB Monitordaten Direktmodus
@@ -198,16 +197,16 @@ class Logamatic43xx extends IPSModule
                 case 'ac':   // AC Monitordaten komplett übertragen
                     $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
                     $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
-                    $data = chr(Command::Normalmodus) . chr($this->ReadPropertyInteger('Bus')) . chr(Command::NUL) . chr(Command::NUL);
-                    $this->ForwardData($data); // Umschalten in Normalmodus senden
+                    $data = utf8_encode(chr(Command::Normalmodus) . chr($this->ReadPropertyInteger('Bus')) . chr(Command::NUL) . chr(Command::NUL));
+                    $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data))); // Umschalten in Normalmodus senden
                     break;
 
                 case 'ad':  // AD Datenblock empfangen
                     IPS_LogMessage('Buderus Logamatic', 'Datenblock ' . $stream);
                     break;
                 case 'b0':  // AD Datenblock empfangen
-                    IPS_LogMessage('Buderus Logamatic', 'Datenblock ' . $stream);
-                    $this->ForwardData($stream);
+                    IPS_LogMessage('Buderus Logamatic', 'Datenblock senden special ' . $stream);
+                    $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => utf8_encode($stream))));
                     break;
             }
         $stream = '';
