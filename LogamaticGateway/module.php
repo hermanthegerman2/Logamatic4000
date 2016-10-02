@@ -97,27 +97,14 @@ class LogamaticGateway extends IPSModule
         return $result;
     }
    
-    
-################## DATAPOINT RECEIVE FROM CHILD
-    /*public function ForwardData($JSONString)
-    { 
-        // Empfangene Daten von der Device Instanz
-        $data = json_decode($JSONString);
-        IPS_LogMessage("Gateway -> SerialPort:", str2hex(utf8_decode($data->Buffer)));
-        $data = utf8_decode($data->Buffer);
-        // Weiterleiten zur I/O Instanz
-        $this->SendDataToParent($data);
-    }*/
-
     public function ForwardData($JSONString)
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('Logamatic Gateway -> RS232 or TCP Port', bin2hex(utf8_decode($data->Buffer)));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data->Buffer)));
-        //$id = IPS_SendDataToParent( $this->InstanceID, json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => $data))); // Daten senden
         return $id;
     }
-################## DATAPOINTS PARENT
+
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
@@ -126,13 +113,6 @@ class LogamaticGateway extends IPSModule
         return true;
     }
     
-    /*protected function SendDataToParent($data)
-    {      
-        $JSONString = json_encode(Array("DataID" => '{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}', "Buffer" => $data));
-        IPS_LogMessage('Logamatic Gateway -> RS232 or TCP Port', str2hex(utf8_decode($data)));
-        IPS_SendDataToParent($this->InstanceID, $JSONString);        
-        return true;
-    }*/
 ################## DUMMYS / WOARKAROUNDS - protected
       
     protected function GetParent()

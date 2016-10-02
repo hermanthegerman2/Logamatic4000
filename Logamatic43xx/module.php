@@ -122,7 +122,9 @@ class Logamatic43xx extends IPSModule
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('Logamatic 43xx -> Gateway', bin2hex(utf8_decode($data->Buffer)));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data->Buffer)));
+        $stream = bin2hex(utf8_decode($data->Buffer));
+        $data = utf8_encode(substr($stream, 0, 2).$this->ReadPropertyInteger('Bus').substr($stream, 2)); // ECO-CAN Busadresse einfügen
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
     }
     
