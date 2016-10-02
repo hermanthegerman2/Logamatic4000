@@ -2,17 +2,17 @@
   "elements":
   [
     { "name": "HK1", "type": "ValidationTextBox", "caption": "Heizkreis 1" },
-    { "name": "HK2", "type": "ValidationTextBox", "caption": "Heizkreis 2" },
+    { "name": "HK2", "type": "ValidationTextBox", "caption": "Heizkreis 2" }
+  ],
+  "actions":
+  [
     { "type": "Select", "name": "Betriebsart", "caption": "Betriebsart",
       "options": [
         { "label": "Manuell Nacht", "value": 0 },
         { "label": "Manuell Tag", "value": 1 },
         { "label": "Automatik", "value": 2 }
       ]
-    }
-  ],
-  "actions":
-  [
+    },
     {
       "type": "Label",
       "label": "Tagsolltemperatur:"
