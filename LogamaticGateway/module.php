@@ -67,7 +67,7 @@ class LogamaticGateway extends IPSModule
     {
         $data = utf8_encode(chr(Command::Direktmodus).chr(0x01));
         $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
-        $data = utf8_encode(decbin($this->ReadPropertyString('Data')));
+        $data = utf8_encode(dechex($this->ReadPropertyString('Data')));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
         $data = utf8_encode(chr(Command::Normalmodus).chr(0x01));
         $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
