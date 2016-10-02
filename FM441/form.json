@@ -45,7 +45,7 @@
       "minimum": 0,
       "maximum": 30,
       "onChange": "FM441_Umschaltschwelle($id, $Umschaltschwelle);"
-    }
+    },
     { "type": "Select", "name": "Desinfektion", "caption": "Desinfektion aus/ein",
       "options": [
         { "label": "Aus", "value": 0 },
