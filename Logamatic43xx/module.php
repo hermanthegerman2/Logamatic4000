@@ -41,9 +41,9 @@ class Logamatic43xx extends IPSModule
     public function RequestMonitordaten()
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
-        $this->SendDataToParent($data);
+        $this->ForwardData($data);
         $data = chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
-        $this->SendDataToParent($data);
+        $this->ForwardData($data);
         SetValueString($this->GetIDForIdent('Monitordaten'), '');
         return true;
     }
@@ -51,9 +51,9 @@ class Logamatic43xx extends IPSModule
     public function RequestEinstellPar()
     {
         $data = chr(Command::Direktmodus).chr(Command::NUL);
-        $this->SendDataToParent($data);
+        $this->ForwardData($data);
         $data = chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
-        $this->SendDataToParent($data);
+        $this->ForwardData($data);
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
         return true;
     }
@@ -118,12 +118,12 @@ class Logamatic43xx extends IPSModule
         return true;
     }
 
-    protected function SendDataToParent($data)
+    protected function ForwardData($data)
     {
         $JSONString = json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', 'Buffer' => utf8_encode($data)));
         IPS_LogMessage('Gateway <- Logamatic 43xx',str2hex(utf8_decode($data)));
-        IPS_SendDataToParent($this->InstanceID, $JSONString); // Daten senden
-        return true;
+        $id = $this->SendDataToParent($this->InstanceID, $JSONString); // Daten senden
+        return $id;
     }
     
     public function ReceiveData($JSONString)
