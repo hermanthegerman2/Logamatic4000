@@ -18,33 +18,33 @@
       "label": "Tagsolltemperatur:"
     },
     {
-      "name": "Slider",
+      "name": "Tagsolltemperatur",
       "type": "HorizontalSlider",
       "minimum": 0,
       "maximum": 30,
-      "onChange": "FM442_Tagsolltemperatur($id, $Slider);"
+      "onChange": "FM442_Tagsolltemperatur($id, $Tagsolltemperatur);"
     },
     {
       "type": "Label",
       "label": "Nachtraumsolltemperatur:"
     },
     {
-      "name": "Slider",
+      "name": "Nachtraumsolltemperatur",
       "type": "HorizontalSlider",
       "minimum": 0,
       "maximum": 30,
-      "onChange": "FM442_Nachtraumsolltemperatur($id, $Slider);"
+      "onChange": "FM442_Nachtraumsolltemperatur($id, $Nachtraumsolltemperatur);"
     },
     {
       "type": "Label",
       "label": "Sommer / Winter – Umschaltschwelle:"
     },
     {
-      "name": "Slider",
+      "name": "Umschaltschwelle",
       "type": "HorizontalSlider",
       "minimum": 0,
       "maximum": 30,
-      "onChange": "FM442_Umschaltschwelle($id, $Slider);"
+      "onChange": "FM442_Umschaltschwelle($id, $Umschaltschwelle);"
     }
   ],
 
