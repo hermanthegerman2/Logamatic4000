@@ -52,7 +52,13 @@ class FM442 extends IPSModule
         return $id;
     }
 
-    public function Betriebsart(int $id)
+    public function   { "type": "Select", "name": "Betriebsart", "caption": "Betriebsart",
+      "options": [
+        { "label": "Manuell Nacht", "value": 0 },
+        { "label": "Manuell Tag", "value": 1 },
+        { "label": "Automatik", "value": 2 }
+      ]
+    },(int $id)
     {
         $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
         IPS_LogMessage('Logamatic FM442', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
