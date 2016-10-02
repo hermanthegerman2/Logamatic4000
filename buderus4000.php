@@ -421,7 +421,7 @@ function Buderus ($typ, $offset, $value)
     $Buderus[144][17] = array ("Ansteuerung Sekundärpumpe",  "Prozent", "1", "%");
 
     $Buderus[154][-1] = array ("Imaginäres Modul", "0");
-    $Buderus[154][0] = array ("","");
+    $Buderus[154][0] = array ("Offset 1","Modul");
     $Buderus[154][1] = array ("Offset 1","Modul");
     $Buderus[154][2] = array ("Offset 2","Modul");
     $Buderus[154][3] = array ("Offset 3","Modul");
@@ -708,18 +708,20 @@ function EncodeMonitorNormalData($Monitordaten, $ID)
     $array = str_split($Monitordaten, 24);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
-        if (substr($array[$x], 0, 2) == 'a7')
+        switch (substr($array[$x], 0, 2))
         {
-            $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-            IPS_LogMessage('Buderus Logamatic', 'Array: '.$array[$x]);
-            $offset = ord(hex2bin(substr($array[$x], 12, 2)));
-            $substring = substr($array[$x], 16, 2);
-            IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
-            $var = CheckVariable($typ, -1, 0, $ID);
-            $value = GetValueString($var);
-            $newvalue = substr_replace($value, $substring, $offset*2, 2);
-            SetValueString($var, $newvalue);
-            EncodeVariableData($ID, $typ);
+            case 'a7':
+                $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+                IPS_LogMessage('Buderus Logamatic', 'Array: '.$array[$x]);
+                $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                $substring = substr($array[$x], 16, 2);
+                IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
+                $name = Buderus($typ, $offset, 0);
+                $var = @IPS_GetVariableIDByName($name, $ID);
+                $value = GetValueString($var);
+                $newvalue = substr_replace($value, $substring, $offset*2, 2);
+                SetValueString($var, $newvalue);
+                EncodeVariableData($ID, $typ);
         }
     }
     return true;
@@ -759,7 +761,7 @@ function EncodeEinstellParameterData ($EinstellParameter, $ID)
 
 function CalculateTimeValue ($value)
 {
- 
+    return true;
 }
 
     
