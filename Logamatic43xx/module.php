@@ -118,7 +118,7 @@ class Logamatic43xx extends IPSModule
         return true;
     }
 
-    protected function ForwardData($data)
+    public function ForwardData($data)
     {
         $JSONString = json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', 'Buffer' => utf8_encode($data)));
         IPS_LogMessage('Gateway <- Logamatic 43xx',str2hex(utf8_decode($data)));

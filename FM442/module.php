@@ -20,7 +20,7 @@ class FM442 extends IPSModule
         $this->SetStatus(102);
     }
 
-    protected function ForwardData($data)
+    public function ForwardData($data)
     {
         $JSONString = json_encode(Array('DataID' => '{482A20C1-35A8-4591-96F0-C119AB72EBB2}', 'Buffer' => utf8_encode($data)));
         IPS_LogMessage('FM442 -> Logamatic:',str2hex(utf8_decode($data)));
