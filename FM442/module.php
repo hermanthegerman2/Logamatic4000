@@ -20,13 +20,32 @@ class FM442 extends IPSModule
         $this->SetStatus(102);
     }
 
+    protected function SendDataToParent($data)
+    {
+        $JSONString = json_encode(Array("DataID" => '{482A20C1-35A8-4591-96F0-C119AB72EBB2}', "Buffer" => utf8_encode($data)));
+        IPS_LogMessage('FM442 -> Logamatic', str2hex(utf8_decode($data)));
+        IPS_SendDataToParent($this->InstanceID, $JSONString);
+        return true;
+    }
+
     public function ForwardData($JSONString)
+    {
+        // Empfangene Daten von der Device Instanz
+        $data = json_decode($JSONString);
+        IPS_LogMessage("FM442 -> Logamatic", bin2hex(utf8_decode($data->Buffer)));
+        $data = utf8_decode($data->Buffer);
+        // Weiterleiten zur I/O Instanz
+        $this->SendDataToParent($data);
+        return true;
+    }
+
+    /*public function ForwardData($JSONString)
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('FM442 -> Logamatic', bin2hex(utf8_decode($data->Buffer)));
-        $id = $this->SendDataToParent(json_encode(Array('DataID' => '{482A20C1-35A8-4591-96F0-C119AB72EBB2}', "Buffer" => $data->Buffer))); // Daten senden
+        $id = SendDataToParent(json_encode(Array('DataID' => '{482A20C1-35A8-4591-96F0-C119AB72EBB2}', "Buffer" => $data->Buffer))); // Daten senden
         return $id;
-    }
+    }*/
 
     public function Tagsolltemperatur(float $temp)
     {
