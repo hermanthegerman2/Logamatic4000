@@ -708,20 +708,18 @@ function EncodeMonitorNormalData($Monitordaten, $ID)
     $array = str_split($Monitordaten, 24);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
-        switch (substr($array[$x], 0, 2))
+        if (substr($array[$x], 0, 2) == 'a7')
         {
-            case 'a7':
-                $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-                IPS_LogMessage('Buderus Logamatic', 'Array: '.$array[$x]);
-                $offset = ord(hex2bin(substr($array[$x], 12, 2)));
-                $substring = substr($array[$x], 16, 2);
-                IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
-                $name = Buderus($typ, $offset, 0);
-                $var = IPS_GetVariableIDByName($name, $ID);
-                $value = GetValueString($var);
-                $newvalue = substr_replace($value, $substring, $offset*2, 2);
-                SetValueString($var, $newvalue);
-                EncodeVariableData($ID, $typ);
+            $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+            IPS_LogMessage('Buderus Logamatic', 'Array: '.$array[$x]);
+            $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+            $substring = substr($array[$x], 16, 2);
+            IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
+            $var = CheckVariable($typ, -1, 0, $ID);
+            $value = GetValueString($var);
+            $newvalue = substr_replace($value, $substring, $offset*2, 2);
+            SetValueString($var, $newvalue);
+            EncodeVariableData($ID, $typ);
         }
     }
     return true;
