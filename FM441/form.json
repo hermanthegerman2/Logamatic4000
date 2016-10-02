@@ -1,21 +1,107 @@
 {	
 	"elements":
 	[
-            { "name": "HK", "type": "ValidationTextBox", "caption": "Heizkreis 3" },
-            { "name": "WW", "type": "ValidationTextBox", "caption": "Warmwasser" }
-        ],
-        
-        "status":
-            [
-                {
-                    "code": 102,
-                    "icon": "active",
-                    "caption": "Konfiguration gültig."
-                },
-                {
-                    "code": 202,
-                    "icon": "error",
-                    "caption": "ECO-CAN Adresse ungültig"
-                }             
-            ]
+        { "name": "HK", "type": "ValidationTextBox", "caption": "Heizkreis 3" },
+        { "name": "WW", "type": "ValidationTextBox", "caption": "Warmwasser" }
+    ],
+  "actions":
+  [
+    { "type": "Select", "name": "Desinfektion", "caption": "Desinfektion aus/ein",
+      "options": [
+        { "label": "Aus", "value": 0 },
+        { "label": "Ein", "value": 1 }
+      ]
+    },
+    {
+      "type": "Label",
+      "label": "Desinfektiontemperatur: 65-75 °C"
+    },
+    {
+      "name": "Desinfektiontemperatur",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 75,
+      "onChange": "FM442_Desinfektiontemperatur($id, $Desinfektiontemperatur);"
+    },
+    { "type": "Select", "name": "Desinfektionstag", "caption": "Desinfektionstag 0-6 (Mo-So), 7=täglich",
+      "options": [
+        { "label": "Montag", "value": 0 },
+        { "label": "Dienstag", "value": 1 },
+        { "label": "Mittwoch", "value": 2 },
+        { "label": "Donnerstag", "value": 3 },
+        { "label": "Freitag", "value": 4 },
+        { "label": "Samstag", "value": 5 },
+        { "label": "Sonntag", "value": 6 },
+        { "label": "täglich", "value": 7 }
+      ]
+    },
+    {
+      "type": "Label",
+      "label": "Desinfektionsuhrzeit: 0-23 Uhr"
+    },
+    {
+      "name": "Desinfektionsuhrzeit",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 23,
+      "onChange": "FM442_Desinfektionsuhrzeit($id, $Desinfektionsuhrzeit);"
+    },
+    {
+      "type": "Label",
+      "label": "Warmwassersolltemperatur: 30 bis 60 °C"
+    },
+    {
+      "name": "Warmwassersolltemperatur",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 30,
+      "onChange": "FM442_Warmwassersolltemperatur($id, $Warmwassersolltemperatur);"
+    },
+    { "type": "Select", "name": "BetriebsartWarmwasser", "caption": "Betriebsart Warmwasser",
+      "options": [
+        { "label": "Manuell Nacht", "value": 0 },
+        { "label": "Manuell Tag", "value": 1 },
+        { "label": "Automatik", "value": 2 }
+      ]
+    },
+    { "type": "Select", "name": "Zirkulationspumpenlaeufe", "caption": "Zirkulationspumpenläufe pro Stunde:",
+      "options": [
+        { "label": "ständig aus", "value": 0 },
+        { "label": "ständig an", "value": 1 },
+        { "label": "1x pro Std", "value": 2 },
+        { "label": "2x pro Std", "value": 3 },
+        { "label": "3x pro Std", "value": 4 },
+        { "label": "4x pro Std", "value": 5 },
+        { "label": "5x pro Std", "value": 6 },
+        { "label": "6x pro Std", "value": 7 }
+      ]
+    },
+    { "type": "Select", "name": "BetriebsartZirkulation", "caption": "Betriebsart Zirkulation",
+      "options": [
+        { "label": "Manuell Nacht", "value": 0 },
+        { "label": "Manuell Tag", "value": 1 },
+        { "label": "Automatik", "value": 2 }
+      ]
+    },
+    {
+      "type": "Label",
+      "label": "Uhrzeit zu der die tägliche Aufheizung gestartet wird: 0-23 Uhr"
+    },
+    {
+      "name": "Aufheizzeit",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 23,
+      "onChange": "FM442_Aufheizzeit($id, $Aufheizzeit);"
+    }
+  ],
+
+  "status":
+  [
+    {
+      "code": 102,
+      "icon": "active",
+      "caption": "Konfiguration gültig."
+    }
+  ]
 }
