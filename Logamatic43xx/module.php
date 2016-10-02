@@ -41,7 +41,7 @@ class Logamatic43xx extends IPSModule
     public function SwitchDM()
     {
         IPS_LogMessage('Logamatic', 'Umschalten in den Direktmodus');
-        $data = utf8_encode(chr(Command::Direktmodus));
+        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
     }
@@ -49,7 +49,7 @@ class Logamatic43xx extends IPSModule
     public function SwitchNM()
     {
         IPS_LogMessage('Logamatic', 'Umschalten in den Normalmodus');
-        $data = utf8_encode(chr(Command::Normalmodus));
+        $data = utf8_encode(chr(Command::Normalmodus).chr(Command::NUL));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
     }
