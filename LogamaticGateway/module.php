@@ -56,7 +56,7 @@ class LogamaticGateway extends IPSModule
     
     public function RequestErrorLog()
     {
-        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL));
+        $data = utf8_encode(chr(Command::Direktmodus).chr(0x01));
         $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
         $data = utf8_encode(chr(Command::Datenblock).chr(Command::NUL).chr(0x01).chr(Command::NUL).chr(Command::Fehlerprotokoll));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
@@ -65,11 +65,11 @@ class LogamaticGateway extends IPSModule
 
     public function SendRawData()
     {
-        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL));
+        $data = utf8_encode(chr(Command::Direktmodus).chr(0x01));
         $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
         $data = utf8_encode(str2hex($this->ReadPropertyString('Data')));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
-        $data = utf8_encode(chr(Command::Normalmodus).chr(Command::NUL));
+        $data = utf8_encode(chr(Command::Normalmodus).chr(0x01));
         $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
         return $id;
     }
