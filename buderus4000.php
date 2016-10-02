@@ -717,7 +717,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID)
                 $substring = substr($array[$x], 16, 2);
                 IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
                 $name = Buderus($typ, $offset, 0);
-                $var = @IPS_GetVariableIDByName($name, $ID);
+                $var = IPS_GetVariableIDByName($name, $ID);
                 $value = GetValueString($var);
                 $newvalue = substr_replace($value, $substring, $offset*2, 2);
                 SetValueString($var, $newvalue);
