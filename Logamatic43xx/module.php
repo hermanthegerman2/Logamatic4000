@@ -121,15 +121,15 @@ class Logamatic43xx extends IPSModule
     public function ForwardData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Gateway <- Logamatic 43xx', bin2hex(utf8_decode($data->Buffer)));
-        $id = IPS_SendDataToParent($this->InstanceID, json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => $data->Buffer))); // Daten senden
+        IPS_LogMessage('Logamatic 43xx -> Gateway', bin2hex(utf8_decode($data->Buffer)));
+        $id = $this->SendDataToParent(json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => $data->Buffer))); // Daten senden
         return $id;
     }
     
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Gateway -> Logamatic 43xx', bin2hex(utf8_decode($data->Buffer)));
+        IPS_LogMessage('Logamatic 43xx Receive Data', bin2hex(utf8_decode($data->Buffer)));
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
         $bus = ord(hex2bin(substr($stream, 4, 2)));

@@ -24,7 +24,7 @@ class FM442 extends IPSModule
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('FM442 -> Logamatic:', bin2hex(utf8_decode($data->Buffer)));
-        $id = IPS_SendDataToParent($this->InstanceID, json_encode(Array('DataID' => '{482A20C1-35A8-4591-96F0-C119AB72EBB2}', "Buffer" => $data->Buffer))); // Daten senden
+        $id = $this->SendDataToParent(json_encode(Array('DataID' => '{482A20C1-35A8-4591-96F0-C119AB72EBB2}', "Buffer" => $data->Buffer))); // Daten senden
         return $id;
     }
 
