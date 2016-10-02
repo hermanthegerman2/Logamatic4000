@@ -6,6 +6,13 @@
   ],
   "actions":
   [
+    { "type": "Select", "name": "Betriebsart", "caption": "Automatik",
+      "options": [
+        { "label": "Manuell Nacht", "value": 0 },
+        { "label": "Manuell Tag", "value": 1 },
+        { "label": "Automatik", "value": 2 }
+      ]
+    },
     {
       "type": "Label",
       "label": "Tagsolltemperatur:"
@@ -16,6 +23,28 @@
       "minimum": 0,
       "maximum": 30,
       "onChange": "FM442_Tagsolltemperatur($id, $Slider);"
+    },
+    {
+      "type": "Label",
+      "label": "Nachtraumsolltemperatur:"
+    },
+    {
+      "name": "Slider",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 30,
+      "onChange": "FM442_Nachtraumsolltemperatur($id, $Slider);"
+    },
+    {
+      "type": "Label",
+      "label": "Sommer / Winter – Umschaltschwelle:"
+    },
+    {
+      "name": "Slider",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 30,
+      "onChange": "FM442_Umschaltschwelle($id, $Slider);"
     }
   ],
 
@@ -25,11 +54,6 @@
       "code": 102,
       "icon": "active",
       "caption": "Konfiguration gültig."
-    },
-    {
-      "code": 202,
-      "icon": "error",
-      "caption": "ECO-CAN Adresse ungültig"
     }
   ]
 }
