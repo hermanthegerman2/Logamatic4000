@@ -33,7 +33,7 @@ class FM442 extends IPSModule
     {
         IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden: ' . $temp . '°C');
         $data = chr(Command::Parameter).chr(0x01).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65);
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data->Buffer)));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
         return $id;
     }
     
