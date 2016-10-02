@@ -38,7 +38,7 @@ class Logamatic43xx extends IPSModule
         }
     }
 
-    public function SwitchDM($bus)
+    public function SwitchDM()
     {
         IPS_LogMessage('Logamatic', 'Umschalten in den Direktmodus');
         $data = utf8_encode(chr(Command::Direktmodus).chr($this->ReadPropertyInteger('Bus')));
@@ -46,7 +46,7 @@ class Logamatic43xx extends IPSModule
         return $id;
     }
 
-    public function SwitchNM($bus)
+    public function SwitchNM()
     {
         IPS_LogMessage('Logamatic', 'Umschalten in den Normalmodus');
         $data = utf8_encode(chr(Command::Normalmodus).chr($this->ReadPropertyInteger('Bus')));
@@ -142,10 +142,8 @@ class Logamatic43xx extends IPSModule
         $datentyp = substr(bin2hex($stream), 0, 2);
         if ($datentyp === 'b0') {
             $this->SwitchDM();
-            sleep(1);
             $data = utf8_encode(substr($stream, 0, 1) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2)); // ECO-CAN Busadresse einfügen
             $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-            sleep(1);
             $this->SwitchNM();
         }
         return $id;
