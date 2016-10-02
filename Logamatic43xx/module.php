@@ -40,20 +40,20 @@ class Logamatic43xx extends IPSModule
 
     public function RequestMonitordaten()
     {
-        $data = chr(Command::Direktmodus).chr(Command::NUL);
-        $this->ForwardData($data);
-        $data = chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
-        $this->ForwardData($data);
+        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL));
+        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
+        $data = utf8_encode(chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL));
+        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Monitordaten'), '');
         return true;
     }
 
     public function RequestEinstellPar()
     {
-        $data = chr(Command::Direktmodus).chr(Command::NUL);
-        $this->ForwardData($data);
-        $data = chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL);
-        $this->ForwardData($data);
+        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL));
+        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
+        $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL));
+        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
         return true;
     }
