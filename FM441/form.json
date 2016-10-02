@@ -6,6 +6,46 @@
     ],
   "actions":
   [
+    { "type": "Select", "name": "Betriebsart", "caption": "Betriebsart",
+      "options": [
+        { "label": "Manuell Nacht", "value": 0 },
+        { "label": "Manuell Tag", "value": 1 },
+        { "label": "Automatik", "value": 2 }
+      ]
+    },
+    {
+      "type": "Label",
+      "label": "Tagsolltemperatur:"
+    },
+    {
+      "name": "Tagsolltemperatur",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 30,
+      "onChange": "FM441_Tagsolltemperatur($id, $Tagsolltemperatur);"
+    },
+    {
+      "type": "Label",
+      "label": "Nachtraumsolltemperatur:"
+    },
+    {
+      "name": "Nachtraumsolltemperatur",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 30,
+      "onChange": "FM441_Nachtraumsolltemperatur($id, $Nachtraumsolltemperatur);"
+    },
+    {
+      "type": "Label",
+      "label": "Sommer / Winter – Umschaltschwelle:"
+    },
+    {
+      "name": "Umschaltschwelle",
+      "type": "HorizontalSlider",
+      "minimum": 0,
+      "maximum": 30,
+      "onChange": "FM441_Umschaltschwelle($id, $Umschaltschwelle);"
+    }
     { "type": "Select", "name": "Desinfektion", "caption": "Desinfektion aus/ein",
       "options": [
         { "label": "Aus", "value": 0 },

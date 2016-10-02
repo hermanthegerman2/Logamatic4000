@@ -28,6 +28,39 @@ class FM441 extends IPSModule
         return $id;
     }
 
+    public function Umschaltschwelle(float $temp)
+    {
+        IPS_LogMessage('Logamatic FM441', 'Umschaltschwelle Sommer/Winter senden: ' . $temp . '°C');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Nachtraumsolltemperatur(float $temp)
+    {
+        IPS_LogMessage('Logamatic FM441', 'Nachtraumsolltemperatur senden: ' . $temp . '°C');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Tagsolltemperatur(float $temp)
+    {
+        IPS_LogMessage('Logamatic FM441', 'Tagsolltemperatur senden: ' . $temp . '°C');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Betriebsart(int $id)
+    {
+        $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
+        IPS_LogMessage('Logamatic FM441', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        return $id;
+    }
+
     public function Desinfektion(int $id)
     {
         $Betriebsart =  array(0 => 'aus', 1 => 'ein');
