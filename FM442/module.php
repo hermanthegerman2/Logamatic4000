@@ -28,8 +28,17 @@ class FM442 extends IPSModule
         return $id;
     }
 
+    public function SwitchDM()
+    {
+        IPS_LogMessage('Logamatic FM442', 'Umschalten in den Direktmodus');
+        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        return $id;
+    }
+
     public function Umschaltschwelle(float $temp)
     {
+        $this->SwitchDM();
         IPS_LogMessage('Logamatic FM442', 'Umschaltschwelle Sommer/Winter senden: ' . $temp . '°C');
         $data = utf8_encode(chr(Command::Parameter).chr(0x65).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
@@ -38,6 +47,7 @@ class FM442 extends IPSModule
 
     public function Nachtraumsolltemperatur(float $temp)
     {
+        $this->SwitchDM();
         IPS_LogMessage('Logamatic FM442', 'Nachtraumsolltemperatur senden: ' . $temp . '°C');
         $data = utf8_encode(chr(Command::Parameter).chr(0x65).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
@@ -46,20 +56,16 @@ class FM442 extends IPSModule
 
     public function Tagsolltemperatur(float $temp)
     {
+        $this->SwitchDM();
         IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden: ' . $temp . '°C');
         $data = utf8_encode(chr(Command::Parameter).chr(0x65).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
         return $id;
     }
 
-    public function   { "type": "Select", "name": "Betriebsart", "caption": "Betriebsart",
-      "options": [
-        { "label": "Manuell Nacht", "value": 0 },
-        { "label": "Manuell Tag", "value": 1 },
-        { "label": "Automatik", "value": 2 }
-      ]
-    },(int $id)
+    public function Betriebsart(int $id)
     {
+        $this->SwitchDM();
         $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
         IPS_LogMessage('Logamatic FM442', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
         $data = utf8_encode(chr(Command::Parameter).chr(0x65).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
