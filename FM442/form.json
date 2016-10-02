@@ -6,7 +6,7 @@
   ],
   "actions":
   [
-    { "type": "Select", "name": "Betriebsart", "caption": "Automatik",
+    { "type": "Select", "name": "Betriebsart", "caption": "Betriebsart",
       "options": [
         { "label": "Manuell Nacht", "value": 0 },
         { "label": "Manuell Tag", "value": 1 },
