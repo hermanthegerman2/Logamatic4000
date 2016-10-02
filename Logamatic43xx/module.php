@@ -122,7 +122,7 @@ class Logamatic43xx extends IPSModule
     {
         $data = json_decode($JSONString);
         IPS_LogMessage('Gateway <- Logamatic 43xx', bin2hex(utf8_decode($data->Buffer)));
-        $id = $this->SendDataToParent(json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => $data->Buffer))); // Daten senden
+        $id = IPS_SendDataToParent($this->InstanceID, json_encode(Array('DataID' => '{0D923A14-D3B4-4F44-A4AB-D2B534693C35}', "Buffer" => $data->Buffer))); // Daten senden
         return $id;
     }
     
@@ -206,7 +206,7 @@ class Logamatic43xx extends IPSModule
                     break;
                 case 'b0':  // AD Datenblock empfangen
                     IPS_LogMessage('Buderus Logamatic', 'Datenblock ' . $stream);
-                    $this->SendDataToParent($stream);
+                    $this->ForwardData($stream);
                     break;
             }
         $stream = '';
