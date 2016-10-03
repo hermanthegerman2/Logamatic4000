@@ -9,6 +9,7 @@ class FM444 extends IPSModule
         //Never delete this line!
         parent::Create();
         $this->RegisterPropertyString('AWe', 'Holzvergaser');
+        $this->RegisterPropertyBoolean ("Logging", true);
     }
 
     public function ApplyChanges()
@@ -22,7 +23,7 @@ class FM444 extends IPSModule
     public function ForwardData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('FM442 -> Logamatic', bin2hex(utf8_decode($data->Buffer)));
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('FM444 -> Logamatic', bin2hex(utf8_decode($data->Buffer)));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}", "Buffer" => $data->Buffer)));
         return $id;
     }
@@ -30,7 +31,7 @@ class FM444 extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Logamatic FM444 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM444 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
@@ -41,17 +42,17 @@ class FM444 extends IPSModule
 
                     case 'a7':  // A7 Monitordaten Normalmodus
                     case 'ad':  // AD Direktdaten Normalmodus
-                        IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
+                        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                         $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                         if ($result != 1) {
-                            IPS_LogMessage('Logamatic FM444', 'Message zurück an Logamatic: ' . $result);
+                            if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM444', 'Message zurück an Logamatic: ' . $result);
                             $data = utf8_encode(hex2bin($result));
                             $this->SendDataToParent(json_encode(Array("DataID" => "{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}", "Buffer" => $data)));
                         }
                         break;
 
                     case 'ab':
-                        IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
+                        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
                         EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
                 }

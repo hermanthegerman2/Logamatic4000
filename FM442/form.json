@@ -2,7 +2,9 @@
   "elements":
   [
     { "name": "HK1", "type": "ValidationTextBox", "caption": "Heizkreis 1" },
-    { "name": "HK2", "type": "ValidationTextBox", "caption": "Heizkreis 2" }
+    { "name": "HK2", "type": "ValidationTextBox", "caption": "Heizkreis 2" },
+    { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+    { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
   ],
   "actions":
   [

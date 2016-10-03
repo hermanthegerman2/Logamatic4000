@@ -1,8 +1,10 @@
 {	
 	"elements":
 	[
-        { "name": "HK", "type": "ValidationTextBox", "caption": "Heizkreis 3" },
-        { "name": "WW", "type": "ValidationTextBox", "caption": "Warmwasser" }
+      { "name": "HK", "type": "ValidationTextBox", "caption": "Heizkreis 3" },
+      { "name": "WW", "type": "ValidationTextBox", "caption": "Warmwasser" },
+      { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+      { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
     ],
   "actions":
   [
