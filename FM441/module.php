@@ -149,7 +149,8 @@ class FM441 extends IPSModule
             case '82':
             case '84':
                 switch ($datentyp) {
-                    case 'a7':   // A7 Monitordaten Normalmodus
+                    case 'a7':  // A7 Monitordaten Normalmodus
+                    case 'ad':  // AD Direktdaten Normalmodus
                         IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                         $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                         if ($result != 1) {

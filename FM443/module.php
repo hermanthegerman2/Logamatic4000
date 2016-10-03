@@ -38,8 +38,8 @@ class FM443 extends IPSModule
         if ($modultyp == '9e')
             {
                 switch ($datentyp) {
-                    case 'a7':   // A7 Monitordaten Normalmodus
-
+                    case 'a7':  // A7 Monitordaten Normalmodus
+                    case 'ad':  // AD Direktdaten Normalmodus
                         IPS_LogMessage('Logamatic FM443', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Normalmodus :' . $stream);
                         $result =EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                         if ($result != 1) {
