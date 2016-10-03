@@ -43,6 +43,7 @@ class Command extends stdClass
 function Buderus ($typ, $offset, $value)
     {
     $Buderus[7][-1] = array ("Heizkreis 1", "64");
+        $Buderus[7][0] = array ("", "");
         $Buderus[7][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[7][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[7][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
@@ -52,6 +53,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[7][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[7][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
     $Buderus[8][-1] = array ("Heizkreis 2", "64");
+        $Buderus[8][0] = array ("", "");
         $Buderus[8][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[8][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[8][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
@@ -61,6 +63,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[8][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[8][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
     $Buderus[9][-1] = array ("Heizkreis 3", "64");
+        $Buderus[9][0] = array ("", "");
         $Buderus[9][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[9][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[9][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
@@ -70,6 +73,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[9][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[9][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
     $Buderus[10][-1] = array ("Heizkreis 4", "64");
+        $Buderus[10][0] = array ("", "");
         $Buderus[10][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[10][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[10][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
@@ -79,7 +83,9 @@ function Buderus ($typ, $offset, $value)
         $Buderus[10][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[10][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
     $Buderus[11][-1] = array ("Außenparameter");
+        $Buderus[11][0] = array ("", "");
     $Buderus[12][-1] = array ("Warmwasser", "44");
+        $Buderus[12][0] = array ("", "");
         $Buderus[12][1] = array ("thermische Desinfektion", "Bit", "AUS", "EIN");
         $Buderus[12][2] = array ("Warmwassersolltemperatur für die Zeit der thermischen Desinfektion", "Temp", "1", "°C");
         $Buderus[12][3] = array ("Desinfektionstag", "Bit", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag", "täglich");
