@@ -678,6 +678,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
             switch (substr($array[$x], 0, 2))
             {
                 case 'ab':
+                case 'ad':
                     IPS_LogMessage('Buderus Logamatic', 'Message: '.$array[$x]);
                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                     $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
