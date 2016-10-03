@@ -43,7 +43,7 @@ class ZM432 extends IPSModule
                         $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                         if ($result != 1) {
                             IPS_LogMessage('Logamatic ZM432', 'Message zurück an Logamatic: ' . $result);
-                            $data = hex2bin(utf8_encode($result));
+                            $data = utf8_encode(hex2bin($result));
                             $this->SendDataToParent(json_encode(Array("DataID" => "{054466C5-C0E0-46C6-82D7-29A2FAE4276C}", "Buffer" => $data)));
                         }
                         break;

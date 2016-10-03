@@ -44,7 +44,7 @@ class FM443 extends IPSModule
                         $result =EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                         if ($result != 1) {
                             IPS_LogMessage('Logamatic FM443', 'Message zurück an Logamatic: ' . $result);
-                            $data = hex2bin(utf8_encode($result));
+                            $data = utf8_encode(hex2bin($result));
                             $this->SendDataToParent(json_encode(Array("DataID" => "{7DADFA25-C0A9-43C6-81E0-523EA0E6D389}", "Buffer" => $data)));
                         }
                         break;
