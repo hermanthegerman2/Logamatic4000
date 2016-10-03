@@ -73,6 +73,8 @@ class FM442 extends IPSModule
         switch ($modultyp) {
             case '80':  // Heizkreis 1
             case '81':  // Heizkreis 2
+            case '07':  // Heizkreis 1 einstellbare Daten
+            case '08':  // Heizkreis 2 einstellbare Daten
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus
                     case 'ad':  // AD Direktdaten Normalmodus
