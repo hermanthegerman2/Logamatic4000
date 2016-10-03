@@ -77,7 +77,6 @@ class FM442 extends IPSModule
             case '08':  // Heizkreis 2 einstellbare Daten
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus
-                    case 'ad':  // AD Direktdaten Normalmodus
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Normalmodus :' . $stream);
                         $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                         if ($result != 1) {
@@ -87,6 +86,7 @@ class FM442 extends IPSModule
                         }
                         break;
                     case 'ab':
+                    case 'ad':  // AD Direktdaten Normalmodus
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Direktmodus :' . $stream);
                         EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
