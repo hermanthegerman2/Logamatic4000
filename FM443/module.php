@@ -50,7 +50,6 @@ class FM443 extends IPSModule
                             $this->SendDataToParent(json_encode(Array("DataID" => "{7DADFA25-C0A9-43C6-81E0-523EA0E6D389}", "Buffer" => $data)));
                         }
                         break;
-
                     case 'ab':
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM443', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Direktmodus :' . $stream);
                         EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
