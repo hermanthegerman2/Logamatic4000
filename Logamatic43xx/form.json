@@ -1,7 +1,8 @@
 {	
 	"elements":
         [
-            {"type": "NumberSpinner", "name": "Bus", "caption": "ECO-CAN Adresse:"},
+            { "type": "Label", "label": "ECO-CAN Busadresse (0-15)" },
+            { "type": "NumberSpinner", "name": "Bus", "caption": "ECO-CAN Adresse:"},
             { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
             { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
         ],

@@ -1,12 +1,12 @@
 {	
 	"elements":
 	    [
-            { "name": "Open", "type": "CheckBox", "caption": "Open" },
-            { "name": "Host", "type": "ValidationTextBox", "caption": "Host" },
-            { "name": "Port", "type": "NumberSpinner", "caption": "Port" },
-            { "name": "Data", "type": "ValidationTextBox", "caption": "Data" },
-            { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
-            { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
+          { "type": "Label", "label": "Verbindung Logamatic Gateway" },
+          { "name": "Open", "type": "CheckBox", "caption": "Open" },
+          { "name": "Host", "type": "ValidationTextBox", "caption": "Host" },
+          { "name": "Port", "type": "NumberSpinner", "caption": "Port" },
+          { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+          { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
         ],
 
         "status":
