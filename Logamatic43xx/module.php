@@ -208,7 +208,8 @@ class Logamatic43xx extends IPSModule
                             break;
                         case '84':
                         case '82':
-                        case '09':
+                        case '09':  // Heizkreis 3 einstellbare Daten
+                        case '12':  // Warmwasser einstellbare Daten
                         case '0c':
                             if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('NM Logamatic 43xx -> FM441', $stream);
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => $data->Buffer)));
