@@ -1,20 +1,18 @@
 {	
-	"elements":
+  "elements":
 	[
-            { "name": "Kessel", "type": "ValidationTextBox", "caption": "bodenstehender Kessel" }
-        ],
+      { "name": "Kessel", "type": "ValidationTextBox", "caption": "bodenstehender Kessel" },
+      { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+      { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
+    ],
+  "status":
+  [
+    {
+      "code": 102,
+      "icon": "active",
+      "caption": "Konfiguration gültig."
+    }
+  ]
         
-        "status":
-            [
-                {
-                    "code": 102,
-                    "icon": "active",
-                    "caption": "Konfiguration gültig."
-                },
-                {
-                    "code": 202,
-                    "icon": "error",
-                    "caption": "ECO-CAN Adresse ungültig"
-                }             
-            ]
+
 }

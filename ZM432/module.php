@@ -9,6 +9,7 @@ class ZM432 extends IPSModule
         //Never delete this line!
         parent::Create();
         $this->RegisterPropertyString('Kessel', 'bodenstehender Kessel');
+        $this->RegisterPropertyBoolean ("Logging", true);
     }
 
     public function ApplyChanges()
