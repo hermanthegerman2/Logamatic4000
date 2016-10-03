@@ -147,10 +147,10 @@ class FM441 extends IPSModule
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
         switch ($modultyp) {
-            case '82': // Heizkreis 3
-            case '84': // Warmwasser
+            case '82':  // Heizkreis 3
+            case '84':  // Warmwasser
             case '09':  // Heizkreis 3 einstellbare Daten
-            case '12':  // Warmwasser einstellbare Daten
+            case '0c':  // Warmwasser einstellbare Daten
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
