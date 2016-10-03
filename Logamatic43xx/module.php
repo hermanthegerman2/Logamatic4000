@@ -199,10 +199,12 @@ class Logamatic43xx extends IPSModule
                             if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('NM Logamatic 43xx -> FM444', $stream);
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{CAAD553B-F39D-42FA-BCBD-A755D031D0ED}", "Buffer" => $data->Buffer)));
                             break;
-                        case '80':
-                        case '81':
-                        case '07':
-                        case '08':
+                        case '80':  // Heizkreis 1
+                        case '81':  // Heizkreis 2
+                        case '07':  // Heizkreis 1 einstellbare Daten
+                        case '08':  // Heizkreis 2 einstellbare Daten
+                        case '11':  // Schaltuhr Kanal 1
+                        case '12':  // Schaltuhr Kanal 2
                             if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('NM Logamatic 43xx -> FM442', $stream);
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => $data->Buffer)));
                             break;
@@ -216,15 +218,19 @@ class Logamatic43xx extends IPSModule
                             if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('NM Logamatic 43xx -> FM441', $stream);
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => $data->Buffer)));
                             break;
-                        case '9e':
+                        case '9e':  // Solar Monitordaten
+                        case '24':  // Solar einstellbare Daten
                             if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('NM Logamatic 43xx -> FM443', $stream);
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{0774465C-7A72-496E-B1BC-E16392A67EBD}", "Buffer" => $data->Buffer)));
                             break;
-                        case '88':
+                        case '88':  // bodenstehender Kessel Monitordaten
+                        case '10':  // einstellbaren Parameter / bodenstehender Kessel
+                        case '1f':  // Schaltuhr Kanal 9 Kesselkreis
                             IPS_LogMessage('NM Logamatic 43xx -> ZM432', $stream);
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
                             break;
-                        case '89':
+                        case '89':  // Konfiguration Monitordaten
+                        case '0d':  // Datentyp für Konfiguration (Modulauswahl) der einstellbaren Parameter
                             $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                             if ($result != 1 and @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID) == true) // Endlosschleife verhindern, falls noch keine Konfiguration!
                             {
