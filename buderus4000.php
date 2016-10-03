@@ -710,10 +710,9 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Modultyp)
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
         $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-        if ($typ == $Modultyp)
+        switch ($Modultyp)
         {
-            if (substr($array[$x], 0, 2) == 'a7')
-            {
+            case $typ:
                 $typ = ord(hex2bin(substr($array[$x], 8, 2)));
                 IPS_LogMessage('Buderus Logamatic', 'Array: '.$array[$x]);
                 $offset = ord(hex2bin(substr($array[$x], 12, 2)));
@@ -724,12 +723,11 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Modultyp)
                 $newvalue = substr_replace($value, $substring, $offset*2, 2);
                 SetValueString($var, $newvalue);
                 EncodeVariableData($ID, $typ);
-            }
-        }
-        elseif
-        {
-            IPS_LogMessage('Buderus Logamatic', 'Array zurücksenden: '.$array[$x]);
-            return $Monitordaten;
+                break;
+            case !$typ:
+                IPS_LogMessage('Buderus Logamatic', 'Array zurücksenden: '.$array[$x]);
+                return $Monitordaten;
+                break;
         }
     }
     return true;
