@@ -703,23 +703,33 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
     return true;
 }
 
-function EncodeMonitorNormalData($Monitordaten, $ID)
+function EncodeMonitorNormalData($Monitordaten, $ID, $Modultyp)
 {
+    $Modultyp = ord(hex2bin($Modultyp));
     $array = str_split($Monitordaten, 24);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
-        if (substr($array[$x], 0, 2) == 'a7')
+        $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+        if ($typ == $Modultyp)
         {
-            $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-            IPS_LogMessage('Buderus Logamatic', 'Array: '.$array[$x]);
-            $offset = ord(hex2bin(substr($array[$x], 12, 2)));
-            $substring = substr($array[$x], 16, 2);
-            IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
-            $var = CheckVariable($typ, -1, 0, $ID);
-            $value = GetValueString($var);
-            $newvalue = substr_replace($value, $substring, $offset*2, 2);
-            SetValueString($var, $newvalue);
-            EncodeVariableData($ID, $typ);
+            if (substr($array[$x], 0, 2) == 'a7')
+            {
+                $typ = ord(hex2bin(substr($array[$x], 8, 2)));
+                IPS_LogMessage('Buderus Logamatic', 'Array: '.$array[$x]);
+                $offset = ord(hex2bin(substr($array[$x], 12, 2)));
+                $substring = substr($array[$x], 16, 2);
+                IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
+                $var = CheckVariable($typ, -1, 0, $ID);
+                $value = GetValueString($var);
+                $newvalue = substr_replace($value, $substring, $offset*2, 2);
+                SetValueString($var, $newvalue);
+                EncodeVariableData($ID, $typ);
+            }
+        }
+        elseif
+        {
+            IPS_LogMessage('Buderus Logamatic', 'Array zurücksenden: '.$array[$x]);
+            return $Monitordaten;
         }
     }
     return true;

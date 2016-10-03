@@ -41,7 +41,7 @@ class Logamatic43xx extends IPSModule
     public function SwitchDM()
     {
         IPS_LogMessage('Logamatic', 'Umschalten in den Direktmodus');
-        $data = utf8_encode(chr(Command::Direktmodus).chr($this->ReadPropertyInteger('Bus')));
+        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL)
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
     }
@@ -49,15 +49,14 @@ class Logamatic43xx extends IPSModule
     public function SwitchNM()
     {
         IPS_LogMessage('Logamatic', 'Umschalten in den Normalmodus');
-        $data = utf8_encode(chr(Command::Normalmodus).chr($this->ReadPropertyInteger('Bus')));
+        $data = utf8_encode(chr(Command::Normalmodus).chr(Command::NUL)
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
     }
 
     public function RequestMonitordaten()
     {
-        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL));
-        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
+        $this->SwitchDM();
         $data = utf8_encode(chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Monitordaten'), '');
@@ -66,8 +65,7 @@ class Logamatic43xx extends IPSModule
 
     public function RequestEinstellPar()
     {
-        $data = utf8_encode(chr(Command::Direktmodus).chr(Command::NUL));
-        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
+        $this->SwitchDM();
         $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
@@ -142,9 +140,10 @@ class Logamatic43xx extends IPSModule
         $datentyp = substr(bin2hex($stream), 0, 2);
         if ($datentyp === 'b0') {
             $this->SwitchDM();
-            $data = utf8_encode(substr($stream, 0, 1) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2) .chr(0x00).chr(0x00)); // ECO-CAN Busadresse einfügen
+            $data = utf8_encode(substr($stream, 0, 1) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2) .chr(0x00)); // ECO-CAN Busadresse einfügen
             $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-            $this->SwitchNM();
+            sleep(2);
+            //$this->SwitchNM();
         }
         return $id;
     }
@@ -190,7 +189,7 @@ class Logamatic43xx extends IPSModule
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{487A7347-AAC6-4084-9A86-25C61A2482DC}", "Buffer" => $data->Buffer)));
                             break;
                         case '89':
-                            EncodeMonitorNormalData($stream, $this->InstanceID);
+                            EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                             break;
                     }
                     break;
