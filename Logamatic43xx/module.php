@@ -168,7 +168,9 @@ class Logamatic43xx extends IPSModule
                     IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse ' . $bus . ' is alive');
                     return true;
 
-                case 'a7':   // A7 Monitordaten Normalmodus
+                case 'a7':
+                case 'ad':
+                    // A7 Monitordaten Normalmodus
                     //IPS_LogMessage('Buderus Logamatic', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                     switch ($modultyp) {
                         case '9f':
@@ -226,10 +228,6 @@ class Logamatic43xx extends IPSModule
                     $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
                     $data = utf8_encode(chr(Command::Normalmodus) . chr($this->ReadPropertyInteger('Bus')) . chr(Command::NUL) . chr(Command::NUL));
                     $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data))); // Umschalten in Normalmodus senden
-                    break;
-
-                case 'ad':  // AD Datenblock empfangen
-                    IPS_LogMessage('Buderus Logamatic', 'Datenblock ' . $stream);
                     break;
                 }
         $stream = '';
