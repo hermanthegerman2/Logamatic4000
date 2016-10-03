@@ -219,9 +219,9 @@ class Logamatic43xx extends IPSModule
                             break;
                         case '89':
                             $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
-                            if ($result != 1 and @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID) == true) {
+                            if ($result != 1 and @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID) == true) // Endlosschleife verhindern, falls noch keine Konfiguration!
+                            {
                                 if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic 43xx', 'Message zurück an Logamatic: ' . $result);
-                                $data = utf8_encode(hex2bin($result));
                                 $this->ReceiveData($JSONString);
                             }
                             break;
