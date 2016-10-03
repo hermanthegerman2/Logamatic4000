@@ -55,7 +55,7 @@ class ZM432 extends IPSModule
                         EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
                 }
-            case '1d':
+            case '1d':  // Schaltuhr Kanal 9 Kesselkreis
                 switch ($datentyp) {
                     case 'a9':
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic ZM432', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);

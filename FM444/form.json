@@ -2,7 +2,7 @@
 	"elements":
 	[
       { "name": "AWe", "type": "ValidationTextBox", "caption": "Alternativer WE" },
-      { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+      { "type": "Label", "label": "Logging für Logamatic FM444 einschalten" },
       { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
         ],
         

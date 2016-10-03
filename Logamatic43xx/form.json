@@ -1,18 +1,13 @@
 {	
 	"elements":
         [
-            { "type": "Label", "label": "ECO-CAN Busadresse (0-15)" },
-            { "type": "NumberSpinner", "name": "Bus", "caption": "ECO-CAN Adresse:"},
+            { "type": "Label", "label": "ECO-CAN Bus Adresse (0-15)" },
+            { "type": "NumberSpinner", "name": "Bus", "caption": "Adresse:"},
             { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
             { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
         ],
     "actions":
         [
-            {
-                "type": "Button",
-                "label": "Logamatic Module anlegen",
-                "onClick": "Logamatic_RequestModule($id);"
-            },
             {
                 "type": "Button",
                 "label": "Monitordaten auslesen",

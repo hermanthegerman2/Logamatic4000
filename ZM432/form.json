@@ -2,7 +2,7 @@
   "elements":
 	[
       { "name": "Kessel", "type": "ValidationTextBox", "caption": "bodenstehender Kessel" },
-      { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+      { "type": "Label", "label": "Logging für Logamatic ZM432 einschalten" },
       { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
     ],
   "status":

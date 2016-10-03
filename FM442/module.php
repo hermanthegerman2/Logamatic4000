@@ -71,8 +71,8 @@ class FM442 extends IPSModule
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
         switch ($modultyp) {
-            case '80':
-            case '81':
+            case '80':  // Heizkreis 1
+            case '81':  // Heizkreis 2
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus
                     case 'ad':  // AD Direktdaten Normalmodus
@@ -89,8 +89,8 @@ class FM442 extends IPSModule
                         EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
                 }
-            case '11':
-            case '12':
+            case '11':  // Schaltuhr Kanal 1
+            case '12':  // Schaltuhr Kanal 2
                 switch ($datentyp) {
                     case 'a9':
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);

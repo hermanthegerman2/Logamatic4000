@@ -36,7 +36,7 @@ class FM443 extends IPSModule
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
-        if ($modultyp == '9e')
+        if ($modultyp == '9e')  // Solar
             {
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus

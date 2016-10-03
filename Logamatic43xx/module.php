@@ -10,7 +10,7 @@ class Logamatic43xx extends IPSModule
         parent::Create();
         $this->RegisterPropertyInteger ('Bus', 1);
         $this->RegisterPropertyString ("Data", "");
-        $this->RegisterPropertyBoolean ("Logging", false);
+        $this->RegisterPropertyBoolean ("Logging", true);
     }
 
     public function ApplyChanges()
@@ -27,7 +27,7 @@ class Logamatic43xx extends IPSModule
                 $this->SetStatus(203);
                 break;
             case ($id <= 15 && $id >= 1):
-                $this->MaintainVariable('Einstellparameter', 'Einstellparameter', 3, '~String', 0, 1);
+                $this->MaintainVariable('Einstellparameter', 'Einstellparameter', 3, '~String', -3, 1);
                 $this->MaintainVariable('Monitordaten', 'Monitordaten', 3, '~String', 0, 1);
                 $this->RegisterProfile('Minutes', '2', '', '', ' m', 0, 0, 0);
                 $this->RegisterProfile('Hours', '2', '', '', ' h', 0, 0, 0);
