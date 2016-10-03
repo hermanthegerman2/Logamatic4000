@@ -722,7 +722,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Modultyp)
             SetValueString($var, $newvalue);
             EncodeVariableData($ID, $typ);
         }
-        elseif ($typ != $Modultyp) {
+        elseif ($typ !== $Modultyp) {
             $data = $array[$x];//substr($Monitordaten,((count($array)-($x+1))*24));
             IPS_LogMessage('Buderus Logamatic', 'Message back: ' . $data);
             return $data;
