@@ -154,7 +154,7 @@ class FM441 extends IPSModule
                         $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
                         if ($result != 1) {
                             IPS_LogMessage('Logamatic FM441', 'Message zurück an Logamatic: ' . $result);
-                            $data = utf8_encode($result);
+                            $data = hex2bin(utf8_encode($result));
                             $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
                         }
                         break;
