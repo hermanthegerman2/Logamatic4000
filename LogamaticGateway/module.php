@@ -12,7 +12,7 @@ class LogamaticGateway extends IPSModule
         $this->RegisterPropertyString("Host", "192.168.178.16");
         $this->RegisterPropertyBoolean("Open", true);
         $this->RegisterPropertyInteger("Port", 6200);
-        $this->RegisterPropertyString("Data", "");
+        $this->RegisterPropertyBoolean("Logging", false);
     }
 
     public function ApplyChanges()
@@ -53,31 +53,11 @@ class LogamaticGateway extends IPSModule
         }
         
     }
-    
-    public function RequestErrorLog()
-    {
-        $data = utf8_encode(chr(Command::Direktmodus).chr(0x01));
-        $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
-        $data = utf8_encode(chr(Command::Datenblock).chr(Command::NUL).chr(0x01).chr(Command::NUL).chr(Command::Fehlerprotokoll));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
-        return $id;
-    }
-
-    public function SendRawData()
-    {
-        $data = utf8_encode(chr(Command::Direktmodus).chr(0x01));
-        $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
-        $data = utf8_encode(hexdec($this->ReadPropertyString('Data')));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
-        $data = utf8_encode(chr(Command::Normalmodus).chr(0x01));
-        $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data)));
-        return $id;
-    }
 
     public function ForwardData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('Logamatic Gateway -> RS232 or TCP Port', str2hex(utf8_decode($data->Buffer)));
+        if ($this->ReadPropertyBoolean("Logging") == true) IPS_LogMessage('Logamatic Gateway -> RS232 or TCP Port', str2hex(utf8_decode($data->Buffer)));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}", "Buffer" => $data->Buffer)));
         return $id;
     }
@@ -85,7 +65,7 @@ class LogamaticGateway extends IPSModule
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
-        IPS_LogMessage('RS232 or TCP Port -> Logamatic Gateway', str2hex(utf8_decode($data->Buffer)));
+        if ($this->ReadPropertyBoolean("Logging") == true) IPS_LogMessage('RS232 or TCP Port -> Logamatic Gateway', str2hex(utf8_decode($data->Buffer)));
         $this->SendDataToChildren(json_encode(Array("DataID" => "{FDAAB689-6162-47D3-A05D-F342430AF8C2}", "Buffer" => $data->Buffer)));
         return true;
     }

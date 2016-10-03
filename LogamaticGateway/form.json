@@ -1,24 +1,14 @@
 {	
 	"elements":
-	[
+	    [
             { "name": "Open", "type": "CheckBox", "caption": "Open" },
             { "name": "Host", "type": "ValidationTextBox", "caption": "Host" },
             { "name": "Port", "type": "NumberSpinner", "caption": "Port" },
-            { "name": "Data", "type": "ValidationTextBox", "caption": "Data" }
+            { "name": "Data", "type": "ValidationTextBox", "caption": "Data" },
+            { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+            { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
         ],
-        "actions":
-        [
-            {
-                "type": "Button",
-                "label": "Raw Daten senden",
-                "onClick": "Gateway_SendRawData($id);"
-            },
-            {
-                "type": "Button",
-                "label": "Sammelstörmeldung auslesen",
-                "onClick": "Gateway_RequestErrorLog($id);"
-            }
-        ],
+
         "status":
         [
             { "code": 102, "icon": "active", "caption": "Gateway erreichbar" },           

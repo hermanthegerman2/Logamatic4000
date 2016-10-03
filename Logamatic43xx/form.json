@@ -1,7 +1,9 @@
 {	
 	"elements":
         [
-            {"type": "NumberSpinner", "name": "Bus", "caption": "ECO-CAN Adresse:"}
+            {"type": "NumberSpinner", "name": "Bus", "caption": "ECO-CAN Adresse:"},
+            { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+            { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
         ],
     "actions":
         [
@@ -19,6 +21,16 @@
                 "type": "Button",
                 "label": "einstellbare Parameter auslesen",
                 "onClick": "Logamatic_RequestEinstellPar($id);"
+            },
+            {
+                "type": "Button",
+                "label": "Raw Daten senden",
+                "onClick": "Logamatic_SendRawData($id);"
+            },
+            {
+                "type": "Button",
+                "label": "Sammelstörmeldung auslesen",
+                "onClick": "Logamatic_RequestErrorLog($id);"
             }
         ],
     "status":
