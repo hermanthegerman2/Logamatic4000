@@ -208,11 +208,11 @@ function Buderus ($typ, $offset, $value)
         $Buderus[36][0] = array ("", 4);
         $Buderus[36][4] = array ("Betriebsart", "Bit", "Aus", "Automatik", "EIN");
         $Buderus[36][5] = array ("Umschaltung für Verbraucher", "Bit", "Automatisch", "nur Speicher 1", "nur Speicher 2");
-        $Buderus[28][6] = array ("Maximaltemperatur Speicher 1", "Temp", "1", "°C");
-        $Buderus[28][7] = array ("", 18);
-        $Buderus[28][18] = array ("Maximaltemperatur Speicher 2", "Temp", "1", "°C");
-        $Buderus[28][19] = array ("", 28);
-        $Buderus[28][28] = array ("Glykolanteil", "Prozent", "10", "%");
+        $Buderus[36][6] = array ("Maximaltemperatur Speicher 1", "Temp", "1", "°C");
+        $Buderus[36][7] = array ("", 18);
+        $Buderus[36][18] = array ("Maximaltemperatur Speicher 2", "Temp", "1", "°C");
+        $Buderus[36][19] = array ("", 28);
+        $Buderus[36][28] = array ("Glykolanteil", "Prozent", "10", "%");
     $Buderus[37][-1] = array ("");
     $Buderus[38][-1] = array ("FM458");
     
