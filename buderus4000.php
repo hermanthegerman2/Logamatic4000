@@ -568,7 +568,7 @@ function Buderus ($typ, $offset, $value)
     $name = $Buderus[$typ][$offset][$value];
     if ($name === false) 
         {
-        IPS_LogMessage('Logamatic Gateway', 'Buderus Modul :'.$typ.' : '.$offset.' : '.$value.'existiert nicht !');
+        IPS_LogMessage('Buderus Logamatic', 'Modultyp:'.$typ.' : '.$offset.' : '.$value.'existiert nicht !');
         return false;
         }
     return $name;
@@ -678,10 +678,10 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
             switch (substr($array[$x], 0, 2))
             {
                 case 'ab':
-                    IPS_LogMessage('Logamatic Gateway', 'Array: '.$array[$x]);
+                    IPS_LogMessage('Buderus Logamatic', 'Message: '.$array[$x]);
                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                     $substring = substr($array[$x], 16, 2).substr($array[$x], 20, 2).substr($array[$x], 24, 2).substr($array[$x], 28, 2).substr($array[$x], 32, 2).substr($array[$x], 36, 2);
-                    IPS_LogMessage('Buderus Logamatic', 'ECO-CAN Adresse Data: '.$typ.' : '.$offset.' : '.$substring);
+                    IPS_LogMessage('Buderus Logamatic', 'Data: '.$typ.' : '.$offset.' : '.$substring);
                     $var = Buderus($typ, -1, 1);
                     if ($var === '0')
                     {
@@ -712,7 +712,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Modultyp)
         $typ = ord(hex2bin(substr($array[$x], 8, 2)));
         if ($typ === $Modultyp) {
             $typ = ord(hex2bin(substr($array[$x], 8, 2)));
-            IPS_LogMessage('Buderus Logamatic', 'Array: ' . $array[$x]);
+            IPS_LogMessage('Buderus Logamatic', 'Message: ' . $array[$x]);
             $offset = ord(hex2bin(substr($array[$x], 12, 2)));
             $substring = substr($array[$x], 16, 2);
             IPS_LogMessage('Buderus Logamatic', 'Data: ' . $typ . ' : ' . $offset . ' : ' . $substring);
@@ -723,8 +723,11 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Modultyp)
             EncodeVariableData($ID, $typ);
         }
         elseif ($typ != $Modultyp) {
-            IPS_LogMessage('Buderus Logamatic', 'Array zurücksenden: ' . $array[$x]);
-            return $array[$x];
+            for ( $y = count ( $array ) -$x; $y < count ( $array ); $y++ ) {
+                $data = $data . $array[$y];
+            }
+            IPS_LogMessage('Buderus Logamatic', 'Message back: ' . $data);
+            return $data;
         }
     }
     return true;
@@ -741,7 +744,7 @@ function EncodeKonfigurationData($Monitordaten, $ID)
             switch ($typ)
             {
                 case 137:
-                    IPS_LogMessage('Buderus Logamatic', 'Array: ' . $array[$x]);
+                    IPS_LogMessage('Buderus Logamatic', 'Message: ' . $array[$x]);
                     $offset = ord(hex2bin(substr($array[$x], 12, 2)));
                     $substring = substr($array[$x], 16, 2);
                     IPS_LogMessage('Buderus Logamatic', 'Data: ' . $typ . ' : ' . $offset . ' : ' . $substring);
