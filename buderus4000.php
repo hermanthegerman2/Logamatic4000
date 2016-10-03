@@ -3,7 +3,7 @@
 class Command extends stdClass
 {
     const NUL = 0x00;
-    const leer = 0x65;                  // auffüllen der einstellbaren Parameter
+    const leer = 0x65;                  // Platzhalter der einstellbaren Parameter
     const Einstellparameter = 0xA1;     // Kommando einstellbare Parameter empfangen
     const Monitordaten = 0xA2;          // Kommando Monitordaten anfordern
     const Datenblock = 0xA3;            // Kommando Datenblock anfordern

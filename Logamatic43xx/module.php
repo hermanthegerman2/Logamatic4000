@@ -201,11 +201,15 @@ class Logamatic43xx extends IPSModule
                             break;
                         case '80':
                         case '81':
+                        case '07':
+                        case '08':
                             if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('NM Logamatic 43xx -> FM442', $stream);
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{E0D2CD4C-BB90-479E-8370-34663C717F9A}", "Buffer" => $data->Buffer)));
                             break;
                         case '84':
                         case '82':
+                        case '09':
+                        case '0c':
                             if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('NM Logamatic 43xx -> FM441', $stream);
                             $this->SendDataToChildren(json_encode(Array("DataID" => "{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "Buffer" => $data->Buffer)));
                             break;
