@@ -76,8 +76,7 @@ class Logamatic43xx extends IPSModule
 
     public function RequestErrorLog()
     {
-        $data = utf8_encode(chr(Command::Direktmodus).chr(0x01));
-        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
+        $this->SwitchDM();
         $data = utf8_encode(chr(Command::Datenblock).chr($this->ReadPropertyInteger('Bus')).chr(Command::Fehlerprotokoll).chr(Command::NUL));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
@@ -85,8 +84,7 @@ class Logamatic43xx extends IPSModule
 
     public function SendRawData()
     {
-        $data = utf8_encode(chr(Command::Direktmodus).chr(0x01));
-        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
+        $this->SwitchDM();
         $data = utf8_encode(hexdec($this->ReadPropertyString('Data')));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         sleep(5);
