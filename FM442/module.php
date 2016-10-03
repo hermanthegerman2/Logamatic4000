@@ -75,7 +75,12 @@ class FM442 extends IPSModule
                 switch ($datentyp) {
                     case 'a7':   // A7 Monitordaten Normalmodus
                         IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Normalmodus :' . $stream);
-                        EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
+                        $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
+                        if ($result != True) {
+                            IPS_LogMessage('Logamatic FM442', 'Message zurück an Logamatic: ' . $result);
+                            $data = utf8_encode($result);
+                            $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+                        }
                         break;
                     case 'ab':
                         IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Direktmodus :' . $stream);

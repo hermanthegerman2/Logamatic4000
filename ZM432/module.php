@@ -19,16 +19,12 @@ class ZM432 extends IPSModule
         $this->SetStatus(102);
     }
 
-     protected function SendDataToParent($data)
+    public function ForwardData($JSONString)
     {
-      
-        $JSONString = json_encode(Array('DataID' => '{054466C5-C0E0-46C6-82D7-29A2FAE4276C}', 'Buffer' => utf8_encode($data)));
-       
-        IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
-        // Daten senden
-        IPS_SendDataToParent($this->InstanceID, $JSONString);
-        
-        return true;
+        $data = json_decode($JSONString);
+        IPS_LogMessage('FM442 -> Logamatic', bin2hex(utf8_decode($data->Buffer)));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{054466C5-C0E0-46C6-82D7-29A2FAE4276C}", "Buffer" => $data->Buffer)));
+        return $id;
     }
     
     public function ReceiveData($JSONString)
@@ -44,7 +40,12 @@ class ZM432 extends IPSModule
                 switch ($datentyp) {
                     case 'a7':   // A7 Monitordaten Normalmodus
                         IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
-                        EncodeMonitorNormalData($stream, $this->InstanceID);
+                        $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
+                        if ($result != True) {
+                            IPS_LogMessage('Logamatic ZM432', 'Message zurück an Logamatic: ' . $result);
+                            $data = utf8_encode($result);
+                            $this->SendDataToParent(json_encode(Array("DataID" => "{054466C5-C0E0-46C6-82D7-29A2FAE4276C}", "Buffer" => $data)));
+                        }
                         break;
                                     
                     case 'ab':

@@ -17,20 +17,16 @@ class FM444 extends IPSModule
         parent::ApplyChanges();
         $this->ConnectParent('{9888202F-A490-4785-BDA7-DBB817B163B2}'); // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $this->SetStatus(102);
-    }        
-    
-    protected function SendDataToParent($data)
-    {
-      
-        $JSONString = json_encode(Array('DataID' => '{054466C5-C0E0-46C6-82D7-29A2FAE4276C}', 'Buffer' => utf8_encode($data)));
-       
-        IPS_LogMessage('Logamatic -> Gateway:',str2hex(utf8_decode($data)));
-        // Daten senden
-        IPS_SendDataToParent($this->InstanceID, $JSONString);
-        
-        return true;
     }
-    
+
+    public function ForwardData($JSONString)
+    {
+        $data = json_decode($JSONString);
+        IPS_LogMessage('FM442 -> Logamatic', bin2hex(utf8_decode($data->Buffer)));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}", "Buffer" => $data->Buffer)));
+        return $id;
+    }
+
     public function ReceiveData($JSONString)
     {
         $data = json_decode($JSONString);
@@ -47,7 +43,12 @@ class FM444 extends IPSModule
                                     case 'a7':   // A7 Monitordaten Normalmodus
 
                                         IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
-                                        EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
+                                        $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
+                                        if ($result != True) {
+                                            IPS_LogMessage('Logamatic FM444', 'Message zurück an Logamatic: ' . $result);
+                                            $data = utf8_encode($result);
+                                            $this->SendDataToParent(json_encode(Array("DataID" => "{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}", "Buffer" => $data)));
+                                        }
                                         break;
                                     
                                     case 'ab':
