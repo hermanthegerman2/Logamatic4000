@@ -180,8 +180,6 @@ class FM441 extends IPSModule
         return true;
     }
 
-
-
 ################## DUMMYS / WOARKAROUNDS - protected
  
     protected function RegisterProfile($Name, $VariablenTyp, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
@@ -220,27 +218,6 @@ class FM441 extends IPSModule
     {
         if ($InstanceStatus <> IPS_GetInstance($this->InstanceID)['InstanceStatus'])
             parent::SetStatus($InstanceStatus);
-    }
-    
-    ################## SEMAPHOREN Helper  - private  
-    private function lock($ident)
-    {
-        for ($i = 0; $i < 100; $i++)
-        {
-            if (IPS_SemaphoreEnter('Logamatic_' . (string) $this->InstanceID . (string) $ident, 1))
-            {
-                return true;
-            }
-            else
-            {
-                IPS_Sleep(mt_rand(1, 5));
-            }
-        }
-        return false;
-    }
-    private function unlock($ident)
-    {
-        IPS_SemaphoreLeave('Logamatic_' . (string) $this->InstanceID . (string) $ident);
     }
 }
 ?>
