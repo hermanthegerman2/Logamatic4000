@@ -41,7 +41,7 @@ class ZM432 extends IPSModule
                     case 'a7':   // A7 Monitordaten Normalmodus
                         IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                         $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
-                        if ($result != True) {
+                        if ($result != 1) {
                             IPS_LogMessage('Logamatic ZM432', 'Message zurück an Logamatic: ' . $result);
                             $data = utf8_encode($result);
                             $this->SendDataToParent(json_encode(Array("DataID" => "{054466C5-C0E0-46C6-82D7-29A2FAE4276C}", "Buffer" => $data)));

@@ -44,7 +44,7 @@ class FM444 extends IPSModule
 
                                         IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
                                         $result = EncodeMonitorNormalData($stream, $this->InstanceID, $modultyp);
-                                        if ($result != True) {
+                                        if ($result != 1) {
                                             IPS_LogMessage('Logamatic FM444', 'Message zurück an Logamatic: ' . $result);
                                             $data = utf8_encode($result);
                                             $this->SendDataToParent(json_encode(Array("DataID" => "{9CA33B30-2DAD-4F3C-BE42-49EE8B27E8C7}", "Buffer" => $data)));
