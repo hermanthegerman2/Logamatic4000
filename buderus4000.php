@@ -108,9 +108,9 @@ function Buderus ($typ, $offset, $value)
         $Buderus[12][14] = array ("Betriebsart Warmwasser", "Bit", "Manuell Nacht", "Manuell Tag", "Automatik");
         $Buderus[12][15] = array ("", 19);
         $Buderus[12][19] = array ("Zirkulationspumpenläufe pro Stunde", "Bit", "ständig aus (läuft nur bei Einmalladung)", "ständig an");
-        $Buderus[12][20] = array ("", 22);
-        $Buderus[12][22] = array ("Betriebsart Warmwasser", "Bit", "Manuell Nacht", "Manuell Tag", "Automatik");
-        $Buderus[12][23] = array ("", 44);
+        $Buderus[12][20] = array ("", 21);
+        $Buderus[12][21] = array ("Betriebsart Warmwasser", "Bit", "Manuell Nacht", "Manuell Tag", "Automatik");
+        $Buderus[12][22] = array ("", 44);
         $Buderus[12][44] = array ("Uhrzeit zu der die tägliche Aufheizung gestartet wird", "Zeit", "1", "Std");
     $Buderus[13][-1] = array ("Konfiguration");
     $Buderus[14][-1] = array ("UBA");
@@ -204,7 +204,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[31][3] = array ("Ferien", "Zeit", "1", "Tage");
     $Buderus[32][-1] = array ("Strategie");
     $Buderus[35][-1] = array ("");
-    $Buderus[36][-1] = array ("Solar", "28");
+    $Buderus[36][-1] = array ("Solarfunktion", "28");
         $Buderus[36][0] = array ("", 4);
         $Buderus[36][4] = array ("Betriebsart", "Bit", "Aus", "Automatik", "EIN");
         $Buderus[36][5] = array ("Umschaltung für Verbraucher", "Bit", "Automatisch", "nur Speicher 1", "nur Speicher 2");
