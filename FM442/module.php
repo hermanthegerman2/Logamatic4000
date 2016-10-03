@@ -75,6 +75,8 @@ class FM442 extends IPSModule
             case '81':  // Heizkreis 2
             case '07':  // Heizkreis 1 einstellbare Daten
             case '08':  // Heizkreis 2 einstellbare Daten
+            case '11':  // Schaltuhr Kanal 1
+            case '12':  // Schaltuhr Kanal 2
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Normalmodus :' . $stream);
@@ -90,16 +92,11 @@ class FM442 extends IPSModule
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Monitordaten ECO-CAN Adresse ' . $bus . ' Direktmodus :' . $stream);
                         EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
-                }
-            case '11':  // Schaltuhr Kanal 1
-            case '12':  // Schaltuhr Kanal 2
-                switch ($datentyp) {
                     case 'a9':
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
                         EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
                         break;
                 }
-
         }
         $stream = '';
         return true;

@@ -36,10 +36,10 @@ class FM444 extends IPSModule
         $datentyp = substr($stream, 0, 2);
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
-        if ($modultyp == '9f')  // Alternativer Wärmeerzeuger
-            {
+        switch ($modultyp) {
+            case '9e':  // Solar Monitordaten
+            case '24':  // Solar einstellbare Daten
                 switch ($datentyp) {
-
                     case 'a7':  // A7 Monitordaten Normalmodus
                     case 'ad':  // AD Direktdaten Normalmodus
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM444', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
@@ -57,10 +57,6 @@ class FM444 extends IPSModule
                         break;
                 }
             }
-        else
-        {
-             return true;
-        }
         $stream = '';
         return true;             
     }

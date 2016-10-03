@@ -37,7 +37,9 @@ class ZM432 extends IPSModule
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
         switch ($modultyp) {
-            case '88':
+            case '88':  // bodenstehender Kessel Monitordaten
+            case '10':  // einstellbaren Parameter / bodenstehender Kessel
+            case '1f':  // Schaltuhr Kanal 9 Kesselkreis
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus
                     case 'ad':  // AD Direktdaten Normalmodus
@@ -49,20 +51,15 @@ class ZM432 extends IPSModule
                             $this->SendDataToParent(json_encode(Array("DataID" => "{054466C5-C0E0-46C6-82D7-29A2FAE4276C}", "Buffer" => $data)));
                         }
                         break;
-                                    
                     case 'ab':
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic ZM432', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
                         EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
-                }
-            case '1d':  // Schaltuhr Kanal 9 Kesselkreis
-                switch ($datentyp) {
                     case 'a9':
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic ZM432', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
                         EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
                         break;
                 }
-                return false;
         }
         $stream = '';
         return true;
