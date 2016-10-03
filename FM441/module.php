@@ -151,6 +151,9 @@ class FM441 extends IPSModule
             case '84':  // Warmwasser
             case '09':  // Heizkreis 3 einstellbare Daten
             case '0c':  // Warmwasser einstellbare Daten
+            case '13':  // Schaltuhr Kanal 3
+            case '14':  // Schaltuhr Kanal 4 Warmwasser
+            case '1f':  // Schaltuhr Kanal 10 Zirkulation
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Normalmodus :'.$stream);
@@ -166,17 +169,11 @@ class FM441 extends IPSModule
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
                         EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
-                }
-            case '13':  // Schaltuhr Kanal 3
-            case '14':  // Schaltuhr Kanal 4 Warmwasser
-            case '1f':  // Schaltuhr Kanal 10 Zirkulation
-                switch ($datentyp) {
                     case 'a9':
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
                         EncodeCyclicEventData($stream, $this->InstanceID, $modultyp);
                         break;
                 }
-
         }
         $stream = '';
         return true;
