@@ -17,6 +17,6 @@ Erforderliche Installation:
 Installation als PHP-Modul über Symcon Modules.
 https://github.com/hermanthegerman2/Logamatic4000
 
-Es muß nur das Modul Logamatic 43xx als neue Instanz installiert werden und danach in der Instanz das Menü "Monitordaten auslesen" angewählt werden. Danach sollten alle tatsächlich vorhandenen Funktionsmodule (FM 441, FM 442, FM 443 und FM 444) gefunden und installiert werden. Der Protocol konverter ist erforderlich, um das Protokoll 3964R zu verarbeiten und kommuniziert sowohl zum Buderus Gateway über RS232 und zu Symcon über TCP Port 6200.
+Es muß nur das Modul Logamatic 43xx als neue Instanz installiert werden und danach in der Instanz das Menü "Monitordaten auslesen" angewählt werden. Danach sollten alle tatsächlich vorhandenen Funktionsmodule (FM 441, FM 442, FM 443, FM 444 und ZM 432) gefunden und installiert werden. Der Protocol konverter ist erforderlich, um das Protokoll 3964R zu verarbeiten und kommuniziert sowohl zum Buderus Gateway über RS232 und zu Symcon über TCP Port 6200.
 
 
