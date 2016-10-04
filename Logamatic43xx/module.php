@@ -241,33 +241,39 @@ class Logamatic43xx extends IPSModule
                     break;
 
                 case 'a9':   // A9 Kennung für einstellbare Parameter
+                case 'aa':   // AA Einstellbare Parameter komplett übertragen
                     $head = GetValueString($this->GetIDForIdent('Einstellparameter'));
                     $Einstellparameter = $head . $stream; // $stream anhängen
                     SetValueString($this->GetIDForIdent('Einstellparameter'), $Einstellparameter);
-                    if (substr($stream, -12, 4) == 'aa00') $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID); // einstellbare Parameter schon komplett
+                    if (substr($stream, -12, 4) == 'aa00') {
+                        $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID);
+                        $this->SwitchNM();  // einstellbare Parameter komplett -> Normalmodus umschalten
+                    }
                     break;
 
-                case 'aa':   // AA Einstellbare Parameter komplett übertragen
+                /*case 'aa':   // AA Einstellbare Parameter komplett übertragen
                     if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse ' . $bus . ' komplett :' . strlen(GetValueString($this->GetIDForIdent('Einstellparameter'))) . ' Bytes');
                     $Einstellparameter = GetValueString($this->GetIDForIdent('Einstellparameter'));
                     $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID);
-                    $data = utf8_encode(chr(Command::Normalmodus) . chr($this->ReadPropertyInteger('Bus')) . chr(Command::NUL) . chr(Command::NUL));
-                    $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));// Umschalten in Normalmodus senden
-                    break;
+                    $this->SwitchNM();
+                    break;*/
 
                 case 'ab':   // AB Monitordaten Direktmodus
+                case 'ac':   // AC Monitordaten komplett übertragen
                     $head = GetValueString($this->GetIDForIdent('Monitordaten'));
                     $Monitordaten = $head . $stream; // $stream anhängen
                     SetValueString($this->GetIDForIdent('Monitordaten'), $Monitordaten);
-                    if (substr($stream, -12, 4) == 'ac00') $this->DistributeDataToChildren($Monitordaten, $this->InstanceID); // Monitordaten schon komplett
+                    if (substr($stream, -12, 4) == 'ac00') {
+                        $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
+                        $this->SwitchNM();  // Monitordaten komplett -> Normalmodus umschalten
+                    }
                     break;
 
-                case 'ac':   // AC Monitordaten komplett übertragen
+                /*case 'ac':   // AC Monitordaten komplett übertragen
                     $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));$this->ReceiveData(json_encode(utf8_encode($Monitordaten)));
                     $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
-                    $data = utf8_encode(chr(Command::Normalmodus) . chr($this->ReadPropertyInteger('Bus')) . chr(Command::NUL) . chr(Command::NUL));
-                    $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data))); // Umschalten in Normalmodus senden
-                    break;
+                    $this->SwitchNM();
+                    break;*/
                 }
         $stream = '';
         return true;

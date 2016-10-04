@@ -49,7 +49,10 @@
       "onChange": "FM441_Umschaltschwelle($id, $Umschaltschwelle);"
     },
     {
-      "type": "CheckBox", "name": "Desinfektion", "caption": "Desinfektion aus/ein",
+      "type": "CheckBox",
+      "name": "Desinfektion",
+      "caption": "Desinfektion aus/ein",
+      "onChange": "FM441_Desinfektion($id);"
     },
     {
       "type": "Label",
