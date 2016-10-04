@@ -138,6 +138,7 @@ class Logamatic43xx extends IPSModule
                         break;
                 }
         }
+        $this->RequestMonitordaten();
         return true;
     }
 
