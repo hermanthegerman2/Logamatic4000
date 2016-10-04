@@ -71,6 +71,7 @@ class Logamatic43xx extends IPSModule
         $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
+        $this->RequestMonitordaten();
         return true;
     }
 
@@ -86,7 +87,7 @@ class Logamatic43xx extends IPSModule
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
         if ($ParentID == false) {
-            Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+            $this->RequestMonitordaten(); // Monitordaten abrufen
             return true;
         }
         $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
@@ -138,7 +139,7 @@ class Logamatic43xx extends IPSModule
                         break;
                 }
         }
-        $this->RequestMonitordaten();
+        $this->RequestEinstellPar();
         return true;
     }
 
@@ -250,11 +251,6 @@ class Logamatic43xx extends IPSModule
                         $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
                         $this->SwitchNM();  // Monitordaten komplett -> Normalmodus umschalten
                         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-                        if ($ParentID == true) {
-                            $this->RequestModule(); // Module anlegen
-                            return true;
-                        }
-                        else  $this->RequestEinstellPar();
                     }
                     break;
                 }
