@@ -85,7 +85,10 @@ class Logamatic43xx extends IPSModule
     public function RequestModule()
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false) Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+        if ($ParentID == false) {
+            Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+            return true;
+        }
         $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
         EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
         $array = array('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
@@ -237,13 +240,6 @@ class Logamatic43xx extends IPSModule
                     }
                     break;
 
-                /*case 'aa':   // AA Einstellbare Parameter komplett übertragen
-                    if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Buderus Logamatic', 'Einstellbare Parameter ECO-CAN Adresse ' . $bus . ' komplett :' . strlen(GetValueString($this->GetIDForIdent('Einstellparameter'))) . ' Bytes');
-                    $Einstellparameter = GetValueString($this->GetIDForIdent('Einstellparameter'));
-                    $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID);
-                    $this->SwitchNM();
-                    break;*/
-
                 case 'ab':   // AB Monitordaten Direktmodus
                 case 'ac':   // AC Monitordaten komplett übertragen
                     $head = GetValueString($this->GetIDForIdent('Monitordaten'));
@@ -252,18 +248,13 @@ class Logamatic43xx extends IPSModule
                     if (substr($stream, -12, 4) == 'ac00') {
                         $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
                         $this->SwitchNM();  // Monitordaten komplett -> Normalmodus umschalten
-                        //$this->RequestModule();
-                        if (GetValueString($this->GetIDForIdent('Einstellparameter')) == '') {
-                            $this->RequestEinstellPar();
+                        $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
+                        if ($ParentID == false) {
+                            $this->RequestModule(); // Module anlegen
+                            return true;
                         }
                     }
                     break;
-
-                /*case 'ac':   // AC Monitordaten komplett übertragen
-                    $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));$this->ReceiveData(json_encode(utf8_encode($Monitordaten)));
-                    $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
-                    $this->SwitchNM();
-                    break;*/
                 }
         $stream = '';
         return true;
