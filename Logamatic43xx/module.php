@@ -35,7 +35,7 @@ class Logamatic43xx extends IPSModule
                 $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
                 $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
                 $this->SetStatus(102);
-                $this->RequestEinstellPar();
+                $this->RequestModule();
                 break;
         }
     }
@@ -67,10 +67,6 @@ class Logamatic43xx extends IPSModule
 
     public function RequestEinstellPar()
     {
-        $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false) {
-            $this->RequestModule(); // Monitordaten abrufen
-        }
         $this->SwitchDM();
         $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
@@ -89,15 +85,11 @@ class Logamatic43xx extends IPSModule
     public function RequestModule()
     {
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == false) {
-            Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
-            return true;
-        }
-
-            $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
-            EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
-            $array = array('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
-            for ($x = 0; $x < count($array); $x++) {
+        if ($ParentID == false) Logamatic_RequestMonitordaten($this->InstanceID); // Monitordaten abrufen
+        $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
+        EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
+        $array = array('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
+        for ($x = 0; $x < count($array); $x++) {
                 $Slot = @IPS_GetObjectIDByName($array[$x], $ParentID);
                 $Modultyp = GetValueString($Slot);
                 switch ($Modultyp) {
@@ -242,9 +234,6 @@ class Logamatic43xx extends IPSModule
                     if (substr($stream, -12, 4) == 'aa00') {
                         $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID);
                         $this->SwitchNM();  // einstellbare Parameter komplett -> Normalmodus umschalten
-                        if (GetValueString($this->GetIDForIdent('Monitordaten')) == '') {
-                            $this->RequestMonitordaten();
-                        }
                     }
                     break;
 
@@ -263,6 +252,10 @@ class Logamatic43xx extends IPSModule
                     if (substr($stream, -12, 4) == 'ac00') {
                         $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
                         $this->SwitchNM();  // Monitordaten komplett -> Normalmodus umschalten
+                        //$this->RequestModule();
+                        if (GetValueString($this->GetIDForIdent('Einstellparameter')) == '') {
+                            $this->RequestEinstellPar();
+                        }
                     }
                     break;
 
