@@ -9,7 +9,6 @@ class Logamatic43xx extends IPSModule
         //Never delete this line!
         parent::Create();
         $this->RegisterPropertyInteger ('Bus', 1);
-        $this->RegisterPropertyString ("Data", "");
         $this->RegisterPropertyBoolean ("Logging", true);
     }
 
@@ -36,6 +35,7 @@ class Logamatic43xx extends IPSModule
                 $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
                 $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
                 $this->SetStatus(102);
+                $this->RequestEinstellPar();
                 break;
         }
     }
@@ -67,6 +67,11 @@ class Logamatic43xx extends IPSModule
 
     public function RequestEinstellPar()
     {
+        $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
+        if ($ParentID == false) {
+            $this->RequestModule(); // Monitordaten abrufen
+            return true;
+        }
         $this->SwitchDM();
         $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
@@ -79,16 +84,6 @@ class Logamatic43xx extends IPSModule
         $this->SwitchDM();
         $data = utf8_encode(chr(Command::Datenblock).chr($this->ReadPropertyInteger('Bus')).chr(Command::Fehlerprotokoll).chr(Command::NUL));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-        return $id;
-    }
-
-    public function SendRawData()
-    {
-        $this->SwitchDM();
-        $data = utf8_encode(hexdec($this->ReadPropertyString('Data')));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-        $data = utf8_encode(chr(Command::Normalmodus).chr(0x01));
-        $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
     }
 
@@ -248,6 +243,9 @@ class Logamatic43xx extends IPSModule
                     if (substr($stream, -12, 4) == 'aa00') {
                         $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID);
                         $this->SwitchNM();  // einstellbare Parameter komplett -> Normalmodus umschalten
+                        if (GetValueString($this->GetIDForIdent('Monitordaten')) == '') {
+                            $this->RequestMonitordaten();
+                        }
                     }
                     break;
 
@@ -287,10 +285,6 @@ class Logamatic43xx extends IPSModule
 
     protected function DistributeDataToChildren($Monitordaten, $ID)
     {
-        $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-        if ($ParentID == true) Logamatic_RequestModule($this->InstanceID);
-        $Einstellparameter = GetValueString($this->GetIDForIdent('Einstellparameter'));
-        if ($Einstellparameter == '') Logamatic_RequestEinstellPar($this->InstanceID);
         $array = str_split($Monitordaten, 44);
         for ( $x = 0; $x < count ( $array ); $x++ )
         {

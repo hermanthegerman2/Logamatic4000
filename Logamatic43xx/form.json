@@ -20,11 +20,6 @@
             },
             {
                 "type": "Button",
-                "label": "Raw Daten senden",
-                "onClick": "Logamatic_SendRawData($id);"
-            },
-            {
-                "type": "Button",
                 "label": "Sammelstörmeldung auslesen",
                 "onClick": "Logamatic_RequestErrorLog($id);"
             }
