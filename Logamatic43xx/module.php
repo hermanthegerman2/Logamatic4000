@@ -254,7 +254,7 @@ class Logamatic43xx extends IPSModule
                             $this->RequestModule(); // Module anlegen
                             return true;
                         }
-                        else  $this->RequestMonitordaten();
+                        else  $this->RequestEinstellPar();
                     }
                     break;
                 }
