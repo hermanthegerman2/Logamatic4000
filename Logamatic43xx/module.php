@@ -249,10 +249,11 @@ class Logamatic43xx extends IPSModule
                         $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
                         $this->SwitchNM();  // Monitordaten komplett -> Normalmodus umschalten
                         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
-                        if ($ParentID == false) {
+                        if ($ParentID == true) {
                             $this->RequestModule(); // Module anlegen
                             return true;
                         }
+                        else  $this->RequestMonitordaten();
                     }
                     break;
                 }
