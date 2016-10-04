@@ -167,7 +167,7 @@ class FM441 extends IPSModule
                     case 'ab':
                     case 'ad':  // AD Direktdaten Normalmodus
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Monitordaten ECO-CAN Adresse '.$bus.' Direktmodus :'.$stream);
-                        EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
+                        $result = EncodeMonitorDirektData($stream, $this->InstanceID, $modultyp);
                         break;
                     case 'a9':
                         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Schaltuhr Nr. ' . $modultyp . ' Daten :' . $stream);
