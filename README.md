@@ -7,6 +7,7 @@ Folgende Buderus Logamatic Steuerung kann eingebunden werden:
 - FM 442 (2 Heizkreise)
 - FM 443 (Solar)
 - FM 444 (Alternativer Wärmeerzeuger)
+- ZM 432 (bodenstehender Kessel)
 
 Erforderliche Installation:
 
