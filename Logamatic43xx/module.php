@@ -235,7 +235,7 @@ class Logamatic43xx extends IPSModule
                             if ($result != 1 and @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID) == true) // Endlosschleife verhindern, falls noch keine Konfiguration!
                             {
                                 if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic 43xx', 'Message zurück an Logamatic: ' . $result);
-                                $this->ReceiveData($JSONString);
+                                //$this->ReceiveData($JSONString);
                             }
                             break;
                     }
