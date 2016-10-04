@@ -84,6 +84,11 @@ class Logamatic43xx extends IPSModule
 
     public function RequestModule()
     {
+        $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
+        if ($ParentID == false) {
+            $this->RequestMonitordaten(); // Monitordaten abrufen
+            return true;
+        }
         $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
         EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
         $array = array('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
