@@ -87,7 +87,6 @@ class Logamatic43xx extends IPSModule
         $this->SwitchDM();
         $data = utf8_encode(hexdec($this->ReadPropertyString('Data')));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-        sleep(5);
         $data = utf8_encode(chr(Command::Normalmodus).chr(0x01));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
@@ -264,7 +263,7 @@ class Logamatic43xx extends IPSModule
                     break;
 
                 case 'ac':   // AC Monitordaten komplett übertragen
-                    $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
+                    $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));$this->ReceiveData(json_encode(utf8_encode($Monitordaten)));
                     $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
                     $data = utf8_encode(chr(Command::Normalmodus) . chr($this->ReadPropertyInteger('Bus')) . chr(Command::NUL) . chr(Command::NUL));
                     $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data))); // Umschalten in Normalmodus senden
