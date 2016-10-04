@@ -37,8 +37,8 @@ class FM444 extends IPSModule
         $bus = substr($stream, 4, 2);
         $modultyp = substr($stream, 8, 2);
         switch ($modultyp) {
-            case '9e':  // Solar Monitordaten
-            case '24':  // Solar einstellbare Daten
+            case '9f':  // Solar Monitordaten
+            case '37':  // Solar einstellbare Daten
                 switch ($datentyp) {
                     case 'a7':  // A7 Monitordaten Normalmodus
                     case 'ad':  // AD Direktdaten Normalmodus
