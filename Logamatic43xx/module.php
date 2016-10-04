@@ -70,7 +70,6 @@ class Logamatic43xx extends IPSModule
         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
         if ($ParentID == false) {
             $this->RequestModule(); // Monitordaten abrufen
-            return true;
         }
         $this->SwitchDM();
         $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')).chr(Command::NUL).chr(Command::NUL).chr(Command::NUL));
