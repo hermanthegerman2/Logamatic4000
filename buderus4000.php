@@ -131,7 +131,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[12][21] = array ("Betriebsart Warmwasser", "HKBetriebsart", "Manuell Nacht", "Manuell Tag", "Automatik");
         $Buderus[12][22] = array ("", 43);
         $Buderus[12][43] = array ("", "");
-        $Buderus[12][44] = array ("Uhrzeit zu der die tägliche Aufheizung gestartet wird", "Zeit", "1", "Std");
+        $Buderus[12][44] = array ("Uhrzeit zu der die tägliche Aufheizung gestartet wird", "ZeitHours", "1", "Std");
         $Buderus[12][45] = array ("", "");
     $Buderus[13][-1] = array ("Konfiguration / einstellbare Werte");
     $Buderus[14][-1] = array ("UBA");
