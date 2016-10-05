@@ -16,7 +16,7 @@ class Command extends stdClass
     const Heizkreis3 = 0x09;    // Datentyp für Heizkreis1 der einstellbaren Parameter
     const Heizkreis4 = 0x0A;    // Datentyp für Heizkreis4 der einstellbaren Parameter
     const Außenparameter = 0x0B;// Datentyp für Außenparameter der einstellbaren Parameter
-    const Warmwasser = 0x0C;    // Datentyp für WW der einstellbaren Parameter
+    const Warmwasser = 0x0C;    // Datentyp für Warmwasser der einstellbaren Parameter
     const Konfiguration = 0x0D; // Datentyp für Konfiguration (Modulauswahl) der einstellbaren Parameter
     const UBA = 0x0E;           // Datentyp für UBA der einstellbaren Parameter / wandhängende Strategie (UBA)
     const Kessel = 0x10;        // Datentyp für Kessel der einstellbaren Parameter / bodenstehender Kessel
@@ -448,7 +448,7 @@ function Buderus ($typ, $offset, $value)
     $Buderus[154][0] = array ("","");
 
 
-    $Buderus[158][-1] = array ("Solarfunktion", "38");
+    $Buderus[158][-1] = array ("Solarfunktion", "32");
         $Buderus[158][0] = array ("Betriebswerte 1", "Bit", "Fehler Einstellung Hysterese", "Speicher 2 auf max. Temperatur", "Speicher 1 auf max. Temperatur", "Kollektor auf max. Temperatur", "", "", "", "");
         $Buderus[158][1] = array ("Betriebswerte 2", "Bit", "Fehler Fühler Anlagenrücklauf Bypass defekt", "Fehler Fühler Speichermitte Bypass defekt", "Fehler Volumenstromzähler WZ defekt", "Fehler Fühler Rücklauf WZ defekt", "Fehler Fühler Vorlauf WZ defekt", "Fehler Fühler Speicher-unten 2 defekt", "Fehler Fühler Speicher-unten 1 defekt", "Fehler Fühler Kollektor defekt");
         $Buderus[158][2] = array ("Betriebswerte 3", "Bit", "Umschaltventil Speicher 2 zu", "Umschaltventil Speicher 2 auf/Speicherladepumpe2", "Umschaltventil Bypass zu", "Umschaltventil Bypass auf", "Sekundärpumpe Speicher 2 Betrieb", "", "", "");
@@ -482,12 +482,6 @@ function Buderus ($typ, $offset, $value)
         $Buderus[158][30] = array ("Betriebsstunden Speicher 2", "Betr2", "65536", "min");
         $Buderus[158][31] = array ("Betriebsstunden Speicher 2", "Betr2", "256", "min");
         $Buderus[158][32] = array ("Betriebsstunden Speicher 2", "Betr2", "1", "min");
-        $Buderus[158][33] = array ("","");
-        $Buderus[158][34] = array ("","");
-        $Buderus[158][35] = array ("","");
-        $Buderus[158][36] = array ("","");
-        $Buderus[158][37] = array ("","");
-        $Buderus[158][38] = array ("","");
 
     $Buderus[159][-1] = array ("Alternativer WE", "41");
         $Buderus[159][0] = array ("Wärmeerzeuger Vorlauf", "Temp", "1", "°C");
