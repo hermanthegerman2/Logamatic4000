@@ -112,7 +112,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[10][65] = array ("", "");
     $Buderus[11][-1] = array ("Außenparameter");
         $Buderus[11][0] = array ("", "");
-    $Buderus[12][-1] = array ("Warmwasser", "45");
+    $Buderus[12][-1] = array ("Warmwasser / einstellbare Werte", "45");
         $Buderus[12][0] = array ("", "");
         $Buderus[12][1] = array ("thermische Desinfektion", "Bit", "AUS", "EIN");
         $Buderus[12][2] = array ("Warmwassersolltemperatur für die Zeit der thermischen Desinfektion", "Temp", "1", "°C");
@@ -133,9 +133,9 @@ function Buderus ($typ, $offset, $value)
         $Buderus[12][43] = array ("", "");
         $Buderus[12][44] = array ("Uhrzeit zu der die tägliche Aufheizung gestartet wird", "Zeit", "1", "Std");
         $Buderus[12][45] = array ("", "");
-    $Buderus[13][-1] = array ("Konfiguration");
+    $Buderus[13][-1] = array ("Konfiguration / einstellbare Werte");
     $Buderus[14][-1] = array ("UBA");
-    $Buderus[16][-1] = array ("Kessel", "");
+    $Buderus[16][-1] = array ("Kessel / einstellbare Werte", "");
     $Buderus[17][-1] = array ("Kanal 1", "3");
         $Buderus[17][0] = array ("festgelegte Schaltprogramme", "Bit", "Eigen", "Frueh", "Spaet", "Nachmittag", "Mittag", "Single", "Senior", "LEER");
         $Buderus[17][1] = array ("Pause", "Zeit", "1", "Std");
@@ -225,15 +225,19 @@ function Buderus ($typ, $offset, $value)
         $Buderus[31][3] = array ("Ferien", "Zeit", "1", "Tage");
     $Buderus[32][-1] = array ("Strategie");
     $Buderus[35][-1] = array ("");
-    $Buderus[36][-1] = array ("Solarfunktion / einstellbare Werte", "28");
-        $Buderus[36][0] = array ("", 4);
+    $Buderus[36][-1] = array ("Solarfunktion / einstellbare Werte", "29");
+        $Buderus[36][0] = array ("", 3);
+        $Buderus[36][3] = array ("");
         $Buderus[36][4] = array ("Betriebsart", "Bit", "Aus", "Automatik", "EIN");
         $Buderus[36][5] = array ("Umschaltung für Verbraucher", "Bit", "Automatisch", "nur Speicher 1", "nur Speicher 2");
         $Buderus[36][6] = array ("Maximaltemperatur Speicher 1", "Temp", "1", "°C");
-        $Buderus[36][7] = array ("", 18);
+        $Buderus[36][7] = array ("", 17);
+        $Buderus[36][17] = array ("");
         $Buderus[36][18] = array ("Maximaltemperatur Speicher 2", "Temp", "1", "°C");
-        $Buderus[36][19] = array ("", 28);
+        $Buderus[36][19] = array ("", 27);
+        $Buderus[36][27] = array ("");
         $Buderus[36][28] = array ("Glykolanteil", "Prozent", "10", "%");
+        $Buderus[36][29] = array ("");
     $Buderus[37][-1] = array ("");
     $Buderus[38][-1] = array ("FM458");
     
