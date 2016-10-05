@@ -47,7 +47,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[7][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[7][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[7][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
-        $Buderus[7][4] = array ("Betriebswerte", "Bit", "Manuell Nacht", "Manuell Tag", "Automatik");
+        $Buderus[7][4] = array ("Betriebswerte", "HKBetriebsart", "Manuell Nacht", "Manuell Tag", "Automatik");
         $Buderus[7][5] = array ("", 17);
         $Buderus[7][17] = array ("Auslegungstemperatur Heizkreis", "Temp", "1", "°C");
         $Buderus[7][18] = array ("", 57);
@@ -801,6 +801,8 @@ function EncodeVariableData($parentID, $typ)
                                 case "Modul":
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(hex2bin(substr($value, $x*2, 2)))+2));
                                         break;
+                                case "HKBetriebsart":
+                                        SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(hex2bin(substr($value, $x*2, 2)))+2));
                                 }
                         }
                         elseif (Buderus($typ, $x, 1) !== "") {
