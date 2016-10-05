@@ -748,7 +748,7 @@ function EncodeVariableData($parentID, $typ)
                 for ($x=0; $x < Buderus($typ, -1, 1) ; $x++)
                     {
 
-                        if (Buderus($typ, $x, 0) !== "")
+                        if (Buderus($typ, $x, 0) != "")
                         {
                             switch (Buderus($typ, $x, 1))
                                 {
@@ -812,7 +812,8 @@ function EncodeVariableData($parentID, $typ)
                                         break;
                                 }
                         }
-                        elseif (Buderus($typ, $x, 1) !== "") {
+                        else
+                            if (Buderus($typ, $x, 1) != "") {
                             $x = Buderus($typ, $x, 1);
                         }
                     }
