@@ -805,7 +805,7 @@ function EncodeVariableData($parentID, $typ)
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(hex2bin(substr($value, $x*2, 2)))+2));
                                 }
                         }
-                        elseif (Buderus($typ, $x, 1) !== "") {
+                        elseif (Buderus($typ, $x, 1) == "") {
                             $x = Buderus($typ, $x, 1);
                         }
                     }
