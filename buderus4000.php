@@ -827,7 +827,7 @@ function EncodeVariableData($parentID, $typ)
                         }
                         else
                             if (Buderus($typ, $x, 1) != "") {
-                            $x = int(Buderus($typ, $x, 1));
+                            $x = (Buderus($typ, $x, 1));
                         }
                     }
 
