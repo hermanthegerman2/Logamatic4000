@@ -812,7 +812,7 @@ function EncodeVariableData($parentID, $typ)
                                         break;
                                 }
                         }
-                        elseif (Buderus($typ, $x, 1) == "") {
+                        elseif (Buderus($typ, $x, 1) !== "") {
                             $x = Buderus($typ, $x, 1);
                         }
                     }
