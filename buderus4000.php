@@ -42,7 +42,7 @@ class Command extends stdClass
 }
 function Buderus ($typ, $offset, $value)
     {
-    $Buderus[7][-1] = array ("Heizkreis 1", "64");
+    $Buderus[7][-1] = array ("Heizkreis 1 / einstellbare Werte", "64");
         $Buderus[7][0] = array ("", "");
         $Buderus[7][1] = array ("", "");
         $Buderus[7][2] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
@@ -56,7 +56,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[7][58] = array ("", 63);
         $Buderus[7][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[7][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
-    $Buderus[8][-1] = array ("Heizkreis 2", "64");
+    $Buderus[8][-1] = array ("Heizkreis 2 / einstellbare Werte", "64");
         $Buderus[8][0] = array ("", "");
         $Buderus[8][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[8][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
@@ -69,7 +69,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[8][58] = array ("", 63);
         $Buderus[8][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[8][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
-    $Buderus[9][-1] = array ("Heizkreis 3", "64");
+    $Buderus[9][-1] = array ("Heizkreis 3 / einstellbare Werte", "64");
         $Buderus[9][0] = array ("", "");
         $Buderus[9][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[9][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
@@ -82,7 +82,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[9][58] = array ("", 63);
         $Buderus[9][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[9][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
-    $Buderus[10][-1] = array ("Heizkreis 4", "64");
+    $Buderus[10][-1] = array ("Heizkreis 4 / einstellbare Werte", "64");
         $Buderus[10][0] = array ("", "");
         $Buderus[10][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[10][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
@@ -141,7 +141,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[21][1] = array ("Pause", "Zeit", "1", "Std");
         $Buderus[21][2] = array ("Party", "Zeit", "1", "Std");
         $Buderus[21][3] = array ("Ferien", "Zeit", "1", "Tage");
-    $Buderus[22][-1] = array ("Heizkreis 5", "64");
+    $Buderus[22][-1] = array ("Heizkreis 5 / einstellbare Werte", "64");
         $Buderus[22][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[22][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[22][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
@@ -155,7 +155,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[23][1] = array ("Pause", "Zeit", "1", "Std");
         $Buderus[23][2] = array ("Party", "Zeit", "1", "Std");
         $Buderus[23][3] = array ("Ferien", "Zeit", "1", "Tage");
-    $Buderus[24][-1] = array ("Heizkreis 6", "64");
+    $Buderus[24][-1] = array ("Heizkreis 6 / einstellbare Werte", "64");
         $Buderus[24][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[24][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[24][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
@@ -169,7 +169,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[25][1] = array ("Pause", "Zeit", "1", "Std");
         $Buderus[25][2] = array ("Party", "Zeit", "1", "Std");
         $Buderus[25][3] = array ("Ferien", "Zeit", "1", "Tage");
-    $Buderus[26][-1] = array ("Heizkreis 7", "64");
+    $Buderus[26][-1] = array ("Heizkreis 7 / einstellbare Werte", "64");
         $Buderus[26][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[26][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[26][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
@@ -183,7 +183,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[27][1] = array ("Pause", "Zeit", "1", "Std");
         $Buderus[27][2] = array ("Party", "Zeit", "1", "Std");
         $Buderus[27][3] = array ("Ferien", "Zeit", "1", "Tage");
-    $Buderus[28][-1] = array ("Heizkreis 8", "64");
+    $Buderus[28][-1] = array ("Heizkreis 8 / einstellbare Werte", "64");
         $Buderus[28][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[28][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
         $Buderus[28][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
@@ -198,14 +198,14 @@ function Buderus ($typ, $offset, $value)
         $Buderus[29][2] = array ("Party", "Zeit", "1", "Std");
         $Buderus[29][3] = array ("Ferien", "Zeit", "1", "Tage");
     $Buderus[30][-1] = array ("");
-    $Buderus[31][-1] = array ("Kanal 10", "3");
+    $Buderus[31][-1] = array ("Kanal 10 / Zirkulation", "3");
         $Buderus[31][0] = array ("festgelegte Schaltprogramme", "Bit", "Eigen", "Frueh", "Spaet", "Nachmittag", "Mittag", "Single", "Senior", "LEER");
         $Buderus[31][1] = array ("Pause", "Zeit", "1", "Std");
         $Buderus[31][2] = array ("Party", "Zeit", "1", "Std");
         $Buderus[31][3] = array ("Ferien", "Zeit", "1", "Tage");
     $Buderus[32][-1] = array ("Strategie");
     $Buderus[35][-1] = array ("");
-    $Buderus[36][-1] = array ("Solarfunktion", "28");
+    $Buderus[36][-1] = array ("Solarfunktion / einstellbare Werte", "28");
         $Buderus[36][0] = array ("", 4);
         $Buderus[36][4] = array ("Betriebsart", "Bit", "Aus", "Automatik", "EIN");
         $Buderus[36][5] = array ("Umschaltung für Verbraucher", "Bit", "Automatisch", "nur Speicher 1", "nur Speicher 2");
