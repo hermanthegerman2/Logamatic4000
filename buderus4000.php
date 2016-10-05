@@ -61,9 +61,11 @@ function Buderus ($typ, $offset, $value)
         $Buderus[7][15] = array ("", "");
         $Buderus[7][16] = array ("", "");
         $Buderus[7][17] = array ("Auslegungstemperatur Heizkreis", "Temp", "1", "°C");
-        $Buderus[7][18] = array ("", '57');
+        $Buderus[7][18] = array ("", 56);
+        $Buderus[7][56] = array ("", "");
         $Buderus[7][57] = array ("Heizsystem", "HKHeizsystem", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
-        $Buderus[7][58] = array ("", '63');
+        $Buderus[7][58] = array ("", 62);
+        $Buderus[7][62] = array ("", "");
         $Buderus[7][63] = array ("Absenkart Ferien", "HKAbsenkart", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[7][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
     $Buderus[8][-1] = array ("Heizkreis 2 / einstellbare Werte", "64");
@@ -825,7 +827,7 @@ function EncodeVariableData($parentID, $typ)
                         }
                         else
                             if (Buderus($typ, $x, 1) != "") {
-                            $x = Buderus($typ, $x, 1);
+                            $x = int(Buderus($typ, $x, 1));
                         }
                     }
 
