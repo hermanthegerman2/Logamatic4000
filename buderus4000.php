@@ -51,9 +51,9 @@ function Buderus ($typ, $offset, $value)
         $Buderus[7][5] = array ("", 17);
         $Buderus[7][17] = array ("Auslegungstemperatur Heizkreis", "Temp", "1", "°C");
         $Buderus[7][18] = array ("", 57);
-        $Buderus[7][57] = array ("Heizsystem", "Bit", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
+        $Buderus[7][57] = array ("Heizsystem", "HKHeizsystem", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
         $Buderus[7][58] = array ("", 63);
-        $Buderus[7][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
+        $Buderus[7][63] = array ("Absenkart Ferien", "HKAbsenkart", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[7][64] = array ("Umschalttemperatur für Absenkart „Außenhalt“ bei Ferienbetrieb", "Temp", "1", "°C");
     $Buderus[8][-1] = array ("Heizkreis 2 / einstellbare Werte", "64");
         $Buderus[8][0] = array ("", "");
@@ -803,6 +803,13 @@ function EncodeVariableData($parentID, $typ)
                                         break;
                                 case "HKBetriebsart":
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(hex2bin(substr($value, $x*2, 2)))+2));
+                                        break;
+                                case "HKAbsenkart":
+                                        SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(hex2bin(substr($value, $x*2, 2)))+2));
+                                        break;
+                                case "HKHeizsystem":
+                                        SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(hex2bin(substr($value, $x*2, 2)))+2));
+                                        break;
                                 }
                         }
                         elseif (Buderus($typ, $x, 1) == "") {
