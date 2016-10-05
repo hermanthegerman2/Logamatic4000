@@ -44,14 +44,13 @@ function Buderus ($typ, $offset, $value)
     {
     $Buderus[7][-1] = array ("Heizkreis 1 / einstellbare Werte", "64");
         $Buderus[7][0] = array ("", "");
-        $Buderus[7][1] = array ("", "");
-        $Buderus[7][2] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
-        $Buderus[7][3] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
-        $Buderus[7][4] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
-        $Buderus[7][5] = array ("Betriebswerte", "Bit", "Manuell Nacht", "Manuell Tag", "Automatik");
-        $Buderus[7][6] = array ("", 18);
-        $Buderus[7][18] = array ("Auslegungstemperatur Heizkreis", "Temp", "1", "°C");
-        $Buderus[7][19] = array ("", 57);
+        $Buderus[7][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
+        $Buderus[7][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
+        $Buderus[7][3] = array ("Tagsolltemperatur", "Temp", "0.5", "°C");
+        $Buderus[7][4] = array ("Betriebswerte", "Bit", "Manuell Nacht", "Manuell Tag", "Automatik");
+        $Buderus[7][5] = array ("", 17);
+        $Buderus[7][17] = array ("Auslegungstemperatur Heizkreis", "Temp", "1", "°C");
+        $Buderus[7][18] = array ("", 57);
         $Buderus[7][57] = array ("Heizsystem", "Bit", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
         $Buderus[7][58] = array ("", 63);
         $Buderus[7][63] = array ("Absenkart Ferien", "Bit", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
