@@ -228,8 +228,8 @@ function Buderus ($typ, $offset, $value)
     $Buderus[36][-1] = array ("Solarfunktion / einstellbare Werte", "29");
         $Buderus[36][0] = array ("", 3);
         $Buderus[36][3] = array ("");
-        $Buderus[36][4] = array ("Betriebsart", "Bit", "Aus", "Automatik", "EIN");
-        $Buderus[36][5] = array ("Umschaltung für Verbraucher", "Bit", "Automatisch", "nur Speicher 1", "nur Speicher 2");
+        $Buderus[36][4] = array ("Betriebsart", "HKBetriebsart", "Aus", "Automatik", "EIN");
+        $Buderus[36][5] = array ("Umschaltung für Verbraucher", "HKBetriebsart", "Automatisch", "nur Speicher 1", "nur Speicher 2");
         $Buderus[36][6] = array ("Maximaltemperatur Speicher 1", "Temp", "1", "°C");
         $Buderus[36][7] = array ("", 17);
         $Buderus[36][17] = array ("");
