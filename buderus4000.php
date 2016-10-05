@@ -835,6 +835,9 @@ function EncodeVariableData($parentID, $typ)
                                 case "HKHeizsystem":
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 3, "~String", $ID), Buderus($typ, $x, ord(hex2bin(substr($value, $x*2, 2)))+2));
                                         break;
+                                case "ZeitHours":
+                                    SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "Hours", $ID),ord(hex2bin(substr($value, $x*2, 2))));//Hours
+                                    break;
                                 }
                         }
                         else
