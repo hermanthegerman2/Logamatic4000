@@ -112,7 +112,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[10][65] = array ("", "");
     $Buderus[11][-1] = array ("Außenparameter");
         $Buderus[11][0] = array ("", "");
-    $Buderus[12][-1] = array ("Warmwasser / einstellbare Werte", "44");
+    $Buderus[12][-1] = array ("Warmwasser / einstellbare Werte", "45");
         $Buderus[12][0] = array ("", "");
         $Buderus[12][1] = array ("thermische Desinfektion", "Modul", "AUS", "EIN");
         $Buderus[12][2] = array ("Warmwassersolltemperatur für die Zeit der thermischen Desinfektion", "Temp", "1", "°C");
