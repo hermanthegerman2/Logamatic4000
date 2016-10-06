@@ -564,7 +564,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[159][41] = array ("","");
 
 
-    echo "Ergebnis Check: ".$typ." ".$offset." ".$value."\n";;
+        IPS_LogMessage('Buderus Logamatic', 'Modultyp:'.$typ.' : '.$offset.' : '.$value);
     $name = $Buderus[$typ][$offset][$value];
     if ($name === false) 
         {
