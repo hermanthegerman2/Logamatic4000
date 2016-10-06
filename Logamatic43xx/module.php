@@ -35,7 +35,6 @@ class Logamatic43xx extends IPSModule
                 $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
                 $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
                 $this->SetStatus(102);
-                $this->RequestMonitordaten();
                 break;
         }
     }
