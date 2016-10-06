@@ -345,6 +345,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[132][9] = array ("", "");
         $Buderus[132][10] = array ("", "");
         $Buderus[132][11] = array ("", "");
+        $Buderus[132][12] = array ("", "");
 
     $Buderus[135][-1] = array ("Fehlerprotokoll", "0");
     $Buderus[135][0] = array ("","");
