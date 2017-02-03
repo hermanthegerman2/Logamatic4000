@@ -25,7 +25,7 @@ class Logamatic43xx extends IPSModule
             case ($id > 15):
                 $this->SetStatus(203);
                 break;
-            case ($id <= 15 && $id >= 0):
+            case ($id <= 15 && $id >= 1):
                 $this->MaintainVariable('Einstellparameter', 'Einstellparameter', 3, '~String', -3, 1);
                 $this->MaintainVariable('Monitordaten', 'Monitordaten', 3, '~String', 0, 1);
                 $this->RegisterProfile('Minutes', '2', '', '', ' m', 0, 0, 0);
