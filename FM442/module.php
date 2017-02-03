@@ -68,8 +68,8 @@ class FM442 extends IPSModule
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
-        $bus = substr($stream, 4, 2);
-        $modultyp = substr($stream, 8, 2);
+        $bus = substr($stream, 2, 2);
+        $modultyp = substr($stream, 4, 2);
         switch ($modultyp) {
             case '80':  // Heizkreis 1
             case '81':  // Heizkreis 2

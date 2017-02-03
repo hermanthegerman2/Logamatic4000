@@ -34,8 +34,8 @@ class ZM432 extends IPSModule
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic ZM432 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
-        $bus = substr($stream, 4, 2);
-        $modultyp = substr($stream, 8, 2);
+        $bus = substr($stream, 2, 2);
+        $modultyp = substr($stream, 4, 2);
         switch ($modultyp) {
             case '88':  // bodenstehender Kessel Monitordaten
             case '10':  // einstellbaren Parameter / bodenstehender Kessel

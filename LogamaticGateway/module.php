@@ -9,9 +9,9 @@ class LogamaticGateway extends IPSModule
         //Never delete this line!
         parent::Create();
         $this->RequireParent("{3CFF0FD9-E306-41DB-9B5A-9D06D38576C3}", "Logamatic Gateway");
-        $this->RegisterPropertyString("Host", "192.168.178.16");
+        $this->RegisterPropertyString("Host", "127.0.0.1");
         $this->RegisterPropertyBoolean("Open", true);
-        $this->RegisterPropertyInteger("Port", 6200);
+        $this->RegisterPropertyInteger("Port", 2500);
         $this->RegisterPropertyBoolean("Logging", false);
     }
 

@@ -34,8 +34,8 @@ class FM443 extends IPSModule
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM443 Receive Data:', bin2hex(utf8_decode($data->Buffer)));
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
-        $bus = substr($stream, 4, 2);
-        $modultyp = substr($stream, 8, 2);
+        $bus = substr($stream, 2, 2);
+        $modultyp = substr($stream, 4, 2);
         switch ($modultyp) {
             case '9e':  // Solar Monitordaten
             case '24':  // Solar einstellbare Daten

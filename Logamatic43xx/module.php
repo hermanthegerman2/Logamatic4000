@@ -173,8 +173,8 @@ class Logamatic43xx extends IPSModule
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic 43xx Receive Data', bin2hex(utf8_decode($data->Buffer)));
         $stream = bin2hex(utf8_decode($data->Buffer));
         $datentyp = substr($stream, 0, 2);
-        $bus = ord(hex2bin(substr($stream, 4, 2)));
-        $modultyp = substr($stream, 8, 2);
+        $bus = ord(hex2bin(substr($stream, 2, 2)));
+        $modultyp = substr($stream, 4, 2);
         if ($bus === $this->ReadPropertyInteger('Bus'))
         {
             switch ($datentyp) {
@@ -268,10 +268,10 @@ class Logamatic43xx extends IPSModule
 
     protected function DistributeDataToChildren($Monitordaten, $ID)
     {
-        $array = str_split($Monitordaten, 44);
+        $array = str_split($Monitordaten, 22);
         for ( $x = 0; $x < count ( $array ); $x++ )
         {
-            $modultyp = substr($array[$x], 8, 2);
+            $modultyp = substr($array[$x], 4, 2);
             $datentyp = (substr($array[$x], 0, 2));
             //IPS_LogMessage('DM Modultyp', $modultyp." Datentyp ".$datentyp);
             $data = hex2bin($array[$x]);
