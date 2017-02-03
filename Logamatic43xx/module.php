@@ -238,7 +238,7 @@ class Logamatic43xx extends IPSModule
                     $head = GetValueString($this->GetIDForIdent('Einstellparameter'));
                     $Einstellparameter = $head . $stream; // $stream anhängen
                     SetValueString($this->GetIDForIdent('Einstellparameter'), $Einstellparameter);
-                    if (substr($stream, -12, 4) == 'aa00') {
+                    if (substr($stream, -4, 4) == 'aa00') {
                         $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID);
                         $this->SwitchNM();  // einstellbare Parameter komplett -> Normalmodus umschalten
                     }
@@ -249,7 +249,7 @@ class Logamatic43xx extends IPSModule
                     $head = GetValueString($this->GetIDForIdent('Monitordaten'));
                     $Monitordaten = $head . $stream; // $stream anhängen
                     SetValueString($this->GetIDForIdent('Monitordaten'), $Monitordaten);
-                    if (substr($stream, -12, 4) == 'ac00') {
+                    if (substr($stream, -4, 4) == 'ac00') {
                         $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
                         $this->SwitchNM();  // Monitordaten komplett -> Normalmodus umschalten
                         $ParentID = @IPS_GetObjectIDByName('Konfiguration', $this->InstanceID);
@@ -268,7 +268,7 @@ class Logamatic43xx extends IPSModule
 
     protected function DistributeDataToChildren($Monitordaten, $ID)
     {
-        $array = str_split($Monitordaten, 22);
+        $array = str_split($Monitordaten, 20);
         for ( $x = 0; $x < count ( $array ); $x++ )
         {
             $modultyp = substr($array[$x], 4, 2);
