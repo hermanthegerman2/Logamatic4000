@@ -640,7 +640,7 @@ function CheckEventVariable($typ, $parentID)
 function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
 {
     $modultyp = ord(hex2bin($modultyp));
-    $array = str_split($EinstellPar, 22);
+    $array = str_split($EinstellPar, 20);
     for ( $x = 0; $x < count ( $array ); $x++ ) {
         if (substr($array[$x], 0, 2) == 'a9') {
             $typ = ord(hex2bin(substr($array[$x], 4, 2)));
@@ -667,7 +667,7 @@ function EncodeCyclicEventData ($EinstellPar, $ID, $modultyp)
 function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
 {
     $Modultyp = ord(hex2bin($Modultyp));
-    $array = str_split($Monitordaten, 22);
+    $array = str_split($Monitordaten, 20);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
         $typ = ord(hex2bin(substr($array[$x], 4, 2)));
@@ -705,7 +705,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
 function EncodeMonitorNormalData($Monitordaten, $ID, $Modultyp)
 {
     $Modultyp = ord(hex2bin($Modultyp));
-    $array = str_split($Monitordaten, 12);
+    $array = str_split($Monitordaten, 10);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
         $typ = ord(hex2bin(substr($array[$x], 4, 2)));
@@ -732,7 +732,7 @@ function EncodeMonitorNormalData($Monitordaten, $ID, $Modultyp)
 
 function EncodeKonfigurationData($Monitordaten, $ID)
 {
-    $array = str_split($Monitordaten, 12);
+    $array = str_split($Monitordaten, 10);
     for ( $x = 0; $x < count ( $array ); $x++ )
     {
         if (substr($array[$x], 0, 2) == 'a7')
