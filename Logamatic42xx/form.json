@@ -1,0 +1,45 @@
+{	
+	"elements":
+        [
+            { "type": "Label", "label": "ECO-CAN Bus Adresse (0-15)" },
+            { "type": "NumberSpinner", "name": "Bus", "caption": "Adresse:"},
+            { "type": "Label", "label": "Logging für Logamatic Gateway einschalten" },
+            { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
+        ],
+    "actions":
+        [
+            {
+                "type": "Button",
+                "label": "Monitordaten auslesen",
+                "onClick": "Logamatic_RequestMonitordaten($id);"
+            },
+            {
+                "type": "Button",
+                "label": "einstellbare Parameter auslesen",
+                "onClick": "Logamatic_RequestEinstellPar($id);"
+            },
+            {
+                "type": "Button",
+                "label": "Sammelstörmeldung auslesen",
+                "onClick": "Logamatic_RequestErrorLog($id);"
+            }
+        ],
+    "status":
+        [
+            {
+                "code": 102,
+                "icon": "active",
+                "caption": "ECO-CAN Adresse gültig."
+            },
+            {
+                "code": 202,
+                "icon": "error",
+                "caption": "ECO-CAN Adresse zu klein"
+            },
+            {
+                "code": 203,
+                "icon": "error",
+                "caption": "ECO-CAN Adresse zu gross"
+            },
+        ]
+}

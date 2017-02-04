@@ -439,11 +439,11 @@ function Buderus ($typ, $offset, $value)
         $Buderus[137][3] = array ("Version", "Version", "", "");
         $Buderus[137][4] = array ("", "");
         $Buderus[137][5] = array ("", "");
-        $Buderus[137][6] = array ("Modul in Slot 1", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM432", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
-        $Buderus[137][7] = array ("Modul in Slot 2", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM432", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
-        $Buderus[137][8] = array ("Modul in Slot 3", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM432", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
-        $Buderus[137][9] = array ("Modul in Slot 4", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM432", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
-        $Buderus[137][10] = array ("Modul in Slot A", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM432", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
+        $Buderus[137][6] = array ("Modul in Slot 1", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM422", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
+        $Buderus[137][7] = array ("Modul in Slot 2", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM422", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
+        $Buderus[137][8] = array ("Modul in Slot 3", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM422", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
+        $Buderus[137][9] = array ("Modul in Slot 4", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM422", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
+        $Buderus[137][10] = array ("Modul in Slot A", "Modul", "defekt", "frei", "ZM432", "FM442", "FM441", "FM447", "ZM422", "FM445", "FM451", "FM454", "ZM424", "UBA", "FM452", "FM448", "ZM433", "FM446", "FM443", "", "", "", "", "FM444");
         $Buderus[137][11] = array ("", "");
         $Buderus[137][12] = array ("Fehler bei Slot 1", "Modul", "kein Fehler", "unbekanntes Modul", "Fehler bei CAN – Adresse", "SOLL // IST – Fehler", "keine Antwort", "Handbetrieb");
         $Buderus[137][13] = array ("Fehler bei Slot 2", "Modul", "kein Fehler", "unbekanntes Modul", "Fehler bei CAN – Adresse", "SOLL // IST – Fehler", "keine Antwort", "Handbetrieb");

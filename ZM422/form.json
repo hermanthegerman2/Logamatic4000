@@ -1,0 +1,18 @@
+{	
+  "elements":
+	[
+      { "name": "Kessel", "type": "ValidationTextBox", "caption": "bodenstehender Kessel" },
+      { "type": "Label", "label": "Logging für Logamatic ZM422 einschalten" },
+      { "name": "Logging", "type": "CheckBox", "caption": "Logging" }
+    ],
+  "status":
+  [
+    {
+      "code": 102,
+      "icon": "active",
+      "caption": "Konfiguration gültig."
+    }
+  ]
+        
+
+}
