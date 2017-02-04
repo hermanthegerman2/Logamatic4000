@@ -18,14 +18,14 @@ class Logamatic43xx extends IPSModule
         parent::ApplyChanges();
         $this->ConnectParent('{24F1DF95-D340-48DB-B0CC-ABB40B12BCAA}'); // 1. Verfügbarer Logamatic-Splitter wird verbunden oder neu erzeugt, wenn nicht vorhanden.
         $id = $this->ReadPropertyInteger('Bus');
-        switch ($id) {
+        /*switch ($id) {
             case $id < 0:
                 $this->SetStatus(202);
                 break;
             case $id > 15:
                 $this->SetStatus(203);
                 break;
-            case $id < 16:
+            case $id < 16:*/
                 $this->MaintainVariable('Einstellparameter', 'Einstellparameter', 3, '~String', -3, 1);
                 $this->MaintainVariable('Monitordaten', 'Monitordaten', 3, '~String', 0, 1);
                 $this->RegisterProfile('Minutes', '2', '', '', ' m', 0, 0, 0);
@@ -35,8 +35,8 @@ class Logamatic43xx extends IPSModule
                 $this->RegisterProfile('Version', '3', '', 'V ', '', 0, 0, 0);
                 $this->RegisterProfile('Flow', '2', '', '', ' l/h', 0, 0, 0);
                 $this->SetStatus(102);
-                break;
-        }
+                /*break;
+        }*/
     }
 
     public function SwitchDM()
