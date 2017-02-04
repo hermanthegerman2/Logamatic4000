@@ -1,12 +1,12 @@
 {
-    "id": "{DC32EE80-C473-4806-A8A3-158DCFB6E2EE}",
+    "id": "{557BBB7A-DCD5-4C78-B165-BBAAD2F7BEFE}",
     "name": "ZM422",
     "type": 3,
     "vendor": "Buderus",
     "aliases": ["Logamatic ZM422"],
-    "parentRequirements": ["{054466C5-C0E0-46C6-82D7-29A2FAE4276C}"],
+    "parentRequirements": ["{50FF26B8-1574-48DA-922E-E1A327B0D137}"],
     "childRequirements": [],
-    "implemented": ["{487A7347-AAC6-4084-9A86-25C61A2482DC}"],
+    "implemented": ["{7C608E31-D80A-45DB-9D2A-CFB402C95CBD}"],
     "prefix": "ZM422"
 }
 
