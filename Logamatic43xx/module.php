@@ -58,7 +58,7 @@ class Logamatic43xx extends IPSModule
     public function RequestMonitordaten()
     {
         $this->SwitchDM();
-        sleep (0.5);
+        sleep (2);
         $data = utf8_encode(chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Monitordaten'), '');
@@ -68,7 +68,7 @@ class Logamatic43xx extends IPSModule
     public function RequestEinstellPar()
     {
         $this->SwitchDM();
-        sleep (0.5);
+        sleep (2);
         $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
@@ -78,7 +78,7 @@ class Logamatic43xx extends IPSModule
     public function RequestErrorLog()
     {
         $this->SwitchDM();
-        sleep (0.5);
+        sleep (2);
         $data = utf8_encode(chr(Command::Datenblock).chr($this->ReadPropertyInteger('Bus')));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
