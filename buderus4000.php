@@ -562,7 +562,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[159][41] = array ("","");
 
 
-        IPS_LogMessage('Buderus Logamatic', 'Modultyp:'.$typ.' : '.$offset.' : '.$value);
+        //IPS_LogMessage('Buderus Logamatic', 'Modultyp:'.$typ.' : '.$offset.' : '.$value);
     $name = $Buderus[$typ][$offset][$value];
     if ($name === false) 
         {
@@ -697,7 +697,7 @@ function EncodeMonitorDirektData($Monitordaten, $ID, $Modultyp)
                     }
             }
         }
-        else IPS_LogMessage('Logamatic 4000', 'Modultyp: '.$Modultyp." Typ: ".$typ);
+        //else IPS_LogMessage('Logamatic 4000', 'Modultyp: '.$Modultyp." Typ: ".$typ);
     }
     return true;
 }
