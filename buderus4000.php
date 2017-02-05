@@ -127,10 +127,10 @@ function Buderus ($typ, $offset, $value)
         $Buderus[12][13] = array ("", 16);
         $Buderus[12][16] = array ("", "");
         $Buderus[12][17] = array ("Zirkulationspumpenläufe pro Stunde", "Modul", "ständig aus (läuft nur bei Einmalladung)", "ständig an", "2", "3", "4", "5", "6", "7");
-        $Buderus[12][18] = array ("", "");
-        $Buderus[12][19] = array ("", "");
-        $Buderus[12][20] = array ("Betriebsart Zirkulation", "HKBetriebsart", "Manuell Nacht", "Manuell Tag", "Automatik");
-        $Buderus[12][21] = array ("", 42);
+        $Buderus[12][18] = array ("", 20);
+        $Buderus[12][20] = array ("", "");
+        $Buderus[12][21] = array ("Betriebsart Zirkulation", "HKBetriebsart", "Manuell Nacht", "Manuell Tag", "Automatik");
+        $Buderus[12][22] = array ("", 42);
         $Buderus[12][42] = array ("", "");
         $Buderus[12][43] = array ("Uhrzeit zu der die tägliche Aufheizung gestartet wird", "ZeitHours", "1", "Std");
         $Buderus[12][44] = array ("", "");
