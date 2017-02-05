@@ -32,6 +32,7 @@ class FM441 extends IPSModule
     public function Umschaltschwelle(float $temp)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Umschaltschwelle Sommer/Winter senden: ' . $temp . '°C');
+        $temp = sprintf('%02s',dechex($temp));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -40,6 +41,7 @@ class FM441 extends IPSModule
     public function Nachtraumsolltemperatur(float $temp)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Nachtraumsolltemperatur senden: ' . $temp . '°C');
+        $temp = sprintf('%02s',dechex($temp));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -48,8 +50,7 @@ class FM441 extends IPSModule
     public function Tagsolltemperatur(float $temp)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Tagsolltemperatur senden: ' . $temp . '°C');
-        $temp = dechex($temp);
-        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Tagsolltemperatur senden: ' . $temp . '°C');
+        $temp = sprintf('%02s',dechex($temp));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -59,6 +60,7 @@ class FM441 extends IPSModule
     {
         $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
+        $id = sprintf('%02s',dechex($id));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -68,6 +70,7 @@ class FM441 extends IPSModule
     {
         $Betriebsart =  array(0 => 'aus', 1 => 'ein');
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'thermische Desinfektion: ' . $Betriebsart[$id]);
+        $id = sprintf('%02s',dechex($id));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x00).chr(0x65).chr($id).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -76,6 +79,7 @@ class FM441 extends IPSModule
     public function Desinfektiontemperatur(float $temp)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Warmwassersolltemperatur für die Zeit der thermischen Desinfektion: ' . $temp . '°C');
+        $temp = sprintf('%02s',dechex($temp));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x00).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -85,6 +89,7 @@ class FM441 extends IPSModule
     {
         $Betriebsart =  array(0 => 'Montag', 1 => 'Dienstag', 2 => 'Mittwoch', 3 => 'Donnerstag', 4 => 'Freitag', 5 => 'Samstag', 6 => 'Sonntag', 7 => 'täglich');
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Desinfektionstag: ' . $Betriebsart[$id]);
+        $id = sprintf('%02s',dechex($id));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -93,6 +98,7 @@ class FM441 extends IPSModule
     public function Desinfektionsuhrzeit(int $id)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Uhrzeit an der die thermische Desinfektion starten soll ' . $id . ' Uhr');
+        $id = sprintf('%02s',dechex($id));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -101,6 +107,7 @@ class FM441 extends IPSModule
     public function Warmwassersolltemperatur(float $temp)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Warmwassersolltemperatur senden: ' . $temp . '°C');
+        $temp = sprintf('%02s',dechex($temp));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x07).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -110,6 +117,7 @@ class FM441 extends IPSModule
     {
         $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart Warmwasser auf ' . $Betriebsart[$id] . ' umschalten');
+        $id = sprintf('%02s',dechex($id));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x0e).chr($id).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -118,6 +126,7 @@ class FM441 extends IPSModule
     public function Zirkulationspumpenlaeufe(int $id)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Zirkulationspumpenläufe pro Stunde ' . $id . ' ändern');
+        $id = sprintf('%02s',dechex($id));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x0e).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -127,6 +136,7 @@ class FM441 extends IPSModule
     {
         $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart Zirkulation auf ' . $Betriebsart[$id] . ' umschalten');
+        $id = sprintf('%02s',dechex($id));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x15).chr(0x65).chr($id).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -135,6 +145,7 @@ class FM441 extends IPSModule
     public function Aufheizzeit(int $id)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Uhrzeit tägliche Aufheizung ' . $id . ' ändern');
+        $id = sprintf('%02s',dechex($id));
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Warmwasser).chr(0x2a).chr(0x65).chr(0x65).chr($id).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
