@@ -118,10 +118,10 @@ function Buderus ($typ, $offset, $value)
         $Buderus[12][2] = array ("Warmwassersolltemperatur für die Zeit der thermischen Desinfektion", "Temp", "1", "°C");
         $Buderus[12][3] = array ("Desinfektionstag", "Modul", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag", "täglich");
         $Buderus[12][4] = array ("Uhrzeit an der die thermische Desinfektion starten soll", "ZeitHours", "1", "Std");
-        $Buderus[12][5] = array ("", 8);
-        $Buderus[12][8] = array ("", "");
-        $Buderus[12][9] = array ("Warmwassersolltemperatur", "Temp", "1", "°C");
-        $Buderus[12][10] = array ("", "");
+        $Buderus[12][5] = array ("", 9);
+        $Buderus[12][9] = array ("", "");
+        $Buderus[12][10] = array ("Warmwassersolltemperatur", "Temp", "1", "°C");
+        //$Buderus[12][10] = array ("", "");
         $Buderus[12][11] = array ("", "");
         $Buderus[12][12] = array ("Betriebsart Warmwasser", "HKBetriebsart", "Manuell Nacht", "Manuell Tag", "Automatik");
         $Buderus[12][13] = array ("", 16);
