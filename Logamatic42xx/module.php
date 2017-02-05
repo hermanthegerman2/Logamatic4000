@@ -58,7 +58,7 @@ class Logamatic42xx extends IPSModule
     public function RequestMonitordaten()
     {
         $this->SwitchDM();
-        sleep (2);
+        sleep (0.2);
         $data = utf8_encode(chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')));
         $this->SendDataToParent(json_encode(Array("DataID" => "{60C485C0-E28D-45D5-BF86-57F0257C1F4E}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Monitordaten'), '');
@@ -68,7 +68,7 @@ class Logamatic42xx extends IPSModule
     public function RequestEinstellPar()
     {
         $this->SwitchDM();
-        sleep (2);
+        sleep (0.2);
         $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')));
         $this->SendDataToParent(json_encode(Array("DataID" => "{60C485C0-E28D-45D5-BF86-57F0257C1F4E}", "Buffer" => $data)));
         SetValueString($this->GetIDForIdent('Einstellparameter'), '');
@@ -78,7 +78,7 @@ class Logamatic42xx extends IPSModule
     public function RequestErrorLog()
     {
         $this->SwitchDM();
-        sleep (2);
+        sleep (0.2);
         $data = utf8_encode(chr(Command::Datenblock).chr($this->ReadPropertyInteger('Bus')));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{60C485C0-E28D-45D5-BF86-57F0257C1F4E}", "Buffer" => $data)));
         return $id;
@@ -152,14 +152,14 @@ class Logamatic42xx extends IPSModule
         switch ($datentyp) {
             case 'b0':
                 $this->SwitchDM();
-                sleep (0.5);
-                $data = utf8_encode(substr($stream, 0, 1) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2) . chr(0x00)); // ECO-CAN Busadresse einfügen
+                sleep (0.2);
+                $data = utf8_encode(substr($stream, 0, 1) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2)); // ECO-CAN Busadresse einfügen
                 $this->SendDataToParent(json_encode(Array("DataID" => "{60C485C0-E28D-45D5-BF86-57F0257C1F4E}", "Buffer" => $data)));
                 //$this->SwitchNM();
                 $offset = substr($stream, 3, 1);
                 if ($offset = '00') $offset = '1';
-                sleep (2.5);
-                $data = utf8_encode(chr(Command::Datenblock).chr($this->ReadPropertyInteger('Bus')).substr($stream, 2, 1).chr($offset).chr(0x00)); // Rückantwort anfragen
+                sleep (2);
+                $data = utf8_encode(chr(Command::Datenblock).chr($this->ReadPropertyInteger('Bus')).substr($stream, 2, 1).chr($offset)); // Rückantwort anfragen
                 $this->SendDataToParent(json_encode(Array("DataID" => "{60C485C0-E28D-45D5-BF86-57F0257C1F4E}", "Buffer" => $data)));
                 break;
             case 'a7':
