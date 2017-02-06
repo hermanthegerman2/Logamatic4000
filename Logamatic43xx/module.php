@@ -163,7 +163,7 @@ class Logamatic43xx extends IPSModule
                         $data = utf8_encode(chr(Command::Datenblock) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2, 1) . chr(Command::ONE)); // Rückantwort anfragen
                         break;
                     default:
-                        $data = utf8_encode(chr(Command::Datenblock) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2, 1) . chr($offset)); // Rückantwort anfragen
+                        $data = utf8_encode(chr(Command::Datenblock) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2, 1) . chr(ord($offset))); // Rückantwort anfragen
                 }
                 $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
                 sleep (0.2);
