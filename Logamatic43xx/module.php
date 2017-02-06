@@ -155,7 +155,7 @@ class Logamatic43xx extends IPSModule
                 sleep (0.2);
                 $data = utf8_encode(substr($stream, 0, 1) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2)); // ECO-CAN Busadresse einfügen
                 $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-                sleep (1);
+                sleep (0.5);
                 $offset = substr(bin2hex($stream), 6, 2);
                 IPS_LogMessage('Buderus Logamatic', $offset);
                 switch ($offset) {
@@ -163,10 +163,10 @@ class Logamatic43xx extends IPSModule
                         $data = utf8_encode(chr(Command::Datenblock) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2, 1) . chr(Command::ONE)); // Rückantwort anfragen
                         break;
                     default:
-                        $data = utf8_encode(chr(Command::Datenblock) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2, 1) . chr($offset)); // Rückantwort anfragen
+                        $data = utf8_encode(chr(Command::Datenblock) . chr($this->ReadPropertyInteger('Bus')) . substr($stream, 2, 1) . $offset); // Rückantwort anfragen
                 }
                 $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-                sleep (0.5);
+                sleep (0.2);
                 $this->SwitchNM();
                 break;
             case 'a7':
