@@ -86,7 +86,7 @@ function Buderus ($typ, $offset, $value)
         $Buderus[9][5] = array ("", 17);
         $Buderus[9][17] = array ("", "");
         $Buderus[9][18] = array ("Auslegungstemperatur Heizkreis", "Temp", "1", "°C");
-        $Buderus[9][19] = array ("", 59);
+        $Buderus[9][19] = array ("", 58);
         $Buderus[9][58] = array ("", "");
         $Buderus[9][59] = array ("Heizsystem", "HKHeizsystem", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
         $Buderus[9][60] = array ("", 62);
