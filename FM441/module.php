@@ -40,6 +40,7 @@ class FM441 extends IPSModule
     public function Nachtraumsolltemperatur(float $temp)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Nachtraumsolltemperatur senden: ' . $temp . '°C');
+        $temp = $temp*2;
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
@@ -48,7 +49,17 @@ class FM441 extends IPSModule
     public function Tagsolltemperatur(float $temp)
     {
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Tagsolltemperatur senden: ' . $temp . '°C');
+        $temp = $temp*2;
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Betriebsart(int $id)
+    {
+        $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
     }
@@ -88,15 +99,6 @@ class FM441 extends IPSModule
     }
 
     /*________________________________________________________________________________________________________________________________________________________________*/
-
-    public function Betriebsart(int $id)
-    {
-        $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
-        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
-        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis3).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
-        return $id;
-    }
 
     public function Desinfektion(int $id)
     {
