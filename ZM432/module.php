@@ -49,7 +49,7 @@ class ZM432 extends IPSModule
     {
         $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
         if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart Kesselkennlinie auf ' . $Betriebsart[$id] . ' umschalten');
-        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Kessel).chr(0x46)).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Kessel).chr(0x46)).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65);
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
     }
