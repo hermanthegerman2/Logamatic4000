@@ -136,7 +136,18 @@ function Buderus ($typ, $offset, $value)
         $Buderus[12][29] = array ("", "");
     $Buderus[13][-1] = array ("Konfiguration / einstellbare Werte");
     $Buderus[14][-1] = array ("UBA");
-    $Buderus[16][-1] = array ("Kessel / einstellbare Werte", "");
+    $Buderus[16][-1] = array ("Kessel / einstellbare Werte", "75");
+        $Buderus[16][0] = array ("", "6");
+        $Buderus[16][6] = array ("", "");
+        $Buderus[16][7] = array ("Abgastemperatur Grenze", "Temp", "1", "°C");
+        $Buderus[16][8] = array ("", 65);
+        $Buderus[16][65] = array ("", "");
+        $Buderus[16][66] = array ("Lastbegrenzung 2x1-stufiger Brenner", "Temp", "1", "°C");
+        $Buderus[16][67] = array ("", 72);
+        $Buderus[12][72] = array ("", "");
+        $Buderus[12][73] = array ("Nachtabsenkung Kesselkennlinie", "Temp4", "1", "K");
+        $Buderus[12][74] = array ("Betriebsart Kesselkennlinie", "HKBetriebsart", "Manuell Nacht", "Manuell Tag", "Automatik");
+        $Buderus[12][75] = array ("", "");
     $Buderus[17][-1] = array ("Kanal 1", "4");
         $Buderus[17][0] = array ("festgelegte Schaltprogramme", "Modul", "Eigen", "Frueh", "Spaet", "Nachmittag", "Mittag", "Single", "Senior", "LEER");
         $Buderus[17][1] = array ("Pause", "ZeitHours", "1", "Std");
@@ -831,6 +842,9 @@ function EncodeVariableData($parentID, $typ)
                                         break;
                                 case "Temp3":
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature", $ID),ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2));
+                                        break;
+                                case "Temp4":
+                                        SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 2, "~Temperature.Difference", $ID),ord(hex2bin(substr($value, $x*2, 2)))*Buderus($typ, $x, 2));
                                         break;
                                 case "Zeit":
                                         SetValue(CheckVariableTYP(Buderus($typ, $x, 0), 1, "Minutes", $ID),ord(hex2bin(substr($value, $x*2, 2))));//Minutes
