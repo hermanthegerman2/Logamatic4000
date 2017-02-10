@@ -123,9 +123,9 @@ function Buderus ($typ, $offset, $value)
         $Buderus[12][9] = array ("", "");
         $Buderus[12][10] = array ("Warmwassersolltemperatur", "Temp", "1", "°C");
         $Buderus[12][11] = array ("", 12);
-        $Buderus[12][12] = array ("", "");
-        $Buderus[12][13] = array ("Betriebsart Warmwasser", "HKBetriebsart", "Manuell Nacht", "Manuell Tag", "Automatik");
-        $Buderus[12][14] = array ("", 16);
+        $Buderus[12][13] = array ("", "");
+        $Buderus[12][14] = array ("Betriebsart Warmwasser", "HKBetriebsart", "Manuell Nacht", "Manuell Tag", "Automatik");
+        $Buderus[12][15] = array ("", 16);
         $Buderus[12][16] = array ("", "");
         $Buderus[12][17] = array ("Zirkulationspumpenläufe pro Stunde", "Modul", "ständig aus (läuft nur bei Einmalladung)", "ständig an", "2", "3", "4", "5", "6", "7");
         $Buderus[12][18] = array ("", 20);
