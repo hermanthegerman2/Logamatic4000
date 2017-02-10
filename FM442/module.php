@@ -31,38 +31,141 @@ class FM442 extends IPSModule
 
     public function Umschaltschwelle(float $temp)
     {
-        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Umschaltschwelle Sommer/Winter senden: ' . $temp . '°C');
-        //$temp = sprintf('%02s',dechex($temp));
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Umschaltschwelle Sommer/Winter senden: ' . $temp . '°C');
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
     }
 
     public function Nachtraumsolltemperatur(float $temp)
     {
-        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Nachtraumsolltemperatur senden: ' . $temp . '°C');
-        //$temp = sprintf('%02s',dechex($temp));
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Nachtraumsolltemperatur senden: ' . $temp . '°C');
+        $temp = $temp*2;
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
     }
 
     public function Tagsolltemperatur(float $temp)
     {
-        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Tagsolltemperatur senden: ' . $temp . '°C');
-        //$temp = sprintf('%02s',dechex($temp));
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Tagsolltemperatur senden: ' . $temp . '°C');
+        $temp = $temp*2;
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
     }
 
     public function Betriebsart(int $id)
     {
         $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
-        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM442', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
-        //$id = sprintf('%02s',dechex($id));
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
         $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis1).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
-        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{482A20C1-35A8-4591-96F0-C119AB72EBB2}", "Buffer" => $data)));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function AbsenkartFerien(int $id)
+    {
+        $Betriebsart =  array(0 => 'Abschalt (Frostschutz bleibt aktiv)', 1 => 'Reduziert', 2 => 'Raumhalt' , 3 => 'Außenhalt');
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Absenkart Ferien: ' . $Betriebsart[$id] . ' umschalten');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis1).chr(0x3f).chr($id).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function AussenhalttemperaturFerien(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Aussenhalttemperatur Ferien: ' . $temp . '°C');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis1).chr(0x3f).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function AuslegungstemperaturHeizkreis(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Auslegungstemperatur Heizkreis: ' . $temp . '°C');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis1).chr(0x0e).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Heizsystem(int $id)
+    {
+        $Betriebsart =  array(0 => 'kein Heizsystem', 1 => 'Heizkörper', 2 => 'Konvektor' , 3 => 'Fussboden', 4 => 'Fusspunkt', 5 => 'konstant', 6 => 'Raumregler' , 7 => 'EIB');
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Heizsystem: ' . $Betriebsart[$id] . ' umschalten');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis1).chr(0x38).chr(0x65).chr($id).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    /*________________________________________________________________________________________________________________________________________________________________*/
+
+    public function Umschaltschwelle2(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Umschaltschwelle Sommer/Winter senden: ' . $temp . '°C');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis2).chr(0x00).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Nachtraumsolltemperatur2(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Nachtraumsolltemperatur senden: ' . $temp . '°C');
+        $temp = $temp*2;
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis2).chr(0x00).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Tagsolltemperatur2(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Tagsolltemperatur senden: ' . $temp . '°C');
+        $temp = $temp*2;
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis2).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Betriebsart2(int $id)
+    {
+        $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart auf ' . $Betriebsart[$id] . ' umschalten');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis2).chr(0x00).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function AbsenkartFerien2(int $id)
+    {
+        $Betriebsart =  array(0 => 'Abschalt (Frostschutz bleibt aktiv)', 1 => 'Reduziert', 2 => 'Raumhalt' , 3 => 'Außenhalt');
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Absenkart Ferien: ' . $Betriebsart[$id] . ' umschalten');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis2).chr(0x3f).chr($id).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function AussenhalttemperaturFerien2(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Aussenhalttemperatur Ferien: ' . $temp . '°C');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis2).chr(0x3f).chr(0x65).chr($temp).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function AuslegungstemperaturHeizkreis2(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Auslegungstemperatur Heizkreis: ' . $temp . '°C');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis2).chr(0x0e).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function Heizsystem2(int $id)
+    {
+        $Betriebsart =  array(0 => 'kein Heizsystem', 1 => 'Heizkörper', 2 => 'Konvektor' , 3 => 'Fussboden', 4 => 'Fusspunkt', 5 => 'konstant', 6 => 'Raumregler' , 7 => 'EIB');
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Heizsystem: ' . $Betriebsart[$id] . ' umschalten');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Heizkreis2).chr(0x38).chr(0x65).chr($id).chr(0x65).chr(0x65).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
         return $id;
     }
 
