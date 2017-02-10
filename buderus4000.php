@@ -137,10 +137,10 @@ function Buderus ($typ, $offset, $value)
     $Buderus[13][-1] = array ("Konfiguration / einstellbare Werte");
     $Buderus[14][-1] = array ("UBA");
     $Buderus[16][-1] = array ("Kessel / einstellbare Werte", "75");
-        $Buderus[16][0] = array ("", "6");
-        $Buderus[16][6] = array ("", "");
-        $Buderus[16][7] = array ("Abgastemperatur Grenze", "Temp", "1", "°C");
-        $Buderus[16][8] = array ("", 65);
+        $Buderus[16][0] = array ("", "11");
+        $Buderus[16][10] = array ("", "");
+        $Buderus[16][11] = array ("Abgastemperatur Grenze", "Temp", "5", "°C");
+        $Buderus[16][12] = array ("", 65);
         $Buderus[16][65] = array ("", "");
         $Buderus[16][66] = array ("Lastbegrenzung 2x1-stufiger Brenner", "Temp", "1", "°C");
         $Buderus[16][67] = array ("", 72);

@@ -27,6 +27,34 @@ class ZM432 extends IPSModule
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{054466C5-C0E0-46C6-82D7-29A2FAE4276C}", "Buffer" => $data->Buffer)));
         return $id;
     }
+
+    public function GrenzeAbgastemperatur(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Grenze Abgastemperatur senden: ' . $temp . '°C');
+        $temp = $temp/5;
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Kessel).chr(0x07).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($temp));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function NachtabsenkungKesselkennlinie(float $temp)
+    {
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Nachtabsenkung Kesselkennlinie senden: ' . $temp . 'K');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Kessel).chr(0x46).chr(0x65).chr(0x65).chr(0x65).chr($temp).chr(0x65).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+    public function BetriebsartKesselkennlinie(int $id)
+    {
+        $Betriebsart =  array(0 => 'Manuell Nacht', 1 => 'Manuell Tag', 2 => 'Automatik');
+        if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('Logamatic FM441', 'Betriebsart Kesselkennlinie auf ' . $Betriebsart[$id] . ' umschalten');
+        $data = utf8_encode(chr(Command::Parameter).chr(Command::leer).chr(Command::Kessel).chr(0x46)).chr(0x65).chr(0x65).chr(0x65).chr(0x65).chr($id).chr(0x65));
+        $id = $this->SendDataToParent(json_encode(Array("DataID" => "{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}", "Buffer" => $data)));
+        return $id;
+    }
+
+
     
     public function ReceiveData($JSONString)
     {
