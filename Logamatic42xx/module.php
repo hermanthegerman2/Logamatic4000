@@ -33,9 +33,9 @@ class Logamatic42xx extends IPSModule
                 break;
             case $id < 16:*/
                 $this->MaintainVariable('Einstellparameter', 'Einstellparameter', 3, '~String', -3, 1);
-                $this->IPS_SetHidden($this->GetIDForIdent('Einstellparameter'), true);
+                IPS_SetHidden($this->GetIDForIdent('Einstellparameter'), true);
                 $this->MaintainVariable('Monitordaten', 'Monitordaten', 3, '~String', 0, 1);
-                $this->IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
+                IPS_SetHidden($this->GetIDForIdent('Monitordaten'), true);
                 $this->RegisterProfile('Minutes', '2', '', '', ' m', 0, 0, 0);
                 $this->RegisterProfile('Hours', '2', '', '', ' h', 0, 0, 0);
                 $this->RegisterProfile('Watt', '2', '', '', ' kWh', 0, 0, 0);
