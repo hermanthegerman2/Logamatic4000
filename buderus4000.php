@@ -43,7 +43,7 @@ class Command extends stdClass
 }
 function Buderus ($typ, $offset, $value)
     {
-    $Buderus[7][-1] = array ("Heizkreis 1 / einstellbare Werte", "64");
+    $Buderus[7][-1] = array ("Heizkreis 1 / einstellbare Werte", "63");
         $Buderus[7][0] = array ("", "");
         $Buderus[7][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
         $Buderus[7][2] = array ("Nachtraumsolltemperatur", "Temp", "0.5", "°C");
@@ -52,14 +52,14 @@ function Buderus ($typ, $offset, $value)
         $Buderus[7][5] = array ("", 15);
         $Buderus[7][15] = array ("", "");
         $Buderus[7][16] = array ("Auslegungstemperatur Heizkreis", "Temp", "1", "°C");
-        $Buderus[7][17] = array ("", 55);
-        $Buderus[7][55] = array ("", "");
-        $Buderus[7][56] = array ("Heizsystem", "HKHeizsystem", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
-        $Buderus[7][57] = array ("", 61);
-        $Buderus[7][61] = array ("", "");
-        $Buderus[7][62] = array ("Absenkart Ferien", "HKAbsenkart", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
-        $Buderus[7][63] = array ("Umschalttemperatur für Absenkart Außenhalt bei Ferienbetrieb", "Temp", "1", "°C");
-        $Buderus[7][64] = array ("", "");
+        $Buderus[7][17] = array ("", 54);
+        $Buderus[7][54] = array ("", "");
+        $Buderus[7][55] = array ("Heizsystem", "HKHeizsystem", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
+        $Buderus[7][56] = array ("", 60);
+        $Buderus[7][60] = array ("", "");
+        $Buderus[7][61] = array ("Absenkart Ferien", "HKAbsenkart", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
+        $Buderus[7][62] = array ("Umschalttemperatur für Absenkart Außenhalt bei Ferienbetrieb", "Temp", "1", "°C");
+        $Buderus[7][63] = array ("", "");
     $Buderus[8][-1] = array ("Heizkreis 2 / einstellbare Werte", "64");
         $Buderus[8][0] = array ("", "");
         $Buderus[8][1] = array ("Sommer / Winter – Umschaltschwelle", "Temp", "1", "°C");
