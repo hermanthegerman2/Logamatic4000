@@ -6,7 +6,7 @@
     "aliases": ["Logamatic FM441"],
     "parentRequirements": ["{5EC102FC-380C-4C7C-AA9A-F7D4070CD15F}"],
     "childRequirements": [],
-    "implemented": ["{E1EA01E8-3901-4EB8-9898-15E9E69B9977}"],
+    "implemented": ["{E1EA01E8-3901-4EB8-9898-15E9E69B9977}", "{630C78DF-CB8D-490D-B21A-13D436DBC0B5}"],
     "prefix": "FM441"
 }
 
