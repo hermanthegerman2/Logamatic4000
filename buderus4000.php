@@ -52,10 +52,10 @@ function Buderus ($typ, $offset, $value)
         $Buderus[7][5] = array ("", 15);
         $Buderus[7][15] = array ("", "");
         $Buderus[7][16] = array ("Auslegungstemperatur Heizkreis", "Temp", "1", "°C");
-        $Buderus[7][17] = array ("", 56);
-        $Buderus[7][56] = array ("", "");
-        $Buderus[7][57] = array ("Heizsystem", "HKHeizsystem", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
-        $Buderus[7][58] = array ("", 61);
+        $Buderus[7][17] = array ("", 55);
+        $Buderus[7][55] = array ("", "");
+        $Buderus[7][56] = array ("Heizsystem", "HKHeizsystem", "kein Heizsystem", "Heizkörper", "Konvektor", "Fussboden", "Fusspunkt", "konstant", "Raumregler", "EIB");
+        $Buderus[7][57] = array ("", 61);
         $Buderus[7][61] = array ("", "");
         $Buderus[7][62] = array ("Absenkart Ferien", "HKAbsenkart", "Abschalt (Frostschutz bleibt aktiv)", "Reduziert", "Raumhalt", "Außenhalt");
         $Buderus[7][63] = array ("Umschalttemperatur für Absenkart Außenhalt bei Ferienbetrieb", "Temp", "1", "°C");
