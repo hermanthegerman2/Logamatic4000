@@ -85,7 +85,7 @@ class Logamatic43xx extends IPSModule
     {
         $this->SwitchDM();
         sleep (0.2);
-        $data = utf8_encode(chr(Command::Datenblock).chr($this->ReadPropertyInteger('Bus')));
+        $data = utf8_encode(chr(Command::Datenblock).chr($this->ReadPropertyInteger('Bus')).chr(Command::Fehlerprotokoll).chr(Command::NUL));
         $id = $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
         return $id;
     }
