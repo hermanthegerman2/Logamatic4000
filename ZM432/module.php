@@ -12,6 +12,12 @@ class ZM432 extends IPSModule
         $this->RegisterPropertyBoolean ("Logging", true);
     }
 
+    public function Destroy()
+    {
+        //Never delete this line!
+        parent::Destroy();
+    }
+
     public function ApplyChanges()
     {
         //Never delete this line!

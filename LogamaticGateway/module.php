@@ -15,6 +15,12 @@ class LogamaticGateway extends IPSModule
         $this->RegisterPropertyBoolean("Logging", false);
     }
 
+    public function Destroy()
+    {
+        //Never delete this line!
+        parent::Destroy();
+    }
+
     public function ApplyChanges()
     {
         //Never delete this line!
