@@ -235,7 +235,10 @@ class Logamatic42xx extends IPSModule
                         case '84':  // Warmwasser
                         case '88':  // bodenstehender Kessel Monitordaten
                         case '10':  // einstellbaren Parameter / bodenstehender Kessel
+                        case '8a':  // Heizkreis 5 Kesselkreis HK
+                        case '15':  // Schaltuhr Kanal 5 Kesselkreis HK
                         case '0c':  // Warmwasser einstellbare Daten
+                        case '16':  // Heizkreis 5 einstellbare Daten
                         case '17':  // Schaltuhr Kanal 6 Warmwasser
                         case '1f':  // Schaltuhr Kanal 10 Zirkulation
                             IPS_LogMessage('NM Logamatic 42xx -> ZM422', $stream);
@@ -302,26 +305,47 @@ class Logamatic42xx extends IPSModule
                     if ($result == false) $this->RequestModule();
                     if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('DM Logamatic 42xx -> FM444', $array[$x]);
                     break;
-                case '9e': case '24':
+                case '9e':  // Solar Monitordaten
+                case '24':  // Solar einstellbare Daten
                     $result = $this->SendDataToChildren(json_encode(Array("DataID" => "{693602C1-B28A-4C80-BB15-49596F1EDF3E}", "Buffer" => utf8_encode($data))));
                     if ($result == false) $this->RequestModule();
                     if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('DM Logamatic 42xx -> FM443', $array[$x]);
                     break;
-                case '89': case '0d':
+                case '89':  // Konfiguration Monitordaten
+                case '0d':  // Datentyp für Konfiguration (Modulauswahl) der einstellbaren Parameter
                     if ($datentyp = 'ab') EncodeMonitorDirektData($array[$x], $ID, $modultyp);
                     if ($datentyp = 'a7') EncodeMonitorNormalData($array[$x], $ID, $modultyp);
                     break;
-                case '88': case '10': case 'ob': case '1d': case '17': case '1f': case '84': case '0c':
+                case '84':  // Warmwasser
+                case '88':  // bodenstehender Kessel Monitordaten
+                case '10':  // einstellbaren Parameter / bodenstehender Kessel
+                case '8a':  // Heizkreis 5 Kesselkreis HK
+                case '15':  // Schaltuhr Kanal 5 Kesselkreis HK
+                case '0c':  // Warmwasser einstellbare Daten
+                case '16':  // Heizkreis 5 einstellbare Daten
+                case '17':  // Schaltuhr Kanal 6 Warmwasser
+                case '1f':  // Schaltuhr Kanal 10 Zirkulation
                     $result = $this->SendDataToChildren(json_encode(Array("DataID" => "{7C608E31-D80A-45DB-9D2A-CFB402C95CBD}", "Buffer" => utf8_encode($data))));
                     if ($result == false) $this->RequestModule();
                     if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('DM Logamatic 43xx -> ZM422', $array[$x]);
                     break;
-                case '82': case '09': case '13':
+                case '82':  // Heizkreis 3
+                    //case '84':  // Warmwasser
+                case '09':  // Heizkreis 3 einstellbare Daten
+                    //case '0c':  // Warmwasser einstellbare Daten
+                case '13':  // Schaltuhr Kanal 3
+                    //case '14':  // Schaltuhr Kanal 4 Warmwasser
+                    //case '1f':  // Schaltuhr Kanal 10 Zirkulation
                     $result = $this->SendDataToChildren(json_encode(Array("DataID" => "{630C78DF-CB8D-490D-B21A-13D436DBC0B5}", "Buffer" => utf8_encode($data))));
                     if ($result == false) $this->RequestModule();
                     if ($this->ReadPropertyBoolean("Logging") == true) IPS_LogMessage('DM Logamatic 42xx -> FM441', $array[$x]);
                     break;
-                case '80': case '81': case '07': case '08': case '11': case '12':
+                case '80':  // Heizkreis 1
+                case '81':  // Heizkreis 2
+                case '07':  // Heizkreis 1 einstellbare Daten
+                case '08':  // Heizkreis 2 einstellbare Daten
+                case '11':  // Schaltuhr Kanal 1
+                case '12':  // Schaltuhr Kanal 2
                     $result = $this->SendDataToChildren(json_encode(Array("DataID" => "{B5591015-1034-42B1-B945-8D27BB0901DE}", "Buffer" => utf8_encode($data))));
                     if ($result == false) $this->RequestModule();
                     if ($this->ReadPropertyBoolean("Logging")) IPS_LogMessage('DM Logamatic 42xx -> FM442', $array[$x]);
