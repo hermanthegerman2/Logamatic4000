@@ -69,8 +69,8 @@ class Logamatic43xx extends IPSModule
         sleep (0.2);
         $data = utf8_encode(chr(Command::Monitordaten).chr($this->ReadPropertyInteger('Bus')));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-        //SetValueString($this->GetIDForIdent('Monitordaten'), '');
-        $this->SetBuffer('Monitordaten', '');
+        SetValueString($this->GetIDForIdent('Monitordaten'), '');
+        //$this->SetBuffer('Monitordaten', '');
         return true;
     }
 
@@ -80,8 +80,8 @@ class Logamatic43xx extends IPSModule
         sleep (0.2);
         $data = utf8_encode(chr(Command::Einstellparameter).chr($this->ReadPropertyInteger('Bus')));
         $this->SendDataToParent(json_encode(Array("DataID" => "{0D923A14-D3B4-4F44-A4AB-D2B534693C35}", "Buffer" => $data)));
-        //SetValueString($this->GetIDForIdent('Einstellparameter'), '');
-        $this->SetBuffer('Einstellparameter', '');
+        SetValueString($this->GetIDForIdent('Einstellparameter'), '');
+        //$this->SetBuffer('Einstellparameter', '');
         return true;
     }
 
@@ -101,8 +101,8 @@ class Logamatic43xx extends IPSModule
             $this->RequestMonitordaten(); // Monitordaten abrufen
             return true;
         }
-        //$Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
-        $Monitordaten = $this->GetBuffer("Monitordaten");
+        $Monitordaten = GetValueString($this->GetIDForIdent('Monitordaten'));
+        //$Monitordaten = $this->GetBuffer("Monitordaten");
         EncodeKonfigurationData($Monitordaten, $this->InstanceID); // Monitordaten nur auf Konfigurationsdaten überprüfen und anlegen
         $array = array('Modul in Slot 1', 'Modul in Slot 2', 'Modul in Slot 3', 'Modul in Slot 4', 'Modul in Slot A'); // mögliche Slots in Logamatic 43xx
         for ($x = 0; $x < count($array); $x++) {
@@ -255,11 +255,11 @@ class Logamatic43xx extends IPSModule
 
                 case 'a9':   // A9 Kennung für einstellbare Parameter
                 case 'aa':   // AA Einstellbare Parameter komplett übertragen
-                    //$head = GetValueString($this->GetIDForIdent('Einstellparameter'));
-                    $head = $this->GetBuffer("Einstellparameter");
+                    $head = GetValueString($this->GetIDForIdent('Einstellparameter'));
+                    //$head = $this->GetBuffer("Einstellparameter");
                     $Einstellparameter = $head . $stream; // $stream anhängen
-                    //SetValueString($this->GetIDForIdent('Einstellparameter'), $Einstellparameter);
-                    $this->SetBuffer("Einstellparameter", $Einstellparameter);
+                    SetValueString($this->GetIDForIdent('Einstellparameter'), $Einstellparameter);
+                    //$this->SetBuffer("Einstellparameter", $Einstellparameter);
                     if (substr($stream, -4, 4) == 'aa00') {
                         $this->DistributeDataToChildren($Einstellparameter, $this->InstanceID);
                         $this->SwitchNM();  // einstellbare Parameter komplett -> Normalmodus umschalten
@@ -268,11 +268,11 @@ class Logamatic43xx extends IPSModule
 
                 case 'ab':   // AB Monitordaten Direktmodus
                 case 'ac':   // AC Monitordaten komplett übertragen
-                    //$head = GetValueString($this->GetIDForIdent('Monitordaten'));
-                    $head = $this->GetBuffer("Monitordaten");
+                    $head = GetValueString($this->GetIDForIdent('Monitordaten'));
+                    //$head = $this->GetBuffer("Monitordaten");
                     $Monitordaten = $head . $stream; // $stream anhängen
-                    //SetValueString($this->GetIDForIdent('Monitordaten'), $Monitordaten);
-                    $this->SetBuffer("Monitordaten", $Monitordaten);
+                    SetValueString($this->GetIDForIdent('Monitordaten'), $Monitordaten);
+                    //$this->SetBuffer("Monitordaten", $Monitordaten);
                     if (substr($stream, -4, 4) == 'ac00') {
                         $this->DistributeDataToChildren($Monitordaten, $this->InstanceID);
                         $this->SwitchNM();  // Monitordaten komplett -> Normalmodus umschalten
